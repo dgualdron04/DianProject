@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 414 274.58">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #ddd;
+            }
+
+            .cls-2 {
+                fill: #c4c4c3;
+            }
+        </style>
+    </defs>
+    <title>Recurso 8</title>
+    <g id="Capa_2" data-name="Capa 2">
+        <g id="Capa_1-2" data-name="Capa 1">
+            <path class="cls-1" d="M43.08,254,0,274.58V170.77l134.86-26Z" />
+            <path class="cls-2" d="M414,0V27.07L0,204V0Z" />
+        </g>
+    </g>
+</svg>

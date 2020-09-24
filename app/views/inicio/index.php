@@ -1,0 +1,1 @@
+<h1>hola <?=$data['name'];?></h1>
