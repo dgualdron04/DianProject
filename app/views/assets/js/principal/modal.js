@@ -1,10 +1,14 @@
+const url = '/dianproject/';
+
 let cerrar = document.querySelectorAll(".close")[0],
   cerrar2 = document.querySelectorAll(".close")[1],
   abrir = document.querySelectorAll(".cta")[0],
   abrir2 = document.querySelectorAll(".cta2")[0],
   modal = document.querySelectorAll(".container")[0],
   modalC = document.querySelectorAll(".modal-container")[0],
-  cont = 0;
+  cont = 0,
+  loading,
+  loader = document.getElementById("loader");
 const register = document.getElementById("register"),
   btnlogin = document.getElementById("boton-register"),
   btnregister = document.getElementById("boton-login"),
@@ -70,21 +74,22 @@ function changelogin() {
 
 var xhr = new XMLHttpRequest();
 var dataregister = document.getElementById("form-register");
-let loading = false,
-  alertdanger = document.getElementById("alert-danger"),
+loading = false;
+let alertdanger = document.getElementById("alert-danger"),
   alertsuccess = document.getElementById("alert-success"),
   logalertsuccess = document.getElementById("logalert-success");
-const nombres = document.getElementById("nombresregistro"),
-  apellidos = document.getElementById("apellidosregistro"),
-  correo = document.getElementById("correosregistro"),
-  contra = document.getElementById("contraregistro"),
-  ccontra = document.getElementById("ccontraregistro");
+const nombresregistro = document.getElementById("nombresregistro"),
+  apellidosregistro = document.getElementById("apellidosregistro"),
+  correoregistro = document.getElementById("correosregistro"),
+  contraregistro = document.getElementById("contraregistro"),
+  ccontraregistro = document.getElementById("ccontraregistro");
 
 dataregister.addEventListener("submit", (event) => {
   var form = new FormData(dataregister);
   loadingfunction();
   let estados;
-  xhr.open("POST", "./registro");
+  history.pushState(null, "", url);
+  xhr.open("POST", "./usuario/registro");
   xhr.onload = () => {
     if (xhr.status === 200) {
       /* console.log("Conexión Establecida"); */
@@ -98,11 +103,11 @@ dataregister.addEventListener("submit", (event) => {
           if (key === "registron-error") {
             alertsuccess.classList.remove("collapse");
             alertsuccess.innerHTML = estados["registron-error"];
-            nombres.value = "";
-            apellidos.value = "";
-            correo.value = "";
-            contra.value = "";
-            ccontra.value = "";
+            nombresregistro.value = "";
+            apellidosregistro.value = "";
+            correoregistro.value = "";
+            contraregistro.value = "";
+            ccontraregistro.value = "";
             setTimeout(() => {
               changelogin();
               logalertsuccess.classList.remove("collapse");
@@ -126,14 +131,13 @@ dataregister.addEventListener("submit", (event) => {
 
 function loadingfunction() {
   if (loading === false) {
-    document.getElementById(
-      "correoerror"
-    ).innerHTML = `<p>El Campo Correo esta vacío.</p>`;
+    loader.style.opacity = "1";
+    loader.style.visibility = "visible";
   } else if (loading === true) {
-    document.getElementById("correoerror").innerHTML = ``;
+    loader.style.opacity = "0";
+    loader.style.visibility = "hidden";
   }
 }
-
 
 /* if (form.get('correoregistro') === "" &&
 form.get('nombreregistro') === "" &&
@@ -164,3 +168,45 @@ document.getElementById("passworderror").innerHTML = `<p class="errores">El Camp
 document.getElementById("nombreerror").innerHTML = ``;
 document.getElementById("apellidoerror").innerHTML = ``;
 document.getElementById("passworderror").innerHTML = ``; */
+
+/*---- Login -----*/
+
+var xhr = new XMLHttpRequest();
+var datalogin = document.getElementById("form-login");
+loading = false;
+let logalertdanger = document.getElementById("logalert-danger");
+
+const correolog = document.getElementById("correologin"),
+      contralog = document.getElementById("contralogin");
+
+datalogin.addEventListener("submit", (event) => {
+  var form = new FormData(datalogin);
+  loadingfunction();
+  let estados;
+
+  history.pushState(null, "", url);
+
+  xhr.open("POST", "./usuario/login");
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      /* console.log("Conexión Establecida"); */
+      estados = /* JSON.parse( */xhr.responseText/* ) */;
+      loading = true;
+      loadingfunction();
+      console.log(estados);
+      if (estados==="el usuario esta logeado") {
+        window.location="./";
+      }
+      /* for (var key in estados) {
+        if (key !== "loading") {
+        }
+      } */
+    } else {
+      alertdanger.classList.remove("collapse");
+      alertdanger.innerHTML = "Error 418";
+    }
+  };
+  xhr.send(form);
+
+  event.preventDefault();
+});

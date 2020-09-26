@@ -2,9 +2,19 @@
 
 class Inicio extends Controller
 {
-    public function index()
+
+    public function __construct()
     {
-        $this->viewtemplate('home/index', ['controller' => "inicio", 'method' => "index", 'name' => "Admin"]);
+        $this->iniciarsesion();
+    }
+
+    public function hola(){
+        if (isset($_SESSION['email'])) {
+            $this->viewtemplate('inicio', 'index', ['name' => "Admin"]);
+        }else{
+            header("location: ".constant('URL'));
+        }
+        
     }
 }
 

@@ -3,7 +3,7 @@
 class App
 { 
 
-    protected $controller = 'inicio';
+    protected $controller = 'usuario';
 
     protected $method = 'index';
 
@@ -20,6 +20,8 @@ class App
             {
                 $this->controller = $url[0];
                 unset($url[0]);
+            }else{
+                header("location: ".constant('URL'));
             }
             
         }
@@ -34,6 +36,8 @@ class App
             {
                 $this->method = $url[1];
                 unset($url[1]);
+            }else{
+                header("location: ".constant('URL'));
             }
 
         }

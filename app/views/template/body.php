@@ -4,7 +4,7 @@
         
         
 
-        require_once './app/views/'.$data['controller'].'/'.$data['method'].'.php';
+        require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
         /* if (isset($_GET["pages"])) {
             

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Declaración de Renta</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo constant('URL').'public/css/principal/principal.css'?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 </head>
@@ -79,14 +80,13 @@
 
     </div>
 
-    <!--?php require_once './vistas/include/modals/principal/login.php'; ?!-->
+    <?php require_once './app/views/assets/includes/modals/principal/login.php'; ?>
+    <?php require_once './app/views/assets/includes/modals/loading/loading.php'; ?>
 
     <footer>
         <p>Derechos Reservados 2020 © (Inserte nombre xde)</p>
     </footer>
-
-<script src="vistas/assets/js/principal/principal.js"></script>
-<script src="vistas/assets/js/principal/modal.js"></script>
+    
 <script src="<?php echo constant('URL').'app/views/assets/js/principal/principal.js'?>"></script>
 <script src="<?php echo constant('URL').'app/views/assets/js/principal/modal.js'?>"></script>
 </body>
