@@ -11,73 +11,37 @@
         <div class="sidebar-menu">
             <center class="profile">
                 <img src="<?php echo constant('URL').'public/images/avatar1.svg'?>" alt="User">
-                <p><!--?php echo $usuarios->obteneruser(); ?!-->Usuario</p>
-                <p><!--?php echo $usuarios->obtenerrol(); ?!-->Rol</p>
+                <p><?php 
+                $nombre = explode(' ', $infouser['nombre']);
+                $apellido = explode(' ', $infouser['apellido']);
+                echo $nombre[0].' '.$apellido[0]; ?></p>
+                <p><?php echo $infouser['nomrol']; ?></p>
             </center>
-            <ul>
-    <li class="item">
-        <a href="./" class="menu-btn" id="inicioboton" title="Inicio">
-            <i class="fas fa-home"></i><span>Inicio</span>
-        </a>
-    </li>
+            <?php 
 
-    <li class="item">
-        <a href="#" class="menu-btn" id="perfilboton" title="Perfil">
-            <i class="fas fa-user-circle"></i><span>Perfil</span>
-        </a>
-    </li>
+            if (strtolower($infouser['nomrol']) == "superadmin") {
+               
+                include "./app/views/assets/includes/botones/botonessuperadmin.php";
 
-    <li class="item">
-        <a href="?pages=verusuarios" class="menu-btn fontusuarios" id="usuariosboton" title="Usuarios">
-            <i class="fas fa-users"></i><span>Usuarios</span>
-        </a>
-    </li>
-
-    <li class="item">
-        <a href="#" class="menu-btn" id="bienesboton" title="Bienes">
-            <i class="fas fa-boxes"></i><span>Bienes</span>
-        </a>
-    </li>
-
-    <li class="item">
-        <a href="#" class="menu-btn" id="declaracionboton" title="Declaración">
-            <i class="fas fa-paste"></i><span>Declaración</span>
-        </a>
-    </li>
-
-    <li class="item">
-        <a href="#" class="menu-btn" id="graficosboton" title="Gráficos">
-            <i class="fas fa-chart-bar"></i><span>Gráficos</span>
-        </a>
-    </li>
-
-    <li class="item">
-        <a href="#" class="menu-btn" id="ayudaboton" title="Ayuda">
-            <i class="fas fa-question-circle"></i><span>Ayuda <i class="fas fa-chevron-down drop-down flecha" id="flecha"></i></span>
-        </a>
-        <div class="sub-menu" id="submenuayudabtn">
-            <a href="#" title="Manual de Usuario"><i class="fas fa-address-book"></i><span>Manual de usuario</span></a>
-            <a href="#" title="Ayuda en línea"><i class="fas fa-info-circle"></i></i><span>Ayuda en línea</span></a>
-        </div>
-    </li>
-</ul>
-            <!--?php 
-            
-            if ($usuarios->obtenernumrol() == 1) {
+            } else if (strtolower($infouser['nomrol']) == "coordinador") {
                 
-                include "vistas/include/botones/botonesadmin.php";
+                include "./app/views/assets/includes/botones/botonescoordinador.php";
                 
-            }else if ($usuarios->obtenernumrol() == 2) {
+            }else if (strtolower($infouser['nomrol']) == "declarante") {
 
-                include "vistas/include/botones/botonesusuario.php";
+                include "./app/views/assets/includes/botones/botonesdeclarante.php";
 
-            }else{
+            }else if (strtolower($infouser['nomrol']) == "contador") {
+                # Aquí va el contador :)
+                include "./app/views/assets/includes/botones/botonescontador.php";
 
-                include "vistas/include/botones/botonessinrol.php";
+            } else{
+
+                include "./app/views/assets/includes/botones/botonessinrol.php";
 
             }
 
-            ?!-->
+            ?>
         </div>
     </div>
     <!--Sidebar Final-->

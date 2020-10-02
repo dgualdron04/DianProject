@@ -1,6 +1,6 @@
 <ul>
     <li class="item">
-        <a href="./" class="menu-btn" id="inicioboton" title="Inicio">
+        <a href="<?php echo constant('URL'); ?>" class="menu-btn" id="inicioboton" title="Inicio">
             <i class="fas fa-home"></i><span>Inicio</span>
         </a>
     </li>
@@ -12,7 +12,7 @@
     </li>
 
     <li class="item">
-        <a href="?pages=verusuarios" class="menu-btn fontusuarios" id="usuariosboton" title="Usuarios">
+        <a href="<?php echo constant('URL'); ?>usuario/listar" class="menu-btn fontusuarios" id="usuariosboton" title="Usuarios">
             <i class="fas fa-users"></i><span>Usuarios</span>
         </a>
     </li>

@@ -6,6 +6,8 @@ class Usuario extends Controller
 
     private $errors = array();
 
+    private $mylist = false;
+
     public function __construct()
     {
         $this->usuario = $this->model('Usuario');
@@ -14,7 +16,13 @@ class Usuario extends Controller
 
     public function index(){
 
-        $this->viewtemplate('inicio', 'index', ['name' => "Admin"]);
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+        }else {
+
+            $this->viewtemplate('usuario', 'index');
+        }
 
     }
 
@@ -23,7 +31,7 @@ class Usuario extends Controller
         
 
         if (isset($_SESSION['email'])) {
-           
+            
             
         } else if (!isset($_POST['nombreregistro'], $_POST['passwordregistro'], $_POST['correoregistro'])) {
 
@@ -64,17 +72,19 @@ class Usuario extends Controller
 
         if (isset($_SESSION['email'])) {
             echo "hay sesión";
-            $this->viewtemplate('inicio', 'index');
+            $this->usuario->setUser($this->traersesion());
+            $this->viewtemplate('usuario', 'index');
         }else if(isset($_POST['correo']) && isset($_POST['password'])){
-  
             $emailform = $_POST['correo'];
             $passform = $_POST['password'];
             if ($this->usuario->loginuser($emailform, $passform)) {
-
                 
                 $this->nombrarsesion($emailform);
+                $this->usuario->setUser($this->traersesion());
                 echo "el usuario esta logeado";
                 
+            } else {
+                echo "usuario y/o pass incorrecta";
             }
         } else {
             echo "no hay formulario";
@@ -88,6 +98,169 @@ class Usuario extends Controller
         $usersession->closesession();
         header("location: ".constant('URL'));
         
+    }
+
+    public function listar()
+    {
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+
+            if (strtolower($this->usuario->getnomrol()) == "coordinador") {
+
+                $_POST['param'] = true;
+            $this->viewtemplate('usuario', 'listar', $this->usuario->traerdatosusuario());
+            
+            } else {
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+        }else {
+
+            $this->viewtemplate('usuario', 'index');
+        }
+        
+    }
+
+    public function traerusuarios()
+    {
+
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (strtolower($this->usuario->getnomrol()) == "coordinador") {
+
+                if (isset($_POST['param']) && $_POST['param'] == true) {
+                    $this->usuario->obtenerusuarios();
+                }else {
+                    $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                }
+                
+            } else {
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+
+        } else {
+            $this->viewtemplate('usuario', 'index');
+        }
+
+    }
+
+    public function crearusuarios()
+    {
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (isset($_POST['param']) && $_POST['param'] == true) {
+
+            $nombre = $_POST['nombrecrear'];
+            $apellido = $_POST['apellidocrear'];
+            $correo = $_POST['emailcrear'];
+            $cedula = $_POST['cedulacrear'];
+            $telefono = $_POST['telefonocrear'];
+            $pass = $_POST['passcrear'];
+            $rol = $this->usuario->obtenernumerorol($_POST['rolcrear']);
+            $estado = $this->usuario->obtenernumeroestado($_POST['estadocrear']);
+            $this->usuario->crearusuarios($nombre, $apellido, $cedula, $telefono, $correo, $pass, $rol, $estado);
+
+            }else {
+
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                
+            }
+        }
+        else 
+        {
+            $this->viewtemplate('usuario', 'index');
+        }
+    }
+
+    public function traerusuarioporid()
+    {
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (strtolower($this->usuario->getnomrol()) == "coordinador") {
+
+                if (isset($_POST['param']) && $_POST['param'] == true) {
+                    $this->usuario->obtenereliminarid($_POST['iduser']);
+                }else {
+                    $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                }
+                
+            } else {
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+
+        } else {
+            $this->viewtemplate('usuario', 'index');
+        }
+    }
+
+    public function traerdatosporid()
+    {
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (strtolower($this->usuario->getnomrol()) == "coordinador") {
+
+                if (isset($_POST['param']) && $_POST['param'] == true) {
+                    $this->usuario->obtenereditid($_POST['iduser']);
+                }else {
+                    $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                }
+                
+            } else {
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+
+        } else {
+            $this->viewtemplate('usuario', 'index');
+        }
+    }
+
+    public function editarusuariosid()
+    {
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (isset($_POST['param']) && $_POST['param'] == true) {
+
+            $nombre = $_POST['nombreeditar'];
+            $apellido = $_POST['apellidoeditar'];
+            $correo = $_POST['emaileditar'];
+            $cedula = $_POST['cedulaeditar'];
+            $telefono = $_POST['telefonoeditar'];
+            $rol = $this->usuario->obtenernumerorol($_POST['roleditar']);
+            $estado = $this->usuario->obtenernumeroestado($_POST['estadoeditar']);
+            $code = $_POST['codeditar'];
+
+            $this->usuario->editarusuarios($nombre, $apellido, $cedula, $telefono, $correo, $rol, $estado, $code);
+
+            }else {
+
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                
+            }
+        }
+        else 
+        {
+            $this->viewtemplate('usuario', 'index');
+        }
+    }
+
+    public function eliminarusuario()
+    {
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (strtolower($this->usuario->getnomrol()) == "coordinador") {
+
+                if (isset($_POST['param']) && $_POST['param'] == true) {
+                    $this->usuario->eliminarusuario($_POST['iduser']);
+                }else {
+                    $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                }
+                
+            } else {
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+
+        } else {
+            $this->viewtemplate('usuario', 'index');
+        }
     }
 
 

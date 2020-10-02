@@ -295,9 +295,9 @@ body {
 .fondo-container{
     background-color: #f4f6f9/* #c4c4c4 *//*#C4D4E0*/;
     background-size: cover;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 132px);
     transition: 0.3s;
-    
+
 }
 
 .fondo-container.collapse .main-container{
@@ -305,6 +305,10 @@ body {
     width: (100% - 70px);
     transition: 0.5s;
     
+}
+
+.mybody{
+    margin-bottom: 62px;
 }
 
 .flecha {
@@ -393,7 +397,9 @@ body {
     .wrapper .header .header-menu .title {
         text-align: center;
     }
-    
+    .main-footer{
+        display: none;
+    }
 }
 
 @media (max-width: 280px){
@@ -426,5 +432,30 @@ body {
     }
     
 }
+
+/*---Footer---*/
+
+.main-footer.collapse {
+
+    margin-left: 0px;
+    transition: 0.3s;
+}
+
+footer {
+    display: block;
+    position: fixed;
+}
+
+.main-footer {
+    margin-left: 250px;
+    background: #fff;
+    border-top: 1px solid #dee2e6;
+    color: #869099;
+    padding: 1rem;
+    width: 100%;
+    transition: 0.3s;
+}
+
+/*----Footer----*/
 
 

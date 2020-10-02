@@ -1,0 +1,13 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.background{
+    height: 100vh;
+    background-image: url("fondo.svg");
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed;
+}

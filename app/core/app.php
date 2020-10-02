@@ -21,7 +21,9 @@ class App
                 $this->controller = $url[0];
                 unset($url[0]);
             }else{
-                header("location: ".constant('URL'));
+                
+                $this->controller = 'errores';
+                unset($url[0]);
             }
             
         }
@@ -37,7 +39,10 @@ class App
                 $this->method = $url[1];
                 unset($url[1]);
             }else{
-                header("location: ".constant('URL'));
+                
+                $this->method = 'index';
+                unset($url[1]);
+
             }
 
         }

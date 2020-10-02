@@ -4,9 +4,6 @@ class Controller
 {   
     private $usersession;
 
-    public function __construct()
-    {
-    }
 
     public function iniciarsesion(){
         $this->usersession = $this->model('Usersession');
@@ -15,6 +12,10 @@ class Controller
 
     public function nombrarsesion($email){
         $this->usersession->setcurrentuser($email);
+    }
+
+    public function traersesion(){
+        return $this->usersession->getcurrentuser();
     }
 
     public function model($model)
@@ -30,7 +31,7 @@ class Controller
         require_once './app/views/'. $view .'.php';
     }
 
-    public function viewtemplate($controllert, $methodt, $data = [])
+    public function viewtemplate($controllert, $methodt, $infouser = [], $data = [])
     {   
 
         if (isset($_SESSION['email'])) {
