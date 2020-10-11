@@ -327,9 +327,13 @@ function editar(datos)
   document.getElementById('cedulaeditar').value = datos[0]['cedula'];
   /* document.getElementById('passeditar').value = '-0p1a2s3s4w5o6r7d89-'; */
   if (datos[0]['rol'].toLowerCase() === 'declarante') {
-    document.getElementById('roleditar').selectedIndex = 2;
+    document.getElementById('roleditar').selectedIndex = 3;
   }else if (datos[0]['rol'].toLowerCase() === 'contador') {
+    document.getElementById('roleditar').selectedIndex = 2;
+  } else if (datos[0]['rol'].toLowerCase() === 'coordinador') {
+
     document.getElementById('roleditar').selectedIndex = 1;
+    
   }
   if (datos[0]['estado'].toLowerCase() === 'inactivo') {
     document.getElementById('estadoeditar').selectedIndex = 2;

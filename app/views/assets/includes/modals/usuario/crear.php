@@ -31,8 +31,14 @@
                     <div class="form-group">
                         <select class="form-control" name="rolcrear" required>
                             <option selected="true" disabled="disabled" class="noselected">Seleccione el rol</option>
+                            <?php if (strtolower($infouser['nomrol']) == "superadmin") { ?>
+                                <option value="coordinador">Coordinador</option>
+                                <option value="contador">Contador</option>
+                                <option value="declarante">Declarante</option>
+                            <?php } else { ?>
                             <option value="contador">Contador</option>
                             <option value="declarante">Declarante</option>
+                            <?php } ?>
                         </select>
                         <select class="form-control input-separe" name="estadocrear" required>
                             <option selected="true" disabled="disabled" class="noselected">Seleccione el estado</option>

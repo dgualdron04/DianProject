@@ -22,8 +22,8 @@
                         <input class="form-control" type="text" name="emaileditar" id="emaileditar" placeholder="Correo Electronico" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="telefonoeditar" id="telefonoeditar" placeholder="Telefono" required>
-                        <input class="form-control input-separe" type="text" name="cedulaeditar" id="cedulaeditar" placeholder="Cedula" required>
+                        <input class="form-control" type="text" name="telefonoeditar" id="telefonoeditar" placeholder="Telefono">
+                        <input class="form-control input-separe" type="text" name="cedulaeditar" id="cedulaeditar" placeholder="Cedula">
                     </div>
                     <!-- <div class="form-group">
                         <input class="form-control" type="password" name="passeditar" id="passeditar" placeholder="Password" autocomplete="off" required>
@@ -31,8 +31,15 @@
                     <div class="form-group">
                         <select class="form-control" name="roleditar" id="roleditar" required >
                             <option selected="true" disabled="disabled" class="noselected">Seleccione el rol</option>
+                            <?php if (strtolower($infouser['nomrol']) == "superadmin") { ?>
+                                <option value="coordinador">Coordinador</option>
+                                <option value="contador">Contador</option>
+                                <option value="declarante">Declarante</option>
+                            <?php } else { ?>
+                            <option value="coordinador" class="noselected">Coordinador</option>
                             <option value="contador">Contador</option>
                             <option value="declarante">Declarante</option>
+                            <?php } ?>
                         </select>
                         <select class="form-control input-separe" name="estadoeditar" id="estadoeditar" required>
                             <option selected="true" disabled="disabled" class="noselected">Seleccione el estado</option>

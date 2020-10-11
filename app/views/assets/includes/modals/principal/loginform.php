@@ -1,6 +1,6 @@
 <div class="row" id="login">
     <div class="col-md-4 offset-md-4 form login-form">
-        <p class="close text-center">X</p>
+        <p class="close text-center">&times;</p>
         <form action="#" method="POST" autocomplete="" id="form-login">
             <h2 class="text-center">
                 Iniciar Sesión</h2>

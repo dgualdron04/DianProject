@@ -82,6 +82,18 @@ class Usuariomodel extends Models
         
     }
 
+    function useractive($email){
+
+        $query = $this->db->connect()->prepare('SELECT eu.tipoestado as estado FROM usuario u JOIN estadousuario eu on eu.codestadou = u.codestadou WHERE u.correo = ?');
+        $query->execute([$email]);
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (strtolower($myquery[0]['estado']) == 'activo') {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     public function setUser($correo){
 
@@ -127,6 +139,14 @@ class Usuariomodel extends Models
         print_r(json_encode($myquery));
     }
 
+    public function obtenerusuariosyadmin()
+    {
+        $query = $this->db->connect()->prepare('SELECT u.codusuario, u.nombre, u.apellido, u.cedula, u.telefono, u.correo, ru.nombrerol as rol, eu.tipoestado as estado FROM usuario u JOIN rolusuario ru on ru.codrol = u.codrol JOIN estadousuario eu on eu.codestadou = u.codestadou WHERE ru.nombrerol <> LOWER("SuperAdmin");');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        print_r(json_encode($myquery));
+    }
+
     public function crearusuarios($nombre, $apellido, $cedula, $telefono,  $correo, $pass, $rol, $estado)
     {
         if ( $stmt = $this->db->connect()->prepare('INSERT INTO '.$this->tablausuario.' (nombre, apellido, cedula, telefono, correo, password, codrol, codestadou) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')) {
@@ -161,6 +181,14 @@ class Usuariomodel extends Models
         print_r(json_encode($myquery));
     }
 
+    public function obtenereliminarcoordid($id)
+    {
+        $query = $this->db->connect()->prepare('SELECT u.codusuario, u.nombre, u.apellido, ru.nombrerol as rol, eu.tipoestado as estado FROM usuario u JOIN rolusuario ru on ru.codrol = u.codrol JOIN estadousuario eu on eu.codestadou = u.codestadou WHERE ru.nombrerol <> LOWER("SuperAdmin") AND u.codusuario = ? ;');
+        $query->execute([$id]);
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        print_r(json_encode($myquery));
+    }
+
     public function eliminarusuario($id)
     {
         if ( $stmt = $this->db->connect()->prepare('DELETE FROM usuario WHERE codusuario = ?')) {
@@ -176,6 +204,14 @@ class Usuariomodel extends Models
     public function obtenereditid($id)
     {
         $query = $this->db->connect()->prepare('SELECT u.codusuario, u.nombre, u.apellido, u.password, u.cedula, u.telefono, u.correo, ru.nombrerol as rol, eu.tipoestado as estado FROM usuario u JOIN rolusuario ru on ru.codrol = u.codrol JOIN estadousuario eu on eu.codestadou = u.codestadou WHERE ru.nombrerol <> LOWER("SuperAdmin") AND ru.nombrerol <> LOWER("Coordinador") AND u.codusuario = ? ;');
+        $query->execute([$id]);
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        print_r(json_encode($myquery));
+    }
+
+    public function obtenereditidadmin($id)
+    {
+        $query = $this->db->connect()->prepare('SELECT u.codusuario, u.nombre, u.apellido, u.password, u.cedula, u.telefono, u.correo, ru.nombrerol as rol, eu.tipoestado as estado FROM usuario u JOIN rolusuario ru on ru.codrol = u.codrol JOIN estadousuario eu on eu.codestadou = u.codestadou WHERE ru.nombrerol <> LOWER("SuperAdmin") AND u.codusuario = ? ;');
         $query->execute([$id]);
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         print_r(json_encode($myquery));

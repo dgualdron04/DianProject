@@ -1,6 +1,6 @@
 <div class="row collapse" id="register">
     <div class="col-md-4 offset-md-4 form">
-        <p class="close text-center">X</p>
+        <p class="close text-center">&times;</p>
         <form action="#" method="POST" autocomplete="" id="form-register">
             <h2 class="text-center">
                 Formulario de Registro</h2>

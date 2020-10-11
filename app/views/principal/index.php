@@ -66,8 +66,17 @@
 
     <div class="content">
 
-    <section class="mywaves">
+    <section class="mybackground">
         <center><img class="myfinance" src="<?php echo constant('URL').'public/images/finance.svg'?>" alt=""></center>
+        <center><p class="h2 othermargins">¿Aún te preguntas si tienes que declarar Renta?</p></center>
+        <center><p class="reset">Puedes hacer un Formulario para averiguarlo.</p>
+        <div class="flex-2">
+            <a href="#" class="btn btn-block btn-principal" id="formulario-btn">¿Debo declarar Renta?</a>
+            <p class="reset">ó</p>
+            <a href="#" class="btn btn-block btn-principal" id="register-btn">Registrarme</a>   
+        </div>
+    </section>
+    <section class="mywaves">
         <div class="wave wave1"></div>
         <div class="wave wave2"></div>
         <div class="wave wave3"></div>
@@ -80,6 +89,7 @@
 
     </div>
 
+    <?php require_once './app/views/assets/includes/modals/principal/encuesta.php'; ?>
     <?php require_once './app/views/assets/includes/modals/principal/login.php'; ?>
     <?php require_once './app/views/assets/includes/modals/loading/loading.php'; ?>
 
