@@ -21,9 +21,9 @@ submenumensajes = document.getElementById("submenumensajes"),
 submenuopciones = document.getElementById("submenuopciones"); */
 
 
-const ayudaboton = document.getElementById("ayudaboton") ,
+/* const ayudaboton = document.getElementById("ayudaboton") ,
 submenuayudabtn = document.getElementById("submenuayudabtn"),
-flecha = document.getElementById("flecha");
+flecha = document.getElementById("flecha"); */
  /* inicioboton = document.getElementById("inicioboton"),
 perfilboton = document.getElementById("perfilboton"),
 usuariosboton = document.getElementById("usuariosboton"),
@@ -38,7 +38,7 @@ ya desplego este submenu, por eso estos se inicializan como false, ya que el usu
 estadomensajes = false,
 estadoopciones = false; */
 
-let estadoayuda = false;
+/* let estadoayuda = false; */
 
 /*Aquí lo que hacemos es una funcion llamada .addEventListener(), a esta funcion hay que pasarle dos parametros, el primero es el evento y el segundo parametro
 es lo que va a hacer cuando pase ese evento, en este caso yo pongo el evento "click" y llamo dos funciones a la hora de que este evento se inicie.
@@ -62,11 +62,11 @@ perfilboton.addEventListener('click', () => {cerrarsubmenus();});
 usuariosboton.addEventListener('click', () => {cerrarsubmenus();});
 declaracionboton.addEventListener('click', () => {cerrarsubmenus();});
 graficosboton.addEventListener('click', () => {cerrarsubmenus();}); */
-ayudaboton.addEventListener('click', (e) => {e.preventDefault(); cambiarestado("ayuda"); openmenu(estadoayuda, submenuayudabtn);});
+/* ayudaboton.addEventListener('click', (e) => {e.preventDefault(); cambiarestado("ayuda"); openmenu(estadoayuda, submenuayudabtn);}); */
 
 /* Esta funcion cambia el estado de los submenus, dependiendo del submenu que se active con el evento "click", esta funcion recibe el nombre de ese submenu
 por medio de un texto, luego dependiendo del texto que se le pase, este cambia el estado de ese submenu.*/
-function cambiarestado(texto) {
+/* function cambiarestado(texto) { */
     /* if (texto === "perfil") {
     estadoperfil = !estadoperfil;
     estadomensajes = false;
@@ -81,10 +81,10 @@ function cambiarestado(texto) {
         estadomensajes = false;
     } */
     
-    if (texto === "ayuda") {
+    /* if (texto === "ayuda") {
         estadoayuda = !estadoayuda;
-    }
-}
+    } */
+/* } */
 
 
 /*Esta funcion se usa para abrir el submenu, recibe 4 parametros, el estado del submenu, si es true es que el submenu esta abierto, si es false es que el submenu se
@@ -102,7 +102,7 @@ submenu2 y submenu3, estos son los dos submenus que se cerraran en caso de que s
 
 } */
 
-function openmenu(estado, submenu1){
+/* function openmenu(estado, submenu1){
     if (estado === true) {
         submenu1.style.maxHeight = '500px';
         flecha.classList.add("collapse");
@@ -110,11 +110,11 @@ function openmenu(estado, submenu1){
         submenu1.style.maxHeight= '0px';
         flecha.classList.remove("collapse");
     }
-}
+} */
 
 /*Esta funcion no tiene parametros, pero si tiene un uso, esta funcion cierra todos los submenus que se encuentren abiertos, por decir si el usuario le da click
 a un boton que no tenga un submenu, se cerraran todos los submenus. */
-function cerrarsubmenus(){
+/* function cerrarsubmenus(){ */
         /* submenuperfil.style.maxHeight= '0px';
         submenumensajes.style.maxHeight= '0px';
         submenuopciones.style.maxHeight= '0px'; */
@@ -123,4 +123,31 @@ function cerrarsubmenus(){
         /* estadoopciones = false;
         estadoperfil = false;
         estadomensajes = false; */
+/* } */
+
+
+
+
+const itemlist = document.querySelectorAll(".item-list");
+
+
+for (let i = 0; i < itemlist.length; i++) {
+    
+    itemlist[i].children[0].addEventListener('click', (e) => { 
+        e.preventDefault(); 
+
+        itemlist[i].children[0].children[1].children[0].classList.toggle("collapse");
+
+        if(itemlist[i].children[1].style.maxHeight === "500px"){
+
+            itemlist[i].children[1].style.maxHeight = '0px';
+
+        }else{
+
+            itemlist[i].children[1].style.maxHeight = '500px';
+
+        }
+
+        });
+    
 }

@@ -10,7 +10,7 @@
             </div>
             <div class="columna">
                 <ol class="historialpaginas float-derecha">
-                    <li class="historialpaginas-item"><a href="./">Inicio</a></li>
+                    <li class="historialpaginas-item"><a href="<?php echo constant('URL'); ?>">Inicio</a></li>
                     <li class="historialpaginas-item activo">Lista de Usuarios</li>
                 </ol>
             </div>

@@ -293,4 +293,20 @@ class Usuario extends Controller
             $this->viewtemplate('usuario', 'index');
         }
     }
+
+
+    public function perfil(){
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setUser($this->traersesion());
+            if (strtolower($this->usuario->getnomrol()) == "declarante") {
+
+                    $this->viewtemplate('usuario', 'perfil', $this->usuario->traerdatosusuario());
+
+            } else {
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+        } else {
+            $this->viewtemplate('usuario', 'index');
+        }
+    }
 }

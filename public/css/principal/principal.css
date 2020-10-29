@@ -1232,3 +1232,10 @@ img.myencuesta{
     pointer-events: none;
   }
 /*---Fin Encuesta---*/
+
+
+@media (min-width: 100px) and (max-width: 576px){
+    .container-modal{
+        width: 95%;
+    }
+}

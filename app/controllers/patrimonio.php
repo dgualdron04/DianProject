@@ -1,7 +1,7 @@
 <?php
 
 
-class Bienes extends Controller
+class Patrimonio extends Controller
 {
 
     private $usuario;
@@ -17,7 +17,13 @@ class Bienes extends Controller
 
         if (isset($_SESSION['email'])) {
             $this->usuario->setUser($this->traersesion());
-            $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            if (strtolower($this->usuario->getnomrol()) == "contador") {
+                $this->viewtemplate('patrimonio', 'listar', $this->usuario->traerdatosusuario());
+            } else{
+
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+
+            }
         } else {
 
             $this->viewtemplate('usuario', 'index');

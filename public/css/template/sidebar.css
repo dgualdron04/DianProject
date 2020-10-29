@@ -106,6 +106,7 @@ body {
 .wrapper .header .header-menu ul li a {
     background:  #fff;
     color: #000;
+    margin-right: 30px;
     display: block;
     font-size: 18px;
     width: 34px;
@@ -385,6 +386,9 @@ body {
         width: 100%;
         position: absolute;
     }
+    .wrapper.collapse .sidebar{
+        width: 0px;
+    }
     .wrapper .sidebar .sidebar-menu .item{
         width: 100%;
     }
@@ -392,7 +396,10 @@ body {
     display: none;
     }
     .fondo-container.collapse .main-container{
-        display: inherit;
+        display: block;
+        margin: 80px 0 0 0;
+        width: 100%;
+        padding: 0;
     }
     .wrapper .header .header-menu .title {
         text-align: center;

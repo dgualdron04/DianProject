@@ -32,9 +32,19 @@
 
         } else if (strtolower($infouser['nomrol']) == "declarante") {
         
+            if (($controllert == "declaracion" && $methodt == "listar") || ($controllert == "declaracion" && $methodt == "crear") || ($controllert == "usuario" && $methodt == "perfil")) {
+
+                require_once './app/views/'.$controllert.'/'.$methodt.'.php';
+
+            }
 
         } else if (strtolower($infouser['nomrol']) == "contador") {
-            # code...
+            
+            if (($controllert == "parametros" && $methodt == "listar") || ($controllert == "patrimonio" && $methodt == "listar") || ($controllert == "rentatrabajo" && $methodt == "listar")) {
+                
+                require_once './app/views/'.$controllert.'/'.$methodt.'.php';
+
+            }
 
         } else{
             
