@@ -1,6 +1,6 @@
 <?php
 
-class Usersessionmodel extends db{
+class Usersessionmodel extends Models{
 
     public function __construct()
     {

@@ -243,7 +243,7 @@ dataregister.addEventListener("submit", (event) => {
   formregister.append("param", param);
 
   ajax({
-    url: `./usuario/registro`,
+    url: `./usuario/registrarusuario`,
     method: "POST",
     // async: true,
     // responseType: 'json',
@@ -336,7 +336,7 @@ datalogin.addEventListener("submit", (event) => {
   formlogin.append("param", param);
 
   ajax({
-    url: `./usuario/login`,
+    url: `./usuario/iniciarsesion`,
     method: "POST",
     // async: true,
     // responseType: 'json',

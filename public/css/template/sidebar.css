@@ -183,6 +183,17 @@ body {
     margin-top: 3px;
 }
 
+.wrapper .sidebar .sidebar-menu .item .sub-menu-btn i{
+    margin-right: 20px;
+}
+
+
+.wrapper .sidebar .sidebar-menu .item .sub-menu-btn .drop-down{
+    float: right;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
 .wrapper .sidebar .sidebar-menu .item .sub-menu{
     background: #f3f7ff/* #616e82 *//* #928f8f *//* #3498DB */;
     overflow: hidden;
@@ -466,3 +477,6 @@ footer {
 /*----Footer----*/
 
 
+.quitar-padding{
+    padding-right: 0px!important;
+}

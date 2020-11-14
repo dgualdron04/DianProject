@@ -25,41 +25,43 @@
                         </div>
                     </div>
 
-                        <div class="slide-page slide-page-editar">
-                            <label for="" class="form-label">Anio</label>
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="anioparametros" placeholder="Anio" value="0000">
-                            </div>
-                            <label for="" class="form-label">Marco Legal</label>
-                            <div class="form-group">
-                                <textarea class="form-control" name="marcolegalp" id="" cols="30" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe animi, quos natus ad aperiam fugiat, doloremque ab explicabo nostrum, sequi et. Sit minima quo assumenda laborum inventore consequuntur sapiente.
-                                Aspernatur, maiores deserunt harum nulla, earum cupiditate facilis aliquam temporibus veniam id at quae fugiat? Explicabo, aliquam! Sequi ad exercitationem mollitia alias accusamus nulla minima odit. Repellat iusto ipsam in.
-                                Commodi delectus accusantium dicta non et numquam reiciendis alias omnis, in animi culpa adipisci quos necessitatibus, eos cupiditate ut possimus. Ea labore optio tempore suscipit! Fugiat aliquam doloribus aliquid ducimus.
-                                Pariatur placeat dolore vitae neque illum omnis similique architecto, quidem error maxime rem. Quibusdam voluptate, ullam dolore corrupti sunt iusto natus ex sapiente sit eveniet harum sint, velit earum nisi.</textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="form-control button firstNextEditar">Siguiente</button>
-                            </div>
+                    <div class="slide-page slide-page-editar">
+                        <label for="" class="form-label">Anio</label>
+                        <div class="form-group">
+                        <input class="form-control btn-disabled" disabled type="number" min="<?php $fecha = getdate(); echo $fecha['year'] - 1; ?>" max="<?php echo $fecha['year'] - 1; ?>" name="anioeditar" id="anioeditar" placeholder="Anio" require>
                         </div>
+                        <label for="" class="form-label">Marco Legal</label>
+                        <div class="form-group">
+                            <textarea class="form-control" name="marcolegaleditar" id="marcoleditar" cols="30" rows="10"></textarea>
+                        </div>
+                        <label for="" class="form-label">Marco Calendario</label>
+                        <div class="form-group">
+                            <textarea class="form-control" name="marcocalendarioeditar" id="marcoceditar" cols="30" rows="10" require></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="form-control button firstNextEditar">Siguiente</button>
+                        </div>
+                    </div>
 
-                        <div class="slide-page slide-page-editar-2">
-                            <label for="" class="form-label">Valor tributario</label>
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="valortributario" placeholder="Valor Tributario" value="000000000" >
-                            </div>
-                            <label for="" class="form-label">Tope 1</label>
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="tope1" placeholder="Tope 1" value="0000000000">
-                            </div>
-                            <label for="" class="form-label">Tope 2</label>
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="tope2" placeholder="Tope 2" value="0000000000">
-                            </div>
-                            <div class="form-group">
-                                <button class="form-control button firstPrevEditar">Anterior</button>
-                                <input class="form-control button" type="submit" name="parametros" value="Editar">
-                            </div>
+                    <div class="slide-page slide-page-editar-2">
+                        <label for="" class="form-label">Valor tributario</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="valoreditar" id="valoreditar" placeholder="000000000">
                         </div>
+                        <label for="" class="form-label">Tope 1</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="tope1editar" id="tope1editar" placeholder="000000000">
+                        </div>
+                        <label for="" class="form-label">Tope 2</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="tope2editar" id="tope2editar" placeholder="000000000">
+                        </div>
+                        <input type="text" class="scond scond-2" name="idpr" id="idpr"> 
+                        <div class="form-group">
+                            <button class="form-control button firstPrevEditar">Anterior</button>
+                            <input class="form-control button" type="submit" name="parametroseditar" value="Editar">
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

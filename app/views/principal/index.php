@@ -72,7 +72,7 @@
         <center><p class="reset">Puedes hacer un Formulario para averiguarlo.</p>
         <div class="flex-2">
             <a href="#" class="btn btn-block btn-principal" id="formulario-btn">¿Debo declarar Renta?</a>
-            <p class="reset">ó</p>
+            <p class="reset">o</p>
             <a href="#" class="btn btn-block btn-principal" id="register-btn">Registrarme</a>   
         </div>
     </section>

@@ -16,7 +16,7 @@
 
         if (strtolower($infouser['nomrol']) == "superadmin") {
             
-            if ($controllert == "usuario" && $methodt == "listar") {
+            if (($controllert == "usuario" && $methodt == "listar") || ($controllert == "usuario" && $methodt == "perfil")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
@@ -24,7 +24,13 @@
 
         } else if (strtolower($infouser['nomrol']) == "coordinador") {
             
-            if ($controllert == "usuario" && $methodt == "listar") {
+            if (($controllert == "usuario" && $methodt == "listar") || 
+            ($controllert == "usuario" && $methodt == "perfil") || 
+            ($controllert == "parametros" && $methodt == "listar") || 
+            ($controllert == "patrimonio" && $methodt == "listar") || 
+            ($controllert == "rentatrabajo" && $methodt == "listar") || 
+            ($controllert == "declaracion" && $methodt == "listar") || 
+            ($controllert == "declaracion" && $methodt == "crear")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 

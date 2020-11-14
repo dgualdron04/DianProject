@@ -6,7 +6,7 @@
     </li>
 
     <li class="item">
-        <a href="#" class="menu-btn" title="Perfil">
+        <a href="<?php echo constant('URL'); ?>usuario/perfil" class="menu-btn" title="Perfil">
             <i class="fas fa-user-circle"></i><span>Perfil</span>
         </a>
     </li>
@@ -17,7 +17,6 @@
         </a>
         <div class="sub-menu">
             <a href="#" title="Manual de Usuario"><i class="fas fa-address-book"></i><span>Manual de usuario</span></a>
-            <a href="#" title="Ayuda en línea"><i class="fas fa-info-circle"></i></i><span>Ayuda en línea</span></a>
         </div>
     </li>
 </ul>

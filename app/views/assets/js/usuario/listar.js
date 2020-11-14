@@ -5,7 +5,7 @@ let tableplace = document.getElementById("table-place"),
 const url1 = "/dianproject/",
   url2 = "/dianproject/usuario/listar";
 
-var formData = new FormData();
+let formData = new FormData();
 let param = true;
 formData.append("param", param);
 
@@ -59,7 +59,7 @@ function ajax({
 }
 
 ajax({
-  url: `./usuario/traerusuarios`,
+  url: `./usuario/listarusuarios`,
   method: "POST",
   // async: true,
   // responseType: 'json',
@@ -86,8 +86,8 @@ function rendertabla(datos) {
       "" + obj["correo"] + "",
       "" + obj["rol"] + "",
       "" + obj["estado"] + "",
-      "<a href='#' id='edit-" + obj["codusuario"] + "' onclick='useredit(event, this.id)' class='user-edit iconslink'><i class='fas fa-user-edit'></i></a>",
-      "<a href='#' id='delete-" + obj["codusuario"] + "' onclick='userdelete(event, this.id)' class='user-delete iconslink'><i class='fas fa-trash-alt'></i></a>",
+      "<a href='#' id='edit-" + obj["idusuario"] + "' onclick='useredit(event, this.id)' class='user-edit iconslink'><i class='fas fa-user-edit'></i></a>",
+      "<a href='#' id='delete-" + obj["idusuario"] + "' onclick='userdelete(event, this.id)' class='user-delete iconslink'><i class='fas fa-trash-alt'></i></a>",
     ]);
   });
 
@@ -169,7 +169,7 @@ formcreate.addEventListener("submit", (e) => {
 });
 
 function crearusuario() {
-  var datos = new FormData(formcreate);
+  let datos = new FormData(formcreate);
 
   if (
     validacion(
@@ -186,7 +186,7 @@ function crearusuario() {
   ) {
     datos.append("param", param);
     ajax({
-      url: `./usuario/crearusuarios`,
+      url: `./usuario/crear`,
       method: "POST",
       // async: true,
       // responseType: 'json',
@@ -221,7 +221,7 @@ function validacion(
 
 function recreartable() {
   ajax({
-    url: `./usuario/traerusuarios`,
+    url: `./usuario/listarusuarios`,
     method: "POST",
     // async: true,
     // responseType: 'json',
@@ -238,9 +238,9 @@ function recreartable() {
 function userdelete(e, myid){
   myid = myid.replace('delete-', '');
 
-  formData.append('iduser', myid);
+  /* formData.append('iduser', myid); */
     ajax({
-      url: `./usuario/traerusuarioporid`,
+      url: `./usuario/editar/${myid}`,
       method: "POST",
       // async: true,
       // responseType: 'json',
@@ -277,9 +277,9 @@ function eliminar(datos) {
   sieliminar.addEventListener('click', (e) => {
     e.preventDefault();
 
-    formData.append('iduser', datos[0]['codusuario']);
+    /* formData.append('iduser', datos[0]['idusuario']); */
     ajax({
-      url: `./usuario/eliminarusuario`,
+      url: `./usuario/eliminar/${datos[0]['idusuario']}`,
       method: "POST",
       // async: true,
       // responseType: 'json',
@@ -303,7 +303,7 @@ function useredit(e, myid){
 
   formData.append('iduser', myid);
     ajax({
-      url: `./usuario/traerdatosporid`,
+      url: `./usuario/editar/${myid}`,
       method: "POST",
       // async: true,
       // responseType: 'json',
@@ -319,7 +319,7 @@ function useredit(e, myid){
 
 function editar(datos)
 {
-  document.getElementById('codeditar').value = datos[0]['codusuario'];
+  document.getElementById('codeditar').value = datos[0]['idusuario'];
   document.getElementById('nombreeditar').value = datos[0]['nombre'];
   document.getElementById('apellidoeditar').value = datos[0]['apellido'];
   document.getElementById('emaileditar').value = datos[0]['correo'];
@@ -352,8 +352,8 @@ function editar(datos)
     e.preventDefault();
     
     c
-    var formdatos = new FormData(formedit);
-    formdatos.append('iduser', datos[0]['codusuario']);
+    let formdatos = new FormData(formedit);
+    formdatos.append('iduser', datos[0]['idusuario']);
     formdatos.append("param", param);
     
     ajax({
@@ -377,11 +377,12 @@ let formedit = document.getElementById("form-edit");
 
 formedit.addEventListener("submit", (e) => {
   e.preventDefault();
-  var formdatos = new FormData(formedit);
+  let formdatos = new FormData(formedit);
   formdatos.append("param", param);
-  formdatos.append("codeditar", formedit['codeditar'].value);
+/*   formdatos.append("codeditar", formedit['ideditar'].value); */
+let formid = formedit['codeditar'].value;
   ajax({
-    url: `./usuario/editarusuariosid`,
+    url: `./usuario/editarusuarios/${formid}`,
     method: "POST",
     // async: true,
     // responseType: 'json',

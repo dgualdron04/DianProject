@@ -25,14 +25,14 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active show" href="#" id="nav-1">
-                            <i class="fas fa-edit"></i>Perfil
+                            <i class="fas fa-user"></i> Perfil
                             <div class="ripple-container"></div>
                             <div class="ripple-container"></div>
                         </a>
                     </li>
                     <li class="nav-item cardseparador">
                         <a class="nav-link show" href="#" id="nav-2">
-                            <i class="fas fa-edit"></i> Editar Perfil
+                            <i class="fas fa-user-cog"></i> Editar Perfil
                             <div class="ripple-container"></div>
                             <div class="ripple-container"></div>
                         </a>
@@ -43,7 +43,7 @@
     </div>
     <div class="card-body-2">
         <div class="tab-content">
-            <div class="tab-pane active show" id="bienes">
+            <div class="tab-pane active show" id="perfil">
                 <p></p>
 
 
@@ -56,27 +56,46 @@
                             <img src="http://localhost/dianproject/public/images/avatar1.svg">
                         </div>
                         <div class="name-perfil">
-                            <p>Anahis Rodriguez</p>
+                            <p id="nombreperfil"><?php
+                                $nombre = explode(' ', $infouser['nombre']);
+                                $apellido = explode(' ', $infouser['apellido']);
+                                echo $nombre[0] . ' ' . $apellido[0];  ?></p>
                         </div>
                         <div class="location-perfil">
-                            <p>Declarante</p>
+                            <p><?php echo $infouser['nomrol']; ?></p>
                         </div><br>
-                            <div class="stats-perfil" >
-                                <div class="">
+                        <div class="stats-perfil">
+                            <div class="">
                                 <p>Correo</p>
-                                <h3 class="margin-perfil">arodriguez27@udi.edu.co</h3>
-                                </div>
-                                
+                                <h3 class="margin-perfil"><?php echo $infouser['correo']; ?></h3>
                             </div>
-                            <br>
+
+                        </div>
+                        <br>
                         <div class="stats-perfil">
                             <div class="followers-perfil">
                                 <p>Cedula</p>
-                                <h3 class="margin-perfil">0000000000</h3>
+                                <h3 class="margin-perfil" id="cedulaperfil">
+                                    <?php
+                                    if (strlen(trim($infouser['cedula'])) == 0) {
+                                        echo "Sin Cédula";
+                                    } else {
+                                        echo $infouser['cedula'];
+                                    }
+                                    ?>
+                                </h3>
                             </div>
-                            <div >
+                            <div>
                                 <p>Telefono</p>
-                                <h3 class="margin-perfil">0000000000</h3>
+                                <h3 class="margin-perfil" id="telefonoperfil">
+                                    <?php
+                                    if (strlen(trim($infouser['telefono'])) == 0) {
+                                        echo "Sin Teléfono";
+                                    } else {
+                                        echo $infouser['telefono'];
+                                    }
+                                    ?>
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -89,99 +108,114 @@
 
             </div>
 
-            <div class="tab-pane show" id="deudas">
+            <div class="tab-pane" id="editar-perfil">
                 <p></p>
 
 
-                <div class="tab-header">
-                    <div class='filausuarios'>
-                        <div class='columna-5'>
-                            <p>Aquí podrás crear tus Deudas.</p>
+                <div class="flex">
+
+                    <div class="container-perfil edit">
+                        <div class="container-head-perfil">
                         </div>
-                        <div class='columna-5'>
+                        <form action="" method="POST" id="formperfil">
+                        <div class="container-body-perfil">
+                            <div class="profile-picture-perfil">
+                                <img src="http://localhost/dianproject/public/images/avatar1.svg">
+                            </div>
+                            <div class="name-perfil">
+                                <div class="form-group flex-2">
+                                    <input type="text" class="form-control edit" name="nombresperfil" value="<?= $infouser['nombre']; ?>">
+                                    <input type="text" class="form-control edit" name="apellidosperfil" value="<?= $infouser['apellido']; ?>">
+                                </div>
+                            </div>
+                            <div class="location-perfil">
+                                <p><?php echo $infouser['nomrol']; ?></p>
+                            </div><br>
+                            <div class="stats-perfil">
+                                <div class="">
+                                    <p>Correo</p>
+                                    <h3 class="margin-perfil-edit form-control btn-disabled"><?= $infouser['correo']; ?></p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="stats-perfil">
+                                <div class="followers-perfil">
+                                    <p>Cedula</p>
+                                    <input type="text" class="margin-perfil-edit form-control"  name="cedulaperfil" value="<?php
+                                                                                                    if (strlen(trim($infouser['cedula'])) == 0) {
+                                                                                                        echo "Sin Cédula";
+                                                                                                    } else {
+                                                                                                        echo $infouser['cedula'];
+                                                                                                    }
+                                                                                                    ?>">
+                                </div>
+                                <div>
+                                    <p>Telefono</p>
+                                    <input type="text" class="margin-perfil-edit form-control"  name="telefonoperfil" value="<?php
+                                                                                                    if (strlen(trim($infouser['telefono'])) == 0) {
+                                                                                                        echo "Sin Teléfono";
+                                                                                                    } else {
+                                                                                                        echo $infouser['telefono'];
+                                                                                                    }
+                                                                                                    ?>">
+                                    </h3>
+                                </div>
+                            </div>
+                            <?php 
+                            $id = $infouser['id'];
+                                if ($id % 2 == 0) {
+                                    $id = "asx2".$infouser['id']."1xgbbvj4scbvfhd2xcnt4dcnji,dck4memje".$infouser['id'].",4m32m1m12m34ddddfdf233".$infouser['id'];
+                                }else{
+                                    $id = "asx2".$infouser['id']."xj3m4kdxhkhdh2n2ekdjh3jk4djkxkxmemje".$infouser['id'].",NNB9WnuCYjyd3Y7vUh2se3".$infouser['id'];
+                                }
+                             ?>
+                            <input type="text" class="scond" name="idperfil" value="<?= $id ?>">
+                            <input type="submit" value="Actualizar Datos" class="btn btn-block btn-usuarios">
                         </div>
-                        <div class='columna-2'>
-                            <a class="btn btn-block btn-usuarios">Crear Deudas</a>
+                        </form>
+                    </div>
+                    
+                    <div class="container-pass">
+                        <form action="" method="POST" id="formpass">
+                        
+                        <p class="h2">Change password</p>
+                        
+                        <label for="Password Actual" class="form-label">Password Actual</label>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="passact" autocomplete="off">
                         </div>
+                        <label for="Password Actual" class="form-label">Password Nueva</label>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="passnuev" autocomplete="off">
+                        </div>
+                        <label for="Password Actual" class="form-label">Confirmar Password</label>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="confirmpassnuev" autocomplete="off">
+                        </div>
+                        <?php 
+                            $id = $infouser['id'];
+                                if ($id % 2 == 0) {
+                                    $id = "pxe3".$infouser['id']."1xgbbv2332s334jsdmxbwhxjkk,xvr4memje".$infouser['id'].",5m324d25edf3e25212334m".$infouser['id'];
+                                }else{
+                                    $id = "pxe3".$infouser['id']."2xgb3dkdjdksjmchridfoldjdk,lxo4memje".$infouser['id'].",NNB9WnuCYjyd3Y7vUh2se3".$infouser['id'];
+                                }
+                             ?>
+                            <input type="text" class="scond" name="idpss" value="<?= $id ?>">
+                        <input type="submit" value="Cambiar Password" class="btn btn-block btn-usuarios">
+                        </form>
                     </div>
                 </div>
 
-                <div class="cardsgrid cardsgrid-patrimonio">
-                    <div class="card-mini">
-
-                        <div class="clip-mini clip-deudas"></div>
-
-                        <div class="text-center ">
-                            <p class="subtitle-text formatear-p"><b>Nombre</b></p>
-                            <p>Lorem ipsum dolor sit amet.</p>
-                        </div>
-
-                        <div class="text-center flex-2">
-
-                            <a class="btn btn-block btn-declaracion" href=""><i class="fas fa-edit"></i>Editar</a>
-                            <a class="btn btn-block btn-declaracion" href=""><i class='fas fa-trash-alt'></i>Eliminar</a>
-
-                        </div>
 
 
-
-                    </div>
-                </div>
 
                 <div class="tab-footer"></div>
 
 
             </div>
-
-            <div class="tab-pane show" id="rentatrabajo">
-                <p></p>
-
-
-                <div class="tab-header">
-                    <div class='filausuarios'>
-                        <div class='columna-5'>
-                            <p>Aquí podrás crear todo lo equivalente a la renta de trabajo.</p>
-                        </div>
-                        <div class='columna-5'>
-                        </div>
-                        <div class='columna-2'>
-                            <a class="btn btn-block btn-usuarios">Crear renta de trabajo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cardsgrid cardsgrid-patrimonio">
-                    <div class="card-mini">
-
-                        <div class="clip-mini clip-prestacion"></div>
-
-                        <div class="text-center ">
-                            <p class="subtitle-text formatear-p"><b>Nombre</b></p>
-                            <p>Lorem ipsum dolor sit amet.</p>
-                        </div>
-
-                        <div class="text-center flex-2">
-
-                            <a class="btn btn-block btn-declaracion" href=""><i class="fas fa-edit"></i>Editar</a>
-                            <a class="btn btn-block btn-declaracion" href=""><i class='fas fa-trash-alt'></i>Eliminar</a>
-
-                        </div>
-
-
-
-                    </div>
-                </div>
-
-                <div class="tab-footer"></div>
-
-
-            </div>
-
         </div>
     </div>
 </div>
 
-
-<?php require_once './app/views/assets/includes/modals/perfil/editar.php'; ?>
-
-
+<script src="<?php echo constant('URL') . 'app/views/assets/js/usuario/perfil.js' ?>"></script>

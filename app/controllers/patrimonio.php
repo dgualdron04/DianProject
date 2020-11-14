@@ -5,19 +5,27 @@ class Patrimonio extends Controller
 {
 
     private $usuario;
+    private $parametros;
+    private $topes;
 
     public function __construct()
     {
         $this->usuario = $this->model('Usuario');
-        $this->iniciarsesion();
+        parent::__construct();
+        /* $this->iniciarsesion(); */
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setusuario($this->traersesion());
+        }else{
+            $fecha = getdate();
+            $this->topes = $this->parametros->topes($fecha['year']-1);
+        }
     }
 
     public function index()
     {
 
         if (isset($_SESSION['email'])) {
-            $this->usuario->setUser($this->traersesion());
-            if (strtolower($this->usuario->getnomrol()) == "contador") {
+            if ((strtolower($this->usuario->getnomrol()) == "contador") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
                 $this->viewtemplate('patrimonio', 'listar', $this->usuario->traerdatosusuario());
             } else{
 
@@ -26,7 +34,7 @@ class Patrimonio extends Controller
             }
         } else {
 
-            $this->viewtemplate('usuario', 'index');
+            $this->viewtemplate('usuario', 'index', null, $this->topes);
         }
     }
 

@@ -6,7 +6,7 @@
     </li>
 
     <li class="item">
-        <a href="#" class="menu-btn" id="perfilboton" title="Perfil">
+        <a href="<?php echo constant('URL'); ?>usuario/perfil" class="menu-btn" id="perfilboton" title="Perfil">
             <i class="fas fa-user-circle"></i><span>Perfil</span>
         </a>
     </li>
@@ -18,21 +18,29 @@
     </li>
 
     <li class="item">
-        <a href="#" class="menu-btn" id="bienesboton" title="Bienes">
-            <i class="fas fa-boxes"></i><span>Bienes</span>
-        </a>
-    </li>
-
-    <li class="item">
-        <a href="#" class="menu-btn" id="declaracionboton" title="Declaración">
+        <a href="<?php echo constant('URL'); ?>declaracion/listar/<?php echo $infouser['id']; ?>" class="menu-btn" id="declaracionboton" title="Declaración">
             <i class="fas fa-paste"></i><span>Declaración</span>
         </a>
     </li>
 
-    <li class="item">
-        <a href="#" class="menu-btn" id="graficosboton" title="Gráficos">
-            <i class="fas fa-chart-bar"></i><span>Gráficos</span>
+    <li class="item item-list">
+        <a href="#" class="menu-btn" title="Ayuda">
+            <i class="fas fa-paste"></i><span>Parametrización <i class="fas fa-chevron-down drop-down flecha"></i></span>
         </a>
+        <div class="sub-menu ">
+            <a href="<?php echo constant('URL'); ?>parametros/listar" title="Parámetros"><i class="fas fa-address-book"></i><span>Parámetros</span></a>
+            
+            <div class="item-list">
+                <a href="#" class="sub-menu-btn" title="Ayuda">
+                    <i class="fas fa-paste quitar-padding"></i><span>Declaración <i class="quitar-padding fas fa-chevron-down drop-down flecha"></i></span>
+                </a>
+                <div class="sub-menu">
+                    <a href="<?php echo constant('URL'); ?>patrimonio/listar" title="Patrimonio"><i class="fas fa-sign"></i><span>Patrimonio</span></a>
+                    <a href="<?php echo constant('URL'); ?>rentatrabajo/listar" title="Rentas"><i class="fas fa-file-signature"></i><span>Renta de trabajo</span></a>
+                </div>
+            </div>
+
+        </div>
     </li>
 
     <li class="item item-list">
@@ -41,7 +49,9 @@
         </a>
         <div class="sub-menu">
             <a href="#" title="Manual de Usuario"><i class="fas fa-address-book"></i><span>Manual de usuario</span></a>
-            <a href="#" title="Ayuda en línea"><i class="fas fa-info-circle"></i></i><span>Ayuda en línea</span></a>
         </div>
     </li>
 </ul>
+
+
+

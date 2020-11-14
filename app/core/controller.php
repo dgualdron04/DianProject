@@ -4,11 +4,15 @@ class Controller
 {   
     private $usersession;
 
-
-    public function iniciarsesion(){
+    public function __construct()
+    {
         $this->usersession = $this->model('Usersession');
         $this->usersession->iniciarsession();
     }
+
+    /* public function iniciarsesion(){
+        
+    } */
 
     public function nombrarsesion($email){
         $this->usersession->setcurrentuser($email);

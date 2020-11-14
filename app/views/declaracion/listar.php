@@ -22,7 +22,6 @@
     <div class="card-header-2 card-header-2-tabs card-header-2-primary">
         <div class="nav-tabs-navigation">
             <div class="nav-tabs-wrapper">
-                <span class="nav-tabs-title">Declaración de Renta:</span>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active show" href="#" id="nav-1">
@@ -40,46 +39,87 @@
             <div class="tab-pane active show" id="declaracion">
                 <p></p>
 
+                <div id="table-place">
+                    <table id="datatable" class="datatable">
+                        <thead>
+                            <tr>
+                                <!-- <th></th> -->
+                                <th>Estado</th>
+                                <th>Anno</th>
+                                <th>Progreso</th>
+                                <th>icon:far fa-edit</th>
+                                <th>icon:far fa-trash-alt</th>
+                                <th>icon:fas fa-eye</th>
+                                <th>icon:far fa-file-pdf</th>
+                            </tr>
+                        </thead>
 
-                <div class="tab-header">
-                    <div class='filausuarios'>
-                        <div class='columna-5'>
-                            <p>Aquí podrás crear tu declaración de renta.</p>
-                        </div>
-                        <div class='columna-5'>
-                        </div>
-                        <div class='columna-2'>
-                            <a href="<?php echo constant('URL'); ?>declaracion/crear" class="btn btn-block btn-usuarios">Crear Declaración de Renta</a>
-                        </div>
-                    </div>
-                </div>
+                        <tbody>
+                            <?php
+                            if (!empty($data)) {
+                                foreach ($data as $datos) : ?>
+                                    <tr>
+                                        <!-- <td>checkbox:</td> -->
+                                        <td>
+                                            <span class="<?php
 
-                <div class="cardsgrid cardsgrid-patrimonio">
-                    <div class="carddeclaracion">
+                                                            if ($datos['estadorevision'] == true && $datos['estadodeclaracion'] == true) {
+                                                                echo "away";
+                                                            } else if ($datos['estadorevision'] == false && $datos['estadodeclaracion'] == true) {
+                                                                echo "available";
+                                                            } else if ($datos['estadodeclaracion'] == false) {
+                                                                echo "offline";
+                                                            } else if ($datos['estadorevision'] == true && $datos['estadoarchivo'] == true) {
+                                                                echo "finish";
+                                                            }
 
-                        <div class="clip clip-declaracion"></div>
+                                                            ?>">
 
-                        <div class="skill-container">
-                            <div class="skill progreso load"><span>0%</span></div>
-                        </div>
-
-                        <div class="text-center ">
-                            <p class="subtitle-text formatear-p"><b>Anio</b></p>
-                            <p>0000</p>
-                        </div>
-
-
-                        <div class="text-center flex-2">
-
-                            <a class="btn btn-block btn-declaracion" href=""><i class="fas fa-edit"></i>Editar</a>
-                            <a class="btn btn-block btn-declaracion" href=""><i class='fas fa-trash-alt'></i>Eliminar</a>
-                            <a class="btn btn-block btn-declaracion btn-disabled" href="">Crear PDF</a>
-
-                        </div>
-
-
-
-                    </div>
+                                            </span>
+                                        </td>
+                                        <td>El año</td>
+                                        <td>progreso:10</td>
+                                        <td>
+                                            <?php
+                                            if ($datos['estadorevision'] == false) {
+                                                echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:editar;id:edit-'.$datos['iddeclaracion'].';href:declaracion/editar';
+                                            } else {
+                                                echo 'icon:far fa-edit;name:editar';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($datos['estadorevision'] == false) {
+                                                echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:delete-'.$datos['iddeclaracion'].';onclick:eliminardeclaracion';
+                                            } else {
+                                                echo 'icon:far fa-trash-alt;name:eliminar';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($datos['estadorevision'] == false) {
+                                                echo 'icon:fas fa-eye-slash;name:Revisión del Contador';
+                                            } else {
+                                                echo 'actionlink:user-edit simbollink;icon:fas fa-eye;name:Revisión del Contador;id:revision-'.$datos['iddeclaracion'].';onclick:revisiondeclaracion';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($datos['estadorevision'] == true && $datos['estadoarchivo'] == true) {
+                                                echo 'actionlink:user-edit simbollink;icon:far fa-file-pdf;name:Descargar Declaración;id:pdf-'.$datos['iddeclaracion'].';onclick:generardeclaracion';
+                                            } else {
+                                                echo 'icon:far fa-file-pdf;name:Descargar Declaración';
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                            <?php endforeach;
+                            } ?>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="tab-footer"></div>
@@ -93,5 +133,5 @@
 
 <?php require_once './app/views/assets/includes/modals/declaracion/eliminar.php'; ?>
 
-
-
+<script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>
+<script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/listar.js' ?>"></script>

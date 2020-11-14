@@ -11,7 +11,7 @@
 
             <p class="h3 title-encuesta-0">¡Averigua si debes declarar renta este año 2020! <br> </p><br>
             <p class="h5">Con esta serie de preguntas lo sabrás.</p>
-            <img src="./public/images/forms2.svg" class="myencuesta" alt="">
+            <img src="<?php echo constant('URL'); ?>public/images/forms2.svg" class="myencuesta" alt="">
 
         </div>
 
@@ -39,7 +39,7 @@
 
             <div class="title-encuesta">
 
-                <p class="h4">El valor total de sus bienes a 31 de Diciembre de 2019, es igual o superior a $000.000.000.</p><br>
+                <p class="h4">El valor total de sus bienes a 31 de Diciembre de 2019, es igual o superior a <?php if(empty($data)){ echo "$000.000.000"; }else { echo "$".number_format($data[0]["tope1"], 0 , '.', '.'); } ?></p><br>
 
 
                 <div class="flex-3">
@@ -75,7 +75,7 @@
 
             <div class="title-encuesta">
 
-                <p class="h4">El valor total de sus compras y consumos con o sin tarjeta de crédito es igual o superior a $000.000.000.</p><br>
+                <p class="h4">El valor total de sus compras y consumos con o sin tarjeta de crédito es igual o superior a <?php if(empty($data)){ echo "$000.000.000"; }else { echo "$".number_format($data[0]["tope2"], 0 , '.', '.'); } ?></p><br>
 
 
                 <div class="flex-3">
@@ -110,7 +110,7 @@
             
             <div class="title-encuesta">
 
-                <p class="h4">El valor total de sus consignaciones bancarias, depósitos o inversiones financieras es igual o superior a $000.000.000.</p><br>
+                <p class="h4">El valor total de sus consignaciones bancarias, depósitos o inversiones financieras es igual o superior a <?php if(empty($data)){ echo "$000.000.000"; }else { echo "$".number_format($data[0]["tope2"], 0 , '.', '.'); } ?></p><br>
 
 
                 <div class="flex-3">
@@ -145,7 +145,7 @@
             
             <div class="title-encuesta">
 
-                <p class="h4">Sus ingresos totales del año anterior son iguales o superior a $000.000.000.</p><br>
+                <p class="h4">Sus ingresos totales del año anterior son iguales o superior a <?php if(empty($data)){ echo "$000.000.000"; }else { echo "$".number_format($data[0]["tope2"], 0 , '.', '.'); } ?></p><br>
 
 
                 <div class="flex-3">
@@ -193,7 +193,7 @@
 
             <p class="h3 title-encuesta-0">Este año no tienes que declarar renta.</p>
             <p class="h5">Puedes visitarnos el próximo año y consultar si tienes que declarar renta.</p>
-            <img src="./public/images/happy.svg" class="myencuesta" alt="">
+            <img src="<?php echo constant('URL'); ?>public/images/happy.svg" class="myencuesta" alt="">
 
         </div>
 
@@ -216,7 +216,7 @@
 
             <p class="h3 title-encuesta-0">Este año debes declarar renta.</p>
             <p class="h5">Registrate y procede a realizar tu declaración de renta con nosotros.</p>
-            <img src="./public/images/register.svg" class="myencuesta" alt="">
+            <img src="<?php echo constant('URL'); ?>public/images/register.svg" class="myencuesta" alt="">
 
         </div>
 

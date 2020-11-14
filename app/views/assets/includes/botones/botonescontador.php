@@ -6,12 +6,6 @@
     </li>
 
     <li class="item">
-        <a href="#" class="menu-btn" id="perfilboton" title="Perfil">
-            <i class="fas fa-user-circle"></i><span>Perfil</span>
-        </a>
-    </li>
-
-    <li class="item">
         <a href="<?php echo constant('URL'); ?>parametros/listar" class="menu-btn" id="perfilparametros" title="Perfil">
             <i class="fas fa-cogs"></i><span>Parámetros</span>
         </a>
@@ -33,7 +27,6 @@
         </a>
         <div class="sub-menu">
             <a href="#" title="Manual de Usuario"><i class="fas fa-address-book"></i><span>Manual de usuario</span></a>
-            <a href="#" title="Ayuda en línea"><i class="fas fa-info-circle"></i></i><span>Ayuda en línea</span></a>
         </div>
     </li>
 </ul>
