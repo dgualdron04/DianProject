@@ -31,6 +31,8 @@ class Usuario extends Controller
                 $this->declaracion = $this->model('Declaracion');
                 $declaraciones = $this->declaracion->listar($this->usuario->getid(), $this->usuario->getnomrol());
                 $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
+            }else if (strtolower($this->usuario->getnomrol()) == "contador") {
+                $this->viewtemplate('declaracion', 'revision', $this->usuario->traerdatosusuario());
             }else{
                 $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
             }
@@ -185,11 +187,14 @@ class Usuario extends Controller
         if (isset($_SESSION['email'])) {
 
             $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+        
         } else if (isset($_POST['param']) && $_POST['param'] == true) {
 
             if (isset($_POST['correo']) && isset($_POST['password'])) {
+
                 $emailform = $_POST['correo'];
                 $passform = $_POST['password'];
+                
                 if ($this->usuario->usuarioactivo($emailform)) {
 
                     if ($this->usuario->iniciarsesion($emailform, $passform)) {
@@ -198,12 +203,15 @@ class Usuario extends Controller
                         $this->usuario->setusuario($this->traersesion());
                         $this->errorslogin['user-login'] = "El usuario esta logeado.";
                         echo json_encode($this->errorslogin);
+                        
                     } else {
+
                         $this->errorslogin['user-error'] = "El usuario y/o pass esta incorrecto.";
                         echo json_encode($this->errorslogin);
+
                     }
 
-                } else{
+                } else {
 
                     $this->errorslogin['user-active'] = "El usuario no se encuentra activo.";
                     echo json_encode($this->errorslogin);
@@ -211,12 +219,16 @@ class Usuario extends Controller
                 }
 
             } else {
+
                 $this->errorslogin['formempty-error'] = "Formulario vacío.";
                 echo json_encode($this->errorslogin);
+
             }
+
         } else {
 
             $this->viewtemplate('usuario', 'index', null, $this->topes);
+            
         }
     }    
 
@@ -230,8 +242,8 @@ class Usuario extends Controller
 
         if (isset($_SESSION['email'])) {
 
-
             $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+
         } else if (isset($_POST['param']) && $_POST['param'] == true) {
 
             if (!isset($_POST['nombreregistro'], $_POST['passwordregistro'], $_POST['correoregistro'])) {
@@ -240,29 +252,40 @@ class Usuario extends Controller
                 $this->errors['nodata-error'] = "No hay datos.";
                 $this->errors['loading'] = true;
                 echo json_encode($this->errors);
+
             } else if (empty($_POST['nombreregistro']) || empty($_POST['passwordregistro']) || empty($_POST['correoregistro'])) {
+
                 //echo 'Formulario vacio';
                 $this->errors['formempty-error'] = "Formulario vacío.";
                 $this->errors['loading'] = true;
                 echo json_encode($this->errors);
+
             } else if ($this->usuario->userexist($_POST['correoregistro'])) {
+
                 //echo "El Usuario Ya esta registrado";
                 $this->errors['userexist-error'] = "El correo ya se encuentra registrado.";
                 $this->errors['loading'] = true;
                 echo json_encode($this->errors);
+
             } else {
+
                 if ($this->usuario->registrarusuario($_POST['nombreregistro'], $_POST['apellidoregistro'], $_POST['correoregistro'], $_POST['passwordregistro'])) {
+                    
                     //echo "El registro salio exitoso.";
                     $this->errors['registron-error'] = "El Registro se Completo Satisfactoriamente,<br> ahora puede Iniciar Sesión";
                     $this->errors['loading'] = true;
                     echo json_encode($this->errors);
+
                 } else {
+
                     //echo "El registro no salio exitoso.";
                     $this->errors['registroff-error'] = "El Registro no se Completo Satisfactoriamente";
                     $this->errors['loading'] = true;
                     echo json_encode($this->errors);
+
                 }
             }
+            
         } else {
 
             $this->viewtemplate('usuario', 'index', null, $this->topes);

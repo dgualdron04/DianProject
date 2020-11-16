@@ -1,24 +1,24 @@
-const bars = document.getElementById("bars"),
-closebars = document.getElementById("closebars"),
-fondocontainer = document.getElementById("fondo-container"),
-wrapper = document.getElementById("wrapper"),
-footer = document.getElementById("footer");
-var boolean = true;
-bars.addEventListener('click', function(){sidebar()});
-closebars.addEventListener('click', function(){sidebar()});
+const bars = document.getElementById("bars");
+const closebars = document.getElementById("closebars");
+const fondocontainer = document.getElementById("fondo-container");
+const wrapper = document.getElementById("wrapper");
+const footer = document.getElementById("footer");
+let boolean = true;
+bars.addEventListener('click', function () { sidebar() });
+closebars.addEventListener('click', function () { sidebar() });
 
 
-function sidebar(){
+function sidebar() {
     boolean = !boolean;
     if (boolean === true) {
         fondocontainer.classList.add("collapse");
         wrapper.classList.add("collapse");
         footer.classList.add("collapse");
-    }else{
+    } else {
 
         wrapper.classList.remove("collapse");
         fondocontainer.classList.remove("collapse");
         footer.classList.remove("collapse");
     }
-    
+
 }

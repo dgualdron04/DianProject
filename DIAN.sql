@@ -119,6 +119,101 @@ FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
 
 /*-------------------------------------------------------------*/
 
+/*--- Creación de la tabla patrimonio ---*/
+
+CREATE TABLE patrimonio
+(idpatrimonio INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del patrimonio',
+patliquitotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El total de patrimonio liquido',
+deudatotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El total de la deuda',
+patbrutototal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El total de patrimonio bruto',
+iddeclaracion INT NOT NULL COMMENT 'Codigo de la Declaración',
+PRIMARY KEY (idpatrimonio),
+FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
+
+/*---------------------------------------*/
+
+/*--- Creación de la tabla modelo ---*/
+
+CREATE TABLE modelo
+(idmodelo INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del modelo',
+tipomodelo varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de modelo',
+PRIMARY KEY (idmodelo));
+
+/*-----------------------------------*/
+
+/*--- Creación de la tabla tipomoneda*/
+
+CREATE TABLE tipomoneda
+(idtipomoneda INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de moneda',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de moneda',
+PRIMARY KEY (idtipomoneda));
+
+/*-----------------------------------*/
+
+/*--- Creación de la tabla Bienes y sus tablas anexas ---*/
+
+CREATE TABLE tipobien
+(idtipobien INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de bien',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de bien',
+descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de bien',
+ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo bien',
+PRIMARY KEY (idtipobien));
+
+CREATE TABLE bien
+(idbien INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del bien',
+valorbien BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del bien',
+idtipobien INT NOT NULL COMMENT 'Codigo del tipo de bien',
+idtipomoneda INT NOT NULL COMMENT 'Codigo del tipo de moneda',
+idmodelo INT NOT NULL COMMENT 'Codigo del modelo',
+PRIMARY KEY (idbien),
+FOREIGN KEY (idtipobien) REFERENCES tipobien(idtipobien),
+FOREIGN KEY (idtipomoneda) REFERENCES tipomoneda(idtipomoneda),
+FOREIGN KEY (idmodelo) REFERENCES modelo(idmodelo));
+
+CREATE TABLE usuariobien
+(idusuariobien INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariobien',
+idbien INT NOT NULL COMMENT 'Codigo del bien',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idpatrimonio INT NOT NULL COMMENT 'Codigo del patrimonio',
+PRIMARY KEY (idusuariobien),
+FOREIGN KEY (idbien) REFERENCES bien(idbien),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idpatrimonio) REFERENCES patrimonio(idpatrimonio));
+
+/*---------------------------*/
+
+/*--- Creación de la tabla Deudas y sus tablas anexas ---*/
+
+CREATE TABLE tipodeuda
+(idtipodeuda INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de deuda',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de deuda',
+descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de deuda',
+ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo deuda',
+PRIMARY KEY (idtipodeuda));
+
+CREATE TABLE deuda
+(iddeuda INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la deuda',
+valordeuda BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la deuda',
+idtipodeuda INT NOT NULL COMMENT 'Codigo del tipo de deuda',
+idtipomoneda INT NOT NULL COMMENT 'Codigo del tipo de moneda',
+idmodelo INT NOT NULL COMMENT 'Codigo del modelo',
+PRIMARY KEY (iddeuda),
+FOREIGN KEY (idtipodeuda) REFERENCES tipodeuda(idtipodeuda),
+FOREIGN KEY (idtipomoneda) REFERENCES tipomoneda(idtipomoneda),
+FOREIGN KEY (idmodelo) REFERENCES modelo(idmodelo));
+
+CREATE TABLE usuariodeuda
+(idusuariodeuda INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariodeuda',
+iddeuda INT NOT NULL COMMENT 'Codigo de la deuda',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idpatrimonio INT NOT NULL COMMENT 'Codigo del patrimonio',
+PRIMARY KEY (idusuariodeuda),
+FOREIGN KEY (iddeuda) REFERENCES deuda(iddeuda),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idpatrimonio) REFERENCES patrimonio(idpatrimonio));
+
+/*-------------------------------------------------------*/
+
 
 /*-----Inserción de datos de la tabla ESTADOUSUARIO-----*/
 
@@ -166,11 +261,13 @@ INSERT INTO `parametros` (`valortributario`, `tope1`, `tope2`, `annoperiodo`, `m
 
 /*-------------------------------*/
 
+
 /*--- Inserción de calendario fiscal ---*/
 
 INSERT INTO `calendariofiscal` ( `dia1`, `dia2`, `idparametro`) VALUES ('2020-08-11', '2020-10-21', '1');
 
 /*--------------------------------------*/
+
 
 /*-- Inserción de Periodo de declaración --*/
 
@@ -178,3 +275,16 @@ INSERT INTO `periododeclarante` (`digito1`, `digito2`, `dia`, `idcalendario`) VA
 
 /*-----------------------------------------*/
 
+
+/*--- Inserción del Modelo ---*/
+
+INSERT INTO `modelo` (`tipomodelo`) VALUES ('Nacional'), ('Internacional');
+
+/*----------------------------*/
+
+
+/*--- Inserción de tipo de moneda ---*/
+
+INSERT INTO `tipomoneda` (`nombre`) VALUES ('Peso Colombiano'), ('Dólar Estadounidense');
+
+/*-----------------------------------*/

@@ -186,16 +186,10 @@ function eliminarcalendario(e, id) {
 //#region Finalizar Eliminar Calendario
 
 function eliminarcalendario1(datos) {
-  document.getElementById(
-    "h2-header-calendario"
-  ).innerHTML = `Eliminar Calendario del Anno ${datos[0]["annoperiodo"]}`;
-  document.getElementById(
-    "modal-body-calendario"
-  ).innerHTML = `<p>¿ Estas seguro que deseas eliminar el Calendario del Anno ${datos[0]["annoperiodo"]}?,
+  document.getElementById("h2-header-calendario").innerHTML = `Eliminar Calendario del Anno ${datos[0]["annoperiodo"]}`;
+  document.getElementById("modal-body-calendario").innerHTML = `<p>¿ Estas seguro que deseas eliminar el Calendario del Anno ${datos[0]["annoperiodo"]}?,
                                                           eliminaras todo lo relacionado con este calendario. </p>`;
-  document.getElementById(
-    "modal-footer-calendario"
-  ).innerHTML = `<a href="#" id="si-eliminar-calendario" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-eliminar-calendario" class="btn-modal btn-block-modal btn-delete"> No </a>`;
+  document.getElementById("modal-footer-calendario").innerHTML = `<a href="#" id="si-eliminar-calendario" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-eliminar-calendario" class="btn-modal btn-block-modal btn-delete"> No </a>`;
 
   let sieliminarcalendario = document.getElementById("si-eliminar-calendario");
   let noeliminarcalendario = document.getElementById("no-eliminar-calendario");
@@ -312,7 +306,7 @@ function listarperiodo(datos) {
         </tr>
         `;
   });
- 
+
   const dtperiodo = new DataTable(
     "#datatable-periodo",
     "Periodos de Declaración",
@@ -323,12 +317,12 @@ function listarperiodo(datos) {
         icon: "fas fa-paste",
         type: "button",
         action: function () {
-          
+
           //#region Cerrar modal periodo
           let modalperiodo = document.getElementById("modal-listar-periodo");
 
           modalperiodo.children[0].classList.add("modal-close");
-          
+
           setTimeout(() => {
             modalperiodo.style.opacity = 0;
             modalperiodo.style.visibility = "hidden";
@@ -336,7 +330,7 @@ function listarperiodo(datos) {
           //#endregion
 
           //#region Abrir modal crear periodo
-          
+
           document.getElementById('primerdigitocrear').value = '';
           document.getElementById('segundodigitocrear').value = '';
           document.getElementById('fechacrear').value = null;
@@ -375,9 +369,9 @@ function listarperiodo(datos) {
             }
           );
           //#endregion
-          
+
           //#endregion
-            
+
         },
       },
     ]
@@ -387,43 +381,43 @@ function listarperiodo(datos) {
 }
 //#region Crear periodo
 let contadorperiodo = 0;
-          let formcrearperiodo = document.getElementById('form-periodo-crear');
-          
-          formcrearperiodo.addEventListener('submit', (e) => {
-            
-            e.preventDefault();
-            contadorperiodo++;
-            if (contadorperiodo === 1) {
-              let formData = new FormData(formcrearperiodo);
-              let param = true;
-              formData.append("param", param);
-              ajax({
-                url: `./parametros/crearperiodo/${idc}`,
-                method: "POST",
-                // async: true,
-                // responseType: 'json',
-                done: () => {cerrarmodal(idc); contadorperiodo = 0;},
-                error: rendererror,
-                form: formData,
-              });
-            }
+let formcrearperiodo = document.getElementById('form-periodo-crear');
+
+formcrearperiodo.addEventListener('submit', (e) => {
+
+  e.preventDefault();
+  contadorperiodo++;
+  if (contadorperiodo === 1) {
+    let formData = new FormData(formcrearperiodo);
+    let param = true;
+    formData.append("param", param);
+    ajax({
+      url: `./parametros/crearperiodo/${idc}`,
+      method: "POST",
+      // async: true,
+      // responseType: 'json',
+      done: () => { cerrarmodal(idc); contadorperiodo = 0; },
+      error: rendererror,
+      form: formData,
+    });
+  }
 
 
-          });
+});
 //#endregion
 
 //#endregion
 
 //#region Abrir periodo y cerrar crear periodo
-  function cerrarmodal($idcalendario) {
-    let modalcrearperiodo = document.getElementById("modal-crear-periodo");
-    modalcrearperiodo.children[0].classList.add("modal-close");
-    abrirperiodo($idcalendario);
-    setTimeout(() => { modalcrearperiodo.style.opacity = 0; modalcrearperiodo.style.visibility = "hidden"; }, 150);
-  }
+function cerrarmodal($idcalendario) {
+  let modalcrearperiodo = document.getElementById("modal-crear-periodo");
+  modalcrearperiodo.children[0].classList.add("modal-close");
+  abrirperiodo($idcalendario);
+  setTimeout(() => { modalcrearperiodo.style.opacity = 0; modalcrearperiodo.style.visibility = "hidden"; }, 150);
+}
 
-  function abrirperiodo(id) {
-    setTimeout(() => {  
+function abrirperiodo(id) {
+  setTimeout(() => {
     let modalperiodo = document.getElementById("modal-listar-periodo");
 
     //#region Cerrar modal editar
@@ -431,16 +425,16 @@ let contadorperiodo = 0;
       "click",
       () => {
         modalperiodo.children[0].classList.add("modal-close");
-  
+
         setTimeout(() => {
           modalperiodo.style.opacity = 0;
           modalperiodo.style.visibility = "hidden";
         }, 500);
       }
     );
-  
+
     //#endregion
-  
+
     modalperiodo.style.opacity = 1;
     modalperiodo.style.visibility = "visible";
     modalperiodo.children[0].classList.remove("modal-close");
@@ -458,14 +452,14 @@ let contadorperiodo = 0;
       form: formData,
     });
   }, 400);
-  }
+}
 //#endregion
 
 //#region Poner max and mins
 
 function maxandmin(datos) {
-    document.getElementById('fechacrear').setAttribute("min", `${datos[0]['dia1']}`);
-    document.getElementById('fechacrear').setAttribute("max", `${datos[0]['dia2']}`);
+  document.getElementById('fechacrear').setAttribute("min", `${datos[0]['dia1']}`);
+  document.getElementById('fechacrear').setAttribute("max", `${datos[0]['dia2']}`);
 }
 
 //#endregion
@@ -479,7 +473,7 @@ function eliminarperiodo(event, id) {
   let modalperiodo = document.getElementById("modal-listar-periodo");
 
   modalperiodo.children[0].classList.add("modal-close");
-  
+
   setTimeout(() => {
     modalperiodo.style.opacity = 0;
     modalperiodo.style.visibility = "hidden";
@@ -488,40 +482,40 @@ function eliminarperiodo(event, id) {
 
   //#region Abrir modal eliminar
   setTimeout(() => {
-    
-  let modaldeleteperiodo = document.getElementById("modal-delete-periodo");
 
-  modaldeleteperiodo.style.opacity = 1;
-  modaldeleteperiodo.style.visibility = "visible";
-  modaldeleteperiodo.children[0].classList.remove("modal-close");
+    let modaldeleteperiodo = document.getElementById("modal-delete-periodo");
 
-  id = id.replace("deletep-", "");
-  let formData = new FormData();
-  let param = true;
-  formData.append("param", param);
-  ajax({
-    url: `./parametros/editarper/${id}`,
-    method: "POST",
-    // async: true,
-    // responseType: 'json',
-    done: eliminarper,
-    error: rendererror,
-    form: formData,
-  });
+    modaldeleteperiodo.style.opacity = 1;
+    modaldeleteperiodo.style.visibility = "visible";
+    modaldeleteperiodo.children[0].classList.remove("modal-close");
 
-  //#region Cerrar modal eliminar
-  modaldeleteperiodo.children[0].children[0].children[1].addEventListener(
-    "click",
-    () => {
-      modaldeleteperiodo.children[0].classList.add("modal-close");
-      abrirperiodo(idc);
-      setTimeout(() => {
-        modaldeleteperiodo.style.opacity = 0;
-        modaldeleteperiodo.style.visibility = "hidden";
-      }, 500);
-    }
-  );
-  //#endregion
+    id = id.replace("deletep-", "");
+    let formData = new FormData();
+    let param = true;
+    formData.append("param", param);
+    ajax({
+      url: `./parametros/editarper/${id}`,
+      method: "POST",
+      // async: true,
+      // responseType: 'json',
+      done: eliminarper,
+      error: rendererror,
+      form: formData,
+    });
+
+    //#region Cerrar modal eliminar
+    modaldeleteperiodo.children[0].children[0].children[1].addEventListener(
+      "click",
+      () => {
+        modaldeleteperiodo.children[0].classList.add("modal-close");
+        abrirperiodo(idc);
+        setTimeout(() => {
+          modaldeleteperiodo.style.opacity = 0;
+          modaldeleteperiodo.style.visibility = "hidden";
+        }, 500);
+      }
+    );
+    //#endregion
   }, 500);
   //#endregion
 
@@ -533,7 +527,7 @@ function eliminarperiodo(event, id) {
 //#region Llenar Periodo
 
 function eliminarper(datos) {
-  
+
   document.getElementById("h2-header-periodo").innerHTML = `Eliminar Periodo del día ${datos[0]["dia"]}`;
   document.getElementById("modal-body-periodo").innerHTML = `<p>¿ Estas seguro que deseas eliminar el Periodo del día ${datos[0]["dia"]}?</p>`;
   document.getElementById("modal-footer-periodo").innerHTML = `<a href="#" id="si-eliminar-periodo" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-eliminar-periodo" class="btn-modal btn-block-modal btn-delete"> No </a>`;
@@ -545,17 +539,17 @@ function eliminarper(datos) {
   noeliminarperiodo.addEventListener("click", (e) => {
     e.preventDefault();
 
-    let modaldeleteperiodo= document.getElementById("modal-delete-periodo");
+    let modaldeleteperiodo = document.getElementById("modal-delete-periodo");
 
     modaldeleteperiodo.children[0].classList.add("modal-close");
-      abrirperiodo(idc);
-      setTimeout(() => {
-        modaldeleteperiodo.style.opacity = 0;
-        modaldeleteperiodo.style.visibility = "hidden";
-      }, 500);
+    abrirperiodo(idc);
+    setTimeout(() => {
+      modaldeleteperiodo.style.opacity = 0;
+      modaldeleteperiodo.style.visibility = "hidden";
+    }, 500);
   });
   //#endregion
- 
+
   //#region Si eliminar
   sieliminarperiodo.addEventListener("click", (e) => {
     e.preventDefault();
@@ -568,12 +562,12 @@ function eliminarper(datos) {
       // async: true,
       // responseType: 'json',
       done: () => {
-      let modaldeleteperiodo = document.getElementById("modal-delete-periodo"); modaldeleteperiodo.children[0].classList.add("modal-close");
-      abrirperiodo(idc);
-      setTimeout(() => {
-        modaldeleteperiodo.style.opacity = 0;
-        modaldeleteperiodo.style.visibility = "hidden";
-      }, 500);
+        let modaldeleteperiodo = document.getElementById("modal-delete-periodo"); modaldeleteperiodo.children[0].classList.add("modal-close");
+        abrirperiodo(idc);
+        setTimeout(() => {
+          modaldeleteperiodo.style.opacity = 0;
+          modaldeleteperiodo.style.visibility = "hidden";
+        }, 500);
       },
       error: rendererror,
       form: formData,
@@ -587,14 +581,14 @@ function eliminarper(datos) {
 
 //#region Editar Periodo
 
-  function editarperiodo(event, idperiodo) {
-    
-    event.preventDefault();
+function editarperiodo(event, idperiodo) {
+
+  event.preventDefault();
   //#region Cerrar modal periodo
   let modalperiodo = document.getElementById("modal-listar-periodo");
 
   modalperiodo.children[0].classList.add("modal-close");
-  
+
   setTimeout(() => {
     modalperiodo.style.opacity = 0;
     modalperiodo.style.visibility = "hidden";
@@ -603,13 +597,13 @@ function eliminarper(datos) {
 
   //#region Abrir modal editar
   setTimeout(() => {
-    
+
     let modaleditarperiodo = document.getElementById("modal-editar-periodo");
-  
+
     modaleditarperiodo.style.opacity = 1;
     modaleditarperiodo.style.visibility = "visible";
     modaleditarperiodo.children[0].classList.remove("modal-close");
-  
+
     idperiodo = idperiodo.replace("editp-", "");
     let formData = new FormData();
     let param = true;
@@ -623,7 +617,7 @@ function eliminarper(datos) {
       error: rendererror,
       form: formData,
     });
-  
+
     //#region Cerrar modal eliminar
     modaleditarperiodo.children[0].children[0].children[0].children[0].addEventListener(
       "click",
@@ -637,11 +631,11 @@ function eliminarper(datos) {
       }
     );
     //#endregion
-    }, 500);
-    //#endregion
-  
+  }, 500);
+  //#endregion
 
-  }
+
+}
 
 //#endregion
 
@@ -666,22 +660,24 @@ formperiodoeditar.addEventListener('submit', (e) => {
   e.preventDefault();
   contadorperiodoeditar++;
   if (contadorperiodoeditar === 1) {
-  let formData = new FormData(formperiodoeditar);
-  let param = true;
-  formData.append("param", param);
-  id = formperiodoeditar['idper'].value;
+    let formData = new FormData(formperiodoeditar);
+    let param = true;
+    formData.append("param", param);
+    id = formperiodoeditar['idper'].value;
     ajax({
       url: `./parametros/editarperiodo/${id}`,
       method: "POST",
       // async: true,
       // responseType: 'json',
-      done:  () => {let modaleditarperiodo = document.getElementById("modal-editar-periodo");
+      done: () => {
+        let modaleditarperiodo = document.getElementById("modal-editar-periodo");
         modaleditarperiodo.children[0].classList.add("modal-close");
-      abrirperiodo(idc);
-      setTimeout(() => {
-        modaleditarperiodo.style.opacity = 0;
-        modaleditarperiodo.style.visibility = "hidden";
-      }, 500); contadorperiodoeditar = 0;},
+        abrirperiodo(idc);
+        setTimeout(() => {
+          modaleditarperiodo.style.opacity = 0;
+          modaleditarperiodo.style.visibility = "hidden";
+        }, 500); contadorperiodoeditar = 0;
+      },
       error: rendererror,
       form: formData,
     });

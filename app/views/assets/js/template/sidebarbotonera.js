@@ -24,7 +24,7 @@ submenuopciones = document.getElementById("submenuopciones"); */
 /* const ayudaboton = document.getElementById("ayudaboton") ,
 submenuayudabtn = document.getElementById("submenuayudabtn"),
 flecha = document.getElementById("flecha"); */
- /* inicioboton = document.getElementById("inicioboton"),
+/* inicioboton = document.getElementById("inicioboton"),
 perfilboton = document.getElementById("perfilboton"),
 usuariosboton = document.getElementById("usuariosboton"),
 declaracionboton = document.getElementById("declaracionboton"),
@@ -67,23 +67,23 @@ graficosboton.addEventListener('click', () => {cerrarsubmenus();}); */
 /* Esta funcion cambia el estado de los submenus, dependiendo del submenu que se active con el evento "click", esta funcion recibe el nombre de ese submenu
 por medio de un texto, luego dependiendo del texto que se le pase, este cambia el estado de ese submenu.*/
 /* function cambiarestado(texto) { */
-    /* if (texto === "perfil") {
-    estadoperfil = !estadoperfil;
+/* if (texto === "perfil") {
+estadoperfil = !estadoperfil;
+estadomensajes = false;
+estadoopciones = false;  
+} else if (texto === "mensaje") {
+    estadomensajes = !estadomensajes;
+    estadoperfil = false;
+    estadoopciones = false;
+} else {
+    estadoopciones = !estadoopciones;
+    estadoperfil = false;
     estadomensajes = false;
-    estadoopciones = false;  
-    } else if (texto === "mensaje") {
-        estadomensajes = !estadomensajes;
-        estadoperfil = false;
-        estadoopciones = false;
-    } else {
-        estadoopciones = !estadoopciones;
-        estadoperfil = false;
-        estadomensajes = false;
-    } */
-    
-    /* if (texto === "ayuda") {
-        estadoayuda = !estadoayuda;
-    } */
+} */
+
+/* if (texto === "ayuda") {
+    estadoayuda = !estadoayuda;
+} */
 /* } */
 
 
@@ -115,14 +115,14 @@ submenu2 y submenu3, estos son los dos submenus que se cerraran en caso de que s
 /*Esta funcion no tiene parametros, pero si tiene un uso, esta funcion cierra todos los submenus que se encuentren abiertos, por decir si el usuario le da click
 a un boton que no tenga un submenu, se cerraran todos los submenus. */
 /* function cerrarsubmenus(){ */
-        /* submenuperfil.style.maxHeight= '0px';
-        submenumensajes.style.maxHeight= '0px';
-        submenuopciones.style.maxHeight= '0px'; */
-        /* submenuayudabtn.style.maxHeight = '0px';
-        estadoayuda = false; */
-        /* estadoopciones = false;
-        estadoperfil = false;
-        estadomensajes = false; */
+/* submenuperfil.style.maxHeight= '0px';
+submenumensajes.style.maxHeight= '0px';
+submenuopciones.style.maxHeight= '0px'; */
+/* submenuayudabtn.style.maxHeight = '0px';
+estadoayuda = false; */
+/* estadoopciones = false;
+estadoperfil = false;
+estadomensajes = false; */
 /* } */
 
 
@@ -132,22 +132,22 @@ const itemlist = document.querySelectorAll(".item-list");
 
 
 for (let i = 0; i < itemlist.length; i++) {
-    
-    itemlist[i].children[0].addEventListener('click', (e) => { 
-        e.preventDefault(); 
+
+    itemlist[i].children[0].addEventListener('click', (e) => {
+        e.preventDefault();
 
         itemlist[i].children[0].children[1].children[0].classList.toggle("collapse");
 
-        if(itemlist[i].children[1].style.maxHeight === "500px"){
+        if (itemlist[i].children[1].style.maxHeight === "500px") {
 
             itemlist[i].children[1].style.maxHeight = '0px';
 
-        }else{
+        } else {
 
             itemlist[i].children[1].style.maxHeight = '500px';
 
         }
 
-        });
-    
+    });
+
 }

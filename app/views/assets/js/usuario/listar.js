@@ -13,8 +13,8 @@ function ajax({
   url,
   method = "GET",
   async = true,
-  done = () => {},
-  error = () => {},
+  done = () => { },
+  error = () => { },
   responseType = "json",
   form = null,
 }) {
@@ -115,17 +115,17 @@ function rendertabla(datos) {
   loadingfunction();
 
   setTimeout(() => {
-  
-  window.dt = new simpleDatatables.DataTable(t, {
-    data,
-    labels: {
-      placeholder: "Buscar...",
-      perPage: "{select} entradas por página.",
-      noRows: "No se encontraron entradas..",
-      info: "Mostrando {start} a {end} de {rows} entradas encontradas.",
-    },
-    layout: {
-      top: `
+
+    window.dt = new simpleDatatables.DataTable(t, {
+      data,
+      labels: {
+        placeholder: "Buscar...",
+        perPage: "{select} entradas por página.",
+        noRows: "No se encontraron entradas..",
+        info: "Mostrando {start} a {end} de {rows} entradas encontradas.",
+      },
+      layout: {
+        top: `
     <div class='card-header'>
       <div class='filausuarios'>
         <div class='columna-5'>
@@ -140,11 +140,11 @@ function rendertabla(datos) {
       </div>
     </div>  
       `,
-      bottom: "{info}{pager}",
-    },
-    perPage: 5,
-    perPageSelect: [1, 5, 10, 15, 20, 25],
-  });
+        bottom: "{info}{pager}",
+      },
+      perPage: 5,
+      perPageSelect: [1, 5, 10, 15, 20, 25],
+    });
   }, 100);
 }
 
@@ -235,19 +235,19 @@ function recreartable() {
 
 /*------Eliminar usuario-------*/
 
-function userdelete(e, myid){
+function userdelete(e, myid) {
   myid = myid.replace('delete-', '');
 
   /* formData.append('iduser', myid); */
-    ajax({
-      url: `./usuario/editar/${myid}`,
-      method: "POST",
-      // async: true,
-      // responseType: 'json',
-      done: eliminar,
-      error: rendererror,
-      form: formData,
-    });
+  ajax({
+    url: `./usuario/editar/${myid}`,
+    method: "POST",
+    // async: true,
+    // responseType: 'json',
+    done: eliminar,
+    error: rendererror,
+    form: formData,
+  });
 
   abrirmodal(modal2, modaldel);
 
@@ -257,18 +257,18 @@ function userdelete(e, myid){
 
 function eliminar(datos) {
   let modalheader = document.getElementById('h2-header'),
-  modalbody = document.getElementById('modal-body'),
-  modalfooter = document.getElementById('modal-footer');
+    modalbody = document.getElementById('modal-body'),
+    modalfooter = document.getElementById('modal-footer');
 
   let nombre = datos[0]['nombre'].split(' '),
-  apellido = datos[0]['apellido'].split(' ');
+    apellido = datos[0]['apellido'].split(' ');
 
-  modalheader.innerHTML = 'Eliminar usuario llamado '+nombre[0]+' '+apellido[0];
-  modalbody.innerHTML = '<p> Estas seguro que deseas eliminar el usuario llamado '+nombre[0]+' '+apellido[0]+' ? </p>';
+  modalheader.innerHTML = 'Eliminar usuario llamado ' + nombre[0] + ' ' + apellido[0];
+  modalbody.innerHTML = '<p> Estas seguro que deseas eliminar el usuario llamado ' + nombre[0] + ' ' + apellido[0] + ' ? </p>';
   modalfooter.innerHTML = `<a href="#" id="si-delete" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-delete" class="btn-modal btn-block-modal btn-delete"> No </a>`;
 
   let sieliminar = document.getElementById("si-delete"),
-  noeliminar = document.getElementById("no-delete");
+    noeliminar = document.getElementById("no-delete");
 
   noeliminar.addEventListener('click', (e) => {
     e.preventDefault(); cerrarmodal(modal2, modaldel);
@@ -298,27 +298,26 @@ function eliminar(datos) {
 
 /*------Editar Usuario-------*/
 
-function useredit(e, myid){
+function useredit(e, myid) {
   myid = myid.replace('edit-', '');
 
   formData.append('iduser', myid);
-    ajax({
-      url: `./usuario/editar/${myid}`,
-      method: "POST",
-      // async: true,
-      // responseType: 'json',
-      done: editar,
-      error: rendererror,
-      form: formData,
-    });
-    
+  ajax({
+    url: `./usuario/editar/${myid}`,
+    method: "POST",
+    // async: true,
+    // responseType: 'json',
+    done: editar,
+    error: rendererror,
+    form: formData,
+  });
+
   abrirmodal(modal3, modaledit);
 
   e.preventDefault();
 }
 
-function editar(datos)
-{
+function editar(datos) {
   document.getElementById('codeditar').value = datos[0]['idusuario'];
   document.getElementById('nombreeditar').value = datos[0]['nombre'];
   document.getElementById('apellidoeditar').value = datos[0]['apellido'];
@@ -328,19 +327,19 @@ function editar(datos)
   /* document.getElementById('passeditar').value = '-0p1a2s3s4w5o6r7d89-'; */
   if (datos[0]['rol'].toLowerCase() === 'declarante') {
     document.getElementById('roleditar').selectedIndex = 3;
-  }else if (datos[0]['rol'].toLowerCase() === 'contador') {
+  } else if (datos[0]['rol'].toLowerCase() === 'contador') {
     document.getElementById('roleditar').selectedIndex = 2;
   } else if (datos[0]['rol'].toLowerCase() === 'coordinador') {
 
     document.getElementById('roleditar').selectedIndex = 1;
-    
+
   }
   if (datos[0]['estado'].toLowerCase() === 'inactivo') {
     document.getElementById('estadoeditar').selectedIndex = 2;
-  }else if (datos[0]['estado'].toLowerCase() === 'activo') {
+  } else if (datos[0]['estado'].toLowerCase() === 'activo') {
     document.getElementById('estadoeditar').selectedIndex = 1;
   }
-   
+
   /* if (formedit['passeditar'].value == '-0p1a2s3s4w5o6r7d89-') {
     formedit['passeditar'].value = datos[0]['password'];
   }
@@ -379,8 +378,8 @@ formedit.addEventListener("submit", (e) => {
   e.preventDefault();
   let formdatos = new FormData(formedit);
   formdatos.append("param", param);
-/*   formdatos.append("codeditar", formedit['ideditar'].value); */
-let formid = formedit['codeditar'].value;
+  /*   formdatos.append("codeditar", formedit['ideditar'].value); */
+  let formid = formedit['codeditar'].value;
   ajax({
     url: `./usuario/editarusuarios/${formid}`,
     method: "POST",

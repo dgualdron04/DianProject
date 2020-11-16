@@ -335,7 +335,7 @@ class DataTable{
             this.element.querySelector('.search-input').addEventListener('input', e=>{
                 const query = e.target.value.trim().toLowerCase();  
                 if (this.items.length === 0) {
-                    this.element.querySelector('.noitems').innerHTML = `<p class="text-center">Aún no hay ${thos.table}.</p>`;
+                    this.element.querySelector('.noitems').innerHTML = `<p class="text-center">Aún no hay ${this.table}.</p>`;
                 }else{
                 if(query === ''){
                     this.element.querySelector('.noitems').innerHTML = ``;

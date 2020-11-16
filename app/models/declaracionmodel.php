@@ -16,7 +16,7 @@ class Declaracionmodel extends Models{
 
         } else if (strtolower($nomrol) == "contador") {
             
-            $query = $this->db->connect()->prepare('SELECT d.iddeclaracion, d.pagototal, d.estadoarchivo, d.estadorevision, d.estadodeclaracion, d.observaciones FROM '.$this->tabladeclaracion.' d WHERE d.estadorevision = true ;');
+            $query = $this->db->connect()->prepare('SELECT d.iddeclaracion, d.pagototal, d.estadoarchivo, d.estadorevision, d.estadodeclaracion, d.observaciones FROM '.$this->tabladeclaracion.' d WHERE d.estadorevision = 1 ;');
             $query->execute([$id]);
             $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
             return $myquery;

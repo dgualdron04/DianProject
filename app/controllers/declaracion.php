@@ -46,21 +46,33 @@ class Declaracion extends Controller
 
         if (isset($_SESSION['email'])) {
 
-                    if ($id == $this->usuario->getid()) {
+            if ((strtolower($this->usuario->getnomrol()) == "declarante")) {
+                if ($id == $this->usuario->getid()) {
                         
-                        $declaraciones = $this->declaracion->listar($id, $this->usuario->getnomrol());
+                    $declaraciones = $this->declaracion->listar($id, $this->usuario->getnomrol());
 
-                        /* print_r($declaraciones);
-                        echo "<br>";
-                        echo $declaraciones[0]['iddeclaracion']; */
+                    /* print_r($declaraciones);
+                    echo "<br>";
+                    echo $declaraciones[0]['iddeclaracion']; */
 
-                        $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
+                    $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
 
-                    } else{
+                } else{
 
-                        $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                    $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
 
-                    }
+                }
+            }else if ((strtolower($this->usuario->getnomrol()) == "contador")) {
+                
+                $declaraciones = $this->declaracion->listar($id, $this->usuario->getnomrol());
+
+                $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
+                
+            }else{
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+            }
+            
+                    
 
         } else {
             $this->viewtemplate('usuario', 'index', null, $this->topes);
@@ -94,8 +106,22 @@ class Declaracion extends Controller
 
     }
 
-    public function listarrevision($annoperiodo){
+    public function revision($annoperiodo){
+        if (isset($_SESSION['email'])) {
 
+            if ((strtolower($this->usuario->getnomrol()) == "contador") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
+
+                $this->viewtemplate('declaracion', 'revision', $this->usuario->traerdatosusuario());
+
+            } else{
+
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+
+            }
+        } else {
+
+            $this->viewtemplate('usuario', 'index', null, $this->topes);
+        }
     }
 
     public function solicitarrevision($annoperiodo){

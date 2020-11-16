@@ -23,8 +23,8 @@ class Controller
     }
 
     public function model($model)
-    {
-        require_once './app/models/'.$model.'model.php';
+    {  
+        require_once './app/models/'.strtolower($model).'model.php';
         $namemodel = $model.'model';
         return new $namemodel();
     }

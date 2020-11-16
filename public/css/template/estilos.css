@@ -1724,6 +1724,10 @@ button.iconostable i {
   width: 30%;
 }
 
+.width-normal-2{
+  width: 25%;
+}
+
 .datatable-container {
   font-family: "Poppins", sans-serif;
   background-color: var(--dt-background-color-container);
