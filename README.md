@@ -3,7 +3,7 @@
 ## Tabla de Contenido.
 
 <ul>
-  <li><a href="#install">Como instalar XAMPP </a></li>
+  <li><a href="#install">Como instalar XAMPP y correr la WEB </a></li>
   <li><a href="#autores">Autores</a></li>
 </ul>
 
@@ -58,31 +58,39 @@
 
  ###### Recurso 6. Pasar "dianproject" a htdocs.
 
-<br><li>Luego nos dirigimos al navegador y pondremos "localhost/phpmyadmin", en caso de no quedar claro ver <a href="#recurso7"> Recurso 7</a></li><br>
+<br><li>Ahora nos dirigimos a la carpeta raiz de xampp y iniciamos el .exe que dice xampp-control, luego iniciamos el proceso de apache y de mysql, en caso de no quedar claro ver <a href="#recurso7"> Recurso 7</a></li><br>
 
 <div id="recurso7">
-<img src="http://g.recordit.co/HlQv6l2nsC.gif" alt="Entrando a localhost/phpmyadmin" id="recurso7" width="550px"></img>
+<img src="http://g.recordit.co/zN9A5ldb2W.gif" alt="Iniciando procesos de xampp" id="recurso7" width="550px"></img>
 </div>
 
- ###### Recurso 7. Entrar a "localhost/phpmyadmin".
+ ###### Recurso 7. Iniciando procesos de xampp.
 
- <br><li>Ahora en "localhost/phpmyadmin" nos dirigimos a la opción que dice importar, dentro de esta ponemos seleccionar archivo y seleccionaremos el archivo llamado "DIAN.sql" que esta dentro de la carpeta dianproject y procedemos a dar en el botón continuar, en caso de no quedar claro ver <a href="#recurso7"> Recurso 8</a></li><br>
+<br><li>Luego nos dirigimos al navegador y pondremos "localhost/phpmyadmin", en caso de no quedar claro ver <a href="#recurso8"> Recurso 8</a></li><br>
 
 <div id="recurso8">
-<img src="http://g.recordit.co/cT3hJ9e1aj.gif" alt="Importando base de datos" id="recurso8" width="550px"></img>
+<img src="http://g.recordit.co/HlQv6l2nsC.gif" alt="Entrando a localhost/phpmyadmin" id="recurso8" width="550px"></img>
 </div>
 
- ###### Recurso 8. Importar la base de datos.
+ ###### Recurso 8. Entrar a "localhost/phpmyadmin".
 
+ <br><li>Ahora en "localhost/phpmyadmin" nos dirigimos a la opción que dice importar, dentro de esta ponemos seleccionar archivo y seleccionaremos el archivo llamado "DIAN.sql" que esta dentro de la carpeta dianproject y procedemos a dar en el botón continuar, en caso de no quedar claro ver <a href="#recurso9"> Recurso 9</a></li><br>
 
-
- <br><li>Bien, ahora ya tienes la base de datos y lo único que tiene que hacer es poner "localhost" y entrar a la que dice dianproject, en caso de no quedar claro ver <a href="#recurso7"> Recurso 9</a></li><br>
-
- <div id="recurso9">
-<img src="http://g.recordit.co/6sB1Vfi7na.gif" alt="Entrando al localhost" id="recurso9" width="550px"></img>
+<div id="recurso9">
+<img src="http://g.recordit.co/cT3hJ9e1aj.gif" alt="Importando base de datos" id="recurso9" width="550px"></img>
 </div>
 
- ###### Recurso 9. Entrando al "localhost" y a dianproject.
+ ###### Recurso 9. Importar la base de datos.
+
+
+
+ <br><li>Bien, ahora ya tienes la base de datos y lo único que tiene que hacer es poner "localhost" y entrar a la que dice dianproject, en caso de no quedar claro ver <a href="#recurso10"> Recurso 10</a></li><br>
+
+ <div id="recurso10">
+<img src="http://g.recordit.co/6sB1Vfi7na.gif" alt="Entrando al localhost" id="recurso10" width="550px"></img>
+</div>
+
+ ###### Recurso 10. Entrando al "localhost" y a dianproject.
 
  
 
@@ -112,11 +120,11 @@
   <br>
  </li><br>
 
-<div id="recurso10">
-<img src="http://g.recordit.co/irwUyrWAwW.gif" alt="Inicio de sesión" id="recurso10" width="550px"></img>
+<div id="recurso11">
+<img src="http://g.recordit.co/irwUyrWAwW.gif" alt="Inicio de sesión" id="recurso11" width="550px"></img>
 </div>
 
- ###### Recurso 9. Iniciando sesión con la cuenta de SuperAdmin.
+ ###### Recurso 11. Iniciando sesión con la cuenta de SuperAdmin.
 
 
 <br><h2 id="autores">Autores</h2>
