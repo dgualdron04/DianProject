@@ -69,7 +69,7 @@
  <br><li>Ahora en "localhost/phpmyadmin" nos dirigimos a la opción que dice importar, dentro de esta ponemos seleccionar archivo y seleccionaremos el archivo llamado "DIAN.sql" que esta dentro de la carpeta dianproject y procedemos a dar en el botón continuar, en caso de no quedar claro ver <a href="#recurso7"> Recurso 8</a></li><br>
 
 <div id="recurso8">
-<img src="http://g.recordit.co/9fYKnrH8Ql.gif" alt="Importando base de datos" id="recurso8" width="550px"></img>
+<img src="http://g.recordit.co/cT3hJ9e1aj.gif" alt="Importando base de datos" id="recurso8" width="550px"></img>
 </div>
 
  ###### Recurso 8. Importar la base de datos.
