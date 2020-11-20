@@ -1491,6 +1491,455 @@ FOREIGN KEY (idrentaexentapensiones) REFERENCES rentaexentapensiones(idrentaexen
 /*--------------------------------*/
 
 
+/*---- Tabla Ganancias Ocasionales ----*/
+
+CREATE TABLE gananciasocasionales
+(idgananciasocasionales INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de las ganancias ocasionales',
+iddeclaracion INT NOT NULL COMMENT 'Codigo de la declaración',
+gananciasocasionales BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ganacias Ocasionales',
+PRIMARY KEY (idgananciasocasionales),
+FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
+
+/*------------------------------*/
+
+
+/*--- Tabla de ingresos ganancias y sus tablas anexas ---*/
+
+CREATE TABLE tipoingresosganancias
+(idtipoingresosganancias INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de ingreo de ganancias',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de ingreo de ganancias',
+descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de ingreo de ganancias',
+ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de ingreo de ganancias',
+PRIMARY KEY (idtipoingresosganancias));
+
+CREATE TABLE ingresosganacias
+(idingresosganacias INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos de ganacias',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de ingresos de ganacias',
+idtipoingresosganancias INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo del tipo de ingresos de ganacias',
+PRIMARY KEY (idingresosganacias),
+FOREIGN KEY (idtipoingresosganancias) REFERENCES tipoingresosganancias(idtipoingresosganancias));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuarioingresosganancias de las ganancias ocasionales  ----*/
+
+CREATE TABLE usuarioingresosganancias
+(idusuarioingresosganancias INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioingresosganancias de las ganancias ocasionales',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idgananciasocasionales INT NOT NULL COMMENT 'Codigo de las ganancias ocasionales',
+idingresosganacias INT NOT NULL COMMENT 'Codigo de ingresos ganancias',
+PRIMARY KEY (idusuarioingresosganancias),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idgananciasocasionales) REFERENCES gananciasocasionales(idgananciasocasionales),
+FOREIGN KEY (idingresosganacias) REFERENCES ingresosganacias(idingresosganacias));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de las ganancias no gravadas y sus tablas anexas ---*/
+
+CREATE TABLE tipogananciasnogravadas
+(idtipogananciasnogravadas INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de las ganancias no gravadas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de las ganancias no gravadas',
+descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de las ganancias no gravadas',
+ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de las ganancias no gravadas',
+PRIMARY KEY (idtipogananciasnogravadas));
+
+CREATE TABLE gananciasnogravadas
+(idgananciasonogravadas INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de las ganancias no gravadas',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de las ganancias no gravadas',
+idtipogananciasnogravadas INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo del tipo de las ganancias no gravadas',
+PRIMARY KEY (idgananciasonogravadas),
+FOREIGN KEY (idtipogananciasnogravadas) REFERENCES tipogananciasnogravadas(idtipogananciasnogravadas));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariogananciasnogravadas de las ganancias ocasionales  ----*/
+
+CREATE TABLE usuariogananciasnogravadas
+(idusuariogananciasnogravadas INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioingresosganancias de las ganancias ocasionales',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idgananciasocasionales INT NOT NULL COMMENT 'Codigo de las ganancias ocasionales',
+idgananciasonogravadas INT NOT NULL COMMENT 'Codigo de las ganancias no gravadas',
+PRIMARY KEY (idusuariogananciasnogravadas),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idgananciasocasionales) REFERENCES gananciasocasionales(idgananciasocasionales),
+FOREIGN KEY (idgananciasonogravadas) REFERENCES gananciasnogravadas(idgananciasonogravadas));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de los ingresos no consecutivos de las ganancias ocasionales ---*/
+
+CREATE TABLE ingresonoconseganancias
+(idingresonoconseganancias INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de los ingresos no consecutivos de las ganancias ocasionales',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de los ingresos no consecutivos de las ganancias ocasionales',
+PRIMARY KEY (idingresonoconseganancias));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuarioingresonoconse de las ganancias ocasionales  ----*/
+
+CREATE TABLE usuarioingresonoconsegananciasocasionales
+(idusuarioingresonoconsegananciasocasionales INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioingresonoconsegananciasocasionales de las ganancias ocasionales',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idgananciasocasionales INT NOT NULL COMMENT 'Codigo de las ganancias ocasionales',
+idingresonoconseganancias INT NOT NULL COMMENT 'Codigo de las ganancias no gravadas',
+PRIMARY KEY (idusuarioingresonoconsegananciasocasionales),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idgananciasocasionales) REFERENCES gananciasocasionales(idgananciasocasionales),
+FOREIGN KEY (idingresonoconseganancias) REFERENCES ingresonoconseganancias(idingresonoconseganancias));
+
+/*--------------------------------*/
+
+
+/*---- Tabla Liquidación Privada ----*/
+
+CREATE TABLE liquidacionprivada
+(idliquidacionprivada INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de Liquidacion privada',
+iddeclaracion INT NOT NULL COMMENT 'Codigo de la declaración',
+impuestoneto BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto Neto',
+impuestooananciaso BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuestooananciaso',
+impuestocargototal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto de cargo total',
+anticiporentasiguiente BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Anticipo de rentas por el año siguiente',
+impuestototal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto total',
+saldopagartotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Salgo a pagar total',
+saldofavortotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Salgo a favor total',
+PRIMARY KEY (idliquidacionprivada),
+FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
+
+/*------------------------------*/
+
+
+/*--- Tabla del impuesto de renta liquida de la liquidacion privada ---*/
+
+CREATE TABLE impuestorentaliq
+(idimpuestorentaliq INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del impuesto de renta liquida de la liquidacion privada',
+generalpensiones BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor general de las pensiones',
+rentapresuntivapen BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Renta presuntiva de las pensiones',
+diviparti2016 BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Dividendos y participaciones 2016',
+divipartisubcedula1a BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Dividendos y participaciones cedula 1a',
+divipartisubcedula2a BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Dividendos y participaciones cedula 2a',
+impuestorentaliqtotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto renta liquida total',
+PRIMARY KEY (idimpuestorentaliq));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuarioimpuestorentaliq de la liquidacion privada  ----*/
+
+CREATE TABLE usuarioimpuestorentaliq
+(idusuarioimpuestorentaliq INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioimpuestorentaliq de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+idimpuestorentaliq INT NOT NULL COMMENT 'Codigo del impuesto renta liquida',
+PRIMARY KEY (idusuarioimpuestorentaliq),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (idimpuestorentaliq) REFERENCES impuestorentaliq(idimpuestorentaliq));
+
+/*--------------------------------*/
+
+
+/*--- Tabla del anticipo de renta de la liquidacion privada ---*/
+
+CREATE TABLE anticiporenta
+(idanticiporenta INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del anticipo de renta',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del anticipo de renta',
+descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion del anticipo de renta',
+PRIMARY KEY (idanticiporenta));
+
+/*---------------------------------------------*/
+
+
+
+/*---- Tabla usuarioanticiporenta de la liquidacion privada  ----*/
+
+CREATE TABLE usuarioanticiporenta
+(idusuarioanticiporenta INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioanticiporenta de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+idanticiporenta INT NOT NULL COMMENT 'Codigo del anticipo de renta',
+PRIMARY KEY (idusuarioanticiporenta),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (idanticiporenta) REFERENCES anticiporenta(idanticiporenta));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de las sanciones de la liquidacion privada ---*/
+
+CREATE TABLE sanciones
+(idsanciones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de las sanciones',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la sancion',
+descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion de la sancion',
+PRIMARY KEY (idsanciones));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariosanciones de la liquidacion privada  ----*/
+
+CREATE TABLE usuariosanciones
+(idusuariosanciones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariosanciones de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+idsanciones INT NOT NULL COMMENT 'Codigo de las sanciones',
+PRIMARY KEY (idusuariosanciones),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (idsanciones) REFERENCES sanciones(idsanciones));
+
+/*--------------------------------*/
+
+
+/*--- Tabla del saldo a favor de la liquidacion privada ---*/
+
+CREATE TABLE saldofavor
+(idsaldofavor INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del saldo a favor',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del saldo a favor',
+descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion del saldo a favor',
+PRIMARY KEY (idsaldofavor));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariosaldoafavor de la liquidacion privada  ----*/
+
+CREATE TABLE usuariosaldoafavor
+(idusuariosaldoafavor INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariosaldoafavor de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+idsaldofavor INT NOT NULL COMMENT 'Codigo del saldo a favor',
+PRIMARY KEY (idusuariosaldoafavor),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (idsaldofavor) REFERENCES saldofavor(idsaldofavor));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de la retencion a declarar de la liquidacion privada ---*/
+
+CREATE TABLE retenciondeclarar
+(idretenciondeclarar INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la retencion a declarar',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la retencion a declarar',
+descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion de la retencion a declarar',
+PRIMARY KEY (idretenciondeclarar));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuarioretenciondeclarar de la liquidacion privada  ----*/
+
+CREATE TABLE usuarioretenciondeclarar
+(idusuarioretenciondeclarar INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioretenciondeclarar de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+idretenciondeclarar INT NOT NULL COMMENT 'Codigo de la retencion a declarar',
+PRIMARY KEY (idusuarioretenciondeclarar),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (idretenciondeclarar) REFERENCES retenciondeclarar(idretenciondeclarar));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de los descuentos de la liquidacion privada ---*/
+
+CREATE TABLE descuentos
+(iddescuentos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del descuento',
+impuestoexterior BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El impuesto exterior',
+donaciones BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Donaciones',
+otros BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'otros',
+descuentostributotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descuentos tribtarios totales',
+PRIMARY KEY (iddescuentos));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariodescuentos de la liquidacion privada  ----*/
+
+CREATE TABLE usuariodescuentos
+(idusuariodescuentos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariodescuentos de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+iddescuentos INT NOT NULL COMMENT 'Codigo de la retencion a declarar',
+PRIMARY KEY (idusuariodescuentos),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (iddescuentos) REFERENCES descuentos(iddescuentos));
+
+/*--------------------------------*/
+
+
+/*--- Tabla del descuento impuesto exterior de la liquidacion privada ---*/
+
+CREATE TABLE descuentoimpuext
+(iddescuentoimpuext INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del descuento impuesto exterior',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del descuento impuesto exterior',
+descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion del descuento impuesto exterior',
+PRIMARY KEY (iddescuentoimpuext));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariodescuentoimpuext de la liquidacion privada  ----*/
+
+CREATE TABLE usuariodescuentoimpuext
+(idusuariodescuentoimpuext INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioretenciondeclarar de la liquidacion privada',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idliquidacionprivada INT NOT NULL COMMENT 'Codigo de la liquidacion privada',
+iddescuentoimpuext INT NOT NULL COMMENT 'Codigo de la retencion a declarar',
+PRIMARY KEY (idusuariodescuentoimpuext),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idliquidacionprivada) REFERENCES liquidacionprivada(idliquidacionprivada),
+FOREIGN KEY (iddescuentoimpuext) REFERENCES descuentoimpuext(iddescuentoimpuext));
+
+/*--------------------------------*/
+
+
+/*---- Tabla Cedula dividendos y Participaciones ----*/
+
+CREATE TABLE ceduladiviparti
+(idceduladiviparti INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de Liquidacion privada',
+iddeclaracion INT NOT NULL COMMENT 'Codigo de la declaración',
+rentaliquida BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Valor de la renta liquida',
+rentaexenta BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Valor de la renta exenta',
+PRIMARY KEY (idceduladiviparti),
+FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
+
+/*------------------------------*/
+
+
+/*--- Tabla de los dividendos y participaciones del 2016 ---*/
+
+CREATE TABLE diviparti2016
+(iddiviparti2016 INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de los dividendos y participaciones del 2016',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de los dividendos y participaciones del 2016',
+PRIMARY KEY (iddiviparti2016));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariodiviparti2016 de la cedula de dividendos y participaciones  ----*/
+
+CREATE TABLE usuariodiviparti2016
+(idusuariodiviparti2016 INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariodiviparti2016 de la cedula de dividendos y participaciones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idceduladiviparti INT NOT NULL COMMENT 'Codigo de la Cedula de dividendos y participaciones',
+iddiviparti2016 INT NOT NULL COMMENT 'Codigo de los dividendos y participaciones del 2016',
+PRIMARY KEY (idusuariodiviparti2016),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idceduladiviparti) REFERENCES ceduladiviparti(idceduladiviparti),
+FOREIGN KEY (iddiviparti2016) REFERENCES diviparti2016(iddiviparti2016));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de los dividendos y participaciones del 2016 ---*/
+
+CREATE TABLE subcedula1a
+(idsubcedula1a INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la subcedula 1a',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la subcedula1a',
+PRIMARY KEY (idsubcedula1a));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariosubcedula1a de la cedula de dividendos y participaciones  ----*/
+
+CREATE TABLE usuariosubcedula1a
+(idusuariosubcedula1a INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariosubcedula1a de la cedula de dividendos y participaciones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idceduladiviparti INT NOT NULL COMMENT 'Codigo de la Cedula de dividendos y participaciones',
+idsubcedula1a INT NOT NULL COMMENT 'Codigo de la subcedula 1a',
+PRIMARY KEY (idusuariosubcedula1a),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idceduladiviparti) REFERENCES ceduladiviparti(idceduladiviparti),
+FOREIGN KEY (idsubcedula1a) REFERENCES subcedula1a(idsubcedula1a));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de la Renta liquida de los pasivos de dividendos ---*/
+
+CREATE TABLE rentaliqpasecedividendos
+(idrentaliqpasecedividendos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la Renta liquida de los pasivos de dividendos',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la Renta liquida de los pasivos de dividendos',
+PRIMARY KEY (idrentaliqpasecedividendos));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariorentaliqpasecedividendos de la cedula de dividendos y participaciones  ----*/
+
+CREATE TABLE usuariorentaliqpasecedividendos
+(idusuariorentaliqpasecedividendos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariorentaliqpasecedividendos de la cedula de dividendos y participaciones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idceduladiviparti INT NOT NULL COMMENT 'Codigo de la Cedula de dividendos y participaciones',
+idrentaliqpasecedividendos INT NOT NULL COMMENT 'Codigo de la subcedula 1a',
+PRIMARY KEY (idusuariorentaliqpasecedividendos),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idceduladiviparti) REFERENCES ceduladiviparti(idceduladiviparti),
+FOREIGN KEY (idrentaliqpasecedividendos) REFERENCES rentaliqpasecedividendos(idrentaliqpasecedividendos));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de Ingreso no constitutivo de la cedula de dividendos y participaciones ---*/
+
+CREATE TABLE ingresonoconsedividendos
+(idingresonoconsedividendos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del ingreso no constitutivo de renta',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la Renta liquida de los pasivos de dividendos',
+PRIMARY KEY (idingresonoconsedividendos));
+
+/*---------------------------------------------*/
+
+
+/*--- Tabla de los dividendos y participaciones del 2016 ---*/
+
+CREATE TABLE subcedula2a
+(idsubcedula2a INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la subcedula 2a',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la subcedula1a',
+PRIMARY KEY (idsubcedula2a));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariosubcedula2a de la cedula de dividendos y participaciones  ----*/
+
+CREATE TABLE usuariosubcedula2a
+(idusuariosubcedula2a INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariosubcedula2a de la cedula de dividendos y participaciones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idceduladiviparti INT NOT NULL COMMENT 'Codigo de la Cedula de dividendos y participaciones',
+idsubcedula2a INT NOT NULL COMMENT 'Codigo de la subcedula 1a',
+PRIMARY KEY (idusuariosubcedula2a),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idceduladiviparti) REFERENCES ceduladiviparti(idceduladiviparti),
+FOREIGN KEY (idsubcedula2a) REFERENCES subcedula2a(idsubcedula2a));
+
+/*--------------------------------*/
+
+
+/*---- Tabla usuarioingresonoconse de la cedula de dividendos y participaciones  ----*/
+
+CREATE TABLE usuarioingresonoconsedividendos
+(idusuarioingresonoconsedividendos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioingresonoconsedividendos de la cedula de dividendos y participaciones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idceduladiviparti INT NOT NULL COMMENT 'Codigo de la Cedula de dividendos y participaciones',
+idingresonoconsedividendos INT NOT NULL COMMENT 'Codigo del ingreso no constitutivo de renta',
+PRIMARY KEY (idusuarioingresonoconsedividendos),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idceduladiviparti) REFERENCES ceduladiviparti(idceduladiviparti),
+FOREIGN KEY (idingresonoconsedividendos) REFERENCES ingresonoconsedividendos(idingresonoconsedividendos));
+
+/*--------------------------------*/
+
 
 /*-----Inserción de datos de la tabla ESTADOUSUARIO-----*/
 
