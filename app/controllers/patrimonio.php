@@ -30,7 +30,14 @@ class Patrimonio extends Controller
 
         if (isset($_SESSION['email'])) {
             if ((strtolower($this->usuario->getnomrol()) == "contador") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
-                $this->viewtemplate('patrimonio', 'listar', $this->usuario->traerdatosusuario());
+
+                $tipobienes = $this->tipobienes->listar();
+                
+                $tipodeudas = $this->tipodeudas->listar();
+
+                $data = [$tipobienes, $tipodeudas];
+
+                $this->viewtemplate('patrimonio', 'listar', $this->usuario->traerdatosusuario(), $data);
             } else{
 
                 $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());

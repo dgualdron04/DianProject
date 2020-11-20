@@ -16,10 +16,10 @@
             <i class="fas fa-paste"></i><span>Declaración <i class="fas fa-chevron-down drop-down flecha"></i></span>
         </a>
         <div class="sub-menu">
+        <a href="<?php echo constant('URL'); ?>informacionpersonal/listar" title="Patrimonio"><i class="fas fa-sign"></i><span>Información Personal</span></a>
             <a href="<?php echo constant('URL'); ?>patrimonio/listar" title="Patrimonio"><i class="fas fa-sign"></i><span>Patrimonio</span></a>
             <a href="<?php echo constant('URL'); ?>cedulas/listar" title="Cedulas"><i class="fas fa-file-signature"></i><span>Cédulas</span></a>
-            <a href="<?php echo constant('URL'); ?>ganancias/listar" title="Rentas"><i class="fas fa-comment-dollar"></i><span>Ganancias Ocasionales</span></a>
-            <a href="<?php echo constant('URL'); ?>liquidacion/listar" title="Rentas"><i class="far fa-sticky-note"></i><span>Liquidación Privada</span></a>
+            <a href="<?php echo constant('URL'); ?>ganancias/listar" title="Ganancias Ocasionales"><i class="fas fa-comment-dollar"></i><span>Ganancias Ocasionales</span></a>
         </div>
     </li>
 

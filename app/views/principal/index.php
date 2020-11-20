@@ -94,7 +94,7 @@
     <?php require_once './app/views/assets/includes/modals/loading/loading.php'; ?>
 
     <footer>
-        <p>Derechos Reservados 2020 © (Inserte nombre xde)</p>
+        <p>Derechos Reservados 2020 © Anahis Enith Rodríguez Suescún - Diego Andrés Gualdrón Angarita - Carlos Mauricio Chinchilla Rosales</p>
     </footer>
     
 <script src="<?php echo constant('URL').'app/views/assets/js/principal/principal.js'?>"></script>

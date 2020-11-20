@@ -31,7 +31,8 @@
             ($controllert == "rentatrabajo" && $methodt == "listar") || 
             ($controllert == "declaracion" && $methodt == "listar") || 
             ($controllert == "declaracion" && $methodt == "crear") || 
-            ($controllert == "declaracion" && $methodt == "revision")) {
+            ($controllert == "declaracion" && $methodt == "revision")|| 
+            ($controllert == "cedulas" && $methodt == "listar")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
@@ -39,7 +40,10 @@
 
         } else if (strtolower($infouser['nomrol']) == "declarante") {
         
-            if (($controllert == "declaracion" && $methodt == "listar") || ($controllert == "declaracion" && $methodt == "crear") || ($controllert == "usuario" && $methodt == "perfil")) {
+            if (($controllert == "declaracion" && $methodt == "listar") || 
+            ($controllert == "declaracion" && $methodt == "crear") || 
+            ($controllert == "usuario" && $methodt == "perfil") ||
+            ($controllert == "errores" && $methodt == "error403")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
@@ -47,7 +51,7 @@
 
         } else if (strtolower($infouser['nomrol']) == "contador") {
             
-            if (($controllert == "parametros" && $methodt == "listar") || ($controllert == "patrimonio" && $methodt == "listar") || ($controllert == "rentatrabajo" && $methodt == "listar") || ($controllert == "declaracion" && $methodt == "revision")) {
+            if (($controllert == "parametros" && $methodt == "listar") || ($controllert == "patrimonio" && $methodt == "listar") || ($controllert == "rentatrabajo" && $methodt == "listar") || ($controllert == "declaracion" && $methodt == "revision") || ($controllert == "cedulas" && $methodt == "listar")) {
                 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 

@@ -33,6 +33,10 @@ class Usuario extends Controller
                 $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
             }else if (strtolower($this->usuario->getnomrol()) == "contador") {
                 $this->viewtemplate('declaracion', 'revision', $this->usuario->traerdatosusuario());
+            }else if (strtolower($this->usuario->getnomrol()) == "superadmin" || strtolower($this->usuario->getnomrol()) == "coordinador"){
+
+                $this->viewtemplate('usuario', 'listar', $this->usuario->traerdatosusuario());
+
             }else{
                 $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
             }
@@ -53,7 +57,7 @@ class Usuario extends Controller
                 $this->viewtemplate('usuario', 'listar', $this->usuario->traerdatosusuario());
 
             } else {
-                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                $this->viewtemplate('errores', 'error403', $this->usuario->traerdatosusuario());
             }
         } else {
 
@@ -76,7 +80,7 @@ class Usuario extends Controller
                     $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
                 }
             } else {
-                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                $this->viewtemplate('errores', 'error403', $this->usuario->traerdatosusuario());
             }
         } else {
             $this->viewtemplate('usuario', 'index', null, $this->topes);
@@ -105,7 +109,7 @@ class Usuario extends Controller
                 }
             } else {
 
-                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                $this->viewtemplate('errores', 'error403', $this->usuario->traerdatosusuario());
             }
         } else {
             $this->viewtemplate('usuario', 'index', null, $this->topes);
@@ -126,7 +130,7 @@ class Usuario extends Controller
                     $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
                 }
             } else {
-                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+                $this->viewtemplate('errores', 'error403', $this->usuario->traerdatosusuario());
             }
         } else {
             $this->viewtemplate('usuario', 'index', null, $this->topes);

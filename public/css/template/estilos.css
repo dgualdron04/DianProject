@@ -2239,6 +2239,19 @@ input.checkbox[type="checkbox"] {
 
 /*------------------------------*/
 
+/*--- Deshabilitar un botón --- */
+
+.isdisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: currentColor;
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+}
+
+/*------------------------------*/
+
+
 @media (min-width: 576px) {
   .columna {
     -ms-flex: 0 0 50%;
