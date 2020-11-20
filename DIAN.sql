@@ -1325,6 +1325,173 @@ FOREIGN KEY (idrentanolaboral) REFERENCES rentanolaboral(idrentanolaboral));
 /*--------------------------------*/
 
 
+/*---- Tabla cedula pensiones ----*/
+
+CREATE TABLE cedulapensiones
+(idcedulapensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de prestación',
+iddeclaracion INT NOT NULL COMMENT 'Codigo de la declaración',
+rentaliquida BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Renta Liquida',
+rentaliquidagravable BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Renta liquida gravable',
+PRIMARY KEY (idcedulapensiones),
+FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
+
+/*------------------------------*/
+
+
+/*--- Tabla de ingresos brutos de la cedula de pensiones ---*/
+
+CREATE TABLE ingresosbrutospensiones
+(idingresosbrutospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos brutos de la cedula de pensiones',
+ingresobrutototal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor total del ingreso bruto',
+PRIMARY KEY (idingresosbrutospensiones));
+
+/*---------------------------------------------*/
+
+
+/*--- Tabla de indemnización sustituta de la cedula de pensiones ---*/
+
+CREATE TABLE indemnizacionsustitutaspensiones
+(idindemnizacionsustitutaspensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de indemnización sustituta de la cedula de pensiones',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
+idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
+PRIMARY KEY (idindemnizacionsustitutaspensiones),
+FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(idingresosbrutospensiones));
+
+/*---------------------------------------------*/
+
+
+/*--- Tabla de pensiones exterior de la cedula de pensiones ---*/
+
+CREATE TABLE pensionesexteriorpensiones
+(idpensionesexteriorpensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de pensiones exterior',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
+idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
+PRIMARY KEY (idpensionesexteriorpensiones),
+FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(idingresosbrutospensiones));
+
+/*---------------------------------------------*/
+
+
+/*--- Tabla de devoluciones ahorro de la cedula de pensiones ---*/
+
+CREATE TABLE devolucionesahorropensiones
+(iddevolucionesahorropensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de devoluciones ahorro de la cedula de pensiones',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
+idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
+PRIMARY KEY (iddevolucionesahorropensiones),
+FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(idingresosbrutospensiones));
+
+/*---------------------------------------------*/
+
+
+/*--- Tabla de Ingresos pensiones y sus tablas anexas ---*/
+
+CREATE TABLE tipoingresospensiones
+(idtipoingresospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de Ingresos pensiones',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de Ingresos pensiones',
+descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de Ingresos pensiones',
+ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de Ingresos pensiones',
+PRIMARY KEY (idtipoingresospensiones));
+
+CREATE TABLE ingresospensiones
+(idingresospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos de pensiones',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
+idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
+idtipoingresospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo del tipo de Ingresos pensiones',
+PRIMARY KEY (idingresospensiones),
+FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(idingresosbrutospensiones),
+FOREIGN KEY (idtipoingresospensiones) REFERENCES tipoingresospensiones(idtipoingresospensiones));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuarioingresobrutopensiones de la cedula de pensiones  ----*/
+
+CREATE TABLE usuarioingresobrutopensiones
+(idusuarioingresobrutopensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariocostogastosproce de la cedula de pensiones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idcedulapensiones INT NOT NULL COMMENT 'Codigo de la cedula de pensiones',
+idingresosbrutospensiones INT NOT NULL COMMENT 'Codigo del ingreso bruto de pensiones',
+PRIMARY KEY (idusuarioingresobrutopensiones),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idcedulapensiones) REFERENCES cedulapensiones(idcedulapensiones),
+FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(idingresosbrutospensiones));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de ingresos no conse total de la cedula de pensiones ---*/
+
+CREATE TABLE ingresonoconsepensiones
+(idingresonoconsepensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos no conse total de la cedula de pensiones',
+ingresosnoconsetotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor total de ingresos no conse total de la cedula de pensiones',
+PRIMARY KEY (idingresonoconsepensiones));
+
+/*---------------------------------------------*/
+
+
+/*--- Tabla de Aportes obligatorios y sus tablas anexas ---*/
+
+CREATE TABLE tipoaportesobligatoriospensiones
+(idtipoaportesobligatoriospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de Aportes obligatorios',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de Aportes obligatorios',
+descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de Aportes obligatorios',
+ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de Aportes obligatorios',
+PRIMARY KEY (idtipoaportesobligatoriospensiones));
+
+CREATE TABLE aportesobligatoriospensiones
+(idaportesobligatoriospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos de pensiones',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
+idingresonoconsepensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresos no conse total de la cedula de pensiones',
+idtipoaportesobligatoriospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo del tipo de Ingresos pensiones',
+PRIMARY KEY (idaportesobligatoriospensiones),
+FOREIGN KEY (idingresonoconsepensiones) REFERENCES ingresonoconsepensiones(idingresonoconsepensiones),
+FOREIGN KEY (idtipoaportesobligatoriospensiones) REFERENCES tipoaportesobligatoriospensiones(idtipoaportesobligatoriospensiones));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuarioingresonoconse de la cedula de pensiones  ----*/
+
+CREATE TABLE usuarioingresonoconsepensiones
+(idusuarioingresonoconsepensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuarioingresonoconsepensiones de la cedula de pensiones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idcedulapensiones INT NOT NULL COMMENT 'Codigo de la cedula de pensiones',
+idingresonoconsepensiones INT NOT NULL COMMENT 'Codigo ingreso no conse de pensiones',
+PRIMARY KEY (idusuarioingresonoconsepensiones),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idcedulapensiones) REFERENCES cedulapensiones(idcedulapensiones),
+FOREIGN KEY (idingresonoconsepensiones) REFERENCES ingresonoconsepensiones(idingresonoconsepensiones));
+
+/*--------------------------------*/
+
+
+/*--- Tabla de la renta exenta de la cedula de pensiones ---*/
+
+CREATE TABLE rentaexentapensiones
+(idrentaexentapensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la renta exenta de la cedula de pensiones',
+valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor total de la renta exenta de la cedula de pensiones',
+PRIMARY KEY (idrentaexentapensiones));
+
+/*---------------------------------------------*/
+
+
+/*---- Tabla usuariorentaexenta de la cedula de pensiones  ----*/
+
+CREATE TABLE usuariorentaexentapensiones
+(idusuariorentaexentapensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del usuariorentaexenta de la cedula de pensiones',
+idusuario INT NOT NULL COMMENT 'Codigo del usuario',
+idcedulapensiones INT NOT NULL COMMENT 'Codigo de la cedula de pensiones',
+idrentaexentapensiones INT NOT NULL COMMENT 'Codigo ingreso no conse de pensiones',
+PRIMARY KEY (idusuariorentaexentapensiones),
+FOREIGN KEY (idusuario) REFERENCES usuario(idusuario),
+FOREIGN KEY (idcedulapensiones) REFERENCES cedulapensiones(idcedulapensiones),
+FOREIGN KEY (idrentaexentapensiones) REFERENCES rentaexentapensiones(idrentaexentapensiones));
+
+/*--------------------------------*/
+
+
+
 /*-----Inserción de datos de la tabla ESTADOUSUARIO-----*/
 
 INSERT INTO `estadousuario`(`tipoestado`) VALUES ('Activo'), ('Inactivo');

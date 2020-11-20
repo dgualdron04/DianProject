@@ -339,7 +339,7 @@ function inicializareditar(datos){
 
 //#endregion
 
-//#region Editar Cedulas
+//#region Editar Cedulas generales
 
 let formcedulageneraleditar = document.getElementById("form-editar-cedulageneral");
 
@@ -452,7 +452,7 @@ function inicializareliminar(datos) {
         ajax({
             url: `./cedulas/eliminar/cedulageneral/${renta}/${tiporenta}/${aspecto}/${id}`,
             method: "POST",
-            done: console.log('si'),
+            done: setTimeout(() => { location.reload();}, 200),
             error: rendererror,
             form: formData,
             urlactual: "/dianproject/cedulas/listar",
@@ -460,3 +460,5 @@ function inicializareliminar(datos) {
     });
 
 }
+
+//#endregion

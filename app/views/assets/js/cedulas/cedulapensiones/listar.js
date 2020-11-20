@@ -85,32 +85,19 @@ formSubmitpensiones.addEventListener("submit", (e) => {
     progressCheckpensiones[currentpensiones - 1].classList.add("active");
     progressTextpensiones[currentpensiones - 1].classList.add("active");
     currentpensiones += 1;
-    /* setTimeout(function () {
 
-        let formData = new FormData(formSubmit);
-        let param = true;
-        formData.append("param", param);
-        ajax({
-            url: `./parametros/crear`,
-            method: "POST",
-            // async: true,
-            // responseType: 'json',
-            done: setTimeout(() => { location.reload(); }, 200),
-            error: rendererror,
-            form: formData,
-        });
-        if (current === 3) {
-            slidePage.style.display = "block";
-            slidePage2.style.display = "none";
-            bullet[current - 2].classList.remove("active");
-            progressCheck[current - 2].classList.remove("active");
-            progressText[current - 2].classList.remove("active");
-            current -= 2;
-            bullet[current - 1].classList.remove("active");
-            progressCheck[current - 1].classList.remove("active");
-            progressText[current - 1].classList.remove("active");
-        }
-    }, 800); */
+    let formData = new FormData(formSubmitpensiones);
+    let param = true;
+    formData.append("param", param);
+
+    ajax({
+        url: `./cedulas/crear/cedulapensiones`,
+        method: 'POST',
+        done: setTimeout(() => { location.reload(); }, 200),
+        error: rendererror,
+        form: formData,
+        urlactual: "/dianproject/cedulas/listar",
+    });
 
 });
 
@@ -160,5 +147,180 @@ tipoingreso.addEventListener('change', () => {
     nextBtnFirstpensiones.classList.remove('isdisabled');
 
 });
+
+//#endregion
+
+//#region Crear el modal editar
+
+function editarcedulapensiones(e, id) {
+
+    let modaleditar = document.getElementById('modal-editar-pensiones');
+
+    //#region Cerrar modal editar
+    modaleditar.children[0].children[0].children[0].children[0].addEventListener(
+        "click",
+        () => {
+            modaleditar.children[0].classList.add("modal-close");
+
+            setTimeout(() => {
+                modaleditar.style.opacity = 0;
+                modaleditar.style.visibility = "hidden";
+            }, 500);
+        }
+    );
+
+    //#endregion
+
+    modaleditar.style.opacity = 1;
+    modaleditar.style.visibility = "visible";
+    modaleditar.children[0].classList.remove("modal-close");
+
+    e.preventDefault();
+
+    let etiqueta = id.trim().split('-');
+    let tiporenta = quitarAcentos(etiqueta[3].replace(" ",'').toLowerCase().replace(" ",''));
+    let renta = quitarAcentos(etiqueta[2].replace(" ",'').toLowerCase().replace(" ",''));
+    id = etiqueta[1];
+    let formData = new FormData();
+    let param = true;
+    formData.append("param", param);
+
+    ajax({
+        url: `./cedulas/editar/cedulapensiones/${renta}/${tiporenta}/pensiones/${id}`,
+        method: 'POST',
+        done: inicializareditarpensiones,
+        error: rendererror,
+        form: formData,
+        urlactual: "/dianproject/cedulas/listar",
+    });
+
+}
+
+//#endregion
+
+//#region Inicializar Editar
+
+function inicializareditarpensiones(datos) {
+    
+    document.getElementById('idcp').value = datos[0]['id'];
+    document.getElementById('rentaeditarpensiones').innerHTML = datos[0]['renta'];
+    document.getElementById('tiporentaeditarpensiones').innerHTML = datos[0]['tiporenta'];
+    document.getElementById('nombrecedulapensioneseditar').value = datos[0]['nombre'];
+    document.getElementById('descripcioncedulapensioneseditar').value = datos[0]['descripcion'];
+    document.getElementById('ayudacedulapensioneseditar').value = datos[0]['ayuda'];
+
+}
+
+//#endregion
+
+//#region Editar Cedulas de pensiones
+
+let formcedulapensioneseditar = document.getElementById("form-editar-pensiones");
+
+formcedulapensioneseditar.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let formData = new FormData(formcedulapensioneseditar);
+  let param = true;
+  formData.append("param", param);
+  let renta = quitarAcentos(document.getElementById('rentaeditarpensiones').innerHTML.replace(" ",'').toLowerCase().replace(" ",''));
+  let tiporenta = quitarAcentos(document.getElementById('tiporentaeditarpensiones').innerHTML.replace(" ",'').toLowerCase().replace(" ",''));
+  let id = formcedulapensioneseditar["idcp"].value;
+  ajax({
+    url: `./cedulas/editarcedulas/cedulapensiones/${renta}/${tiporenta}/pensiones/${id}`,
+    method: 'POST',
+    done: setTimeout(() => { location.reload();}, 200),
+    error: rendererror,
+    form: formData,
+    urlactual: "/dianproject/cedulas/listar",
+});
+});
+
+//#endregion
+
+//#region Acción del botón eliminar Cedula de Pensiones
+
+function eliminarcedulapensiones(e, id) {
+
+    let modaldeletecedulapensiones = document.getElementById("modal-delete-cedulapensiones");
+
+    modaldeletecedulapensiones.style.opacity = 1;
+    modaldeletecedulapensiones.style.visibility = "visible";
+    modaldeletecedulapensiones.children[0].classList.remove("modal-close");
+
+    //#region Cerrar modal eliminar
+    modaldeletecedulapensiones.children[0].children[0].children[1].addEventListener("click", () => {
+        modaldeletecedulapensiones.children[0].classList.add("modal-close");
+
+        setTimeout(() => {
+            modaldeletecedulapensiones.style.opacity = 0;
+            modaldeletecedulapensiones.style.visibility = "hidden";
+        }, 500);
+    }
+    );
+    //#endregion
+
+    let formData = new FormData();
+    let param = true;
+    formData.append("param", param);
+    let etiqueta = id.trim().split('-');
+    let tiporenta = quitarAcentos(etiqueta[3].replace(" ",'').toLowerCase().replace(" ",''));
+    let renta = quitarAcentos(etiqueta[2].replace(" ",'').toLowerCase().replace(" ",''));
+    id = etiqueta[1];
+    ajax({
+        url: `./cedulas/editar/cedulapensiones/${renta}/${tiporenta}/pensiones/${id}`,
+        method: 'POST',
+        done: inicializareliminarpensiones,
+        error: rendererror,
+        form: formData,
+        urlactual: "/dianproject/cedulas/listar",
+    });
+
+}
+
+//#endregion
+
+//#region Inicializar eliminar
+
+function inicializareliminarpensiones(datos) {
+    
+    document.getElementById("h2-header-cedulapensiones").innerHTML = `Eliminar la cedula general ${datos[0]["nombre"]}`;
+    document.getElementById("modal-body-cedulapensiones").innerHTML = `<p>¿ Estas seguro que deseas eliminar la cedula general de la ${datos[0]["renta"]}, con tipo de renta ${datos[0]['tiporenta']} y con nombre ${datos[0]["nombre"]}?</p>`;
+    document.getElementById("modal-footer-cedulapensiones").innerHTML = `<a href="#" id="si-eliminar-cedulapensiones" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-eliminar-cedulapensiones" class="btn-modal btn-block-modal btn-delete"> No </a>`;
+
+    let sieliminarcedulapensiones = document.getElementById("si-eliminar-cedulapensiones");
+    let noeliminarcedulapensiones = document.getElementById("no-eliminar-cedulapensiones");
+    
+    noeliminarcedulapensiones.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let modaldeletecedulapensiones = document.getElementById("modal-delete-cedulapensiones");
+
+        modaldeletecedulapensiones.children[0].classList.add("modal-close");
+
+        setTimeout(() => {
+            modaldeletecedulapensiones.style.opacity = 0;
+            modaldeletecedulapensiones.style.visibility = "hidden";
+        }, 500);
+    });
+
+    sieliminarcedulapensiones.addEventListener("click", (e) => {
+        e.preventDefault();
+        let formData = new FormData();
+        let param = true;
+        formData.append("param", param);
+        let renta = quitarAcentos(datos[0]['renta'].replace(" ",'').toLowerCase().replace(" ",''));
+        let tiporenta = quitarAcentos(datos[0]['tiporenta'].replace(" ",'').toLowerCase().replace(" ",''));
+        let id = datos[0]['id'];
+        ajax({
+            url: `./cedulas/eliminar/cedulapensiones/${renta}/${tiporenta}/pensiones/${id}`,
+            method: "POST",
+            done: setTimeout(() => { location.reload();}, 200),
+            error: rendererror,
+            form: formData,
+            urlactual: "/dianproject/cedulas/listar",
+        });
+    }); 
+
+}
 
 //#endregion

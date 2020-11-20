@@ -63,7 +63,7 @@
                         <tbody>
                             <?php
                             if (!empty($data)) {
-                                foreach ($data as $datos) : ?>
+                                foreach ($data[0] as $datos) : ?>
                                     <tr>
                                         <td><?php echo $datos['renta']; ?></td>
                                         <td><?php echo $datos['tipoderenta']; ?></td>
@@ -93,7 +93,6 @@
                                 <th>Ingreso o Renta</th>
                                 <th>Tipo</th>
                                 <th>Nombre</th>
-                                <th>Descripción</th>
                                 <th>icon:far fa-edit</th>
                                 <th>icon:far fa-trash-alt</th>
                             </tr>
@@ -104,12 +103,11 @@
                             if (!empty($data)) {
                                 foreach ($data[1] as $datos) : ?>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><?php echo $datos['nombre']; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editd-' . $datos['idtipodeuda'] . ';onclick:editartipodeuda'; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deleted-' . $datos['idtipodeuda'] . ';onclick:eliminartipodeuda'; ?></td>
+                                        <td><?php echo $datos['renta']; ?></td></td>
+                                        <td><?php echo $datos['tipoderenta']; ?></td></td>
+                                        <td><?php echo $datos['nombre']; ?></td></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editd-' . $datos['id'] . '-'.$datos['renta'].'-'.$datos['tipoderenta'].';onclick:editarcedulapensiones'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deleted-' . $datos['id'] . '-'.$datos['renta'].'-'.$datos['tipoderenta'].';onclick:eliminarcedulapensiones'; ?></td>
                                     </tr>
                             <?php endforeach;
                             } ?>
@@ -128,7 +126,9 @@
 <?php require_once './app/views/assets/includes/modals/cedulas/cedulageneral/crear.php'; ?>
 <?php require_once './app/views/assets/includes/modals/cedulas/cedulapensiones/crear.php'; ?>
 <?php require_once './app/views/assets/includes/modals/cedulas/cedulageneral/editar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/cedulas/cedulapensiones/editar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/cedulas/cedulageneral/eliminar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/cedulas/cedulapensiones/eliminar.php'; ?>
 
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/funciones.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>

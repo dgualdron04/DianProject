@@ -10,14 +10,14 @@
 
                     <div class="progress-bar">
                         <div class="step">
-                            <p class="stepcrearpensiones">Renta</p>
+                            <p class="stepcrearpensiones">Ingreso</p>
                             <div class="bullet bulletcrearpensiones">
                                 <span>1</span>
                             </div>
                             <div class="check checkcrearpensiones fas fa-check"></div>
                         </div>
                         <div class="step">
-                            <p class="stepcrearpensiones">Tipo de Renta</p>
+                            <p class="stepcrearpensiones">Tipo de Ingreso</p>
                             <div class="bullet bulletcrearpensiones">
                                 <span>2</span>
                             </div>

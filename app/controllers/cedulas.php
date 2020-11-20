@@ -23,11 +23,14 @@ class Cedulas extends Controller
     private $tipoaporteobligatoriolaboralnoconse;
     private $tipootroscostogastolaboral;
     private $tiporentaexededuccionlaboral;
+    private $tipoingresopensiones;
+    private $tipoaportesobligatoriospensiones;
 
     public function __construct()
     {
         $this->usuario = $this->model('Usuario');
         $this->cedulageneral = $this->model('Cedulageneral');
+        $this->cedulapensiones = $this->model('Cedulapensiones');
         $this->tipoprestacion = $this->model('Tipoprestacion');
         $this->tipoaporteobligatorio = $this->model('Tipoaporteobligatorio');
         $this->tipoaportevoluntario = $this->model('Tipoaportevoluntario');
@@ -45,8 +48,9 @@ class Cedulas extends Controller
         $this->tipoaporteobligatoriolaboralnoconse = $this->model('Tipoaporteobligatoriolaboralnoconse');
         $this->tipootroscostogastolaboral = $this->model('Tipootroscostogastolaboral');
         $this->tiporentaexededuccionlaboral = $this->model('Tiporentaexededuccionlaboral');
+        $this->tipoingresopensiones = $this->model('Tipoingresopensiones');
+        $this->tipoaportesobligatoriospensiones = $this->model('Tipoaportesobligatoriospensiones');
         parent::__construct();
-        /* $this->iniciarsesion(); */
         if (isset($_SESSION['email'])) {
             $this->usuario->setusuario($this->traersesion());
         } else {
@@ -78,7 +82,11 @@ class Cedulas extends Controller
 
                 $cedulageneral = $this->cedulageneral->listar();
 
-                $this->viewtemplate('cedulas', 'listar', $this->usuario->traerdatosusuario(), $cedulageneral);
+                $cedulapensiones = $this->cedulapensiones->listar();
+
+                $data = [$cedulageneral, $cedulapensiones];
+
+                $this->viewtemplate('cedulas', 'listar', $this->usuario->traerdatosusuario(), $data);
             } else {
                 $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
             }
@@ -203,6 +211,30 @@ class Cedulas extends Controller
                         }
                     } else if (strtolower($cedula) == "cedulapensiones") {
 
+                        $ingresocedulapensiones = $_POST['ingresoscedulapensionescrear'];
+                        $tipoingresocedulapensiones = $_POST['tipoingresopensionescrear'];
+                        $nombrecedulapensiones = $_POST['nombrepensionescrear'];
+                        $descripcioncedulapensiones = $_POST['descripcionpensionescrear'];
+                        $ayudacedulapensiones = $_POST['ayudapensionescrear'];
+
+                        if (strtolower($ingresocedulapensiones) == "ingresobruto"){
+
+                            if (strtolower($tipoingresocedulapensiones) == "tipoingresopensiones") {
+
+                                $this->tipoingresopensiones->crear($nombrecedulapensiones, $descripcioncedulapensiones, $ayudacedulapensiones);
+
+                            }
+
+                        } else if (strtolower($ingresocedulapensiones) == "ingresonoconstitutivo") {
+
+                            if (strtolower($tipoingresocedulapensiones) == "tipoaporteobligatorio") {
+
+                                $this->tipoaportesobligatoriospensiones->crear($nombrecedulapensiones, $descripcioncedulapensiones, $ayudacedulapensiones);
+
+                            }
+
+                        }
+                        
                         echo $_POST['ingresoscedulapensionescrear'];
                         echo "<br>";
                         echo $_POST['tipoingresopensionescrear'];
@@ -359,7 +391,36 @@ class Cedulas extends Controller
                                 }
                             }
                         }
+                    } else if (strtolower($cedula) == "cedulapensiones") {
+
+                        if (strtolower($renta) == "ingresobruto") {
+
+                            if (strtolower($tiporenta) == "tipoingresodepensiones") {
+
+                                if (strtolower($aspecto) == "pensiones") {
+
+                                    $this->tipoingresopensiones->editar($id);
+
+                                }
+
+                            }
+
+                        } else if (strtolower($renta) == "ingresosnoconstitutivos") {
+
+                            if (strtolower($tiporenta) == "tipodeaporteobligatorio") {
+
+                                    if (strtolower($aspecto) == "pensiones") {
+
+                                        $this->tipoaportesobligatoriospensiones->editar($id);
+
+                                    }
+
+                            }
+
+                        }
+
                     }
+
                 } else {
 
                     $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
@@ -384,11 +445,13 @@ class Cedulas extends Controller
 
                 if (isset($_POST['param']) && $_POST['param'] == true) {
 
-                    $nombrecedulageneral = $_POST['nombrecedulageneraleditar'];
-                    $descripcioncedulageneral = $_POST['descripcioncedulageneraleditar'];
-                    $ayudacedulageneral = $_POST['ayudacedulageneraleditar'];
+                    
 
                     if (strtolower($cedula) == "cedulageneral") {
+
+                        $nombrecedulageneral = $_POST['nombrecedulageneraleditar'];
+                        $descripcioncedulageneral = $_POST['descripcioncedulageneraleditar'];
+                        $ayudacedulageneral = $_POST['ayudacedulageneraleditar'];
 
                         if (strtolower($renta) == "rentadetrabajo") {
 
@@ -512,7 +575,40 @@ class Cedulas extends Controller
                                 }
                             }
                         }
+                    } else if (strtolower($cedula) == "cedulapensiones") {
+                        
+                        $nombrecedulapensiones = $_POST['nombrecedulapensioneseditar'];
+                        $descripcioncedulapensiones = $_POST['descripcioncedulapensioneseditar'];
+                        $ayudacedulapensiones = $_POST['ayudacedulapensioneseditar'];
+
+                        if (strtolower($renta) == "ingresobruto") {
+                            
+                            if (strtolower($tiporenta) == "tipodeingresosdepensiones") {
+
+                                if (strtolower($aspecto) == "pensiones") {
+
+                                    $this->tipoingresopensiones->editaringresopensiones($nombrecedulapensiones, $descripcioncedulapensiones, $ayudacedulapensiones, $id);
+
+                                }
+                            
+                            }
+
+                        } else if (strtolower($renta) == "ingresosnoconstitutivos") {
+
+                            if (strtolower($tiporenta) == "tipodeaporteobligatorio") {
+                                
+                                if (strtolower($aspecto) == "pensiones") {
+                                    
+                                    $this->tipoaportesobligatoriospensiones->editartipoaporteobligatorio($nombrecedulapensiones, $descripcioncedulapensiones, $ayudacedulapensiones, $id);
+
+                                }
+
+                            }
+
+                        }
+
                     }
+
                 } else {
 
                     $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
@@ -659,11 +755,39 @@ class Cedulas extends Controller
                                 if (strtolower($aspecto) == "tiporentaexentadeduccion") {
 
                                     $this->tiporentaexededuccionlaboral->eliminar($id);
-                                    //$this->tiporentaexededuccionlaboral->editartiporentaexentadeduccion($nombrecedulageneral, $descripcioncedulageneral, $ayudacedulageneral, $id);
                                 }
                             }
                         }
+                    } else if (strtolower($cedula) == "cedulapensiones") {
+
+                        if (strtolower($renta) == "ingresobruto") {
+                            
+                            if (strtolower($tiporenta) == "tipodeingresosdepensiones") {
+
+                                if (strtolower($aspecto) == "pensiones") {
+
+                                    $this->tipoingresopensiones->eliminar($id);
+
+                                }
+                            
+                            }
+
+                        } else if (strtolower($renta) == "ingresosnoconstitutivos") {
+
+                            if (strtolower($tiporenta) == "tipodeaporteobligatorio") {
+                                
+                                if (strtolower($aspecto) == "pensiones") {
+                                    
+                                    $this->tipoaportesobligatoriospensiones->eliminar($id);
+
+                                }
+
+                            }
+
+                        }
+
                     }
+
                 } else {
 
                     $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
