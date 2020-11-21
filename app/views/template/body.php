@@ -33,7 +33,8 @@
             ($controllert == "declaracion" && $methodt == "crear") || 
             ($controllert == "declaracion" && $methodt == "revision")|| 
             ($controllert == "cedulas" && $methodt == "listar") ||
-            ($controllert == "informacionpersonal" && $methodt == "listar")) {
+            ($controllert == "informacionpersonal" && $methodt == "listar")||
+            ($controllert == "ganancias" && $methodt == "listar")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
@@ -57,7 +58,8 @@
             ($controllert == "rentatrabajo" && $methodt == "listar") || 
             ($controllert == "declaracion" && $methodt == "revision") || 
             ($controllert == "cedulas" && $methodt == "listar") ||
-            ($controllert == "informacionpersonal" && $methodt == "listar")) {
+            ($controllert == "informacionpersonal" && $methodt == "listar")||
+            ($controllert == "ganancias" && $methodt == "listar")) {
                 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
