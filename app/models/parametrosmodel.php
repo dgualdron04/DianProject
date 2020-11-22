@@ -6,6 +6,7 @@ class Parametrosmodel extends Models{
     private $tablaparametros = "parametros";
     private $tablacalendario = "calendariofiscal";
     private $tablaperiododeclarante = "periododeclarante";
+    private $tablaparametrosdeclaracion = "parametrosdeclaracion";
 
     public function listar(){
 
@@ -71,6 +72,15 @@ class Parametrosmodel extends Models{
                 } 
 
             } 
+        }
+
+        if ($query5 = $this->db->connect()->prepare('SELECT * FROM '.$this->tablaparametrosdeclaracion.' WHERE idparametro = ?')) {
+            $query5->execute([$id]);
+
+            if ($query6 = $this->db->connect()->prepare('DELETE FROM '.$this->tablaparametrosdeclaracion.' WHERE idparametro = ?')) {
+                $query6->execute([$id]);
+            }
+
         }
 
         if ( $stmt = $this->db->connect()->prepare('DELETE FROM '.$this->tablaparametros.' WHERE idparametro = ? ')) {

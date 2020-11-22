@@ -182,8 +182,6 @@ function eliminargananciasnogravadas(e, id) {
 //#region Inicializar eliminar tipo de bienes
 
 function iniciareleminarnogravadas(datos) {
-    console.log(datos);
-    console.log(datos[0]['nombre']);
     document.getElementById("h2-header-gananciasnogravadas").innerHTML = `Eliminar el tipo de ganancia no gravada ${datos[0]['nombre']}`;
     document.getElementById("modal-body-gananciasnogravadas").innerHTML = `<p>¿ Estas seguro que deseas eliminar el tipo de Ganancia no Gravada ${datos[0]['nombre']}?</p>`;
     document.getElementById("modal-footer-gananciasnogravadas").innerHTML = `<a href="#" id="si-eliminar-gananciasnogravadas" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-eliminar-gananciasnogravadas" class="btn-modal btn-block-modal btn-delete"> No </a>`;

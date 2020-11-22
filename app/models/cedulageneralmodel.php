@@ -2,6 +2,8 @@
 
 class Cedulageneralmodel extends Models{
 
+    private $tablacedulageneral = "cedulageneral";
+
     /* Renta de trabajo */
     private $tablatipoprestacion = "tipoprestacion";
     private $tablatipoaporteobligatorio = "tipoaporteobligatorio";
@@ -70,6 +72,25 @@ class Cedulageneralmodel extends Models{
         $query->execute();
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         return $myquery;
+
+    }
+
+    public function crear($iddeclaracion){
+        $connect = $this->db->connect();
+
+        if ($query = $connect->prepare('INSERT INTO '.$this->tablacedulageneral.'(rentaliquidageneral, rentasexentasdeduccion, rentaliquidaordinaria, rentaliquidagravable, iddeclaracion) VALUES (?,?,?,?,?)')) {
+
+            $query->execute([0,0,0,0,$iddeclaracion]);
+
+            $idcedulageneral = $connect->lastInsertId();
+
+            return $idcedulageneral;
+
+        } else {
+
+            return false;
+
+        }
 
     }
 

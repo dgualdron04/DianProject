@@ -14,6 +14,7 @@ class Tipoactividadeconomicamodel extends Models{
 
     }
 
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoactividadeconomica.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

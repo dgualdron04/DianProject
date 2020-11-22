@@ -2,6 +2,8 @@
 
 class Cedulapensionesmodel extends Models{
 
+    private $tablacedulapensiones = "cedulapensiones";
+
     private $tipoingresopensiones = "tipoingresospensiones";
     private $tipoaporteobligatoriopensiones = "tipoaportesobligatoriospensiones";
 
@@ -13,6 +15,22 @@ class Cedulapensionesmodel extends Models{
         $query->execute();
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         return $myquery;
+
+    }
+
+    public function crear($iddeclaracion){
+
+        if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablacedulapensiones.'(rentaliquida, rentaliquidagravable, iddeclaracion) VALUES (?, ?, ?)')) {
+
+            $query->execute([0, 0, $iddeclaracion]);
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
 
     }
 

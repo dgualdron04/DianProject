@@ -18,6 +18,8 @@
     </div>
 </div>
 
+<?php $contanio = 0; $fecha = getdate();?>
+
 <div class="card-2">
     <div class="card-header-2 card-header-2-tabs card-header-2-primary">
         <div class="nav-tabs-navigation">
@@ -77,12 +79,16 @@
 
                                             </span>
                                         </td>
-                                        <td>El año</td>
+                                        <td><?php echo $datos['annoperiodo'];
+                                        if ($datos['annoperiodo'] == $fecha['year']-1) {
+                                            $contanio++;
+                                        }
+                                        ?></td>
                                         <td>progreso:10</td>
                                         <td>
                                             <?php
                                             if ($datos['estadorevision'] == false) {
-                                                echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:editar;id:edit-'.$datos['iddeclaracion'].';href:declaracion/editar';
+                                                echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:editar;id:edit-'.$datos['iddeclaracion'].';href:'.constant('URL').'declaracion/editar/'.$datos['iddeclaracion'];
                                             } else {
                                                 echo 'icon:far fa-edit;name:editar';
                                             }
@@ -133,5 +139,15 @@
 
 <?php require_once './app/views/assets/includes/modals/declaracion/eliminar.php'; ?>
 
+<?php
+
+if ($contanio > 0) {
+    require_once './app/views/assets/includes/alertas/alert.php';
+}
+
+?>
+
+
+<script src="<?php echo constant('URL') . 'app/views/assets/js/template/funciones.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/listar.js' ?>"></script>

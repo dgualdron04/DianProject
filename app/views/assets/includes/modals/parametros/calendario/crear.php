@@ -1,4 +1,4 @@
-<div class="modal-container " id="modal-crear-calendario">
+<div class="modal-container modal-crear-calendario" id="modal-crear-calendario">
 
     <div class="container modal-close" id="cont-modal-crear-cal">
         <div class="row">
@@ -9,7 +9,7 @@
                         Crear Calendario</h2>
                     <br>
                     <br>
-                    <div class="slide-page slide-page-editar">
+                    <div>
                     <label for="" class="form-label">Anno del Parametro</label>
                         <div class="form-group">
                         <input class="form-control btn-disabled" disabled type="number" min="<?php $fecha = getdate(); echo $fecha['year'] - 1; ?>" max="<?php echo $fecha['year'] - 1; ?>" value="<?php echo $fecha['year'] - 1; ?>" name="aniocalendario" 

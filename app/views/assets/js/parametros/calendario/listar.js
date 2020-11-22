@@ -381,6 +381,7 @@ function listarperiodo(datos) {
 }
 //#region Crear periodo
 let contadorperiodo = 0;
+if (document.querySelector('.modal-container-crear')) {
 let formcrearperiodo = document.getElementById('form-periodo-crear');
 
 formcrearperiodo.addEventListener('submit', (e) => {
@@ -404,6 +405,7 @@ formcrearperiodo.addEventListener('submit', (e) => {
 
 
 });
+}
 //#endregion
 
 //#endregion
@@ -654,6 +656,7 @@ function traereditarper(datos) {
 
 //#region Editar
 let contadorperiodoeditar = 0;
+if (!document.querySelector('.modal-crear-calendario')) {
 let formperiodoeditar = document.getElementById('form-periodo-editar');
 
 formperiodoeditar.addEventListener('submit', (e) => {
@@ -683,4 +686,5 @@ formperiodoeditar.addEventListener('submit', (e) => {
     });
   }
 });
+}
 //#endregion

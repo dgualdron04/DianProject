@@ -268,6 +268,14 @@ class Usuariomodel extends Models
 
     }
 
+    public function listarinformacionpersonal($id){
+        $query = $this->db->connect()->prepare('SELECT ae.idactividadeconomica as "id", "Actividad economica" as "clase", tae.nombre FROM actividadeconomica ae JOIN tipoactividadeconomica tae ON tae.idtipoactividad = ae.idtipoactividad WHERE idusuario = ? UNION SELECT ds.iddireccionseccional as "id", "Direccion Seccional" as "clase", tds.nombre FROM direccionseccional ds JOIN tipodireccionseccional tds ON tds.idtipodireccionseccional = ds.idtipodireccionseccional WHERE ds.idusuario = ?');
+        $query->execute([$id,$id]);
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     /* 
     Alerta, si se va a usar alguna de estas funciones toca cambiar el cod por id y el nombrerol por tiporol.
 

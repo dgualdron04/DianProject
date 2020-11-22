@@ -41,7 +41,6 @@
                         </select>
                         </div>
                         <div class="form-group">
-                            <!-- <button class="form-control button firstNext">Siguiente</button> -->
                             <input class="form-control button" type="submit" name="parametros" value="Editar">
                         </div>
                     </div>

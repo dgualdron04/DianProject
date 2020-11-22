@@ -59,3 +59,51 @@ function loadingfunction() {
 }
 //#endregion
 
+//#region Alerta
+let cont = 0;
+let cont2 = 0;
+function alerta($text, $nombre) {
+
+    document.querySelector('.msg').innerHTML = $text;
+    cont = cont + 1;
+    if (cont === 1) {
+        let alerta = document.querySelector($nombre);
+        alerta.classList.remove('displaynone');
+        alerta.classList.add('show');
+        alerta.classList.remove('hide');
+        alerta.classList.add('showAlert');
+        setTimeout(() => {
+            alerta.classList.remove('show');
+            alerta.classList.add('hide');
+            setTimeout(() => {
+                alerta.classList.add('displaynone');
+                cont = 0;
+            }, 1000);
+        }, 5000);
+        alerta.children[2].addEventListener('click', () => {
+            cont2 = cont2 + 1;
+            if (cont2 === 1) {
+                alerta.classList.remove('show');
+                alerta.classList.add('hide');
+                setTimeout(() => {
+                    alerta.classList.add('displaynone');
+                    cont = 0;
+                    cont2 = 0;
+                }, 1000);
+
+            }
+        });
+    }
+
+}
+
+  //#endregion
+
+  //#region Quitar Acentos
+
+function quitaracentosfun(cadena){
+	const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+	return cadena.split('').map( letra => acentos[letra] || letra).join('').toString();	
+}
+
+//#endregion

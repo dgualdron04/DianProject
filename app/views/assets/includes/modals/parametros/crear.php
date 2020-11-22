@@ -1,4 +1,4 @@
-<div class="modal-container" id="modal-crear">
+<div class="modal-container modal-container-crear" id="modal-crear">
 
     <div class="container modal-close" id="cont-modal-crear">
         <div class="row">

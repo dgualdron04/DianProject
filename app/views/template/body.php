@@ -43,7 +43,7 @@
         } else if (strtolower($infouser['nomrol']) == "declarante") {
         
             if (($controllert == "declaracion" && $methodt == "listar") || 
-            ($controllert == "declaracion" && $methodt == "crear") || 
+            ($controllert == "declaracion" && $methodt == "editar") || 
             ($controllert == "usuario" && $methodt == "perfil") ||
             ($controllert == "errores" && $methodt == "error403")) {
 
