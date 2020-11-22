@@ -225,6 +225,10 @@ FOREIGN KEY (idpatrimonio) REFERENCES patrimonio(idpatrimonio));
 CREATE TABLE cedulageneral
 (idcedulageneral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de prestación',
 iddeclaracion INT NOT NULL COMMENT 'Codigo de la declaración',
+rentaliquidageneral BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Rentas Liquida General',
+rentasexentasdeduccion BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Rentas Exenta Deduccion',
+rentaliquidaordinaria BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Rentas Liquida Ordinaria',
+rentaliquidagravable BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Rentas Liquida Gravable',
 PRIMARY KEY (idcedulageneral),
 FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
 
