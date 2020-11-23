@@ -160,6 +160,41 @@
             <div class="tab-pane show" id="liquidacionprivada">
                 <p></p>
 
+                <p class="scond scond-2" id="idliquidacionprivada"><?php echo $data[0][2] ?></p>
+                
+                <!--div class="only-flex"!-->
+                    <!--p class="scond scond-2" id="idtotalganancias">Total Liquidación Privada:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p!-->
+                <!--/div!-->
+
+                <div>
+                    <table id="datatable-liquidacionprivada" class="datatable">
+                        <thead>
+                            <tr>
+                                <th>Clase</th>
+                                <th>Valor</th>
+                                <th>Descripción</th>
+                                <th>icon:far fa-edit</th>
+                                <th>icon:far fa-trash-alt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            if (!empty($data)) {
+                                foreach ($data[4] as $datos) : ?>
+                                    <tr>
+                                        <td><?php echo $datos['clase']; ?></td>
+                                        <td><?php echo $datos['valor']; ?></td>
+                                        <td><?php echo $datos['descripcion']; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editlp-' . $datos['id'] .'-'.$datos['clase'].';onclick:editarliquidacionprivada'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:Eliminar;id:deletelp-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['valor'].';onclick:eliminarliquidacionprivada'; ?></td>
+                                    </tr>
+                            <?php endforeach;
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="tab-footer"></div>
 
 
@@ -168,6 +203,41 @@
 
             <div class="tab-pane show" id="gananciasocasionales">
                 <p></p>
+                
+                <p class="scond scond-2" id="idpatrimonio"><!--?php echo $data[0][0] ?!--></p>
+                
+                <div class="only-flex">
+                    <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales: <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--></p>
+                </div>
+
+                <div>
+                    <table id="datatable-gananciasocasionales" class="datatable">
+                        <thead>
+                            <tr>
+                                <th>Clase</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>icon:far fa-edit</th>
+                                <th>icon:far fa-trash-alt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            if (!empty($data)) {
+                                foreach ($data[5] as $datos) : ?>
+                                    <tr>
+                                        <td><?php echo $datos['clase']; ?></td>
+                                        <td><?php echo $datos['tipo']; ?></td>
+                                        <td><?php echo $datos['valor']; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editip-' . $datos['id'] .'-'.$datos['clase'].';onclick:editarpatrimonio'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletep-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminarpatrimonio'; ?></td>
+                                    </tr>
+                            <?php endforeach;
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="tab-footer"></div>
 
@@ -185,10 +255,13 @@
 <?php require_once './app/views/assets/includes/modals/declaracion/patrimonio/crear.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/patrimonio/editar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/patrimonio/eliminar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/liquidacionprivada/crear.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/liquidacionprivada/editar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/liquidacionprivada/eliminar.php'; ?>
 
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/funciones.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/declaracion.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/informacionpersonal/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/patrimonio/listar.js' ?>"></script>
-
+<script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/liquidacionprivada/listar.js' ?>"></script>

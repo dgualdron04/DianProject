@@ -478,7 +478,6 @@ formeditarpatrimonio.addEventListener('submit', (e) => {
     formData.append("param", param);
     let clasep = document.getElementById('tipopatrimonioeditar').innerHTML.toLowerCase();
     let id = formeditarpatrimonio['iddob'].value;
-    console.log(id);
     ajax({
         url: `./declaracion/editardeclaracion/patrimonio/${clasep}/${id}`,
         method: 'POST',
@@ -551,7 +550,6 @@ function eliminarpatrimonio(e, id) {
         let formData = new FormData();
         let param = true;
         formData.append("param", param);
-        console.log(clase);
         ajax({
             url: `./declaracion/eliminardeclaracion/patrimonio/${clase}/${id}`,
             method: "POST",
@@ -562,10 +560,6 @@ function eliminarpatrimonio(e, id) {
         });
     });
 
-    console.log(id);
-    console.log(valor);
-    console.log(tipo);
-    console.log(clase);
 }
 
 //#endregion

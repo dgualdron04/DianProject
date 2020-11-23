@@ -30,6 +30,16 @@ class Declaracion extends Controller
     private $usuariobien;
     private $deuda;
     private $usuariodeuda;
+    private $anticiporenta;
+    private $usuarioanticiporenta;
+    private $sanciones;
+    private $usuariosanciones;
+    private $saldofavor;
+    private $usuariosaldoafavor;
+    private $retenciondeclarar;
+    private $usuarioretenciondeclarar;
+    private $descuentoimpuext;
+    private $usuariodescuentoimpuext;
 
     public function __construct()
     {
@@ -57,8 +67,17 @@ class Declaracion extends Controller
         $this->usuariobien = $this->model('Usuariobien');
         $this->deuda = $this->model('Deuda');
         $this->usuariodeuda = $this->model('Usuariodeuda');
+        $this->anticiporenta = $this->model('Anticiporenta');
+        $this->usuarioanticiporenta = $this->model('Usuarioanticiporenta');
+        $this->sanciones = $this->model('Sanciones');
+        $this->usuariosanciones = $this->model('Usuariosanciones');
+        $this->saldofavor = $this->model('Saldofavor');
+        $this->usuariosaldoafavor = $this->model('Usuariosaldoafavor');
+        $this->retenciondeclarar = $this->model('Retenciondeclarar');
+        $this->usuarioretenciondeclarar = $this->model('Usuarioretenciondeclarar');
+        $this->descuentoimpuext = $this->model('Descuentoimpuext');
+        $this->usuariodescuentoimpuext = $this->model('Usuariodescuentoimpuext');
         parent::__construct();
-        /* $this->iniciarsesion(); */
         if (isset($_SESSION['email'])) {
             $this->usuario->setusuario($this->traersesion());
         }else{
@@ -194,14 +213,19 @@ class Declaracion extends Controller
 
                 $informacionpersonal = $this->usuario->listarinformacionpersonal($this->usuario->getid());
                 $idpatrimonio = $this->patrimonio->traerid($id);
-                $ids = [$idpatrimonio];
                 $this->patrimonio->calcularpatrimoniototales($id);
                 $patrimonio = $this->patrimonio->listar($id);
+                $idcedulas = 1;
+                $cedulas = [];
+                $idliquidacion = $this->liquidacionprivada->traerid($id);
+                $liquidacionprivada = $this->liquidacionprivada->listar($id);
+                $gananciasocasionales = $this->gananciasocasionales->listar($id);
+                $ids = [$idpatrimonio, $idcedulas, $idliquidacion];
                 /*$cedulas = $this->cedulas->listar();
                 $liquidacionprivada = $this->liquidacionprivada->listar();
                 $gananciasocasionales = $this->gananciasocasionales->listar(); */
 
-                $data = [$ids, $informacionpersonal, $patrimonio];
+                $data = [$ids, $informacionpersonal, $patrimonio, $cedulas, $liquidacionprivada, $gananciasocasionales];
 
                 $this->viewtemplate('declaracion', 'editar', $this->usuario->traerdatosusuario(), $data);
 
@@ -310,7 +334,7 @@ class Declaracion extends Controller
         }
     }
 
-    public function creardeclaracion($clase, $tipo, $id){
+    public function creardeclaracion($clase, $tipo, $id = null){
         if (isset($_SESSION['email'])) {
 
             if ((strtolower($this->usuario->getnomrol()) == "declarante") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
@@ -331,15 +355,6 @@ class Declaracion extends Controller
 
                     if ($tipo == "bienes") {
                         
-                        /* echo "<br>";
-                        echo $_POST['tipomonedacrearpatrimonio'];
-                        echo "<br>";
-                        echo $_POST['tipomodelocrearpatrimonio'];
-                        echo "<br>";
-                        echo $_POST['valorpatrimoniocrear'];
-                        echo "<br>";
-                        echo $id;
-                        echo "<br>"; */
                         $valor = $_POST['valorpatrimoniocrear'];
                         $idmoneda = $_POST['tipomonedacrearpatrimonio'];
                         $idmodelo = $_POST['tipomodelocrearpatrimonio'];
@@ -357,6 +372,39 @@ class Declaracion extends Controller
 
                         $iddeuda = $this->deuda->crear($valor, $id, $idmoneda, $idmodelo);
                         $this->usuariodeuda->crear($iddeuda, $idpatrimonio, $this->usuario->getid());
+
+                    }
+
+                } else if ($clase == "liquidacionprivada") {
+
+                    $valor = $_POST['valorliquidacionprivadacrear'];
+                    $descripcion = $_POST['descripcionliquidacionprivadacrear'];
+                    $idliquidacion = $_POST['idliqu'];
+
+                    if ($tipo == "anticiporenta") {
+
+                        $idanticipo = $this->anticiporenta->crear($valor, $descripcion);     
+                        $this->usuarioanticiporenta->crear($idanticipo, $idliquidacion, $this->usuario->getid());
+
+                    } else if ($tipo == "sanciones") {
+
+                        $idsanciones = $this->sanciones->crear($valor, $descripcion);     
+                        $this->usuariosanciones->crear($idsanciones, $idliquidacion, $this->usuario->getid());
+
+                    } else if ($tipo == "saldofavor") {
+
+                        $idsaldofavor = $this->saldofavor->crear($valor, $descripcion);
+                        $this->usuariosaldoafavor->crear($idsaldofavor, $idliquidacion, $this->usuario->getid());
+
+                    } else if ($tipo == "retenciondeclarar") {
+
+                        $idretenciondeclarar = $this->retenciondeclarar->crear($valor, $descripcion);
+                        $this->usuarioretenciondeclarar->crear($idretenciondeclarar, $idliquidacion, $this->usuario->getid());
+
+                    } else if ($tipo == "descuentoimpuext") {
+
+                        $iddescuentoimpuext = $this->descuentoimpuext->crear($valor, $descripcion);
+                        $this->usuariodescuentoimpuext->crear($iddescuentoimpuext, $idliquidacion, $this->usuario->getid());
 
                     }
 
@@ -411,6 +459,30 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "liquidacionprivada") {
+
+                    if ($tipo == "anticipoderenta") {
+
+                        $this->anticiporenta->editar($id);
+
+                    } else if ($tipo == "sanciones") {
+
+                        $this->sanciones->editar($id);
+
+                    } else if ($tipo == "saldoafavor") {
+
+                        $this->saldofavor->editar($id);
+
+                    } else if ($tipo == "retencionadeclarar") {
+
+                        $this->retenciondeclarar->editar($id);
+
+                    } else if ($tipo == "descuentoimpuestoexterior") {
+
+                        $this->descuentoimpuext->editar($id);
+
+                    }
+
                 }
 
             } else{
@@ -462,6 +534,33 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "liquidacionprivada") {
+
+                    $valor = $_POST['valorliquidacionprivadaeditar'];
+                    $descripcion = $_POST['descripcionliquidacionprivadaeditar'];
+
+                    if ($tipo == "anticipoderenta") {
+
+                        $this->anticiporenta->editaranticiporenta($valor, $descripcion, $id);
+
+                    } else if ($tipo == "sanciones") {
+
+                        $this->sanciones->editarsanciones($valor, $descripcion, $id);
+
+                    } else if ($tipo == "saldoafavor") {
+
+                        $this->saldofavor->editarsaldofavor($valor, $descripcion, $id);
+
+                    } else if ($tipo == "retencionadeclarar") {
+
+                        $this->retenciondeclarar->editarretenciondeclarar($valor, $descripcion, $id);
+
+                    } else if ($tipo == "descuentoimpuestoexterior") {
+
+                        $this->descuentoimpuext->editardescuentoimpuext($valor, $descripcion, $id);
+
+                    }
+
                 }
 
             } else{
@@ -478,10 +577,11 @@ class Declaracion extends Controller
 
     public function eliminardeclaracion($clase, $tipo, $id){
 
+
         if (isset($_SESSION['email'])) {
 
             if ((strtolower($this->usuario->getnomrol()) == "declarante") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
-
+                
                 if ($clase == "informacionpersonal") {
 
                     if ($tipo == "actividadeconomica") {
@@ -494,7 +594,7 @@ class Declaracion extends Controller
 
                     }
 
-                } if ($clase = "patrimonio") {
+                } else if ($clase == "patrimonio") {
 
                     if ($tipo == "bien" || $tipo == "bienes") {
                         
@@ -505,6 +605,35 @@ class Declaracion extends Controller
                         
                         $this->usuariodeuda->eliminar($id);
                         $this->deuda->eliminar($id);
+
+                    }
+
+                } else if ($clase == "liquidacionprivada") {
+
+                    if ($tipo == "anticipoderenta") {
+
+                        $this->usuarioanticiporenta->eliminar($id);
+                        $this->anticiporenta->eliminar($id);
+
+                    } else if ($tipo == "sanciones") {
+
+                        $this->usuariosanciones->eliminar($id);
+                        $this->sanciones->eliminar($id);
+
+                    } else if ($tipo == "saldoafavor") {
+
+                        $this->usuariosaldoafavor->eliminar($id);
+                        $this->saldofavor->eliminar($id);
+
+                    } else if ($tipo == "retencionadeclarar") {
+
+                        $this->usuarioretenciondeclarar->eliminar($id);
+                        $this->retenciondeclarar->eliminar($id);
+
+                    } else if ($tipo == "descuentoimpuestoexterior") {
+
+                        $this->usuariodescuentoimpuext->eliminar($id);
+                        $this->descuentoimpuext->eliminar($id);
 
                     }
 
