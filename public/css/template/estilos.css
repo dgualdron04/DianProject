@@ -1699,6 +1699,17 @@ button.iconostable i {
   margin-right: 10px;
 }
 
+p.iconostable{
+  font-size: 18px;
+  padding: 10px;
+  border-right: 1px solid;
+}
+
+p.iconostable-2{
+  font-size: 18px;
+  padding: 10px;
+}
+
 .inputtable {
   transform: scale(1.4);
 }

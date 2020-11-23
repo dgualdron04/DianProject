@@ -1,4 +1,4 @@
-//#region Creación de la tabla declarante
+//#region Creación de la tabla Información personal
 const dtinformacionpersonal = new DataTable('#datatable-informacionpersonal', 'información personal', [
     {
         id: 'bAdd',
@@ -81,7 +81,9 @@ function llenartipoinformacionpersonal(datos){
     let id;
     let tipo;
     
+    if ( datos.length !== 0 ) {
     datos[0]['idtipodireccionseccional'] ?  tipo = "Dirección Seccional" : tipo = "Actividad Economica";
+    }
 
     creartiposif.innerHTML = `
     <option selected="true" disabled="disabled" class="noselected">Seleccione el tipo de ${tipo}</option>`;
@@ -90,8 +92,13 @@ function llenartipoinformacionpersonal(datos){
         creartiposif.innerHTML += `<option value="${id}">${tipos['nombre']}</option>`;
     });
 
+    if ( datos.length !== 0 ) {
     divtipoinformacionpersonalcrear.classList.remove('scond');
     creartiposif.removeAttribute('disabled');
+    } else{
+        divtipoinformacionpersonalcrear.classList.add('scond');
+        creartiposif.setAttribute('disabled', 'disabled');
+    }
 
 }
 
@@ -279,13 +286,14 @@ function eliminarinformacionpersonal(e, id) {
         form: formData,
         urlactual: location.href,
     });
-    //#endregion
+    
 
 
 }
 
 //#endregion
 
+//#region Iniciar Eliminar
 
 function inicializareliminar(datos) {
     
@@ -325,3 +333,5 @@ function inicializareliminar(datos) {
     });
 
 }
+
+//#endregion

@@ -320,8 +320,12 @@ class DataTable{
             headerButtons.forEach(button =>{
                 if (button.type === "checkbox") {
                     html += `<li><input class="inputtable" id="${button.id}" title="${button.text}" type="${button.type}"></li>`
-                }else{
+                }else if (button.type === "button"){
                     html += `<li><button class="iconostable" id="${button.id}"><i class="${button.icon}"></i>${button.text}</button></li>`
+                } else if (button.type === "p"){
+                    html += `<li><p class="iconostable" id="${button.id}">${button.text}</p></li>`
+                } else if (button.type === "p2"){
+                    html += `<li><p class="iconostable-2" id="${button.id}">${button.text}</p></li>`
                 }
             });
 

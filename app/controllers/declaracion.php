@@ -22,6 +22,14 @@ class Declaracion extends Controller
     private $tipodireccionseccional;
     private $actividadeconomica;
     private $direccionseccional;
+    private $tipobienes;
+    private $tipodeudas;
+    private $tipomoneda;
+    private $modelo;
+    private $bien;
+    private $usuariobien;
+    private $deuda;
+    private $usuariodeuda;
 
     public function __construct()
     {
@@ -41,6 +49,14 @@ class Declaracion extends Controller
         $this->tipodireccionseccional = $this->model('Tipodireccionseccional');
         $this->actividadeconomica = $this->model('Actividadeconomica');
         $this->direccionseccional = $this->model('Direccionseccional');
+        $this->tipobienes = $this->model('Tipobienes');
+        $this->tipodeudas = $this->model('Tipodeudas');
+        $this->tipomoneda = $this->model('Tipomoneda');
+        $this->modelo = $this->model('Modelo');
+        $this->bien = $this->model('Bien');
+        $this->usuariobien = $this->model('Usuariobien');
+        $this->deuda = $this->model('Deuda');
+        $this->usuariodeuda = $this->model('Usuariodeuda');
         parent::__construct();
         /* $this->iniciarsesion(); */
         if (isset($_SESSION['email'])) {
@@ -177,14 +193,17 @@ class Declaracion extends Controller
             if ((strtolower($this->usuario->getnomrol()) == "declarante") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
 
                 $informacionpersonal = $this->usuario->listarinformacionpersonal($this->usuario->getid());
-                /*$patrimonio = $this->patrimonio->listar();
-                $cedulas = $this->cedulas->listar();
+                $idpatrimonio = $this->patrimonio->traerid($id);
+                $ids = [$idpatrimonio];
+                $this->patrimonio->calcularpatrimoniototales($id);
+                $patrimonio = $this->patrimonio->listar($id);
+                /*$cedulas = $this->cedulas->listar();
                 $liquidacionprivada = $this->liquidacionprivada->listar();
                 $gananciasocasionales = $this->gananciasocasionales->listar(); */
 
-                /* $data = [$informacionpersonal]; */
+                $data = [$ids, $informacionpersonal, $patrimonio];
 
-                $this->viewtemplate('declaracion', 'editar', $this->usuario->traerdatosusuario(), $informacionpersonal);
+                $this->viewtemplate('declaracion', 'editar', $this->usuario->traerdatosusuario(), $data);
 
             } else{
 
@@ -254,6 +273,30 @@ class Declaracion extends Controller
 
                     }
 
+                } else if($clase == "patrimonio"){
+
+                    if ($tipo == "bienes" || $tipo == "bien") {
+                        
+                        $bienes = $this->tipobienes->listar();
+                        print_r(json_encode($bienes));
+
+                    } else if ($tipo == "deudas" || $tipo == "deuda") {
+
+                        $deudas = $this->tipodeudas->listar();
+                        print_r(json_encode($deudas));
+
+                    } else if ($tipo == "moneda") {
+
+                        $moneda = $this->tipomoneda->listar();
+                        print_r(json_encode($moneda));
+
+                    } else if ($tipo == "modelo") {
+
+                        $modelo = $this->modelo->listar();
+                        print_r(json_encode($modelo));
+
+                    }
+
                 }
 
             } else{
@@ -281,6 +324,39 @@ class Declaracion extends Controller
                     } else if ($tipo == "direccionseccional") {
                         
                         $this->direccionseccional->crear($id, $this->usuario->getid());
+
+                    }
+
+                } else if ($clase == "patrimonio") {
+
+                    if ($tipo == "bienes") {
+                        
+                        /* echo "<br>";
+                        echo $_POST['tipomonedacrearpatrimonio'];
+                        echo "<br>";
+                        echo $_POST['tipomodelocrearpatrimonio'];
+                        echo "<br>";
+                        echo $_POST['valorpatrimoniocrear'];
+                        echo "<br>";
+                        echo $id;
+                        echo "<br>"; */
+                        $valor = $_POST['valorpatrimoniocrear'];
+                        $idmoneda = $_POST['tipomonedacrearpatrimonio'];
+                        $idmodelo = $_POST['tipomodelocrearpatrimonio'];
+                        $idpatrimonio = $_POST['idpatri'];
+
+                        $idbien = $this->bien->crear($valor, $id, $idmoneda, $idmodelo);
+                        $this->usuariobien->crear($idbien, $idpatrimonio, $this->usuario->getid());
+
+                    } else if ($tipo == "deudas") {
+
+                        $valor = $_POST['valorpatrimoniocrear'];
+                        $idmoneda = $_POST['tipomonedacrearpatrimonio'];
+                        $idmodelo = $_POST['tipomodelocrearpatrimonio'];
+                        $idpatrimonio = $_POST['idpatri'];
+
+                        $iddeuda = $this->deuda->crear($valor, $id, $idmoneda, $idmodelo);
+                        $this->usuariodeuda->crear($iddeuda, $idpatrimonio, $this->usuario->getid());
 
                     }
 
@@ -323,6 +399,18 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "patrimonio") {
+                    
+                    if ($tipo == "bien" || $tipo == "bienes") {
+                        
+                        $this->bien->editar($id);
+
+                    } else if ($tipo == "deuda" || $tipo == "deudas") {
+                        
+                        $this->deuda->editar($id);
+
+                    }
+
                 }
 
             } else{
@@ -357,6 +445,23 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "patrimonio") {
+                    
+                    $tipopatrimonio = $_POST['tipo1patrimonioeditar'];
+                    $valor = $_POST['valorpatrimonioeditar'];
+                    $tipomoneda = $_POST['tipomonedaeditarpatrimonio'];
+                    $modelo = $_POST['tipomodeloeditarpatrimonio'];
+
+                    if ($tipo == "bien" || $tipo == "bienes") {
+                        
+                        $this->bien->editarbien($tipopatrimonio, $valor, $tipomoneda, $modelo, $id);
+
+                    } else if ($tipo == "deuda" || $tipo == "deudas") {
+                        
+                        $this->deuda->editardeuda($tipopatrimonio, $valor, $tipomoneda, $modelo, $id);
+
+                    }
+
                 }
 
             } else{
@@ -386,6 +491,20 @@ class Declaracion extends Controller
                     } else if ($tipo == "direccionseccional") {
                         
                         $this->direccionseccional->eliminar($id);
+
+                    }
+
+                } if ($clase = "patrimonio") {
+
+                    if ($tipo == "bien" || $tipo == "bienes") {
+                        
+                        $this->usuariobien->eliminar($id);
+                        $this->bien->eliminar($id);
+
+                    } else if ($tipo == "deuda" || $tipo == "deudas") {
+                        
+                        $this->usuariodeuda->eliminar($id);
+                        $this->deuda->eliminar($id);
 
                     }
 

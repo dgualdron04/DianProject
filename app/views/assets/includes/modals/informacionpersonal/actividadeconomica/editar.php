@@ -6,7 +6,7 @@
                 <p class="close text-center" id="close-modal-editar-actividadeconomica">&times;</p>
                 <form action="#" method="POST" autocomplete="" id="form-editar-actividadeconomica">
                     <h2 class="text-center">
-                        Editar Tipo de Bien</h2>
+                        Editar Tipo de <br> Actividad Economica</h2>
                     <br>
                         <div>
                             <label for="" class="form-label">Nombre</label>
