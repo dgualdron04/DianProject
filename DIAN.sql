@@ -2015,6 +2015,6 @@ INSERT INTO `modelo` (`tipomodelo`) VALUES ('Nacional'), ('Internacional');
 
 /*--- Inserción de tipo de moneda ---*/
 
-INSERT INTO `tipomoneda` (`nombre`) VALUES ('Peso Colombiano'), ('Dólar Estadounidense');
+INSERT INTO `tipomoneda` (`nombre`) VALUES ('Peso Colombiano');
 
 /*-----------------------------------*/
