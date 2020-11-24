@@ -204,11 +204,11 @@
             <div class="tab-pane show" id="gananciasocasionales">
                 <p></p>
                 
-                <p class="scond scond-2" id="idpatrimonio"><!--?php echo $data[0][0] ?!--></p>
+                <p class="scond scond-2" id="idganancias"><?php echo $data[0][3] ?></p>
                 
-                <div class="only-flex">
-                    <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales: <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--></p>
-                </div>
+                <!--div class="only-flex">
+                    <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p>
+                </div!-->
 
                 <div>
                     <table id="datatable-gananciasocasionales" class="datatable">
@@ -230,8 +230,8 @@
                                         <td><?php echo $datos['clase']; ?></td>
                                         <td><?php echo $datos['tipo']; ?></td>
                                         <td><?php echo $datos['valor']; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editip-' . $datos['id'] .'-'.$datos['clase'].';onclick:editarpatrimonio'; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletep-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminarpatrimonio'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'] .'-'.$datos['clase'].'-'.$datos['tipo'].';onclick:editargananciasocasionales'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminargananciasocasionales'; ?></td>
                                     </tr>
                             <?php endforeach;
                             } ?>
@@ -258,6 +258,9 @@
 <?php require_once './app/views/assets/includes/modals/declaracion/liquidacionprivada/crear.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/liquidacionprivada/editar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/liquidacionprivada/eliminar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/crear.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/editar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/eliminar.php'; ?>
 
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/funciones.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>
@@ -265,3 +268,4 @@
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/informacionpersonal/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/patrimonio/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/liquidacionprivada/listar.js' ?>"></script>
+<script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/gananciasocasionales/listar.js' ?>"></script>

@@ -40,6 +40,14 @@ class Declaracion extends Controller
     private $usuarioretenciondeclarar;
     private $descuentoimpuext;
     private $usuariodescuentoimpuext;
+    private $tipoingresosganancias;
+    private $tipogananciasnogravadas;
+    private $ingresosganacias;
+    private $usuarioingresosganancias;
+    private $ingresonoconseganancias;
+    private $usuarioingresonoconsegananciasocasionales;
+    private $gananciasnogravadas;
+    private $usuariogananciasnogravadas;
 
     public function __construct()
     {
@@ -77,6 +85,14 @@ class Declaracion extends Controller
         $this->usuarioretenciondeclarar = $this->model('Usuarioretenciondeclarar');
         $this->descuentoimpuext = $this->model('Descuentoimpuext');
         $this->usuariodescuentoimpuext = $this->model('Usuariodescuentoimpuext');
+        $this->tipoingresosganancias = $this->model('Tipoingresosganancias');
+        $this->tipogananciasnogravadas = $this->model('Tipogananciasnogravadas');
+        $this->ingresosganacias = $this->model('Ingresosganacias');
+        $this->usuarioingresosganancias = $this->model('Usuarioingresosganancias');
+        $this->ingresonoconseganancias = $this->model('Ingresonoconseganancias');
+        $this->usuarioingresonoconsegananciasocasionales = $this->model('Usuarioingresonoconsegananciasocasionales');
+        $this->gananciasnogravadas = $this->model('Gananciasnogravadas');
+        $this->usuariogananciasnogravadas = $this->model('Usuariogananciasnogravadas');
         parent::__construct();
         if (isset($_SESSION['email'])) {
             $this->usuario->setusuario($this->traersesion());
@@ -219,8 +235,9 @@ class Declaracion extends Controller
                 $cedulas = [];
                 $idliquidacion = $this->liquidacionprivada->traerid($id);
                 $liquidacionprivada = $this->liquidacionprivada->listar($id);
+                $idganancias = $this->gananciasocasionales->traerid($id);
                 $gananciasocasionales = $this->gananciasocasionales->listar($id);
-                $ids = [$idpatrimonio, $idcedulas, $idliquidacion];
+                $ids = [$idpatrimonio, $idcedulas, $idliquidacion, $idganancias];
                 /*$cedulas = $this->cedulas->listar();
                 $liquidacionprivada = $this->liquidacionprivada->listar();
                 $gananciasocasionales = $this->gananciasocasionales->listar(); */
@@ -321,6 +338,20 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "gananciasocasionales") {
+
+                    if ($tipo == "ingresosganancias") {
+
+                        $ingresosganacias = $this->tipoingresosganancias->listar();
+                        print_r(json_encode($ingresosganacias));
+
+                    } else if ($tipo == "gananciasnogravadas") {
+
+                        $gananciasnogravadas = $this->tipogananciasnogravadas->listar();
+                        print_r(json_encode($gananciasnogravadas));
+
+                    }
+
                 }
 
             } else{
@@ -408,6 +439,28 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "gananciasocasionales") {
+
+                    $valor = $_POST['valorgananciasocasionalescrear'];
+                    $idgananciasocasionales = $_POST['idgananciasocasionales'];
+                    
+                    if ($tipo == "ingresosganancias") {
+
+                        $idingresosganacias = $this->ingresosganacias->crear($valor, $id);
+                        $this->usuarioingresosganancias->crear($idingresosganacias, $idgananciasocasionales, $this->usuario->getid());
+                        
+                    } else if ($tipo == "ingresosnoconse") {
+
+                        $idingresonoconseganancias = $this->ingresonoconseganancias->crear($valor);
+                        $this->usuarioingresonoconsegananciasocasionales->crear($idingresonoconseganancias, $idgananciasocasionales, $this->usuario->getid());
+
+                    } else if ($tipo == "gananciasnogravadas") {
+
+                        $idgananciasnogravadas = $this->gananciasnogravadas->crear($valor, $id);
+                        $this->usuariogananciasnogravadas->crear($idgananciasnogravadas, $idgananciasocasionales, $this->usuario->getid());
+
+                    }
+
                 }
 
             } else{
@@ -480,6 +533,22 @@ class Declaracion extends Controller
                     } else if ($tipo == "descuentoimpuestoexterior") {
 
                         $this->descuentoimpuext->editar($id);
+
+                    }
+
+                } else if ($clase == "gananciasocasionales") {
+
+                    if ($tipo == "ingresos") {
+
+                        $this->ingresosganacias->editar($id);
+
+                    } else if ($tipo == "ingresosnoconstitutivos") {
+
+                        $this->ingresonoconseganancias->editar($id);
+
+                    } else if ($tipo == "gananciasocasionalesnogravadasyexentas") {
+
+                        $this->gananciasnogravadas->editar($id);
 
                     }
 
@@ -561,6 +630,23 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "gananciasocasionales") {
+
+                    $valor = $_POST['valorgananciasocasionaleseditar'];
+
+                    if ($tipo == "ingresos") {
+
+                        $this->ingresosganacias->editaringresos($valor, $id);
+
+                    } else if ($tipo == "ingresosnoconstitutivos") {
+
+                        $this->ingresonoconseganancias->editaringresosnoconse($valor, $id);
+
+                    } else if ($tipo == "gananciasocasionalesnogravadasyexentas") {
+
+                        $this->gananciasnogravadas->editarganancias($valor, $id);
+
+                    }
                 }
 
             } else{
@@ -634,6 +720,25 @@ class Declaracion extends Controller
 
                         $this->usuariodescuentoimpuext->eliminar($id);
                         $this->descuentoimpuext->eliminar($id);
+
+                    }
+
+                } else if ($clase == "gananciasocasionales") {
+
+                    if ($tipo == "ingresos") {
+
+                        $this->usuarioingresosganancias->eliminar($id);
+                        $this->ingresosganacias->eliminar($id);
+
+                    } else if ($tipo == "ingresosnoconstitutivos") {
+
+                        $this->usuarioingresonoconsegananciasocasionales->eliminar($id);
+                        $this->ingresonoconseganancias->eliminar($id);
+
+                    } else if ($tipo == "gananciasocasionalesnogravadasyexentas") {
+
+                        $this->usuariogananciasnogravadas->eliminar($id);
+                        $this->gananciasnogravadas->eliminar($id);
 
                     }
 
