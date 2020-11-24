@@ -334,7 +334,7 @@ datalogin.addEventListener("submit", (event) => {
 
   var formlogin = new FormData(datalogin);
   formlogin.append("param", param);
-
+  logalertdanger.classList.add("collapse");
   ajax({
     url: `./usuario/iniciarsesion`,
     method: "POST",
@@ -359,7 +359,13 @@ function loginfunction(datos)
 
     if (key==="user-login") {
       window.location="./";
-    } 
+    } else if (key === "user-active"){
+      logalertdanger.classList.remove("collapse");
+      logalertdanger.innerHTML = datos['user-active'];
+    } else if (key === "user-error") {
+      logalertdanger.classList.remove("collapse");
+      logalertdanger.innerHTML = datos['user-error'];
+    }
 
   }
 

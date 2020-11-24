@@ -46,6 +46,10 @@
 
                     <div class="slide-page-2 slide-page-crear-2-liquidacionprivada">
                         
+                        <label for="" class="form-label">Nombre</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" min="0" name="nombreliquidacionprivadacrear" id="nombreliquidacionprivadacrear" placeholder="Nombre">
+                        </div>    
                         <label for="" class="form-label">Valor</label>
                         <div class="form-group">
                             <input class="form-control" type="number" min="0" name="valorliquidacionprivadacrear" placeholder="Valor">

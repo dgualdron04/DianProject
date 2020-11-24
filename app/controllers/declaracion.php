@@ -387,54 +387,57 @@ class Declaracion extends Controller
                     if ($tipo == "bienes") {
                         
                         $valor = $_POST['valorpatrimoniocrear'];
+                        $nombre = $_POST['nombrepatrimoniocrear'];
                         $idmoneda = $_POST['tipomonedacrearpatrimonio'];
                         $idmodelo = $_POST['tipomodelocrearpatrimonio'];
                         $idpatrimonio = $_POST['idpatri'];
 
-                        $idbien = $this->bien->crear($valor, $id, $idmoneda, $idmodelo);
+                        $idbien = $this->bien->crear($nombre, $valor, $id, $idmoneda, $idmodelo);
                         $this->usuariobien->crear($idbien, $idpatrimonio, $this->usuario->getid());
 
                     } else if ($tipo == "deudas") {
 
                         $valor = $_POST['valorpatrimoniocrear'];
+                        $nombre = $_POST['nombrepatrimoniocrear'];
                         $idmoneda = $_POST['tipomonedacrearpatrimonio'];
                         $idmodelo = $_POST['tipomodelocrearpatrimonio'];
                         $idpatrimonio = $_POST['idpatri'];
 
-                        $iddeuda = $this->deuda->crear($valor, $id, $idmoneda, $idmodelo);
+                        $iddeuda = $this->deuda->crear($nombre, $valor, $id, $idmoneda, $idmodelo);
                         $this->usuariodeuda->crear($iddeuda, $idpatrimonio, $this->usuario->getid());
 
                     }
 
                 } else if ($clase == "liquidacionprivada") {
 
+                    $nombre = $_POST['nombreliquidacionprivadacrear'];
                     $valor = $_POST['valorliquidacionprivadacrear'];
                     $descripcion = $_POST['descripcionliquidacionprivadacrear'];
                     $idliquidacion = $_POST['idliqu'];
 
                     if ($tipo == "anticiporenta") {
 
-                        $idanticipo = $this->anticiporenta->crear($valor, $descripcion);     
+                        $idanticipo = $this->anticiporenta->crear($nombre, $valor, $descripcion);     
                         $this->usuarioanticiporenta->crear($idanticipo, $idliquidacion, $this->usuario->getid());
 
                     } else if ($tipo == "sanciones") {
 
-                        $idsanciones = $this->sanciones->crear($valor, $descripcion);     
+                        $idsanciones = $this->sanciones->crear($nombre ,$valor, $descripcion);     
                         $this->usuariosanciones->crear($idsanciones, $idliquidacion, $this->usuario->getid());
 
                     } else if ($tipo == "saldofavor") {
 
-                        $idsaldofavor = $this->saldofavor->crear($valor, $descripcion);
+                        $idsaldofavor = $this->saldofavor->crear($nombre, $valor, $descripcion);
                         $this->usuariosaldoafavor->crear($idsaldofavor, $idliquidacion, $this->usuario->getid());
 
                     } else if ($tipo == "retenciondeclarar") {
 
-                        $idretenciondeclarar = $this->retenciondeclarar->crear($valor, $descripcion);
+                        $idretenciondeclarar = $this->retenciondeclarar->crear($nombre,$valor, $descripcion);
                         $this->usuarioretenciondeclarar->crear($idretenciondeclarar, $idliquidacion, $this->usuario->getid());
 
                     } else if ($tipo == "descuentoimpuext") {
 
-                        $iddescuentoimpuext = $this->descuentoimpuext->crear($valor, $descripcion);
+                        $iddescuentoimpuext = $this->descuentoimpuext->crear($nombre, $valor, $descripcion);
                         $this->usuariodescuentoimpuext->crear($iddescuentoimpuext, $idliquidacion, $this->usuario->getid());
 
                     }
@@ -589,44 +592,46 @@ class Declaracion extends Controller
                 } else if ($clase == "patrimonio") {
                     
                     $tipopatrimonio = $_POST['tipo1patrimonioeditar'];
+                    $nombre = $_POST['nombrepatrimonioeditar'];
                     $valor = $_POST['valorpatrimonioeditar'];
                     $tipomoneda = $_POST['tipomonedaeditarpatrimonio'];
                     $modelo = $_POST['tipomodeloeditarpatrimonio'];
 
                     if ($tipo == "bien" || $tipo == "bienes") {
                         
-                        $this->bien->editarbien($tipopatrimonio, $valor, $tipomoneda, $modelo, $id);
+                        $this->bien->editarbien($nombre, $tipopatrimonio, $valor, $tipomoneda, $modelo, $id);
 
                     } else if ($tipo == "deuda" || $tipo == "deudas") {
                         
-                        $this->deuda->editardeuda($tipopatrimonio, $valor, $tipomoneda, $modelo, $id);
+                        $this->deuda->editardeuda($nombre, $tipopatrimonio, $valor, $tipomoneda, $modelo, $id);
 
                     }
 
                 } else if ($clase == "liquidacionprivada") {
 
+                    $nombre = $_POST['nombreliquidacionprivadaeditar'];
                     $valor = $_POST['valorliquidacionprivadaeditar'];
                     $descripcion = $_POST['descripcionliquidacionprivadaeditar'];
 
                     if ($tipo == "anticipoderenta") {
 
-                        $this->anticiporenta->editaranticiporenta($valor, $descripcion, $id);
+                        $this->anticiporenta->editaranticiporenta($nombre, $valor, $descripcion, $id);
 
                     } else if ($tipo == "sanciones") {
 
-                        $this->sanciones->editarsanciones($valor, $descripcion, $id);
+                        $this->sanciones->editarsanciones($nombre, $valor, $descripcion, $id);
 
                     } else if ($tipo == "saldoafavor") {
 
-                        $this->saldofavor->editarsaldofavor($valor, $descripcion, $id);
+                        $this->saldofavor->editarsaldofavor($nombre, $valor, $descripcion, $id);
 
                     } else if ($tipo == "retencionadeclarar") {
 
-                        $this->retenciondeclarar->editarretenciondeclarar($valor, $descripcion, $id);
+                        $this->retenciondeclarar->editarretenciondeclarar($nombre, $valor, $descripcion, $id);
 
                     } else if ($tipo == "descuentoimpuestoexterior") {
 
-                        $this->descuentoimpuext->editardescuentoimpuext($valor, $descripcion, $id);
+                        $this->descuentoimpuext->editardescuentoimpuext($nombre, $valor, $descripcion, $id);
 
                     }
 

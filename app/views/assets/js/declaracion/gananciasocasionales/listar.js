@@ -182,7 +182,7 @@ formcreargananciasocasionales.addEventListener('submit', (e) => {
     let param = true;
     formData.append("param", param);
     let claseg = formcreargananciasocasionales['tipogananciasocasionalescrear'].value;
-    console.log(claseg);
+
     let id = formcreargananciasocasionales['tipo1gananciasocasionalescrear'].value;
     let idgananciasocasionales = document.getElementById('idganancias').innerHTML;
     formData.append("idgananciasocasionales", idgananciasocasionales);
@@ -190,7 +190,7 @@ formcreargananciasocasionales.addEventListener('submit', (e) => {
         ajax({
             url: `./declaracion/creardeclaracion/gananciasocasionales/${claseg}/${id}`,
             method: 'POST',
-            done: console.log('a')/* setTimeout(() => { location.reload(); }, 200) */,
+            done: setTimeout(() => { location.reload(); }, 200),
             error: rendererror,
             form: formData,
             urlactual: location.href,
@@ -242,7 +242,7 @@ function editargananciasocasionales(e, id) {
     let tipo = quitaracentosfun(etiqueta[3].replace(" ", '').toLowerCase().replace(" ", ''));
     let clase = quitaracentosfun(etiqueta[2].replace(" ", '').toLowerCase().replace(" ", ''));
     id = etiqueta[1];
-    console.log(clase);
+
     document.getElementById('tipogananciasocasionaleseditar').innerHTML = etiqueta[2];
     document.getElementById('tipo2gananciasocasionaleseditar').innerHTML = etiqueta[3];
     
@@ -253,7 +253,7 @@ function editargananciasocasionales(e, id) {
     ajax({
         url: `./declaracion/editardecla/gananciasocasionales/${clase}/${id}`,
         method: "POST",
-        done: inicializareditarpatrimonio,
+        done: inicializargananciasocasionales,
         error: rendererror,
         form: formData,
         urlactual: location.href,
@@ -265,7 +265,7 @@ function editargananciasocasionales(e, id) {
 
 //#region Inicializar Editar
 
-function inicializareditarpatrimonio(datos) {
+function inicializargananciasocasionales(datos) {
     
     document.getElementById('idgo').value = datos[0]['id'];
     document.getElementById('valorgananciasocasionaleseditar').value = datos[0]['valor'];
@@ -286,7 +286,7 @@ formeditargananciasocasionales.addEventListener('submit', (e) => {
     let param = true;
     formData.append("param", param);
     let clasego = quitaracentosfun(document.getElementById('tipogananciasocasionaleseditar').innerHTML.replace(" ", '').toLowerCase().replace(" ", ''));
-    console.log(clasego);
+
     let id = formeditargananciasocasionales['idgo'].value;
     ajax({
         url: `./declaracion/editardeclaracion/gananciasocasionales/${clasego}/${id}`,
@@ -331,7 +331,7 @@ function eliminargananciasocasionales(e, id) {
     let tipo = quitaracentosfun(etiqueta[3].replace(" ", '').toLowerCase().replace(" ", ''));
     let clase = quitaracentosfun(etiqueta[2].replace(" ", '').toLowerCase().replace(" ", ''));
     id = etiqueta[1];
-    console.log(clase);
+
     document.getElementById("h2-header-gananciasocasionales").innerHTML = `Eliminar la ganancia ocasional ${etiqueta[2]} con valor ${etiqueta[4]}`;
     document.getElementById("modal-body-gananciasocasionales").innerHTML = `<p>¿ Estas seguro que deseas eliminar la ganancia ocasional ${etiqueta[2]} con tipo ${etiqueta[3]} con un valor de ${etiqueta[4]}?</p>`;
     document.getElementById("modal-footer-gananciasocasionales").innerHTML = `<a href="#" id="si-eliminar-gananciasocasionales" class="btn-modal btn-block-modal btn-delete"> Si </a> <a href="#" id="no-eliminar-gananciasocasionales" class="btn-modal btn-block-modal btn-delete"> No </a>`;

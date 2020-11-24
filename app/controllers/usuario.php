@@ -217,7 +217,7 @@ class Usuario extends Controller
 
                 } else {
 
-                    $this->errorslogin['user-active'] = "El usuario no se encuentra activo.";
+                    $this->errorslogin['user-active'] = "El usuario no se encuentra activo o no existe.";
                     echo json_encode($this->errorslogin);
 
                 }

@@ -86,10 +86,14 @@ class Usuariomodel extends Models
 
         $query = $this->db->connect()->prepare('SELECT eu.tipoestado as estado FROM usuario u JOIN estadousuario eu on eu.idestado = u.idestado WHERE u.correo = ?');
         $query->execute([$email]);
-        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
-        if (strtolower($myquery[0]['estado']) == 'activo') {
-            return true;
-        }else{
+        $query = $query->fetch(PDO::FETCH_ASSOC);
+        if (isset($query['estado'])) {
+            if (strtolower($query['estado']) == 'activo') {
+                return true;
+            }else{
+                return false;
+            }
+        } else {
             return false;
         }
     }

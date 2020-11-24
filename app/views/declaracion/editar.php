@@ -120,6 +120,7 @@
                                 <!-- <th></th> -->
                                 <th>Clase</th>
                                 <th>Tipo</th>
+                                <th>Nombre</th>
                                 <th>Valor</th>
                                 <th>icon:far fa-edit</th>
                                 <th>icon:far fa-trash-alt</th>
@@ -133,6 +134,7 @@
                                     <tr>
                                         <td><?php echo $datos['clase']; ?></td>
                                         <td><?php echo $datos['tipo']; ?></td>
+                                        <td><?php echo $datos['nombre']; ?></td>
                                         <td><?php echo $datos['valor']; ?></td>
                                         <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editip-' . $datos['id'] .'-'.$datos['clase'].';onclick:editarpatrimonio'; ?></td>
                                         <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletep-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminarpatrimonio'; ?></td>
@@ -150,6 +152,41 @@
 
             <div class="tab-pane show" id="cedulas">
                 <p></p>
+
+                <p class="scond scond-2" id="idcedulas"><!--?php echo $data[0][3] ?!--></p>
+                
+                <!--div class="only-flex">
+                    <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p>
+                </div!-->
+
+                <div>
+                    <table id="datatable-cedulas" class="datatable">
+                        <thead>
+                            <tr>
+                                <th>Clase</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>icon:far fa-edit</th>
+                                <th>icon:far fa-trash-alt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            if (!empty($data)) {
+                                foreach ($data[3] as $datos) : ?>
+                                    <tr>
+                                        <td><?php echo $datos['clase']; ?></td>
+                                        <td><?php echo $datos['tipo']; ?></td>
+                                        <td><?php echo $datos['valor']; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'] .'-'.$datos['clase'].'-'.$datos['tipo'].';onclick:editargananciasocasionales'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminargananciasocasionales'; ?></td>
+                                    </tr>
+                            <?php endforeach;
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="tab-footer"></div>
 
@@ -171,6 +208,7 @@
                         <thead>
                             <tr>
                                 <th>Clase</th>
+                                <th>Nombre</th>
                                 <th>Valor</th>
                                 <th>Descripción</th>
                                 <th>icon:far fa-edit</th>
@@ -184,6 +222,7 @@
                                 foreach ($data[4] as $datos) : ?>
                                     <tr>
                                         <td><?php echo $datos['clase']; ?></td>
+                                        <td><?php echo $datos['nombre']; ?></td>
                                         <td><?php echo $datos['valor']; ?></td>
                                         <td><?php echo $datos['descripcion']; ?></td>
                                         <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editlp-' . $datos['id'] .'-'.$datos['clase'].';onclick:editarliquidacionprivada'; ?></td>
@@ -261,6 +300,7 @@
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/crear.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/editar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/eliminar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/cedulas/crear.php'; ?>
 
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/funciones.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>
@@ -269,3 +309,4 @@
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/patrimonio/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/liquidacionprivada/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/gananciasocasionales/listar.js' ?>"></script>
+<script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/cedulas/listar.js' ?>"></script>

@@ -5,12 +5,12 @@ class Bienmodel extends Models{
 
     private $tablabien = "bien";
 
-    public function crear($valorbien,$idtipo, $idmoneda, $idmodelo){
+    public function crear($nombre, $valorbien,$idtipo, $idmoneda, $idmodelo){
         $connect = $this->db->connect();
 
-        if ($query = $connect->prepare('INSERT INTO '.$this->tablabien.'(valorbien, idtipobien, idtipomoneda, idmodelo) VALUES (?,?,?,?)')) {
+        if ($query = $connect->prepare('INSERT INTO '.$this->tablabien.'(nombre, valorbien, idtipobien, idtipomoneda, idmodelo) VALUES (?,?,?,?,?)')) {
 
-            $query->execute([$valorbien,$idtipo, $idmoneda, $idmodelo]);
+            $query->execute([$nombre,$valorbien,$idtipo, $idmoneda, $idmodelo]);
 
             $idbien = $connect->lastInsertId();
             
@@ -25,16 +25,16 @@ class Bienmodel extends Models{
 
     public function editar($id){
 
-        $query = $this->db->connect()->prepare('SELECT b.idbien AS "id", b.idtipobien AS "tipo", b.idtipomoneda AS "tipomoneda", b.idmodelo AS "modelo", b.valorbien AS "valor" FROM '.$this->tablabien.' b WHERE b.idbien = ? ;');
+        $query = $this->db->connect()->prepare('SELECT b.idbien AS "id", b.nombre AS "nombre", b.idtipobien AS "tipo", b.idtipomoneda AS "tipomoneda", b.idmodelo AS "modelo", b.valorbien AS "valor" FROM '.$this->tablabien.' b WHERE b.idbien = ? ;');
         $query->execute([$id]);
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         print_r(json_encode($myquery));
 
     }
 
-    public function editarbien($idtipo, $valor, $tipomoneda, $modelo, $id){
-        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tablabien.' SET idtipobien  = ?, valorbien = ?, idtipomoneda = ?, idmodelo = ? WHERE idbien = ?')) {
-            $stmt->execute([$idtipo, $valor, $tipomoneda, $modelo, $id]);
+    public function editarbien($nombre, $idtipo, $valor, $tipomoneda, $modelo, $id){
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tablabien.' SET idtipobien  = ?, nombre = ?, valorbien = ?, idtipomoneda = ?, idmodelo = ? WHERE idbien = ?')) {
+            $stmt->execute([$idtipo, $nombre, $valor, $tipomoneda, $modelo, $id]);
             
             return true;
         } else {

@@ -5,12 +5,12 @@ class Retenciondeclararmodel extends Models{
 
     private $tablaretenciondeclarar = "retenciondeclarar";
 
-    public function crear($valor,$descripcion){
+    public function crear($nombre, $valor,$descripcion){
         $connect = $this->db->connect();
 
-        if ($query = $connect->prepare('INSERT INTO '.$this->tablaretenciondeclarar.'(valor, descripcion) VALUES (?,?)')) {
+        if ($query = $connect->prepare('INSERT INTO '.$this->tablaretenciondeclarar.'(nombre, valor, descripcion) VALUES (?,?,?)')) {
 
-            $query->execute([$valor,$descripcion]);
+            $query->execute([$nombre, $valor,$descripcion]);
 
             $idretenciondeclarar = $connect->lastInsertId();
             
@@ -25,16 +25,16 @@ class Retenciondeclararmodel extends Models{
 
     public function editar($id){
 
-        $query = $this->db->connect()->prepare('SELECT rd.idretenciondeclarar AS "id", rd.valor AS "valor", rd.descripcion FROM '.$this->tablaretenciondeclarar.' rd WHERE rd.idretenciondeclarar = ? ;');
+        $query = $this->db->connect()->prepare('SELECT rd.idretenciondeclarar AS "id", rd.nombre AS "nombre", rd.valor AS "valor", rd.descripcion FROM '.$this->tablaretenciondeclarar.' rd WHERE rd.idretenciondeclarar = ? ;');
         $query->execute([$id]);
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         print_r(json_encode($myquery));
 
     }
 
-    public function editarretenciondeclarar($valor, $descripcion, $id){
-        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tablaretenciondeclarar.' SET valor = ?, descripcion = ? WHERE idretenciondeclarar = ?')) {
-            $stmt->execute([$valor, $descripcion, $id]);
+    public function editarretenciondeclarar($nombre, $valor, $descripcion, $id){
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tablaretenciondeclarar.' SET nombre = ?, valor = ?, descripcion = ? WHERE idretenciondeclarar = ?')) {
+            $stmt->execute([$nombre, $valor, $descripcion, $id]);
             
             return true;
         } else {

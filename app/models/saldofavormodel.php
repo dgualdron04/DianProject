@@ -5,12 +5,12 @@ class Saldofavormodel extends Models{
 
     private $tablasaldofavor = "saldofavor";
 
-    public function crear($valor,$descripcion){
+    public function crear($nombre,$valor,$descripcion){
         $connect = $this->db->connect();
 
-        if ($query = $connect->prepare('INSERT INTO '.$this->tablasaldofavor.'(valor, descripcion) VALUES (?,?)')) {
+        if ($query = $connect->prepare('INSERT INTO '.$this->tablasaldofavor.'(nombre, valor, descripcion) VALUES (?,?,?)')) {
 
-            $query->execute([$valor,$descripcion]);
+            $query->execute([$nombre,$valor,$descripcion]);
 
             $idsanciones = $connect->lastInsertId();
             
@@ -25,16 +25,16 @@ class Saldofavormodel extends Models{
 
     public function editar($id){
 
-        $query = $this->db->connect()->prepare('SELECT sf.idsaldofavor AS "id", sf.valor AS "valor", sf.descripcion FROM '.$this->tablasaldofavor.' sf WHERE sf.idsaldofavor = ? ;');
+        $query = $this->db->connect()->prepare('SELECT sf.idsaldofavor AS "id", sf.nombre AS "nombre", sf.valor AS "valor", sf.descripcion FROM '.$this->tablasaldofavor.' sf WHERE sf.idsaldofavor = ? ;');
         $query->execute([$id]);
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         print_r(json_encode($myquery));
 
     }
 
-    public function editarsaldofavor($valor, $descripcion, $id){
-        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tablasaldofavor.' SET valor = ?, descripcion = ? WHERE idsaldofavor = ?')) {
-            $stmt->execute([$valor, $descripcion, $id]);
+    public function editarsaldofavor($nombre, $valor, $descripcion, $id){
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tablasaldofavor.' SET nombre = ?, valor = ?, descripcion = ? WHERE idsaldofavor = ?')) {
+            $stmt->execute([$nombre, $valor, $descripcion, $id]);
             
             return true;
         } else {

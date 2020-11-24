@@ -46,6 +46,10 @@
 
                     <div class="slide-page-2 slide-page-editar-2-patrimonio">
                         
+                        <label for="" class="form-label">Nombre</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" min="0" name="nombrepatrimonioeditar" id="nombrepatrimonioeditar" placeholder="Nombre">
+                        </div>
                         <label for="" class="form-label">Valor</label>
                         <div class="form-group">
                             <input class="form-control" type="number" min="0" name="valorpatrimonioeditar" id="valorpatrimonioeditar" placeholder="Valor">

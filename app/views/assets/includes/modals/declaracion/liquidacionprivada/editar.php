@@ -11,6 +11,10 @@
                         <p class="text-center">Tipo de Liquidación Privada: <span id="tipoliquidacionprivadaeditar"></span></p>
                     
                         <div>
+                            <label for="" class="form-label">Nombre</label>
+                            <div class="form-group">
+                                <input class="form-control" type="text" min="0" name="nombreliquidacionprivadaeditar" id="nombreliquidacionprivadaeditar" placeholder="Nombre">
+                            </div>
                             <label for="" class="form-label">Valor</label>
                             <div class="form-group">
                                 <input class="form-control" type="number" min="0" name="valorliquidacionprivadaeditar" id="valorliquidacionprivadaeditar" placeholder="Valor">

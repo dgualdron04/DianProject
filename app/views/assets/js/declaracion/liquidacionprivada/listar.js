@@ -168,6 +168,7 @@ function editarliquidacionprivada(e, id) {
 function llenareditarliquidacionprivada(datos) {
 
     document.getElementById('idlp').value = datos[0]['id'];
+    document.getElementById('nombreliquidacionprivadaeditar').value = datos[0]['nombre'];
     document.getElementById('valorliquidacionprivadaeditar').value = datos[0]['valor'];
     document.getElementById('descripcionliquidacionprivadaeditar').value = datos[0]['descripcion'];
     

@@ -448,9 +448,9 @@ function llenareditarpatrimonio(datos) {
 //#region Inicializar editar patrimonio
 
 function inicializareditarpatrimonio(datos) {
-
     setTimeout(() => {
         document.getElementById('iddob').value = datos[0]['id'];
+        document.getElementById('nombrepatrimonioeditar').value = datos[0]['nombre'];
         document.getElementById('tipo1patrimonioeditar').value = datos[0]['tipo'];
         document.getElementById('valorpatrimonioeditar').value = datos[0]['valor'];
         document.getElementById('tipomonedaeditarpatrimonio').value = datos[0]['tipomoneda'];

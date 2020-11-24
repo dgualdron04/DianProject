@@ -5,12 +5,12 @@ class Descuentoimpuextmodel extends Models{
 
     private $tabladescuentoimpuext = "descuentoimpuext";
 
-    public function crear($valor,$descripcion){
+    public function crear($nombre, $valor,$descripcion){
         $connect = $this->db->connect();
 
-        if ($query = $connect->prepare('INSERT INTO '.$this->tabladescuentoimpuext.'(valor, descripcion) VALUES (?,?)')) {
+        if ($query = $connect->prepare('INSERT INTO '.$this->tabladescuentoimpuext.'(nombre, valor, descripcion) VALUES (?,?,?)')) {
 
-            $query->execute([$valor,$descripcion]);
+            $query->execute([$nombre, $valor,$descripcion]);
 
             $iddescuentoimpuext = $connect->lastInsertId();
             
@@ -25,16 +25,16 @@ class Descuentoimpuextmodel extends Models{
 
     public function editar($id){
 
-        $query = $this->db->connect()->prepare('SELECT die.iddescuentoimpuext AS "id", die.valor AS "valor", die.descripcion FROM '.$this->tabladescuentoimpuext.' die WHERE die.iddescuentoimpuext = ? ;');
+        $query = $this->db->connect()->prepare('SELECT die.iddescuentoimpuext AS "id", die.nombre AS "nombre", die.valor AS "valor", die.descripcion FROM '.$this->tabladescuentoimpuext.' die WHERE die.iddescuentoimpuext = ? ;');
         $query->execute([$id]);
         $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
         print_r(json_encode($myquery));
 
     }
 
-    public function editardescuentoimpuext($valor, $descripcion, $id){
-        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tabladescuentoimpuext.' SET valor = ?, descripcion = ? WHERE iddescuentoimpuext = ?')) {
-            $stmt->execute([$valor, $descripcion, $id]);
+    public function editardescuentoimpuext($nombre, $valor, $descripcion, $id){
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tabladescuentoimpuext.' SET nombre = ?, valor = ?, descripcion = ? WHERE iddescuentoimpuext = ?')) {
+            $stmt->execute([$nombre, $valor, $descripcion, $id]);
             
             return true;
         } else {
