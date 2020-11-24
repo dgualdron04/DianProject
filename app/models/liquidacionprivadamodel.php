@@ -32,9 +32,9 @@ class Liquidacionprivadamodel extends Models{
 
     public function crear($iddeclaracion){
 
-        if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablaliquidacionprivada.'(impuestoneto, impuestooananciaso, impuestocargototal, anticiporentasiguiente, impuestototal, saldopagartotal, saldofavortotal, iddeclaracion ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')) {
+        if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablaliquidacionprivada.'(impuestoneto, impuestocargototal, impuestototal, saldopagartotal, saldofavortotal, iddeclaracion ) VALUES (?, ?, ?, ?, ?, ?)')) {
 
-            $query->execute([0, 0, 0, 0, 0, 0, 0, $iddeclaracion]);
+            $query->execute([0, 0, 0, 0, 0, $iddeclaracion]);
 
             return true;
 

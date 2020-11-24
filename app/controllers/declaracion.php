@@ -295,7 +295,7 @@ class Declaracion extends Controller
         
     }
 
-    public function traertipo($clase, $tipo){
+    public function traertipo($clase, $tipo, $aspecto = null){
         if (isset($_SESSION['email'])) {
 
             if ((strtolower($this->usuario->getnomrol()) == "declarante") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
@@ -349,6 +349,35 @@ class Declaracion extends Controller
 
                         $gananciasnogravadas = $this->tipogananciasnogravadas->listar();
                         print_r(json_encode($gananciasnogravadas));
+
+                    }
+
+                } else if ($clase == "cedulas") {
+
+                    if ($tipo == "cedulageneral") {
+
+                        if ($aspecto == "rentatrabajo") {
+
+                            # code...
+
+                        } else if ($aspecto == "rentacapital") {
+
+                            # code...
+
+                        } else if ($aspecto == "rentaexenta") {
+
+                            # code...
+
+                        }
+
+
+                    } else if ($tipo == "cedulapensiones") {
+
+                        # code...
+
+                    } else if ($tipo == "ceduladividendosyparticipaciones") {
+
+                        # code...
 
                     }
 

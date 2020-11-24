@@ -32,7 +32,7 @@
                     </li>
                     <li class="nav-item cardseparador">
                         <a class="nav-link" href="#" id="nav-2">
-                            Tipo de Ingresos no consecutivos
+                            Tipo de Ingresos de Ganancias Ocasionales
                             <div class="ripple-container"></div>
                             <div class="ripple-container"></div>
                         </a>

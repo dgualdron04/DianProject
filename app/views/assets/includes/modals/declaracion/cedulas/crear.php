@@ -41,6 +41,14 @@
                             </select>
                         </div>
                         </div>
+                        <div class="scond" id="divtipoaspectoscrearcedula">
+                        <label for="" class="form-label">Aspectos</label>
+                        <div class="form-group">
+                            <select class="form-control" disabled name="tipoaspectoscedulascrear" id="tipoaspectoscedulascrear">
+                                <option selected="true" disabled="disabled" class="noselected">Seleccione el Tipo de Aspecto</option>
+                            </select>
+                        </div>
+                        </div>
                         <div class="form-group">
                             <button class="form-control button firstNextcedulas isdisabled">Siguiente</button>
                         </div>
