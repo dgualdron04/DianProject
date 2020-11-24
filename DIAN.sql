@@ -107,6 +107,18 @@ FOREIGN KEY (idusuario) REFERENCES usuario(idusuario));
 /*----------------------------------------*/
 
 
+/*--- Creación de la tabla Exogenas ---*/
+
+CREATE TABLE exogenas
+(idexogenas INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la exogena',
+iddeclaracion INT NOT NULL COMMENT 'Codigo de la Declaración',
+ruta varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ruta de la exogena',
+PRIMARY KEY (idexogenas),
+FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
+
+/*-------------------------------------------------------------*/
+
+
 /*--- Creación de la tabla intermedia parametrosdeclaracion ---*/
 
 CREATE TABLE parametrosdeclaracion
@@ -118,6 +130,7 @@ FOREIGN KEY (idparametro) REFERENCES parametros(idparametro),
 FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
 
 /*-------------------------------------------------------------*/
+
 
 
 /*--- Creación de la tabla patrimonio ---*/
@@ -398,6 +411,7 @@ FOREIGN KEY (idrentaexenta) REFERENCES rentaexenta(idrentaexenta));
 
 CREATE TABLE tipoprimacancilleria
 (idtipoprimacancilleria INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de prima cancilleria',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de prima cancilleria',
 descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de prima cancilleria',
 ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de prima cancilleria',
 PRIMARY KEY (idtipoprimacancilleria));
@@ -1652,9 +1666,7 @@ CREATE TABLE liquidacionprivada
 (idliquidacionprivada INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de Liquidacion privada',
 iddeclaracion INT NOT NULL COMMENT 'Codigo de la declaración',
 impuestoneto BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto Neto',
-impuestooananciaso BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuestooananciaso',
 impuestocargototal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto de cargo total',
-anticiporentasiguiente BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Anticipo de rentas por el año siguiente',
 impuestototal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Impuesto total',
 saldopagartotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Salgo a pagar total',
 saldofavortotal BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Salgo a favor total',
