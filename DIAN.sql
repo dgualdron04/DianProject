@@ -166,6 +166,7 @@ PRIMARY KEY (idtipobien));
 CREATE TABLE bien
 (idbien INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del bien',
 valorbien BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del bien',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del bien',
 idtipobien INT NOT NULL COMMENT 'Codigo del tipo de bien',
 idtipomoneda INT NOT NULL COMMENT 'Codigo del tipo de moneda',
 idmodelo INT NOT NULL COMMENT 'Codigo del modelo',
@@ -198,6 +199,7 @@ PRIMARY KEY (idtipodeuda));
 
 CREATE TABLE deuda
 (iddeuda INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la deuda',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de la deuda',
 valordeuda BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la deuda',
 idtipodeuda INT NOT NULL COMMENT 'Codigo del tipo de deuda',
 idtipomoneda INT NOT NULL COMMENT 'Codigo del tipo de moneda',
@@ -263,6 +265,7 @@ PRIMARY KEY (idingresobruto));
 
 CREATE TABLE salario
 (idsalario INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del salario',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del Salario',
 meseslaborados INT NOT NULL COMMENT 'Meses laborados',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del salario',
 idingresobruto INT NOT NULL COMMENT 'Codigo del ingreso bruto',
@@ -276,6 +279,7 @@ FOREIGN KEY (idingresobruto) REFERENCES ingresobruto(idingresobruto));
 
 CREATE TABLE viaticos
 (idviaticos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de los viaticos',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de los viaticos',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del salario',
 idingresobruto INT NOT NULL COMMENT 'Codigo del ingreso bruto',
 PRIMARY KEY (idviaticos),
@@ -300,6 +304,7 @@ FOREIGN KEY (idingresobruto) REFERENCES ingresobruto(idingresobruto));
 
 CREATE TABLE otrospagos
 (idotrospagos INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de otros pagos',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de otros pagos',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de los otros pagos',
 idingresobruto INT NOT NULL COMMENT 'Codigo del ingreso bruto',
 PRIMARY KEY (idotrospagos),
@@ -318,6 +323,7 @@ PRIMARY KEY (idtipoprestacion));
 
 CREATE TABLE prestasociales
 (idprestasociales INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la prestación social',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de las prestaciones sociales',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la prestación social',
 idtipoprestacion INT NOT NULL COMMENT 'Codigo del tipo de prestación',
 idingresobruto INT NOT NULL COMMENT 'Codigo del ingreso bruto',
@@ -343,6 +349,7 @@ PRIMARY KEY (idrentaexenta));
 
 CREATE TABLE cesantiaintereses
 (idcesantiasintereses INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la cesantias intereses',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de las cesantiaintereses',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la prestación social',
 idingresobruto INT NOT NULL COMMENT 'Codigo del ingreso bruto',
 idrentaexenta INT NOT NULL COMMENT 'Codigo de la renta exenta',
@@ -364,6 +371,7 @@ PRIMARY KEY (idtipoindemnizacion));
 
 CREATE TABLE indemnizacion
 (idindemnizacion INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la indemnizacion',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de Indemnizacion',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la prestación social',
 idtipoindemnizacion INT NOT NULL COMMENT 'Codigo del tipo de indemnizacion',
 idrentaexenta INT NOT NULL COMMENT 'Codigo de la rentaexenta',
@@ -390,13 +398,13 @@ FOREIGN KEY (idrentaexenta) REFERENCES rentaexenta(idrentaexenta));
 
 CREATE TABLE tipoprimacancilleria
 (idtipoprimacancilleria INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de prima cancilleria',
-nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de prima cancilleria',
 descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de prima cancilleria',
 ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de prima cancilleria',
 PRIMARY KEY (idtipoprimacancilleria));
 
 CREATE TABLE primacancilleria
 (idprimacancilleria INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la prima cancilleria',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de prima',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la prima cancilleria',
 idtipoprimacancilleria INT NOT NULL COMMENT 'Codigo del tipo de prima cancilleria',
 idrentaexenta INT NOT NULL COMMENT 'Codigo de la rentaexenta',
@@ -468,13 +476,14 @@ FOREIGN KEY (idrentatrabajo) REFERENCES rentatrabajo(idrentatrabajo));
 
 CREATE TABLE tipodeduccion
 (idtipodeduccion INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de deduccion',
-nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de deduccion',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de deduccion',
 descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de deduccion',
 ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de deduccion',
 PRIMARY KEY (idtipodeduccion));
 
 CREATE TABLE deducciones
 (iddeducciones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la deduccion',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de Deduccion',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la deduccion',
 idtipodeduccion INT NOT NULL COMMENT 'Codigo del tipo de deduccion',
 PRIMARY KEY (iddeducciones),
@@ -519,6 +528,7 @@ PRIMARY KEY (idtipoaporteobligatorio));
 
 CREATE TABLE aporteobligatorio
 (idaporteobligatorio INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del aporte obligatorio',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de aporteobligatorio',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del aporte obligatorio',
 idtipoaporteobligatorio INT NOT NULL COMMENT 'Codigo del tipo de aporte obligatorio',
 idingresonoconse INT NOT NULL COMMENT 'Codigo del ingreso no consecutivo',
@@ -540,6 +550,7 @@ PRIMARY KEY (idtipoaportevoluntario));
 
 CREATE TABLE aportevoluntario
 (idaportevoluntario INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del aporte voluntario',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de aporteobligatorio',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del aporte voluntario',
 idtipoaportevoluntario INT NOT NULL COMMENT 'Codigo del tipo de aporte voluntario',
 idingresonoconse INT NOT NULL COMMENT 'Codigo del ingreso no consecutivo',
@@ -575,6 +586,7 @@ PRIMARY KEY (idtipopagoalimen));
 
 CREATE TABLE pagosalimen
 (idpagosalimen INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del pago alimentario',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de pagos alimenticios',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del pago alimentario',
 cantidadmeses INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Cantidad de meses',
 idtipopagoalimen INT NOT NULL COMMENT 'Codigo del tipo de pago alimentario',
@@ -637,6 +649,7 @@ PRIMARY KEY (idtipointeresesrendicapital));
 
 CREATE TABLE interesesrendimientoscapital
 (idinteresesrendimientoscapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del interes rendimiento capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de intereses rendimientos capital',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del pago alimentario',
 idtipointeresesrendicapital INT NOT NULL COMMENT 'Codigo del tipo de interess rendimientos capital',
 idingresobrutocapital INT NOT NULL COMMENT 'Codigo del ingreso bruto capital',
@@ -658,6 +671,7 @@ PRIMARY KEY (idtipootrosingresoscapital));
 
 CREATE TABLE otrosingresoscapital
 (idotrosingresoscapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de otros ingresos capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del otros ingresos',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de otros ingresos capital',
 idtipootrosingresoscapital INT NOT NULL COMMENT 'Codigo del tipo de otros ingresos capital',
 idingresobrutocapital INT NOT NULL COMMENT 'Codigo del ingreso bruto capital',
@@ -703,6 +717,7 @@ PRIMARY KEY (idtipoaporteobligatoriocapital));
 
 CREATE TABLE aporteobligatoriocapital
 (idaporteobligatoriocapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del aporte obligatorio de la renta capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de aporte obligatorio',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del aporte obligatorio de la renta capital',
 idtipoaporteobligatoriocapital INT NOT NULL COMMENT 'Codigo del tipo de aporte obligatorio de la renta capital',
 idingresonoconsecapital INT NOT NULL COMMENT 'Codigo del ingreso no consecutivo',
@@ -724,6 +739,7 @@ PRIMARY KEY (idtipoaportevoluntariocapital));
 
 CREATE TABLE aportevoluntariocapital
 (idaportevoluntariocapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del aporte voluntario de la renta capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de aporte voluntario',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del aporte voluntario de la renta capital',
 idtipoaportevoluntariocapital INT NOT NULL COMMENT 'Codigo del tipo de aporte obligatorio de la renta capital',
 idingresonoconsecapital INT NOT NULL COMMENT 'Codigo del ingreso no consecutivo',
@@ -785,6 +801,7 @@ PRIMARY KEY (idtiporentaexededuccioncapital));
 
 CREATE TABLE rentaexededuccioncapital
 (idrentaexededuccioncapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la renta exenta de deduccion de la renta capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de renta exenta deduccion capital',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la renta exenta de deduccion de la renta capital',
 idtiporentaexededuccioncapital INT NOT NULL COMMENT 'Codigo de la renta exenta de deduccion de la renta capital',
 PRIMARY KEY (idrentaexededuccioncapital),
@@ -822,6 +839,7 @@ PRIMARY KEY (idcostogastosprocecapital));
 
 CREATE TABLE interesesprestamoscapital
 (idinteresesprestamoscapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de los intereses de prestamos de la renta capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de interesesprestamoscapital',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de los intereses de prestamos de la renta capital',
 idcostogastosprocecapital INT NOT NULL COMMENT 'Codigo del costo de gastos procedentes de la renta capital',
 PRIMARY KEY (idinteresesprestamoscapital),
@@ -841,6 +859,7 @@ PRIMARY KEY (idtipootroscostogastocapital));
 
 CREATE TABLE otroscostogastoscapital
 (idotroscostogastoscapital INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de otros costos de gastos de la renta capital',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de otros costos gastos capital',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de otros costos de gastos de la renta capital',
 idtipootroscostogastocapital INT NOT NULL COMMENT 'Codigo del tipo de otros costos de gastos de la renta capital',
 idcostogastosprocecapital INT NOT NULL COMMENT 'Codigo del costo de gastos procedentes de la renta capital',
@@ -885,6 +904,7 @@ FOREIGN KEY (idcedulageneral) REFERENCES cedulageneral(idcedulageneral));
 
 CREATE TABLE devdescreblaboral
 (iddevdescreblaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de devdescreb de la renta no laboral',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de devdescreblaboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de devdescreb de la renta no laboral',
 PRIMARY KEY (iddevdescreblaboral));
 
@@ -932,6 +952,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE indemnizacionnolaboral
 (idindemnizacionnolaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de indemnización no laboral de la renta no laboral',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de la indemnización',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnizacion no laboral de la renta no laboral',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idindemnizacionnolaboral),
@@ -944,6 +965,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE derechosexplotpropielaboral
 (idderechosexplotpropielaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de derechos explotacion propiedad de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del derecho explot propie laboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de derechos explotacion propiedad de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idderechosexplotpropielaboral),
@@ -956,6 +978,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE recibidosganancialeslaboral
 (idrecibidosganancialeslaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de recibidos gananciales de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de recibidosganancialeslaboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de recibidos gananciales de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idrecibidosganancialeslaboral),
@@ -968,6 +991,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE recompensaslaboral
 (idrecompensaslaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de recompensas de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de la recompensa',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de recompensas de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idrecompensaslaboral),
@@ -980,6 +1004,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE explotfranquiciaslaboral
 (idexplotfranquiciaslaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de explotacion de franquicias de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del explotfranquiciaslaboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de explotacion de franquicias de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idexplotfranquiciaslaboral),
@@ -992,6 +1017,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE retirodinerosfondovolulaboral
 (idretirodinerosfondovolulaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de retiros de dineros de fondos de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de retirodinerosfondovolulaboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de retiros de dineros de fondos de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idretirodinerosfondovolulaboral),
@@ -1004,6 +1030,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE campanniaspoliticaslaboral
 (idcampanniaspoliticaslaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de campannias politicas de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de la campania politica',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de campannias politicas de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idcampanniaspoliticaslaboral),
@@ -1016,6 +1043,7 @@ FOREIGN KEY (idingresobrutolaboral) REFERENCES ingresobrutolaboral(idingresobrut
 
 CREATE TABLE apoyoseconoestadolaboral
 (idapoyoseconoestadolaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de apoyos con el estado de las rentas no laborales ',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de apoyoseconoestadolaboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de apoyos con el estado de las rentas no laborales ',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 PRIMARY KEY (idapoyoseconoestadolaboral),
@@ -1035,6 +1063,7 @@ PRIMARY KEY (idtipovalorbrutoventaslaboral));
 
 CREATE TABLE valorbrutoventaslaboral
 (idvalorbrutoventaslaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de valor bruto de las ventas de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de valor bruto ventas no laborales',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de valor bruto de las ventas de las rentas no laborales',
 idingresobrutolaboral INT NOT NULL COMMENT 'Codigo del ingreso bruto de la renta no laboral',
 idtipovalorbrutoventaslaboral INT NOT NULL COMMENT 'Codigo del tipo de valor bruto de las ventas de las rentas no laborales',
@@ -1074,6 +1103,7 @@ PRIMARY KEY (idingresosnoconselaboral));
 
 CREATE TABLE honorariosdesaproyeclaboral
 (idhonorariosdesaproyeclaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de honorarios de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de los honorarios',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de honorarios de las rentas no laborales',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idhonorariosdesaproyeclaboral),
@@ -1086,6 +1116,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE recibidosganancialeslaboralnoconse
 (idrecibidosganancialeslaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de  recibidos gananciales de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de recibidosganancialeslaboralnoconse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de  recibidos gananciales de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idrecibidosganancialeslaboralnoconse),
@@ -1098,6 +1129,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE recompensaslaboralnoconse
 (idrecompensaslaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de recompensas de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de recompensaslaboralnoconse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de recompensas de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idrecompensaslaboralnoconse),
@@ -1117,6 +1149,7 @@ PRIMARY KEY (idtipoaporteobligatoriolaboralnoconse));
 
 CREATE TABLE aportesobligatorioslaboralnoconse
 (idaportesobligatorioslaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de aportes obligatorios de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del aporte obligatorios no laborales no conse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de aportes obligatorios de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 idtipoaporteobligatoriolaboralnoconse INT NOT NULL COMMENT 'Codigo del tipo de aportes obligatorios de las rentas no laborales no consecutivas',
@@ -1131,6 +1164,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE aportesvoluntarioslaboralnoconse
 (idaportesvoluntarioslaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de aportes voluntarios de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del aporte voluntario laborales no conse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de aportes voluntarios de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idaportesvoluntarioslaboralnoconse),
@@ -1143,6 +1177,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE aporteseconoedulaboralnoconse
 (idaporteseconoedulaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de aportes economicos educacion de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de aporteseconoedulaboralnoconse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de aportes economicos educacion de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idaporteseconoedulaboralnoconse),
@@ -1155,6 +1190,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE indemnizaaseguradoreslaboralnoconse
 (idindemnizaaseguradoreslaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de indemnizacion de aseguradores de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de indemnizaaseguradoreslaboralnoconse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnizacion de aseguradores de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idindemnizaaseguradoreslaboralnoconse),
@@ -1167,6 +1203,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE campanniaspoliticaslaboralnoconse
 (idcampanniaspoliticaslaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de campannias politicas de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de campannias politicas',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de campannias politicas de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idcampanniaspoliticaslaboralnoconse),
@@ -1179,6 +1216,7 @@ FOREIGN KEY (idingresosnoconselaboral) REFERENCES ingresosnoconselaboral(idingre
 
 CREATE TABLE agroingresosegurolaboralnoconse
 (idagroingresosegurolaboralnoconse INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de agro ingreso seguro de las rentas no laborales no consecutivas',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de agroingresosegurolaboralnoconse',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de agro ingreso seguro de las rentas no laborales no consecutivas',
 idingresosnoconselaboral INT NOT NULL COMMENT 'Codigo de ingreso no consecutivo de la renta no laboral',
 PRIMARY KEY (idagroingresosegurolaboralnoconse),
@@ -1238,6 +1276,7 @@ PRIMARY KEY (idtiporentaexededuccionlaboral));
 
 CREATE TABLE rentaexededuccionlaboral
 (idrentaexededuccionlaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de renta exenta de deduccion de la Renta no laboral',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de renta exenta deduccion laboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de renta exenta de deduccion de la Renta no laboral',
 idtiporentaexededuccionlaboral INT NOT NULL COMMENT 'Codigo del tipo de renta exenta de deduccion de la Renta no laboral',
 PRIMARY KEY (idrentaexededuccionlaboral),
@@ -1275,6 +1314,7 @@ PRIMARY KEY (idcostogastosprocelaboral));
 
 CREATE TABLE interesesprestamoslaboral
 (idinteresesprestamoslaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de intereses de prestamos de las rentas no laborales',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de interesesprestamoslaboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de intereses de prestamos de las rentas no laborales',
 idcostogastosprocelaboral INT NOT NULL COMMENT 'Codigo de costos gastos procedentes de la renta no laboral',
 PRIMARY KEY (idinteresesprestamoslaboral),
@@ -1306,6 +1346,7 @@ PRIMARY KEY (idtipootroscostogastolaboral));
 
 CREATE TABLE otroscostogastolaboral
 (idotroscostogastolaboral INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de otros costos de gastos de la Renta no laboral',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del otros costos gastos no laboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de otros costos de gastos de la Renta no laboral',
 idtipootroscostogastolaboral INT NOT NULL COMMENT 'Codigo del tipo de otros costos de gastos de la Renta no laboral',
 PRIMARY KEY (idotroscostogastolaboral),
@@ -1356,6 +1397,7 @@ PRIMARY KEY (idingresosbrutospensiones));
 
 CREATE TABLE indemnizacionsustitutaspensiones
 (idindemnizacionsustitutaspensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de indemnización sustituta de la cedula de pensiones',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de indemnizacionsustitutaspensiones',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
 idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
 PRIMARY KEY (idindemnizacionsustitutaspensiones),
@@ -1368,6 +1410,7 @@ FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(iding
 
 CREATE TABLE pensionesexteriorpensiones
 (idpensionesexteriorpensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de pensiones exterior',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de pensionesexteriorpensiones',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
 idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
 PRIMARY KEY (idpensionesexteriorpensiones),
@@ -1380,6 +1423,7 @@ FOREIGN KEY (idingresosbrutospensiones) REFERENCES ingresosbrutospensiones(iding
 
 CREATE TABLE devolucionesahorropensiones
 (iddevolucionesahorropensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de devoluciones ahorro de la cedula de pensiones',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de devolucionesahorropensiones   ',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
 idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
 PRIMARY KEY (iddevolucionesahorropensiones),
@@ -1399,6 +1443,7 @@ PRIMARY KEY (idtipoingresospensiones));
 
 CREATE TABLE ingresospensiones
 (idingresospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos de pensiones',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de ingresos pensiones',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
 idingresosbrutospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresobruto',
 idtipoingresospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo del tipo de Ingresos pensiones',
@@ -1445,6 +1490,7 @@ PRIMARY KEY (idtipoaportesobligatoriospensiones));
 
 CREATE TABLE aportesobligatoriospensiones
 (idaportesobligatoriospensiones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de ingresos de pensiones',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de aportes obligatorios pensiones',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de indemnización sustituta de la cedula de pensiones',
 idingresonoconsepensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo de ingresos no conse total de la cedula de pensiones',
 idtipoaportesobligatoriospensiones INT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Codigo del tipo de Ingresos pensiones',
@@ -1511,7 +1557,7 @@ FOREIGN KEY (iddeclaracion) REFERENCES declaracion(iddeclaracion));
 
 CREATE TABLE tipoingresosganancias
 (idtipoingresosganancias INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del tipo de ingreo de ganancias',
-nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de ingreo de ganancias',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de ingreso de ganancias',
 descripcion varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripción del tipo de ingreo de ganancias',
 ayuda varchar(250) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Ayuda del tipo de ingreo de ganancias',
 PRIMARY KEY (idtipoingresosganancias));
@@ -1652,6 +1698,7 @@ FOREIGN KEY (idimpuestorentaliq) REFERENCES impuestorentaliq(idimpuestorentaliq)
 
 CREATE TABLE anticiporenta
 (idanticiporenta INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del anticipo de renta',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de anticiporenta',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del anticipo de renta',
 descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion del anticipo de renta',
 PRIMARY KEY (idanticiporenta));
@@ -1679,6 +1726,7 @@ FOREIGN KEY (idanticiporenta) REFERENCES anticiporenta(idanticiporenta));
 
 CREATE TABLE sanciones
 (idsanciones INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de las sanciones',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de sanciones',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la sancion',
 descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion de la sancion',
 PRIMARY KEY (idsanciones));
@@ -1705,6 +1753,7 @@ FOREIGN KEY (idsanciones) REFERENCES sanciones(idsanciones));
 
 CREATE TABLE saldofavor
 (idsaldofavor INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del saldo a favor',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del saldo a favor',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del saldo a favor',
 descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion del saldo a favor',
 PRIMARY KEY (idsaldofavor));
@@ -1731,6 +1780,7 @@ FOREIGN KEY (idsaldofavor) REFERENCES saldofavor(idsaldofavor));
 
 CREATE TABLE retenciondeclarar
 (idretenciondeclarar INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la retencion a declarar',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de retencion declarar',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la retencion a declarar',
 descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion de la retencion a declarar',
 PRIMARY KEY (idretenciondeclarar));
@@ -1785,6 +1835,7 @@ FOREIGN KEY (iddescuentos) REFERENCES descuentos(iddescuentos));
 
 CREATE TABLE descuentoimpuext
 (iddescuentoimpuext INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del descuento impuesto exterior',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de descuentoimpuext',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del descuento impuesto exterior',
 descripcion VARCHAR(200) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Descripcion del descuento impuesto exterior',
 PRIMARY KEY (iddescuentoimpuext));
