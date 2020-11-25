@@ -59,6 +59,13 @@
                             <div class="ripple-container"></div>
                         </a>
                     </li>
+                    <li class="nav-item cardseparador">
+                        <a class="nav-link show" href="#" id="nav-6">
+                        <i class="fas fa-file"></i> Exogenas
+                            <div class="ripple-container"></div>
+                            <div class="ripple-container"></div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -298,6 +305,43 @@
 
             </div>
 
+            <div class="tab-pane show" id="exogenas">
+                <p></p>
+            
+                
+                <!--div class="only-flex">
+                    <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p>
+                </div!-->
+
+                <div>
+                    <table id="datatable-exogenas" class="datatable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>icon:far fa-edit</th>
+                                <th>icon:far fa-trash-alt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            if (!empty($data)) {
+                                foreach ($data[5] as $datos) : ?>
+                                    <tr>
+                                        <td><?php echo $datos['clase']; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'] .'-'.$datos['clase'].'-'.$datos['tipo'].';onclick:editargananciasocasionales'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminargananciasocasionales'; ?></td>
+                                    </tr>
+                            <?php endforeach;
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-footer"></div>
+
+
+            </div>
         </div>
     </div>
 </div>
@@ -325,3 +369,4 @@
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/liquidacionprivada/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/gananciasocasionales/listar.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/cedulas/listar.js' ?>"></script>
+<script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/exogenas/listar.js' ?>"></script>

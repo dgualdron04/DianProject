@@ -6,6 +6,9 @@ class Costogastosprocelaboralmodel extends Models{
     private $tablausuariocostogastosprocelaboral  = "usuariocostogastosprocelaboral ";
     private $tablaretanolaboral = "rentanolaboral";
     private $tablacedulageneral = "cedulageneral";
+    private $tablainteresesprestamoslaboral = "interesesprestamoslaboral";
+    private $tablaotroscostogastolaboral = "otroscostogastolaboral";
+    private $tablacostofiscallaboral = "costofiscallaboral";
 
     public function crear(){
         $connect = $this->db->connect();
@@ -31,6 +34,26 @@ class Costogastosprocelaboralmodel extends Models{
         $query->execute([$id]);
         $query = $query->fetch(PDO::FETCH_ASSOC);
         return $query['id'];
+    }
+
+    public function calcularcostogastosprocelaboral($id)
+    {
+        $interesesprestamoslaboral = $this->db->connect()->prepare('SELECT IF(SUM(valor) != 0,SUM(valor),0) AS "interesesprestamoslaboral" FROM '.$this->tablainteresesprestamoslaboral.' WHERE idcostogastosprocelaboral = ?');
+        $interesesprestamoslaboral->execute([$id]);
+        $interesesprestamoslaboral = $interesesprestamoslaboral->fetch(PDO::FETCH_ASSOC);
+
+        $otroscostogastolaboral = $this->db->connect()->prepare('SELECT IF(SUM(valor) != 0,SUM(valor),0) AS "otroscostogastolaboral" FROM '.$this->tablaotroscostogastolaboral.' WHERE idcostogastosprocelaboral = ?');
+        $otroscostogastolaboral->execute([$id]);
+        $otroscostogastolaboral = $otroscostogastolaboral->fetch(PDO::FETCH_ASSOC);
+
+        $costofiscallaboral = $this->db->connect()->prepare('SELECT IF(SUM(valor) != 0,SUM(valor),0) AS "costofiscallaboral" FROM '.$this->tablacostofiscallaboral.' WHERE idcostogastosprocelaboral = ?');
+        $costofiscallaboral->execute([$id]);
+        $costofiscallaboral = $costofiscallaboral->fetch(PDO::FETCH_ASSOC);
+        
+        $ingresocostogastoprocetotal = $interesesprestamoslaboral['interesesprestamoslaboral'] + $otroscostogastolaboral['otroscostogastolaboral'] + $costofiscallaboral['costofiscallaboral'];
+
+        $costogastosprocelaboral = $this->db->connect()->prepare('UPDATE '.$this->tablacostogastosprocelaboral.' SET ingresocostogastoprocetotal = ? WHERE idcostogastosprocelaboral = ?');
+        $costogastosprocelaboral->execute([$ingresocostogastoprocetotal, $id]);
     }
 
 }

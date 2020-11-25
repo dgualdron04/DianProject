@@ -523,21 +523,58 @@ class Declaracion extends Controller
                 $idganancias = $this->gananciasocasionales->traerid($id);
                 $gananciasocasionales = $this->gananciasocasionales->listar($id);
                 $idingresobruto = $this->ingresobruto->traerid($id);
+
+                $this->ingresobruto->calcularingresobruto($idingresobruto);
+
                 $idingresonoconse = $this->ingresonoconse->traerid($id);
+
+                $this->ingresonoconse->calcularingresonoconse($idingresonoconse);
+
                 $idrentatrabajo = $this->rentatrabajo->traerid($id);
+
+
                 $idrentaexenta = $this->rentaexenta->traerid($id);
+
+                $this->rentaexenta->calcularrentaexenta($idrentaexenta);
+
+                $this->rentatrabajo->calcularrentatrabajo($idrentatrabajo);
+
                 $idfuerzapublica = $this->fuerzapublica->traerid($id);
                 $idingresobrutorentacapital = $this->ingresobrutocapital->traerid($id);
+
+                $this->ingresobrutocapital->calcularingresobrutocapital($idingresobrutorentacapital);
+
                 $idingresosnoconsecapital = $this->ingresonoconsecapital->traerid($id);
+
+                $this->ingresonoconsecapital->calcularingresosnoconse($idingresosnoconsecapital);
+
                 $idcostogastosprocecapital = $this->costogastosprocecapital->traerid($id);
+
+                $this->costogastosprocecapital->calcularcostogastosprocecapital($idcostogastosprocecapital);
+
                 $idrentacapital = $this->rentacapital->traerid($id);
+
+                $this->rentacapital->calcualrrentacapital($idrentacapital);
+
+                $idingresobrutolaboral = $this->ingresobrutolaboral->traerid($id);
+
+                $this->ingresobrutolaboral->calcularingresobrutolaboral($idingresobrutolaboral);
+
+                $idingresosnoconselaboral = $this->ingresosnoconselaboral->traerid($id);
+
+                $this->ingresosnoconselaboral->calcularingresonoconselaboral($idingresosnoconselaboral);
+
+                $idcostogastosprocelaboral = $this->costogastosprocelaboral->traerid($id);
+
+                $this->costogastosprocelaboral->calcularcostogastosprocelaboral($idcostogastosprocelaboral);
+
+                $idrentanolaboral = $this->rentanolaboral->traerid($id);
+
+                $this->rentanolaboral->calcularrentanolaboral($idrentanolaboral);
+
                 $idceduladiviparti = $this->ceduladiviparti->traerid($id);
                 $idingresobrutopensiones = $this->ingresosbrutospensiones->traerid($id);
                 $idingresonoconsepensiones = $this->ingresonoconsepensiones->traerid($id);
-                $idingresobrutolaboral = $this->ingresobrutolaboral->traerid($id);
-                $idingresosnoconselaboral = $this->ingresosnoconselaboral->traerid($id);
-                $idcostogastosprocelaboral = $this->costogastosprocelaboral->traerid($id);
-                $idrentanolaboral = $this->rentanolaboral->traerid($id);
                 $idcedulapensiones = $this->cedulapensiones->traerid($id);
                 $cedulas = [$idingresobruto, $idrentaexenta, $idingresonoconse, $idrentatrabajo, $idfuerzapublica, $idingresobrutorentacapital, $idingresosnoconsecapital, $idcostogastosprocecapital, $idrentacapital, $idceduladiviparti, $idingresobrutopensiones, $idingresonoconsepensiones, $idingresobrutolaboral, $idingresosnoconselaboral, $idcostogastosprocelaboral, $idrentanolaboral, $idcedulapensiones];
                 $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias];

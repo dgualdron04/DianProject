@@ -6,6 +6,8 @@ class Costogastosprocecapitalmodel extends Models{
     private $tablausuariocostogastosprocecapital = "usuariocostogastosprocecapital";
     private $tablarentacapital = "rentacapital";
     private $tablacedulageneral = "cedulageneral";
+    private $tablainteresesprestamoscapital = "interesesprestamoscapital";
+    private $tablaotroscostogastoscapital = "otroscostogastoscapital";
 
     public function crear(){
         $connect = $this->db->connect();
@@ -31,6 +33,24 @@ class Costogastosprocecapitalmodel extends Models{
         $query->execute([$id]);
         $query = $query->fetch(PDO::FETCH_ASSOC);
         return $query['id'];
+    }
+
+    public function calcularcostogastosprocecapital($id)
+    {
+        
+        $interesesprestamos = $this->db->connect()->prepare('SELECT IF(SUM(ip.valor) != 0,SUM(ip.valor),0) AS "interesesprestamos" FROM '.$this->tablainteresesprestamoscapital.' ip WHERE ip.idcostogastosprocecapital = ?');
+        $interesesprestamos->execute([$id]);
+        $interesesprestamos = $interesesprestamos->fetch(PDO::FETCH_ASSOC);
+
+        $otroscostogastoscapital = $this->db->connect()->prepare('SELECT IF(SUM(occ.valor) != 0,SUM(occ.valor),0) AS "otroscostogastoscapital" FROM '.$this->tablaotroscostogastoscapital.' occ WHERE occ.idcostogastosprocecapital = ?');
+        $otroscostogastoscapital->execute([$id]);
+        $otroscostogastoscapital = $otroscostogastoscapital->fetch(PDO::FETCH_ASSOC);
+        
+        $ingresocostogastosprocetotal = $interesesprestamos['interesesprestamos'] + $otroscostogastoscapital['otroscostogastoscapital'];
+
+        $costogastosprocecapital = $this->db->connect()->prepare('UPDATE '.$this->tablacostogastosprocecapital.' SET valor = ? WHERE idcostogastosprocecapital = ?');
+        $costogastosprocecapital->execute([$ingresocostogastosprocetotal, $id]);
+
     }
 
 }
