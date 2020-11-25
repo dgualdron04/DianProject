@@ -1293,7 +1293,7 @@ nextBtnFirstcedulas.addEventListener('click', (e) => {
 
             divnombrecrearcedulas.classList.remove('scond');
             divmesessalariocedulascrear.classList.add('scond');
-            divvalorcedulascrear.classList.add('scond');
+            divvalorcedulascrear.classList.remove('scond');
 
         }
 
@@ -1310,7 +1310,7 @@ nextBtnFirstcedulas.addEventListener('click', (e) => {
             divvalorcedulascrear.classList.remove('scond');
 
         }
-
+        
         
     }  else if (cedulacrear.value == "cedulapensiones") {
 
@@ -2166,11 +2166,35 @@ formcrearcedulas.addEventListener('submit', (e) => {
 
             } else if (tiporentacedulacrear.value === "rentaliqpasece"){
 
-
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idrentanolaboral = document.getElementById('idrentanolaboral').innerHTML;
+                    formData.append("idrentanolaboral", idrentanolaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/rentaliqpasece`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
             } else if (tiporentacedulacrear.value === "rentaexentadeduccion"){
 
-
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idrentanolaboral = document.getElementById('idrentanolaboral').innerHTML;
+                    formData.append("idrentanolaboral", idrentanolaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/rentaexentadeduccion`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
             }
 
@@ -2182,23 +2206,105 @@ formcrearcedulas.addEventListener('submit', (e) => {
             
             if (tiporentacedulacrear.value === "ingresopensiones") {
 
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutopensiones = document.getElementById('idingresobrutopensiones').innerHTML;
+                    formData.append("idingresobrutopensiones", idingresobrutopensiones);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulapensiones/ingresobruto/ingresopensiones`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
             } else if (tiporentacedulacrear.value === "devolucionesahorro"){
+
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutopensiones = document.getElementById('idingresobrutopensiones').innerHTML;
+                    formData.append("idingresobrutopensiones", idingresobrutopensiones);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulapensiones/ingresobruto/devolucionesahorro`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
             } else if (tiporentacedulacrear.value === "indemnizacionsustitutas"){
 
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutopensiones = document.getElementById('idingresobrutopensiones').innerHTML;
+                    formData.append("idingresobrutopensiones", idingresobrutopensiones);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulapensiones/ingresobruto/indemnizacionsustitutas`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
             } else if (tiporentacedulacrear.value === "pensionesexterior") {
                 
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutopensiones = document.getElementById('idingresobrutopensiones').innerHTML;
+                    formData.append("idingresobrutopensiones", idingresobrutopensiones);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulapensiones/ingresobruto/pensionesexterior`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
             }
 
         } else if (tipocedulacrear.value === "ingresonoconse") {
 
             if (tiporentacedulacrear.value === "aportesobligatorios") {
 
+                let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresonoconsepensiones = document.getElementById('idingresonoconsepensiones').innerHTML;
+                    formData.append("idingresonoconsepensiones", idingresonoconsepensiones);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulapensiones/ingresonoconse/aportesobligatorios`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
             }
 
         } else if (tipocedulacrear.value === "rentaexenta") {
 
-
+            let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idcedulapensiones = document.getElementById('idcedulapensiones').innerHTML;
+                    formData.append("idcedulapensiones", idcedulapensiones);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulapensiones/rentaexenta`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
         }
 
@@ -2206,23 +2312,84 @@ formcrearcedulas.addEventListener('submit', (e) => {
 
         if (tipocedulacrear.value === "dividendosyparticipaciones") {
             
-                        
+            let formData = new FormData(formcrearcedulas);
+            let param = true;
+            formData.append("param", param);
+            let idceduladiviparti = document.getElementById('idceduladiviparti').innerHTML;
+            formData.append("idceduladiviparti", idceduladiviparti);
+            ajax({
+                url: `./declaracion/creardeclaracion/ceduladividendosyparticipaciones/dividendosyparticipaciones`,
+                method: 'POST',
+                done: console.log('si'),
+                error: rendererror,
+                form: formData,
+                urlactual: location.href,
+            });
+
 
         } else if (tipocedulacrear.value === "subcedula1a") {
 
-
+            let formData = new FormData(formcrearcedulas);
+            let param = true;
+            formData.append("param", param);
+            let idceduladiviparti = document.getElementById('idceduladiviparti').innerHTML;
+            formData.append("idceduladiviparti", idceduladiviparti);
+            ajax({
+                url: `./declaracion/creardeclaracion/ceduladividendosyparticipaciones/subcedula1a`,
+                method: 'POST',
+                done: console.log('si'),
+                error: rendererror,
+                form: formData,
+                urlactual: location.href,
+            });
             
         }else if (tipocedulacrear.value === "subcedula2a") {
 
-
+            let formData = new FormData(formcrearcedulas);
+            let param = true;
+            formData.append("param", param);
+            let idceduladiviparti = document.getElementById('idceduladiviparti').innerHTML;
+            formData.append("idceduladiviparti", idceduladiviparti);
+            ajax({
+                url: `./declaracion/creardeclaracion/ceduladividendosyparticipaciones/subcedula2a`,
+                method: 'POST',
+                done: console.log('si'),
+                error: rendererror,
+                form: formData,
+                urlactual: location.href,
+            });
             
         }else if (tipocedulacrear.value === "ingresosnoconse") {
             
-
+            let formData = new FormData(formcrearcedulas);
+            let param = true;
+            formData.append("param", param);
+            let idceduladiviparti = document.getElementById('idceduladiviparti').innerHTML;
+            formData.append("idceduladiviparti", idceduladiviparti);
+            ajax({
+                url: `./declaracion/creardeclaracion/ceduladividendosyparticipaciones/ingresosnoconse`,
+                method: 'POST',
+                done: console.log('si'),
+                error: rendererror,
+                form: formData,
+                urlactual: location.href,
+            });
 
         }else if (tipocedulacrear.value === "rentaliquidaece") {
 
-
+            let formData = new FormData(formcrearcedulas);
+            let param = true;
+            formData.append("param", param);
+            let idceduladiviparti = document.getElementById('idceduladiviparti').innerHTML;
+            formData.append("idceduladiviparti", idceduladiviparti);
+            ajax({
+                url: `./declaracion/creardeclaracion/ceduladividendosyparticipaciones/rentaliquidaece`,
+                method: 'POST',
+                done: console.log('si'),
+                error: rendererror,
+                form: formData,
+                urlactual: location.href,
+            });
             
         }
         

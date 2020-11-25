@@ -168,6 +168,7 @@
                 <p class="scond scond-2" id="idingresosnoconselaboral"><?php echo $data[0][1][12] ?></p>
                 <p class="scond scond-2" id="idcostogastosprocelaboral"><?php echo $data[0][1][14] ?></p>
                 <p class="scond scond-2" id="idrentanolaboral"><?php echo $data[0][1][15] ?></p>
+                <p class="scond scond-2" id="idcedulapensiones"><?php echo $data[0][1][16] ?></p>
                 
                 <!--div class="only-flex">
                     <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p>

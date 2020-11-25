@@ -38,6 +38,14 @@ class Cedulapensionesmodel extends Models{
 
     }
 
+    public function traerid($id)
+    {
+        $query = $this->db->connect()->prepare('SELECT cp.idcedulapensiones AS "id" FROM '.$this->tablacedulapensiones . ' cp WHERE cp.iddeclaracion = ?');
+        $query->execute([$id]);
+        $query = $query->fetch(PDO::FETCH_ASSOC);
+        return $query['id'];
+    }
+
 }
 
 ?>

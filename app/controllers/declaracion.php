@@ -144,6 +144,27 @@ class Declaracion extends Controller
     private $otroscostogastolaboral;
     private $costofiscallaboral;
     private $interesesprestamoslaboral;
+    private $rentaliqpasecelaboral;
+    private $usuariorentaliqpasecelaboral;
+    private $rentaexededuccionlaboral;
+    private $usuariorentaexededuccionlaboral;
+    private $ingresospensiones;
+    private $devolucionesahorropensiones;
+    private $indemnizacionsustitutaspensiones;
+    private $pensionesexteriorpensiones;
+    private $aportesobligatoriospensiones;
+    private $rentaexentapensiones;
+    private $usuariorentaexentapensiones;
+    private $diviparti2016; 
+    private $usuariodiviparti2016;
+    private $subcedula1a;
+    private $usuariosubcedula1a;
+    private $subcedula2a;
+    private $usuariosubcedula2a;
+    private $ingresonoconsedividendos;
+    private $usuarioingresonoconsedividendos;
+    private $rentaliqpasecedividendos;
+    private $usuariorentaliqpasecedividendos;
 
     public function __construct()
     {
@@ -287,7 +308,28 @@ class Declaracion extends Controller
         $this->interesesprestamoslaboral = $this->model("interesesprestamoslaboral");
         $this->costofiscallaboral = $this->model("costofiscallaboral");
         $this->otroscostogastolaboral = $this->model("otroscostogastolaboral");
-        
+        $this->rentaliqpasecelaboral = $this->model("Rentaliqpasecelaboral");
+        $this->usuariorentaliqpasecelaboral = $this->model('Usuariorentaliqpasecelaboral');
+        $this->rentaexededuccionlaboral = $this->model("Rentaexededuccionlaboral");
+        $this->usuariorentaexededuccionlaboral = $this->model("Usuariorentaexededuccionlaboral");
+        $this->ingresospensiones = $this->model("Ingresospensiones");
+        $this->devolucionesahorropensiones = $this->model('Devolucionesahorropensiones');
+        $this->indemnizacionsustitutaspensiones = $this->model('Indemnizacionsustitutaspensiones');
+        $this->pensionesexteriorpensiones = $this->model('Pensionesexteriorpensiones');
+        $this->aportesobligatoriospensiones = $this->model('Aportesobligatoriospensiones');
+        $this->rentaexentapensiones = $this->model('Rentaexentapensiones');
+        $this->usuariorentaexentapensiones = $this->model('Usuariorentaexentapensiones');
+        $this->diviparti2016 = $this->model('Diviparti2016');
+        $this->usuariodiviparti2016 = $this->model('Usuariodiviparti2016');
+        $this->subcedula1a = $this->model('Subcedula1a');
+        $this->usuariosubcedula1a = $this->model('Usuariosubcedula1a');
+        $this->subcedula2a = $this->model('Subcedula2a');
+        $this->usuariosubcedula2a = $this->model('Usuariosubcedula2a');
+        $this->ingresonoconsedividendos = $this->model('Ingresonoconsedividendos');
+        $this->usuarioingresonoconsedividendos = $this->model('Usuarioingresonoconsedividendos');
+        $this->rentaliqpasecedividendos = $this->model('Rentaliqpasecedividendos');
+        $this->usuariorentaliqpasecedividendos = $this->model('Usuariorentaliqpasecedividendos');
+
         parent::__construct();
         if (isset($_SESSION['email'])) {
             $this->usuario->setusuario($this->traersesion());
@@ -496,10 +538,11 @@ class Declaracion extends Controller
                 $idingresosnoconselaboral = $this->ingresosnoconselaboral->traerid($id);
                 $idcostogastosprocelaboral = $this->costogastosprocelaboral->traerid($id);
                 $idrentanolaboral = $this->rentanolaboral->traerid($id);
-                $cedulas = [$idingresobruto, $idrentaexenta, $idingresonoconse, $idrentatrabajo, $idfuerzapublica, $idingresobrutorentacapital, $idingresosnoconsecapital, $idcostogastosprocecapital, $idrentacapital, $idceduladiviparti, $idingresobrutopensiones, $idingresonoconsepensiones, $idingresobrutolaboral, $idingresosnoconselaboral, $idcostogastosprocelaboral, $idrentanolaboral];
+                $idcedulapensiones = $this->cedulapensiones->traerid($id);
+                $cedulas = [$idingresobruto, $idrentaexenta, $idingresonoconse, $idrentatrabajo, $idfuerzapublica, $idingresobrutorentacapital, $idingresosnoconsecapital, $idcostogastosprocecapital, $idrentacapital, $idceduladiviparti, $idingresobrutopensiones, $idingresonoconsepensiones, $idingresobrutolaboral, $idingresosnoconselaboral, $idcostogastosprocelaboral, $idrentanolaboral, $idcedulapensiones];
                 $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias];
-
-                $data = [$ids, $informacionpersonal, $patrimonio, $cedulas, $liquidacionprivada, $gananciasocasionales];
+                $cedula = [];
+                $data = [$ids, $informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales];
 
                 $this->viewtemplate('declaracion', 'editar', $this->usuario->traerdatosusuario(), $data);
 
@@ -1198,8 +1241,9 @@ class Declaracion extends Controller
                         }  else if ($id == "devdescreb") {
 
                             $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
                             $idrentanolaboral = $_POST['idrentanolaboral'];
-                            $iddevdescreblaboral = $this->devdescreblaboral->crear($nombrecrearcedulas);
+                            $iddevdescreblaboral = $this->devdescreblaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear);
                             $this->usuariodevdescreblaboral->crear($iddevdescreblaboral, $idrentanolaboral, $this->usuario->getid());
                                 
             
@@ -1298,12 +1342,19 @@ class Declaracion extends Controller
                             }
             
                         } else if ($id == "rentaliqpasece"){
-            
-            
+                            
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentanolaboral = $_POST['idrentanolaboral'];
+                                $idrentaliqpasecelaboral = $this->rentaliqpasecelaboral->crear($valoraspectoscedulascrear);
+                                $this->usuariorentaliqpasecelaboral->crear($idrentaliqpasecelaboral, $idrentanolaboral, $this->usuario->getid());
             
                         } else if ($id == "rentaexentadeduccion"){
-            
-            
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentanolaboral = $_POST['idrentanolaboral'];
+                                $aspectoscedulascrear = $_POST['aspectoscedulascrear'];
+                                $idrentaexededuccionlaboral = $this->rentaexededuccionlaboral->crear($nombrecrearcedulas,$valoraspectoscedulascrear, $aspectoscedulascrear);
+                                $this->usuariorentaexededuccionlaboral->crear($idrentaexededuccionlaboral, $idrentanolaboral, $this->usuario->getid());
             
                         }
             
@@ -1314,48 +1365,95 @@ class Declaracion extends Controller
                     if ($tipo == "ingresobruto") {
                         
                         if ($id == "ingresopensiones") {
-            
+
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                            $idingresobrutopensiones = $_POST['idingresobrutopensiones'];
+                            $aspectoscedulascrear = $_POST['aspectoscedulascrear'];
+                            $this->ingresospensiones->crear($nombrecrearcedulas,$valoraspectoscedulascrear,$idingresobrutopensiones,$aspectoscedulascrear);
+                                        
                         } else if ($id == "devolucionesahorro"){
+
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                            $idingresobrutopensiones = $_POST['idingresobrutopensiones'];
+                            $this->devolucionesahorropensiones->crear($nombrecrearcedulas,$valoraspectoscedulascrear,$idingresobrutopensiones);
             
                         } else if ($id == "indemnizacionsustitutas"){
+
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                            $idingresobrutopensiones = $_POST['idingresobrutopensiones'];
+                            $this->indemnizacionsustitutaspensiones->crear($nombrecrearcedulas,$valoraspectoscedulascrear,$idingresobrutopensiones);
             
                         } else if ($id == "pensionesexterior") {
+
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                            $idingresobrutopensiones = $_POST['idingresobrutopensiones'];
+                            $this->pensionesexteriorpensiones->crear($nombrecrearcedulas,$valoraspectoscedulascrear,$idingresobrutopensiones);
                             
                         }
             
                     } else if ($tipo == "ingresonoconse") {
             
                         if ($id == "aportesobligatorios") {
+
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                            $idingresonoconsepensiones = $_POST['idingresonoconsepensiones'];
+                            $aspectoscedulascrear = $_POST['aspectoscedulascrear'];
+                            $this->aportesobligatoriospensiones->crear($nombrecrearcedulas,$valoraspectoscedulascrear,$idingresonoconsepensiones, $aspectoscedulascrear);
+                            
                             
                         }
             
                     } else if ($tipo == "rentaexenta") {
             
-            
+                        $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                        $idcedulapensiones = $_POST['idcedulapensiones'];
+                        $idrentaexentapensiones = $this->rentaexentapensiones->crear($valoraspectoscedulascrear);
+                        $this->usuariorentaexentapensiones->crear($idrentaexentapensiones, $idcedulapensiones, $this->usuario->getid());
             
                     }
             
                 } else if ($clase == "ceduladividendosyparticipaciones") {
             
                     if ($tipo == "dividendosyparticipaciones") {
-                        
-            
+                        $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                        $idceduladiviparti = $_POST['idceduladiviparti'];
+                        $iddiviparti2016 = $this->diviparti2016->crear($valoraspectoscedulascrear);
+                        $this->usuariodiviparti2016->crear($iddiviparti2016, $idceduladiviparti, $this->usuario->getid());
             
                     } else if ($tipo == "subcedula1a") {
             
-            
+                        $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                        $idceduladiviparti = $_POST['idceduladiviparti'];
+                        $idsubcedula1a = $this->subcedula1a->crear($valoraspectoscedulascrear);
+                        $this->usuariosubcedula1a->crear($idsubcedula1a, $idceduladiviparti, $this->usuario->getid());
                         
                     }else if ($tipo == "subcedula2a") {
             
-            
+                        $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                        $idceduladiviparti = $_POST['idceduladiviparti'];
+                        $idsubcedula2a = $this->subcedula2a->crear($valoraspectoscedulascrear);
+                        $this->usuariosubcedula2a->crear($idsubcedula2a, $idceduladiviparti, $this->usuario->getid());
                         
                     }else if ($tipo == "ingresosnoconse") {
                         
-            
+                        $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                        $idceduladiviparti = $_POST['idceduladiviparti'];
+                        $idingresonoconsedividendos = $this->ingresonoconsedividendos->crear($valoraspectoscedulascrear);
+                        $this->usuarioingresonoconsedividendos->crear($idingresonoconsedividendos, $idceduladiviparti, $this->usuario->getid());
+                        
             
                     }else if ($tipo == "rentaliquidaece") {
             
-            
+                        $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                        $idceduladiviparti = $_POST['idceduladiviparti'];
+                        $idrentaliqpasecedividendos = $this->rentaliqpasecedividendos->crear($valoraspectoscedulascrear);
+                        $this->usuariorentaliqpasecedividendos->crear($idrentaliqpasecedividendos, $idceduladiviparti, $this->usuario->getid());
+                        
                         
                     }
                     

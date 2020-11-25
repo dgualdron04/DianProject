@@ -5,12 +5,12 @@ class Costofiscallaboralmodel extends Models{
 
     private $tablacostofiscallaboral = "costofiscallaboral";
 
-    public function crear($nombre, $valor, $idcostogastosprocelaboral){
+    public function crear($valor, $idcostogastosprocelaboral){
         $connect = $this->db->connect();
 
-        if ($query = $connect->prepare('INSERT INTO '.$this->tablacostofiscallaboral.'(nombre, valor, idcostogastosprocelaboral) VALUES (?,?,?)')) {
+        if ($query = $connect->prepare('INSERT INTO '.$this->tablacostofiscallaboral.'(valor, idcostogastosprocelaboral) VALUES (?,?)')) {
 
-            $query->execute([$nombre, $valor, $idcostogastosprocelaboral]);
+            $query->execute([$valor, $idcostogastosprocelaboral]);
 
             /* $iddevdescreblaboral = $connect->lastInsertId(); */
 
