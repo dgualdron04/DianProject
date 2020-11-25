@@ -4,6 +4,15 @@ class Tipoindemnizacionmodel extends Models{
 
     private $tablatipoindemnizacion = "tipoindemnizacion";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT ti.idtipoindemnizacion, ti.nombre, ti.descripcion, ti.ayuda FROM '.$this->tablatipoindemnizacion.' ti ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoindemnizacion.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

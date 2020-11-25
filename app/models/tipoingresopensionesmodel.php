@@ -4,6 +4,15 @@ class Tipoingresopensionesmodel extends Models{
 
     private $tablatipoingresopensiones = "tipoingresospensiones";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tip.idtipoingresospensiones, tip.nombre, tip.descripcion, tip.ayuda FROM '.$this->tablatipoingresopensiones.' tip ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoingresopensiones.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

@@ -12,7 +12,9 @@ class Rentacapitalmodel extends Models{
 
             $query->execute([0,0,0,0,$idcedulageneral]);
 
-            return true;
+            $idrentacapital = $connect->lastInsertId();
+
+            return $idrentacapital;
 
         } else {
 

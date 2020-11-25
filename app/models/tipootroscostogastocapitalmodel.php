@@ -4,6 +4,15 @@ class Tipootroscostogastocapitalmodel extends Models{
 
     private $tablatipootroscostogastocapital = "tipootroscostogastocapital";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tocgc.idtipootroscostogastocapital, tocgc.nombre, tocgc.descripcion, tocgc.ayuda FROM '.$this->tablatipootroscostogastocapital.' tocgc ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+    
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipootroscostogastocapital.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

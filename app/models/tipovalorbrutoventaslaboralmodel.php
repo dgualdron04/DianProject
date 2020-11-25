@@ -4,6 +4,15 @@ class Tipovalorbrutoventaslaboralmodel extends Models{
 
     private $tablatipovalorbrutoventaslaboral = "tipovalorbrutoventaslaboral";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tvbvl.idtipovalorbrutoventaslaboral, tvbvl.nombre, tvbvl.descripcion, tvbvl.ayuda FROM '.$this->tablatipovalorbrutoventaslaboral.' tvbvl ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipovalorbrutoventaslaboral.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

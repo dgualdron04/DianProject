@@ -4,6 +4,15 @@ class Tipoprestacionmodel extends Models{
 
     private $tablatipoprestacion = "tipoprestacion";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tp.idtipoprestacion, tp.nombre, tp.descripcion, tp.ayuda FROM '.$this->tablatipoprestacion.' tp ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoprestacion.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

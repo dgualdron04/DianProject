@@ -4,6 +4,16 @@ class Tipoaportevoluntariocapitalmodel extends Models{
 
     private $tablatipoaportevoluntariocapital = "tipoaportevoluntariocapital";
 
+
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tavc.idtipoaportevoluntariocapital, tavc.nombre, tavc.descripcion, tavc.ayuda FROM '.$this->tablatipoaportevoluntariocapital.' tavc ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoaportevoluntariocapital.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

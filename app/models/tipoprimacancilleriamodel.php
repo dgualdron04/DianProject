@@ -4,6 +4,15 @@ class Tipoprimacancilleriamodel extends Models{
 
     private $tablatipoprimacancilleria = "tipoprimacancilleria";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tpc.idtipoprimacancilleria, tpc.nombre, tpc.descripcion, tpc.ayuda FROM '.$this->tablatipoprimacancilleria.' tpc ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoprimacancilleria.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

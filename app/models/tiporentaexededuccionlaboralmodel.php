@@ -4,6 +4,15 @@ class Tiporentaexededuccionlaboralmodel extends Models{
 
     private $tablatiporentaexededuccionlaboral = "tiporentaexededuccionlaboral";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tre.idtiporentaexededuccionlaboral, tre.nombre, tre.descripcion, tre.ayuda FROM '.$this->tablatiporentaexededuccionlaboral.' tre ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatiporentaexededuccionlaboral.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

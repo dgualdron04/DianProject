@@ -4,6 +4,15 @@ class Tipootrosingresoscapitalmodel extends Models{
 
     private $tablatipootrosingresoscapital = "tipootrosingresoscapital";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT toi.idtipootrosingresoscapital, toi.nombre, toi.descripcion, toi.ayuda FROM '.$this->tablatipootrosingresoscapital.' toi ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipootrosingresoscapital.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

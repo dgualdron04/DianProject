@@ -4,6 +4,15 @@ class Tipopagoalimenmodel extends Models{
 
     private $tablatipopagoalimen = "tipopagoalimen";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tpa.idtipopagoalimen, tpa.parentesco, tpa.descripcion, tpa.ayuda FROM '.$this->tablatipopagoalimen.' tpa ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipopagoalimen.'(parentesco, descripcion, ayuda) VALUES (?,?,?)')) {

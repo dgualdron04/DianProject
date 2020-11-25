@@ -5,6 +5,15 @@ class Tipoaporteobligatoriolaboralnoconsemodel extends Models{
 
     private $tablatipoaporteobligatoriolaboralnoconse = "tipoaporteobligatoriolaboralnoconse";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT taolnc.idtipoaporteobligatoriolaboralnoconse, taolnc.nombre, taolnc.descripcion, taolnc.ayuda FROM '.$this->tablatipoaporteobligatoriolaboralnoconse.' taolnc ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoaporteobligatoriolaboralnoconse.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

@@ -4,6 +4,15 @@ class Tipoaportevoluntariomodel extends Models{
 
     private $tablatipoaportevoluntario = "tipoaportevoluntario";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tav.idtipoaportevoluntario, tav.nombre, tav.descripcion, tav.ayuda FROM '.$this->tablatipoaportevoluntario.' tav ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoaportevoluntario.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

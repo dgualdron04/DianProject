@@ -20,11 +20,15 @@ class Cedulapensionesmodel extends Models{
 
     public function crear($iddeclaracion){
 
-        if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablacedulapensiones.'(rentaliquida, rentaliquidagravable, iddeclaracion) VALUES (?, ?, ?)')) {
+        $connect = $this->db->connect();
+
+        if ($query = $connect->prepare('INSERT INTO '.$this->tablacedulapensiones.'(rentaliquida, rentaliquidagravable, iddeclaracion) VALUES (?, ?, ?)')) {
 
             $query->execute([0, 0, $iddeclaracion]);
 
-            return true;
+            $idcedulapensiones = $connect->lastInsertId();
+
+            return $idcedulapensiones;
 
         } else {
 

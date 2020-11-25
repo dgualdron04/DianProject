@@ -4,6 +4,15 @@ class Tipodeduccionmodel extends Models{
 
     private $tablatipodeduccion = "tipodeduccion";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT td.idtipodeduccion, td.nombre, td.descripcion, td.ayuda FROM '.$this->tablatipodeduccion.' td ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipodeduccion.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

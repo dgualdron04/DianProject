@@ -4,6 +4,15 @@ class Tipoaporteobligatoriocapitalmodel extends Models{
 
     private $tablatipoaporteobligatoriocapital = "tipoaporteobligatoriocapital";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT taoc.idtipoaporteobligatoriocapital, taoc.nombre, taoc.descripcion, taoc.ayuda FROM '.$this->tablatipoaporteobligatoriocapital.' taoc ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipoaporteobligatoriocapital.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

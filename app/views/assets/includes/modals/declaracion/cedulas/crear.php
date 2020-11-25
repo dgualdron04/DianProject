@@ -42,23 +42,45 @@
                         </div>
                         </div>
                         <div class="scond" id="divtipoaspectoscrearcedula">
-                        <label for="" class="form-label">Aspectos</label>
+                        <label for="" class="form-label">Sub Aspecto</label>
                         <div class="form-group">
                             <select class="form-control" disabled name="tipoaspectoscedulascrear" id="tipoaspectoscedulascrear">
                                 <option selected="true" disabled="disabled" class="noselected">Seleccione el Tipo de Aspecto</option>
                             </select>
                         </div>
                         </div>
+                        <div class="scond" id="divtiposubaspectoscrearcedula">
+                        <label for="" class="form-label">Tipo de Sub Aspecto</label>
+                        <div class="form-group">
+                            <select class="form-control" disabled name="tiposubaspectoscedulascrear" id="tiposubaspectoscedulascrear">
+                                <option selected="true" disabled="disabled" class="noselected">Seleccione el Tipo de Aspecto</option>
+                            </select>
+                        </div>
+                        </div>
+                        
                         <div class="form-group">
                             <button class="form-control button firstNextcedulas isdisabled">Siguiente</button>
                         </div>
                     </div>
 
                     <div class="slide-page-2 slide-page-crear-2-cedulas">
-                        
-                        <label for="" class="form-label">Valor</label>
+                        <div class="scond" id="divnombrecrearcedulas">
+                        <label for="" class="form-label">Nombre</label>
                         <div class="form-group">
-                            <input class="form-control" type="number" min="0" name="valoraspectoscedulascrear" placeholder="Valor">
+                            <input class="form-control" type="text" min="0" name="nombrecrearcedulas" id="nombrecrearcedulas" placeholder="Nombre">
+                        </div> 
+                        </div>
+                        <div class="scond" id="divmesessalariocedulascrear">
+                        <label for="" class="form-label">Numero de meses</label>
+                        <div class="form-group">
+                            <input class="form-control" type="number" min="0" name="mesessalariocedulascrear" id="mesessalariocedulascrear" placeholder="Numero de meses">
+                        </div>
+                        </div>
+                        <div id="divvalorcedulascrear">
+                            <label for="" class="form-label">Valor</label>
+                            <div class="form-group">
+                                <input class="form-control" type="number" min="0" name="valoraspectoscedulascrear" placeholder="Valor">
+                            </div>
                         </div>
                         
                         <div class="form-group">

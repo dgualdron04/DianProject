@@ -4,6 +4,15 @@ class Tiporentaexededuccioncapitalmodel extends Models{
 
     private $tablatiporentaexededuccioncapital = "tiporentaexededuccioncapital";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tre.idtiporentaexededuccioncapital, tre.nombre, tre.descripcion, tre.ayuda FROM '.$this->tablatiporentaexededuccioncapital.' tre ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatiporentaexededuccioncapital.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {

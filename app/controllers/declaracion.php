@@ -12,9 +12,32 @@ class Declaracion extends Controller
     private $patrimonio;
     private $cedulageneral;
     private $rentatrabajo;
+    private $ingresobruto;
+    private $usuarioingresobruto;
+    private $ingresonoconse;
+    private $usuarioingresonoconse;
+    private $rentaexenta;
+    private $usuariorentaexenta;
     private $rentacapital;
+    private $ingresobrutocapital;
+    private $usuarioingresobrutocapital;
+    private $ingresonoconsecapital;
+    private $usuarioingresonoconsecapital;
+
     private $rentanolaboral;
+    private $ingresobrutolaboral;
+    private $usuarioingresobrutolaboral;
+    private $ingresosnoconselaboral;
+    private $usuarioingresonoconselaboral;
+    private $costogastosprocelaboral;
+    private $usuariocostogastosprocelaboral;
+
     private $cedulapensiones;
+    private $ingresosbrutospensiones;
+    private $usuarioingresobrutopensiones;
+    private $ingresonoconsepensiones;
+    private $usuarioingresonoconsepensiones;
+
     private $gananciasocasionales;
     private $liquidacionprivada;
     private $ceduladiviparti;
@@ -48,6 +71,24 @@ class Declaracion extends Controller
     private $usuarioingresonoconsegananciasocasionales;
     private $gananciasnogravadas;
     private $usuariogananciasnogravadas;
+    private $tipodeduccion;
+    private $tiporentaexededuccioncapital;
+    private $tiporentaexededuccionlaboral;
+    private $tipoingresopensiones;
+    private $tipoaportesobligatoriospensiones;
+    private $tipoprestacion;
+    private $tipoaporteobligatorio;
+    private $tipopagoalimen;
+    private $tipoindemnizacion;
+    private $tipoprimacancilleria;
+    private $tipointeresesrendicapital;
+    private $tipootrosingresoscapital;
+    private $tipoaporteobligatoriocapital;
+    private $tipoaportevoluntariocapital;
+    private $tipootroscostogastocapital;
+    private $tipovalorbrutoventaslaboral;
+    private $tipoaporteobligatoriolaboralnoconse;
+    private $tipootroscostogastolaboral;
 
     public function __construct()
     {
@@ -57,9 +98,33 @@ class Declaracion extends Controller
         $this->patrimonio = $this->model('Patrimonio');
         $this->cedulageneral = $this->model('Cedulageneral');
         $this->rentatrabajo = $this->model('Rentatrabajo');
+        $this->ingresobruto = $this->model('Ingresobruto');
+        $this->usuarioingresobruto = $this->model('Usuarioingresobruto');
+        $this->ingresonoconse = $this->model('Ingresonoconse');
+        $this->usuarioingresonoconse = $this->model('Usuarioingresonoconse');
+        $this->rentaexenta = $this->model('Rentaexenta');
+        $this->usuariorentaexenta = $this->model('Usuariorentaexenta');
+
         $this->rentacapital = $this->model('Rentacapital');
+        $this->ingresobrutocapital = $this->model('Ingresobrutocapital');
+        $this->usuarioingresobrutocapital = $this->model('Usuarioingresobrutocapital');
+        $this->ingresonoconsecapital = $this->model('Ingresonoconsecapital');
+        $this->usuarioingresonoconsecapital = $this->model('Usuarioingresonoconsecapital');
+        $this->usuarioingresobrutopensiones = $this->model('Usuarioingresobrutopensiones');
+
         $this->rentanolaboral = $this->model('Rentanolaboral');
+        $this->ingresobrutolaboral = $this->model('Ingresobrutolaboral');
+        $this->usuarioingresobrutolaboral = $this->model('Usuarioingresobrutolaboral');
+        $this->ingresosnoconselaboral = $this->model('Ingresosnoconselaboral');
+        $this->usuarioingresonoconselaboral = $this->model('Usuarioingresonoconselaboral');
+        $this->costogastosprocelaboral = $this->model('Costogastosprocelaboral');
+        $this->usuariocostogastosprocelaboral = $this->model('Usuariocostogastosprocelaboral');
+
         $this->cedulapensiones = $this->model('Cedulapensiones');
+        $this->ingresosbrutospensiones = $this->model('Ingresosbrutospensiones');
+        $this->ingresonoconsepensiones = $this->model('Ingresonoconsepensiones');
+        $this->usuarioingresonoconsepensiones = $this->model('Usuarioingresonoconsepensiones');
+
         $this->gananciasocasionales = $this->model('Gananciasocasionales');
         $this->liquidacionprivada = $this->model('Liquidacionprivada');
         $this->ceduladiviparti = $this->model('Ceduladiviparti');
@@ -93,6 +158,25 @@ class Declaracion extends Controller
         $this->usuarioingresonoconsegananciasocasionales = $this->model('Usuarioingresonoconsegananciasocasionales');
         $this->gananciasnogravadas = $this->model('Gananciasnogravadas');
         $this->usuariogananciasnogravadas = $this->model('Usuariogananciasnogravadas');
+        $this->tipodeduccion = $this->model('Tipodeduccion');
+        $this->tiporentaexededuccioncapital = $this->model('Tiporentaexededuccioncapital');
+        $this->tiporentaexededuccionlaboral = $this->model('Tiporentaexededuccionlaboral');
+        $this->tipoingresopensiones = $this->model('Tipoingresopensiones');
+        $this->tipoaportesobligatoriospensiones = $this->model('Tipoaportesobligatoriospensiones');
+        $this->tipoprestacion = $this->model('Tipoprestacion');
+        $this->tipoaporteobligatorio = $this->model('Tipoaporteobligatorio');
+        $this->tipoaportevoluntario = $this->model('Tipoaportevoluntario');
+        $this->tipopagoalimen = $this->model('Tipopagoalimen');
+        $this->tipoindemnizacion = $this->model('Tipoindemnizacion');
+        $this->tipoprimacancilleria = $this->model('Tipoprimacancilleria');
+        $this->tipointeresesrendicapital = $this->model('Tipointeresesrendicapital');
+        $this->tipootrosingresoscapital = $this->model('Tipootrosingresoscapital');
+        $this->tipoaporteobligatoriocapital = $this->model('Tipoaporteobligatoriocapital');
+        $this->tipoaportevoluntariocapital = $this->model('Tipoaportevoluntariocapital');
+        $this->tipootroscostogastocapital = $this->model('Tipootroscostogastocapital');
+        $this->tipovalorbrutoventaslaboral = $this->model('Tipovalorbrutoventaslaboral');
+        $this->tipoaporteobligatoriolaboralnoconse = $this->model('Tipoaporteobligatoriolaboralnoconse');
+        $this->tipootroscostogastolaboral = $this->model('Tipootroscostogastolaboral');
         parent::__construct();
         if (isset($_SESSION['email'])) {
             $this->usuario->setusuario($this->traersesion());
@@ -184,13 +268,60 @@ class Declaracion extends Controller
 
                     $idcedulageneral = $this->cedulageneral->crear($iddeclaracion);
 
-                    $this->rentatrabajo->crear($idcedulageneral);
+                    $idrentatrabajo = $this->rentatrabajo->crear($idcedulageneral);
 
-                    $this->rentacapital->crear($idcedulageneral);
+                    $idingresobruto = $this->ingresobruto->crear();
 
-                    $this->rentanolaboral->crear($idcedulageneral);
+                    $this->usuarioingresobruto->crear($idingresobruto, $idrentatrabajo, $this->usuario->getid());
+
+                    $idingresonoconse = $this->ingresonoconse->crear();
+
+                    $this->usuarioingresonoconse->crear($idingresonoconse, $idrentatrabajo, $this->usuario->getid());
+
+                    $idrentaexenta = $this->rentaexenta->crear();
+
+                    $this->usuariorentaexenta->crear($idrentaexenta, $idrentatrabajo, $this->usuario->getid());
+
+                    $idrentacapital = $this->rentacapital->crear($idcedulageneral);
+
+                    $idingresobrutocapital = $this->ingresobrutocapital->crear();
+
+                    $this->usuarioingresobrutocapital->crear($idingresobrutocapital, $idrentacapital, $this->usuario->getid());
+
+                    $idingresonoconsecapital = $this->ingresonoconsecapital->crear();
+
+                    $this->usuarioingresonoconsecapital->crear($idingresonoconsecapital, $idrentacapital, $this->usuario->getid());
+
+                    $idcostogastosproce = $this->costogastosproce->crear();
+
+                    $this->usuariocostogastosprocecapital->crear($idcostogastosproce, $idrentacapital, $this->usuario->getid());
+
+                    $idrentanolaboral = $this->rentanolaboral->crear($idcedulageneral);
+
+                    $idingresobrutolaboral = $this->ingresobrutolaboral->crear();
+
+                    $this->usuarioingresobrutolaboral->crear($idingresobrutolaboral, $idrentanolaboral, $this->usuario->getid());
+
+                    $idingresosnoconselaboral = $this->ingresosnoconselaboral->crear();
+
+                    $this->usuarioingresonoconselaboral->crear($idingresosnoconselaboral, $idrentanolaboral, $this->usuario->getid());
+
+                    $idcostogastosprocelaboral = $this->costogastosprocelaboral->crear();
+
+                    $this->usuariocostogastosprocelaboral->crear($idcostogastosprocelaboral, $idrentanolaboral, $this->usuario->getid());
+
                     
-                    $this->cedulapensiones->crear($iddeclaracion);
+                    $idcedulapensiones = $this->cedulapensiones->crear($iddeclaracion);
+
+                    $idingresobrutopensiones = $this->ingresosbrutospensiones->crear();
+
+                    $this->usuarioingresobrutopensiones->crear($idingresobrutopensiones, $idcedulapensiones, $this->usuario->getid());
+
+                    $idingresonoconsepensiones = $this->ingresonoconsepensiones->crear();
+
+                    $this->usuarioingresonoconsepensiones->crear($idingresonoconsepensiones, $idcedulapensiones, $this->usuario->getid());
+
+
 
                     $this->gananciasocasionales->crear($iddeclaracion);
 
@@ -295,7 +426,7 @@ class Declaracion extends Controller
         
     }
 
-    public function traertipo($clase, $tipo, $aspecto = null){
+    public function traertipo($clase, $tipo, $aspecto = null, $tipoaspecto = null, $tipodeltipoaspecto = null){
         if (isset($_SESSION['email'])) {
 
             if ((strtolower($this->usuario->getnomrol()) == "declarante") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
@@ -353,27 +484,167 @@ class Declaracion extends Controller
                     }
 
                 } else if ($clase == "cedulas") {
-
+                    
                     if ($tipo == "cedulageneral") {
 
                         if ($aspecto == "rentatrabajo") {
+                            
+                            if ($tipoaspecto == "ingresobruto") {
 
-                            # code...
+                                if ($tipodeltipoaspecto == "prestasociales") {
+                                    
+                                    $prestacion = $this->tipoprestacion->listar();
+                                    print_r(json_encode($prestacion));
+
+                                }
+
+                            } else if($tipoaspecto == "ingresosnoconse") {
+
+                                if ($tipodeltipoaspecto == "aportesobligatorios") {
+
+                                    $aporteobligatorio = $this->tipoaporteobligatorio->listar();
+                                    print_r(json_encode($aporteobligatorio));
+
+                                } else if ($tipodeltipoaspecto == "aportesvoluntarios") {
+
+                                    $aportevoluntario = $this->tipoaportevoluntario->listar();
+                                    print_r(json_encode($aportevoluntario));
+
+                                } else if ($tipodeltipoaspecto == "pagosalimen") {
+
+                                    $pagosalimen = $this->tipopagoalimen->listar();
+                                    print_r(json_encode($pagosalimen));
+
+                                }
+
+                            } else if ($tipoaspecto == "rentaexenta") {
+
+                                if ($tipodeltipoaspecto == "indemnizacion") {
+
+                                    $indemnizacion = $this->tipoindemnizacion->listar();
+                                    print_r(json_encode($indemnizacion));
+
+
+                                } else if ($tipodeltipoaspecto == "primacancilleria") {
+
+                                    $prima = $this->tipoprimacancilleria->listar();
+                                    print_r(json_encode($prima));
+
+                                }
+
+                            } else if ($tipoaspecto == "deducciones") {
+
+                                $deducciones = $this->tipodeduccion->listar();
+                                print_r(json_encode($deducciones));
+
+                            }
 
                         } else if ($aspecto == "rentacapital") {
 
-                            # code...
+                            if ($tipoaspecto == "rentaexentadeduccion") {
 
-                        } else if ($aspecto == "rentaexenta") {
+                                $rentaexentadeduccion = $this->tiporentaexededuccioncapital->listar();
+                                print_r(json_encode($rentaexentadeduccion));
 
-                            # code...
+                            } else if ($tipoaspecto == "ingresobrutocapital") {
+
+                                if ($tipodeltipoaspecto == "interesesrendimientos") {
+
+                                    $interesesrendimientos = $this->tipointeresesrendicapital->listar();
+                                    print_r(json_encode($interesesrendimientos));
+
+                                } else if ($tipodeltipoaspecto == "otrosingresos") {
+
+                                    $otrosingresos = $this->tipootrosingresoscapital->listar();
+                                    print_r(json_encode($otrosingresos));
+                                    
+                                }
+
+                            } else if ($tipoaspecto == "ingresosnoconsecapital") {
+
+                                if ($tipodeltipoaspecto == "aportesobligatorios") {
+
+                                    $aporteobligatoriocapital = $this->tipoaporteobligatoriocapital->listar();
+                                    print_r(json_encode($aporteobligatoriocapital));
+
+                                } else if ($tipodeltipoaspecto == "aportesvoluntarios") {
+
+                                    $aportesvoluntarioscapital = $this->tipoaportevoluntariocapital->listar();
+                                    print_r(json_encode($aportesvoluntarioscapital));
+
+                                }
+
+                            } else if ($tipoaspecto == "costogastoproce") {
+
+                                if ($tipodeltipoaspecto == "otroscostogastos") {
+
+                                    $otroscostosgastoscapital = $this->tipootroscostogastocapital->listar();
+                                    print_r(json_encode($otroscostosgastoscapital));
+
+                                }
+
+                            }
+
+                        } else if ($aspecto == "rentanolaboral") {
+
+                            if ($tipoaspecto == "rentaexentadeduccion") {
+
+                                $rentaexentadeduccion = $this->tiporentaexededuccionlaboral->listar();
+                                print_r(json_encode($rentaexentadeduccion));
+
+                            } else if ($tipoaspecto == "ingresobrutonolaboral") {
+                                
+                                if ($tipodeltipoaspecto == "valorbrutoventas") {
+
+                                    $valorbrutoventas = $this->tipovalorbrutoventaslaboral->listar();
+                                    print_r(json_encode($valorbrutoventas));
+
+                                }
+
+                            } else if ($tipoaspecto == "ingresosnoconsenolaboral") {
+
+                                if ($tipodeltipoaspecto == "aportesobligatorios") {
+                                    
+                                    $aportesobligatoriosnolaboral = $this->tipoaporteobligatoriolaboralnoconse->listar();
+                                    print_r(json_encode($aportesobligatoriosnolaboral));
+
+                                }
+
+                            } else if ($tipoaspecto == "costogastoproce") {
+
+                                if ($tipodeltipoaspecto == "otroscostogastos") {
+                                
+                                    $otroscostogastosnolaboral = $this->tipootroscostogastolaboral->listar();
+                                    print_r(json_encode($otroscostogastosnolaboral));
+
+                                }
+
+                            }
 
                         }
 
 
                     } else if ($tipo == "cedulapensiones") {
 
-                        # code...
+                        if ($aspecto == "ingresobruto") {
+
+                            if ($tipoaspecto == "ingresopensiones") {
+                                
+                                $ingresopensiones = $this->tipoingresopensiones->listar();
+                                print_r(json_encode($ingresopensiones));
+
+                            }
+
+                        } else if ($aspecto == "ingresonoconse") {
+                            
+                            if ($tipoaspecto == "aportesobligatorios") {
+
+                                $aportesobligatorios = $this->tipoaportesobligatoriospensiones->listar();
+                                print_r(json_encode($aportesobligatorios));
+
+                            }
+
+                        }
 
                     } else if ($tipo == "ceduladividendosyparticipaciones") {
 
@@ -394,7 +665,7 @@ class Declaracion extends Controller
         }
     }
 
-    public function creardeclaracion($clase, $tipo, $id = null){
+    public function creardeclaracion($clase, $tipo, $id = null, $aspecto = null, $tipoaspecto = null){
         if (isset($_SESSION['email'])) {
 
             if ((strtolower($this->usuario->getnomrol()) == "declarante") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
@@ -493,6 +764,242 @@ class Declaracion extends Controller
 
                     }
 
+                } else if ($clase == "cedulageneral") {
+        
+                    if ($tipo == "rentatrabajo") {
+            
+                        if ($id == "ingresobruto") {
+            
+                            if ($aspecto == "salario") {
+            
+            
+            
+                            } else if ($aspecto == "honorarios")  {
+            
+            
+            
+                            } else if ($aspecto == "viaticos") {
+            
+            
+            
+                            } else if ($aspecto == "otrospagos") {
+            
+            
+            
+                            } else if ($aspecto == "prestasociales"){
+            
+            
+            
+                            }
+            
+                        } else if ($id == "ingresosnoconse") {
+            
+                            if ($aspecto == "aportesobligatorios") {
+                                
+                            }  else if ($aspecto == "aportesvoluntarios"){
+            
+                            } else if ($aspecto == "aporteseconoedu") {
+            
+                            } else if ($aspecto == "pagosalimen") {
+            
+                            }
+            
+                        }  else if ($id == "deducciones"){
+            
+            
+            
+                        } else if ($id == "rentaexenta") {
+            
+                            if ($aspecto == "indemnizacion") {
+            
+                            } else if ($aspecto == "gastosrepresentacion"){
+            
+                            } else if ($aspecto == "primacancilleria") {
+            
+                            } else if ($aspecto == "fuerzapublica") {
+            
+                                if ($tipoaspecto == "seguromuerte") {
+                                    
+                                } else if ($tipoaspecto == "excesosalariobasico") {
+                                    
+                                }
+            
+                            }
+            
+                        }
+            
+                    } else if ($tipo == "rentacapital") {
+            
+                        if ($id == "ingresobrutocapital") {
+            
+                            if ($aspecto == "interesesrendimientos") {
+            
+            
+            
+                            } else if ($aspecto == "otrosingresos"){
+            
+            
+            
+                            }
+            
+                        } else if ($id == "ingresosnoconsecapital") {
+            
+                            if ($aspecto == "aportesobligatorios") {
+            
+            
+            
+                            } else if ($aspecto == "aportesvoluntarios") {
+            
+            
+            
+                            }
+            
+                        } else if ($id == "costogastoproce"){
+            
+                            if ($aspecto == "interesesprestamos") {
+            
+            
+            
+                            } else if ($aspecto == "otroscostogastos") {
+            
+            
+            
+                            }
+            
+                        } else if ($id == "rentaliqpasece") {
+            
+            
+            
+                        } else if ($id == "rentaexentadeduccion") {
+            
+            
+            
+                        }
+                        
+                    } else if ($tipo == "rentanolaboral") {
+            
+                        if ($id == "ingresobrutonolaboral") {
+            
+                            if ($aspecto == "ingresosnoclasifican") {
+                            
+                            } else if ($aspecto == "indemnizacionnolabo") {
+            
+                            } else if ($aspecto == "recompensas") {
+            
+                            } else if ($aspecto == "derechosexplotpropie"){
+            
+                            } else if ($aspecto == "explotfranquicias"){
+            
+                            }  else if ($aspecto == "recibidosgananciales"){
+            
+                            }  else if ($aspecto == "retirodinerosfondovolu") {
+                                
+                            } else if ($aspecto == "apoyoseconoestado") {
+            
+                            } else if ($aspecto == "campanniaspoliticas"){
+            
+                            } else if ($aspecto == "valorbrutoventas"){
+            
+                            }
+            
+                        }  else if ($id == "devdescreb") {
+            
+            
+            
+                        } else if ($id == "ingresosnoconsenolaboral") {
+            
+                            if ($aspecto == "aportesobligatorios") {
+            
+                            }  else if ($aspecto == "aportesvoluntarios") {
+            
+                            }  else if ($aspecto == "recompensas") {
+            
+                            }  else if ($aspecto == "recibidosgananciales") {
+            
+                            } else if ($aspecto == "honorariosdesaproyec") {
+            
+                            } else if ($aspecto == "aporteseconoedu") {
+            
+                            } else if ($aspecto == "campanniaspoliticas"){
+            
+                            } else if ($aspecto == "indemnizaaseguradores"){
+            
+                            } else if ($aspecto == "agroingresoseguro"){
+            
+                            }
+            
+                        } else if ($id == "costogastoproce") {
+            
+                            if ($aspecto == "interesesprestamos") {
+            
+                            } else if ($aspecto == "otroscostogastos") {
+            
+                            }  else if ($aspecto == "costofiscal") {
+            
+                            }
+            
+                        } else if ($id == "rentaliqpasece"){
+            
+            
+            
+                        } else if ($id == "rentaexentadeduccion"){
+            
+            
+            
+                        }
+            
+                    }
+                    
+                } else if ($clase == "cedulapensiones") {
+            
+                    if ($tipo == "ingresobruto") {
+                        
+                        if ($id == "ingresopensiones") {
+            
+                        } else if ($id == "devolucionesahorro"){
+            
+                        } else if ($id == "indemnizacionsustitutas"){
+            
+                        } else if ($id == "pensionesexterior") {
+                            
+                        }
+            
+                    } else if ($tipo == "ingresonoconse") {
+            
+                        if ($id == "aportesobligatorios") {
+                            
+                        }
+            
+                    } else if ($tipo == "rentaexenta") {
+            
+            
+            
+                    }
+            
+                } else if ($clase == "ceduladividendosyparticipaciones") {
+            
+                    if ($tipo == "dividendosyparticipaciones") {
+                        
+            
+            
+                    } else if ($tipo == "subcedula1a") {
+            
+            
+                        
+                    }else if ($tipo == "subcedula2a") {
+            
+            
+                        
+                    }else if ($tipo == "ingresosnoconse") {
+                        
+            
+            
+                    }else if ($tipo == "rentaliquidaece") {
+            
+            
+                        
+                    }
+                    
                 }
 
             } else{

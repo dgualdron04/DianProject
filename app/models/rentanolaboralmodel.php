@@ -12,7 +12,9 @@ class Rentanolaboralmodel extends Models{
 
             $query->execute([0,0,0,0,$idcedulageneral]);
 
-            return true;
+            $idrentanolaboral = $connect->lastInsertId();
+
+            return $idrentanolaboral;
 
         } else {
 

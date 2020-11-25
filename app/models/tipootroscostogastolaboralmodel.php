@@ -5,6 +5,15 @@ class Tipootroscostogastolaboralmodel extends Models{
 
     private $tablatipootroscostogastolaboral = "tipootroscostogastolaboral";
 
+    public function listar(){
+
+        $query = $this->db->connect()->prepare('SELECT tocgl.idtipootroscostogastolaboral, tocgl.nombre, tocgl.descripcion, tocgl.ayuda FROM '.$this->tablatipootroscostogastolaboral.' tocgl ;');
+        $query->execute();
+        $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $myquery;
+
+    }
+
     public function crear($nombre, $descripcion, $ayuda){
 
         if ($query = $this->db->connect()->prepare('INSERT INTO '.$this->tablatipootroscostogastolaboral.'(nombre, descripcion, ayuda) VALUES (?,?,?)')) {
