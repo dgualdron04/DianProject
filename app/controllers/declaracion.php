@@ -23,6 +23,8 @@ class Declaracion extends Controller
     private $usuarioingresobrutocapital;
     private $ingresonoconsecapital;
     private $usuarioingresonoconsecapital;
+    private $costogastosprocecapital;
+    private $usuariocostogastosprocecapital;
 
     private $rentanolaboral;
     private $ingresobrutolaboral;
@@ -111,6 +113,8 @@ class Declaracion extends Controller
         $this->ingresonoconsecapital = $this->model('Ingresonoconsecapital');
         $this->usuarioingresonoconsecapital = $this->model('Usuarioingresonoconsecapital');
         $this->usuarioingresobrutopensiones = $this->model('Usuarioingresobrutopensiones');
+        $this->costogastosprocecapital = $this->model('Costogastosprocecapital');
+        $this->usuariocostogastosprocecapital = $this->model('Usuariocostogastosprocecapital');
 
         $this->rentanolaboral = $this->model('Rentanolaboral');
         $this->ingresobrutolaboral = $this->model('Ingresobrutolaboral');
@@ -292,7 +296,7 @@ class Declaracion extends Controller
 
                     $this->usuarioingresonoconsecapital->crear($idingresonoconsecapital, $idrentacapital, $this->usuario->getid());
 
-                    $idcostogastosproce = $this->costogastosproce->crear();
+                    $idcostogastosproce = $this->costogastosprocecapital->crear();
 
                     $this->usuariocostogastosprocecapital->crear($idcostogastosproce, $idrentacapital, $this->usuario->getid());
 
