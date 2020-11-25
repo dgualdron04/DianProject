@@ -3,6 +3,8 @@
 class Ingresosbrutospensionesmodel extends Models{
 
     private $tablaingresosbrutospensiones = "ingresosbrutospensiones";
+    private $tablausuarioingresobrutopensiones = "usuarioingresobrutopensiones";
+    private $tablacedulapensiones = "cedulapensiones";
 
     public function crear(){
         $connect = $this->db->connect();
@@ -21,6 +23,13 @@ class Ingresosbrutospensionesmodel extends Models{
 
         }
 
+    }
+
+    public function traerid($id){
+        $query = $this->db->connect()->prepare('SELECT ibp.idingresosbrutospensiones AS "id" FROM '.$this->tablaingresosbrutospensiones.' ibp JOIN '.$this->tablausuarioingresobrutopensiones.' uibp ON uibp.idingresosbrutospensiones = ibp.idingresosbrutospensiones JOIN '.$this->tablacedulapensiones.' cp ON cp.idcedulapensiones = uibp.idcedulapensiones WHERE cp.iddeclaracion = ?');
+        $query->execute([$id]);
+        $query = $query->fetch(PDO::FETCH_ASSOC);
+        return $query['id'];
     }
 
 }

@@ -152,8 +152,22 @@
 
             <div class="tab-pane show" id="cedulas">
                 <p></p>
-
-                <p class="scond scond-2" id="idcedulas"><!--?php echo $data[0][3] ?!--></p>
+                <p class="scond scond-2" id="idingresobrutorentatrabajo"><?php echo $data[0][1][0] ?></p>
+                <p class="scond scond-2" id="idrentaexentarentatrabajo"><?php echo $data[0][1][1] ?></p>
+                <p class="scond scond-2" id="idingresonoconserentatrabajo"><?php echo $data[0][1][2] ?></p>
+                <p class="scond scond-2" id="idrentatrabajo"><?php echo $data[0][1][3] ?></p>
+                <p class="scond scond-2" id="idfuerzapublica"><?php echo $data[0][1][4] ?></p>
+                <p class="scond scond-2" id="idingresobrutorentacapital"><?php echo $data[0][1][5] ?></p>
+                <p class="scond scond-2" id="idingresosnoconsecapital"><?php echo $data[0][1][6] ?></p>
+                <p class="scond scond-2" id="idcostogastosprocecapital"><?php echo $data[0][1][6] ?></p>
+                <p class="scond scond-2" id="idrentacapital"><?php echo $data[0][1][7] ?></p>
+                <p class="scond scond-2" id="idceduladiviparti"><?php echo $data[0][1][8] ?></p>
+                <p class="scond scond-2" id="idingresobrutopensiones"><?php echo $data[0][1][9] ?></p>
+                <p class="scond scond-2" id="idingresonoconsepensiones"><?php echo $data[0][1][10] ?></p>
+                <p class="scond scond-2" id="idingresobrutolaboral"><?php echo $data[0][1][11] ?></p>
+                <p class="scond scond-2" id="idingresosnoconselaboral"><?php echo $data[0][1][12] ?></p>
+                <p class="scond scond-2" id="idcostogastosprocelaboral"><?php echo $data[0][1][14] ?></p>
+                <p class="scond scond-2" id="idrentanolaboral"><?php echo $data[0][1][15] ?></p>
                 
                 <!--div class="only-flex">
                     <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p>

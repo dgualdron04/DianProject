@@ -213,7 +213,8 @@ tiporentacedulacrear.addEventListener('change', () => {
                 <option value="honorarios">Honorarios</option>
                 <option value="prestasociales">Prestaciones Sociales</option>
                 <option value="otrospagos">Otros Pagos</option>
-                <option value="viaticos">Viaticos</option>`;
+                <option value="viaticos">Viaticos</option>
+                <option value="cesantiaintereses">Cesantía de intereses</option>`;
                 
             } else if (tiporentacedulacrear.value === "ingresosnoconse") {
 
@@ -463,6 +464,8 @@ aspectoscedulascrear.addEventListener('change', () => {
                         urlactual: location.href,
                     });
 
+                } else if (aspectoscedulascrear.value === "cesantiaintereses") {
+                    nextBtnFirstcedulas.classList.remove('isdisabled');
                 }
                 
             } else if (tiporentacedulacrear.value === "ingresosnoconse") {
@@ -644,11 +647,10 @@ aspectoscedulascrear.addEventListener('change', () => {
                     let formData = new FormData();
                     let param = true;
                     formData.append("param", param);
-                    formData.append("param", param);
                     ajax({
                         url: `./declaracion/traertipo/cedulas/cedulageneral/rentacapital/costogastoproce/otroscostogastos`,
                         method: 'POST',
-                        done: llenaraportesvoluntarioscapital,
+                        done: llenarotroscostosgastoscapital,
                         error: rendererror,
                         form: formData,
                         urlactual: location.href,
@@ -1198,6 +1200,28 @@ function llenarotroscostosgastosnolaboral(datos) {
 
 //#endregion
 
+//#region Llenar otros costos de gastos capitales
+
+function llenarotroscostosgastoscapital(datos) {
+    if (datos !== null) {
+        divtiposubaspectoscrearcedula.classList.remove('scond');
+        tiposubaspectoscedulascrear.removeAttribute('disabled');
+        tiposubaspectoscedulascrear.innerHTML = `<option selected="true" disabled="disabled" class="noselected">Seleccione el Tipo del Sub Aspecto</option>`;
+        datos.forEach(tipos => {
+            tiposubaspectoscedulascrear.innerHTML += `<option value="${tipos['idtipootroscostogastocapital']}">${tipos['nombre']}</option>`;
+            
+            tiposubaspectoscedulascrear.addEventListener('change', () => {
+                if (aspectoscedulascrear.value === "otroscostogastos" && tiposubaspectoscedulascrear.value == `${tipos['idtipootroscostogastocapital']}`) {
+                    nextBtnFirstcedulas.classList.remove('isdisabled');
+                }
+            });
+            
+        });
+    }
+}
+
+//#endregion
+
 //#region Elegir los campos a presentar
 
 nextBtnFirstcedulas.addEventListener('click', (e) => {
@@ -1208,7 +1232,7 @@ nextBtnFirstcedulas.addEventListener('click', (e) => {
     if (cedulacrear.value === "cedulageneral") {
         if (aspectoscedulascrear.value === "salario") {
 
-            divnombrecrearcedulas.classList.add('scond');
+            divnombrecrearcedulas.classList.remove('scond');
             divmesessalariocedulascrear.classList.remove('scond');
             divvalorcedulascrear.classList.remove('scond');
 
@@ -1231,7 +1255,9 @@ nextBtnFirstcedulas.addEventListener('click', (e) => {
         aspectoscedulascrear.value === "campanniaspoliticas" ||
         aspectoscedulascrear.value === "honorariosdesaproyec" || 
         aspectoscedulascrear.value === "indemnizaaseguradores" ||
-        aspectoscedulascrear.value === "agroingresoseguro") {
+        aspectoscedulascrear.value === "agroingresoseguro" ||
+        aspectoscedulascrear.value === "cesantiaintereses" ||
+        aspectoscedulascrear.value === "valorbrutoventas") {
             
             divnombrecrearcedulas.classList.remove('scond');
             divmesessalariocedulascrear.classList.add('scond');
@@ -1257,7 +1283,6 @@ nextBtnFirstcedulas.addEventListener('click', (e) => {
         aspectoscedulascrear.value === "indemnizacionnolabo" ||
         aspectoscedulascrear.value === "retirodinerosfondovolu" ||
         aspectoscedulascrear.value === "recibidosgananciales" ||
-        aspectoscedulascrear.value === "valorbrutoventas" ||
         aspectoscedulascrear.value === "costofiscal") {
             
             divnombrecrearcedulas.classList.add('scond');
@@ -1326,7 +1351,9 @@ nextBtnFirstcedulas.addEventListener('click', (e) => {
 
 let formcrearcedulas = document.getElementById('form-crear-cedulas');
 
-formcrearcedulas.addEventListener('submit', () => {
+formcrearcedulas.addEventListener('submit', (e) => {
+
+    e.preventDefault();
 
     if (cedulacrear.value == "cedulageneral") {
         
@@ -1336,56 +1363,275 @@ formcrearcedulas.addEventListener('submit', () => {
 
                 if (aspectoscedulascrear.value === "salario") {
 
-
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutorentatrabajo = document.getElementById('idingresobrutorentatrabajo').innerHTML;
+                    formData.append("idingresobrutorentatrabajo", idingresobrutorentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresobruto/salario`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "honorarios")  {
 
-
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutorentatrabajo = document.getElementById('idingresobrutorentatrabajo').innerHTML;
+                    formData.append("idingresobrutorentatrabajo", idingresobrutorentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresobruto/honorarios`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "viaticos") {
 
-
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutorentatrabajo = document.getElementById('idingresobrutorentatrabajo').innerHTML;
+                    formData.append("idingresobrutorentatrabajo", idingresobrutorentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresobruto/viaticos`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "otrospagos") {
 
-
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutorentatrabajo = document.getElementById('idingresobrutorentatrabajo').innerHTML;
+                    formData.append("idingresobrutorentatrabajo", idingresobrutorentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresobruto/otrospagos`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "prestasociales"){
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutorentatrabajo = document.getElementById('idingresobrutorentatrabajo').innerHTML;
+                    formData.append("idingresobrutorentatrabajo", idingresobrutorentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresobruto/prestasociales`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
+                } else if (aspectoscedulascrear.value === "cesantiaintereses") {
+                    
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresobrutorentatrabajo = document.getElementById('idingresobrutorentatrabajo').innerHTML;
+                    let idrentaexentarentatrabajo = document.getElementById('idrentaexentarentatrabajo').innerHTML;
+                    formData.append("idingresobrutorentatrabajo", idingresobrutorentatrabajo);
+                    formData.append("idrentaexentarentatrabajo", idrentaexentarentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresobruto/cesantiaintereses`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 }
 
             } else if (tiporentacedulacrear.value === "ingresosnoconse") {
 
                 if (aspectoscedulascrear.value === "aportesobligatorios") {
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresonoconserentatrabajo = document.getElementById('idingresonoconserentatrabajo').innerHTML;
+                    formData.append("idingresonoconserentatrabajo", idingresonoconserentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresosnoconse/aportesobligatorios`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
                     
                 }  else if (aspectoscedulascrear.value === "aportesvoluntarios"){
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresonoconserentatrabajo = document.getElementById('idingresonoconserentatrabajo').innerHTML;
+                    let idrentaexentarentatrabajo = document.getElementById('idrentaexentarentatrabajo').innerHTML;
+                    formData.append("idingresonoconserentatrabajo", idingresonoconserentatrabajo);
+                    formData.append("idrentaexentarentatrabajo", idrentaexentarentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresosnoconse/aportesvoluntarios`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "aporteseconoedu") {
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresonoconserentatrabajo = document.getElementById('idingresonoconserentatrabajo').innerHTML;
+                    formData.append("idingresonoconserentatrabajo", idingresonoconserentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresosnoconse/aporteseconoedu`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "pagosalimen") {
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresonoconserentatrabajo = document.getElementById('idingresonoconserentatrabajo').innerHTML;
+                    formData.append("idingresonoconserentatrabajo", idingresonoconserentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/ingresosnoconse/pagosalimen`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 }
 
             }  else if (tiporentacedulacrear.value === "deducciones"){
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idrentatrabajo = document.getElementById('idrentatrabajo').innerHTML;
+                    formData.append("idrentatrabajo", idrentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/deducciones`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
 
             } else if (tiporentacedulacrear.value === "rentaexenta") {
 
                 if (aspectoscedulascrear.value === "indemnizacion") {
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idrentaexentarentatrabajo = document.getElementById('idrentaexentarentatrabajo').innerHTML;
+                    formData.append("idrentaexentarentatrabajo", idrentaexentarentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/rentaexenta/indemnizacion`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "gastosrepresentacion"){
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idrentaexentarentatrabajo = document.getElementById('idrentaexentarentatrabajo').innerHTML;
+                    formData.append("idrentaexentarentatrabajo", idrentaexentarentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/rentaexenta/gastosrepresentacion`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "primacancilleria") {
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idrentaexentarentatrabajo = document.getElementById('idrentaexentarentatrabajo').innerHTML;
+                    formData.append("idrentaexentarentatrabajo", idrentaexentarentatrabajo);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/rentaexenta/primacancilleria`,
+                        method: 'POST',
+                        done: setTimeout(() => {location.reload();}, 200),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "fuerzapublica") {
 
                     if (tiposubaspectoscedulascrear.value === "seguromuerte") {
                         
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idfuerzapublica = document.getElementById('idfuerzapublica').innerHTML;
+                        formData.append("idfuerzapublica", idfuerzapublica);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/rentaexenta/fuerzapublica/seguromuerte`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                     } else if (tiposubaspectoscedulascrear.value === "excesosalariobasico") {
                         
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idfuerzapublica = document.getElementById('idfuerzapublica').innerHTML;
+                        formData.append("idfuerzapublica", idfuerzapublica);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentatrabajo/rentaexenta/fuerzapublica/excesosalariobasico`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                     }
 
                 }
@@ -1398,11 +1644,35 @@ formcrearcedulas.addEventListener('submit', () => {
 
                 if (aspectoscedulascrear.value === "interesesrendimientos") {
 
-
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutorentacapital = document.getElementById('idingresobrutorentacapital').innerHTML;
+                        formData.append("idingresobrutorentacapital", idingresobrutorentacapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/ingresobrutocapital/interesesrendimientos`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 } else if (aspectoscedulascrear.value === "otrosingresos"){
 
-
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutorentacapital = document.getElementById('idingresobrutorentacapital').innerHTML;
+                        formData.append("idingresobrutorentacapital", idingresobrutorentacapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/ingresobrutocapital/otrosingresos`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 }
 
@@ -1410,11 +1680,35 @@ formcrearcedulas.addEventListener('submit', () => {
 
                 if (aspectoscedulascrear.value === "aportesobligatorios") {
 
-
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresosnoconsecapital = document.getElementById('idingresosnoconsecapital').innerHTML;
+                        formData.append("idingresosnoconsecapital", idingresosnoconsecapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/ingresosnoconsecapital/aportesobligatorios`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 } else if (aspectoscedulascrear.value === "aportesvoluntarios") {
 
-
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresosnoconsecapital = document.getElementById('idingresosnoconsecapital').innerHTML;
+                        formData.append("idingresosnoconsecapital", idingresosnoconsecapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/ingresosnoconsecapital/aportesvoluntarios`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 }
 
@@ -1422,21 +1716,69 @@ formcrearcedulas.addEventListener('submit', () => {
 
                 if (aspectoscedulascrear.value === "interesesprestamos") {
 
-
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idcostogastosprocecapital = document.getElementById('idcostogastosprocecapital').innerHTML;
+                        formData.append("idcostogastosprocecapital", idcostogastosprocecapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/costogastoproce/interesesprestamos`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 } else if (aspectoscedulascrear.value === "otroscostogastos") {
 
-
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idcostogastosprocecapital = document.getElementById('idcostogastosprocecapital').innerHTML;
+                        formData.append("idcostogastosprocecapital", idcostogastosprocecapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/costogastoproce/otroscostogastos`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 }
 
             } else if (tiporentacedulacrear.value === "rentaliqpasece") {
 
-
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idrentacapital = document.getElementById('idcostogastosprocecapital').innerHTML;
+                        formData.append("idrentacapital", idrentacapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/rentaliqpasece`,
+                            method: 'POST',
+                            done: setTimeout(() => {location.reload();}, 200),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
             } else if (tiporentacedulacrear.value === "rentaexentadeduccion") {
 
-
+                        let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idrentacapital = document.getElementById('idcostogastosprocecapital').innerHTML;
+                        formData.append("idrentacapital", idrentacapital);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentacapital/rentaexentadeduccion`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
             }
             
@@ -1446,49 +1788,327 @@ formcrearcedulas.addEventListener('submit', () => {
 
                 if (aspectoscedulascrear.value === "ingresosnoclasifican") {
                 
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/ingresosnoclasifican`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                 } else if (aspectoscedulascrear.value === "indemnizacionnolabo") {
+
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/indemnizacionnolabo`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 } else if (aspectoscedulascrear.value === "recompensas") {
 
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/recompensas`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                 } else if (aspectoscedulascrear.value === "derechosexplotpropie"){
+
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/derechosexplotpropie`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 } else if (aspectoscedulascrear.value === "explotfranquicias"){
 
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/explotfranquicias`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                 }  else if (aspectoscedulascrear.value === "recibidosgananciales"){
+
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/recibidosgananciales`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 }  else if (aspectoscedulascrear.value === "retirodinerosfondovolu") {
                     
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/retirodinerosfondovolu`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                 } else if (aspectoscedulascrear.value === "apoyoseconoestado") {
+
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/apoyoseconoestado`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 } else if (aspectoscedulascrear.value === "campanniaspoliticas"){
 
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/campanniaspoliticas`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                 } else if (aspectoscedulascrear.value === "valorbrutoventas"){
+
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresobrutolaboral = document.getElementById('idingresobrutolaboral').innerHTML;
+                        formData.append("idingresobrutolaboral", idingresobrutolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresobrutonolaboral/valorbrutoventas`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 }
 
             }  else if (tiporentacedulacrear.value === "devdescreb") {
-
-
+                
+                let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idrentanolaboral = document.getElementById('idrentanolaboral').innerHTML;
+                        formData.append("idrentanolaboral", idrentanolaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/devdescreb`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
             } else if (tiporentacedulacrear.value === "ingresosnoconsenolaboral") {
 
                 if (aspectoscedulascrear.value === "aportesobligatorios") {
 
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                        formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/aportesobligatorios`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
+
                 }  else if (aspectoscedulascrear.value === "aportesvoluntarios") {
+
+                    let formData = new FormData(formcrearcedulas);
+                        let param = true;
+                        formData.append("param", param);
+                        let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                        formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                        ajax({
+                            url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/aportesvoluntarios`,
+                            method: 'POST',
+                            done: console.log('si'),
+                            error: rendererror,
+                            form: formData,
+                            urlactual: location.href,
+                        });
 
                 }  else if (aspectoscedulascrear.value === "recompensas") {
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/recompensas`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 }  else if (aspectoscedulascrear.value === "recibidosgananciales") {
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/recibidosgananciales`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "honorariosdesaproyec") {
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/honorariosdesaproyec`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "aporteseconoedu") {
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/aporteseconoedu`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 } else if (aspectoscedulascrear.value === "campanniaspoliticas"){
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/campanniaspoliticas`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "indemnizaaseguradores"){
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/indemnizaaseguradores`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "agroingresoseguro"){
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idingresosnoconselaboral = document.getElementById('idingresosnoconselaboral').innerHTML;
+                    formData.append("idingresosnoconselaboral", idingresosnoconselaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/ingresosnoconsenolaboral/agroingresoseguro`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 }
 
@@ -1496,9 +2116,51 @@ formcrearcedulas.addEventListener('submit', () => {
 
                 if (aspectoscedulascrear.value === "interesesprestamos") {
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idcostogastosprocelaboral = document.getElementById('idcostogastosprocelaboral').innerHTML;
+                    formData.append("idcostogastosprocelaboral", idcostogastosprocelaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/costogastoproce/interesesprestamos`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 } else if (aspectoscedulascrear.value === "otroscostogastos") {
 
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idcostogastosprocelaboral = document.getElementById('idcostogastosprocelaboral').innerHTML;
+                    formData.append("idcostogastosprocelaboral", idcostogastosprocelaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/costogastoproce/otroscostogastos`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
+
                 }  else if (aspectoscedulascrear.value === "costofiscal") {
+
+                    let formData = new FormData(formcrearcedulas);
+                    let param = true;
+                    formData.append("param", param);
+                    let idcostogastosprocelaboral = document.getElementById('idcostogastosprocelaboral').innerHTML;
+                    formData.append("idcostogastosprocelaboral", idcostogastosprocelaboral);
+                    ajax({
+                        url: `./declaracion/creardeclaracion/cedulageneral/rentanolaboral/costogastoproce/costofiscal`,
+                        method: 'POST',
+                        done: console.log('si'),
+                        error: rendererror,
+                        form: formData,
+                        urlactual: location.href,
+                    });
 
                 }
 
@@ -1531,7 +2193,7 @@ formcrearcedulas.addEventListener('submit', () => {
         } else if (tipocedulacrear.value === "ingresonoconse") {
 
             if (tiporentacedulacrear.value === "aportesobligatorios") {
-                
+
             }
 
         } else if (tipocedulacrear.value === "rentaexenta") {
@@ -1544,7 +2206,7 @@ formcrearcedulas.addEventListener('submit', () => {
 
         if (tipocedulacrear.value === "dividendosyparticipaciones") {
             
-
+                        
 
         } else if (tipocedulacrear.value === "subcedula1a") {
 

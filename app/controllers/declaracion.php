@@ -92,6 +92,59 @@ class Declaracion extends Controller
     private $tipoaporteobligatoriolaboralnoconse;
     private $tipootroscostogastolaboral;
 
+    private $salario;
+    private $honorarios;
+    private $viaticos;
+    private $otrospagos;
+    private $cesantiaintereses;
+    private $prestasociales;
+    private $aporteobligatorio;
+    private $aportevoluntario;
+    private $aporteseconoedu;
+    private $pagosalimen;
+    private $deducciones;
+    private $usuariodeducciones;
+    private $indemnizacion;
+    private $gastosrepresentacion;
+    private $primacancilleria;
+    private $fuerzapublica;
+    private $seguromuerte;
+    private $excesosalariobasico;
+    private $interesesrendimientoscapital;
+    private $otrosingresoscapital;
+    private $aporteobligatoriocapital;
+    private $aportevoluntariocapital;
+    private $interesesprestamoscapital;
+    private $otroscostogastoscapital;
+    private $rentaliqpasececapital;
+    private $usuariorentaliqpasececapital;
+    private $rentaexededuccioncapital;
+    private $usuariorentaexededuccioncapital;
+    private $ingresosnoclasificanlaboral;
+    private $indemnizacionnolaboral;
+    private $derechosexplotpropielaboral;
+    private $recompensaslaboral;
+    private $recibidosganancialeslaboral;
+    private $explotfranquiciaslaboral;
+    private $apoyoseconoestadolaboral;
+    private $retirodinerosfondovolulaboral;
+    private $valorbrutoventaslaboral;
+    private $campanniaspoliticaslaboral;
+    private $devdescreblaboral;
+    private $usuariodevdescreblaboral;
+    private $aportesvoluntarioslaboralnoconse;
+    private $aportesobligatorioslaboralnoconse;
+    private $recompensaslaboralnoconse;
+    private $recibidosganancialeslaboralnoconse;
+    private $honorariosdesaproyeclaboral;
+    private $aporteseconoedulaboralnoconse;
+    private $campanniaspoliticaslaboralnoconse;
+    private $indemnizaaseguradoreslaboralnoconse;
+    private $agroingresosegurolaboralnoconse;
+    private $otroscostogastolaboral;
+    private $costofiscallaboral;
+    private $interesesprestamoslaboral;
+
     public function __construct()
     {
         $this->usuario = $this->model('Usuario');
@@ -106,6 +159,7 @@ class Declaracion extends Controller
         $this->usuarioingresonoconse = $this->model('Usuarioingresonoconse');
         $this->rentaexenta = $this->model('Rentaexenta');
         $this->usuariorentaexenta = $this->model('Usuariorentaexenta');
+        $this->fuerzapublica = $this->model('Fuerzapublica');
 
         $this->rentacapital = $this->model('Rentacapital');
         $this->ingresobrutocapital = $this->model('Ingresobrutocapital');
@@ -181,6 +235,59 @@ class Declaracion extends Controller
         $this->tipovalorbrutoventaslaboral = $this->model('Tipovalorbrutoventaslaboral');
         $this->tipoaporteobligatoriolaboralnoconse = $this->model('Tipoaporteobligatoriolaboralnoconse');
         $this->tipootroscostogastolaboral = $this->model('Tipootroscostogastolaboral');
+        
+        $this->salario = $this->model('Salario');
+        $this->honorarios = $this->model('Honorarios');
+        $this->viaticos = $this->model('Viaticos');
+        $this->otrospagos = $this->model('Otrospagos');
+        $this->cesantiaintereses = $this->model('Cesantiaintereses');
+        $this->prestasociales = $this->model('Prestasociales');
+        $this->aporteobligatorio = $this->model('Aporteobligatorio');
+        $this->aportevoluntario = $this->model('Aportevoluntario');
+        $this->aporteseconoedu = $this->model('Aporteseconoedu');
+        $this->pagosalimen = $this->model('Pagosalimen');
+        $this->deducciones = $this->model('Deducciones');
+        $this->usuariodeducciones = $this->model('Usuariodeducciones');
+        $this->indemnizacion = $this->model('Indemnizacion');
+        $this->gastosrepresentacion = $this->model('Gastosrepresentacion');
+        $this->primacancilleria = $this->model('Primacancilleria');
+        $this->seguromuerte = $this->model('Seguromuerte');
+        $this->excesosalariobasico = $this->model('Excesosalariobasico');
+        $this->interesesrendimientoscapital = $this->model('Interesesrendimientoscapital');
+        $this->otrosingresoscapital = $this->model('Otrosingresoscapital');
+        $this->aporteobligatoriocapital = $this->model('Aporteobligatoriocapital');
+        $this->aportevoluntariocapital = $this->model('Aportevoluntariocapital');
+        $this->interesesprestamoscapital = $this->model('Interesesprestamoscapital');
+        $this->otroscostogastoscapital = $this->model('Otroscostogastoscapital');
+        $this->rentaliqpasececapital = $this->model('Rentaliqpasececapital');
+        $this->usuariorentaliqpasececapital = $this->model('Usuariorentaliqpasececapital');
+        $this->rentaexededuccioncapital = $this->model('Rentaexededuccioncapital');
+        $this->usuariorentaexededuccioncapital = $this->model('Usuariorentaexededuccioncapital');
+        $this->ingresosnoclasificanlaboral = $this->model('Ingresosnoclasificanlaboral');
+        $this->indemnizacionnolaboral = $this->model('Indemnizacionnolaboral');
+        $this->recompensaslaboral = $this->model('Recompensaslaboral');
+        $this->derechosexplotpropielaboral = $this->model('Derechosexplotpropielaboral');
+        $this->explotfranquiciaslaboral = $this->model('Explotfranquiciaslaboral');
+        $this->recibidosganancialeslaboral = $this->model('Recibidosganancialeslaboral');
+        $this->retirodinerosfondovolulaboral = $this->model('Retirodinerosfondovolulaboral');
+        $this->apoyoseconoestadolaboral = $this->model('Apoyoseconoestadolaboral');
+        $this->campanniaspoliticaslaboral = $this->model('Campanniaspoliticaslaboral');
+        $this->valorbrutoventaslaboral = $this->model('Valorbrutoventaslaboral');
+        $this->devdescreblaboral = $this->model('Devdescreblaboral');
+        $this->usuariodevdescreblaboral = $this->model('Usuariodevdescreblaboral');
+        $this->aportesobligatorioslaboralnoconse = $this->model('Aportesobligatorioslaboralnoconse');
+        $this->recompensaslaboralnoconse = $this->model('Recompensaslaboralnoconse');
+        $this->recibidosganancialeslaboralnoconse = $this->model('Recibidosganancialeslaboralnoconse');
+        $this->honorariosdesaproyeclaboral = $this->model('Honorariosdesaproyeclaboral');
+        $this->aporteseconoedulaboralnoconse = $this->model('Aporteseconoedulaboralnoconse');
+        $this->campanniaspoliticaslaboralnoconse = $this->model('Campanniaspoliticaslaboralnoconse');
+        $this->indemnizaaseguradoreslaboralnoconse = $this->model('Indemnizaaseguradoreslaboralnoconse');
+        $this->agroingresosegurolaboralnoconse = $this->model('Agroingresosegurolaboralnoconse');
+        $this->aportesvoluntarioslaboralnoconse = $this->model('Aportesvoluntarioslaboralnoconse');
+        $this->interesesprestamoslaboral = $this->model("interesesprestamoslaboral");
+        $this->costofiscallaboral = $this->model("costofiscallaboral");
+        $this->otroscostogastolaboral = $this->model("otroscostogastolaboral");
+        
         parent::__construct();
         if (isset($_SESSION['email'])) {
             $this->usuario->setusuario($this->traersesion());
@@ -286,6 +393,8 @@ class Declaracion extends Controller
 
                     $this->usuariorentaexenta->crear($idrentaexenta, $idrentatrabajo, $this->usuario->getid());
 
+                    $this->fuerzapublica->crear($idrentaexenta);
+
                     $idrentacapital = $this->rentacapital->crear($idcedulageneral);
 
                     $idingresobrutocapital = $this->ingresobrutocapital->crear();
@@ -366,16 +475,29 @@ class Declaracion extends Controller
                 $idpatrimonio = $this->patrimonio->traerid($id);
                 $this->patrimonio->calcularpatrimoniototales($id);
                 $patrimonio = $this->patrimonio->listar($id);
-                $idcedulas = 1;
-                $cedulas = [];
+                /* $idcedulas = 1; */
                 $idliquidacion = $this->liquidacionprivada->traerid($id);
                 $liquidacionprivada = $this->liquidacionprivada->listar($id);
                 $idganancias = $this->gananciasocasionales->traerid($id);
                 $gananciasocasionales = $this->gananciasocasionales->listar($id);
-                $ids = [$idpatrimonio, $idcedulas, $idliquidacion, $idganancias];
-                /*$cedulas = $this->cedulas->listar();
-                $liquidacionprivada = $this->liquidacionprivada->listar();
-                $gananciasocasionales = $this->gananciasocasionales->listar(); */
+                $idingresobruto = $this->ingresobruto->traerid($id);
+                $idingresonoconse = $this->ingresonoconse->traerid($id);
+                $idrentatrabajo = $this->rentatrabajo->traerid($id);
+                $idrentaexenta = $this->rentaexenta->traerid($id);
+                $idfuerzapublica = $this->fuerzapublica->traerid($id);
+                $idingresobrutorentacapital = $this->ingresobrutocapital->traerid($id);
+                $idingresosnoconsecapital = $this->ingresonoconsecapital->traerid($id);
+                $idcostogastosprocecapital = $this->costogastosprocecapital->traerid($id);
+                $idrentacapital = $this->rentacapital->traerid($id);
+                $idceduladiviparti = $this->ceduladiviparti->traerid($id);
+                $idingresobrutopensiones = $this->ingresosbrutospensiones->traerid($id);
+                $idingresonoconsepensiones = $this->ingresonoconsepensiones->traerid($id);
+                $idingresobrutolaboral = $this->ingresobrutolaboral->traerid($id);
+                $idingresosnoconselaboral = $this->ingresosnoconselaboral->traerid($id);
+                $idcostogastosprocelaboral = $this->costogastosprocelaboral->traerid($id);
+                $idrentanolaboral = $this->rentanolaboral->traerid($id);
+                $cedulas = [$idingresobruto, $idrentaexenta, $idingresonoconse, $idrentatrabajo, $idfuerzapublica, $idingresobrutorentacapital, $idingresosnoconsecapital, $idcostogastosprocecapital, $idrentacapital, $idceduladiviparti, $idingresobrutopensiones, $idingresonoconsepensiones, $idingresobrutolaboral, $idingresosnoconselaboral, $idcostogastosprocelaboral, $idrentanolaboral];
+                $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias];
 
                 $data = [$ids, $informacionpersonal, $patrimonio, $cedulas, $liquidacionprivada, $gananciasocasionales];
 
@@ -775,57 +897,141 @@ class Declaracion extends Controller
                         if ($id == "ingresobruto") {
             
                             if ($aspecto == "salario") {
-            
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $mesessalariocedulascrear = $_POST['mesessalariocedulascrear'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentatrabajo = $_POST['idingresobrutorentatrabajo'];
+                                $this->salario->crear($nombrecrearcedulas, $mesessalariocedulascrear, $valoraspectoscedulascrear, $idingresobrutorentatrabajo);
+                                /* echo $nombrecrearcedulas;
+                                echo "<br>";
+                                echo $mesessalariocedulascrear;
+                                echo "<br>";
+                                echo $valoraspectoscedulascrear;
+                                echo "<br>";
+                                echo $idingresobrutorentatrabajo;
+                                echo "<br>"; */
             
                             } else if ($aspecto == "honorarios")  {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentatrabajo = $_POST['idingresobrutorentatrabajo'];
+                                $this->honorarios->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutorentatrabajo);
             
                             } else if ($aspecto == "viaticos") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentatrabajo = $_POST['idingresobrutorentatrabajo'];
+                                $this->viaticos->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutorentatrabajo);
             
                             } else if ($aspecto == "otrospagos") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentatrabajo = $_POST['idingresobrutorentatrabajo'];
+                                $this->otrospagos->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutorentatrabajo);
             
                             } else if ($aspecto == "prestasociales"){
             
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentatrabajo = $_POST['idingresobrutorentatrabajo'];
+                                $idtipoprestacion = $_POST['tiposubaspectoscedulascrear'];
+                                $this->prestasociales->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutorentatrabajo, $idtipoprestacion);
             
-            
+                            } else if ($aspecto == "cesantiaintereses") {
+                                
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentatrabajo = $_POST['idingresobrutorentatrabajo'];
+                                $idrentaexentarentatrabajo = $_POST['idrentaexentarentatrabajo'];
+                                $this->cesantiaintereses->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutorentatrabajo, $idrentaexentarentatrabajo);
+
                             }
             
                         } else if ($id == "ingresosnoconse") {
             
                             if ($aspecto == "aportesobligatorios") {
                                 
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresonoconserentatrabajo = $_POST['idingresonoconserentatrabajo'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->aporteobligatorio->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresonoconserentatrabajo, $tiposubaspectoscedulascrear);
+
                             }  else if ($aspecto == "aportesvoluntarios"){
             
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresonoconserentatrabajo = $_POST['idingresonoconserentatrabajo'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $idrentaexentarentatrabajo = $_POST['idrentaexentarentatrabajo'];
+                                $this->aportevoluntario->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresonoconserentatrabajo, $tiposubaspectoscedulascrear, $idrentaexentarentatrabajo);
+
                             } else if ($aspecto == "aporteseconoedu") {
             
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresonoconserentatrabajo = $_POST['idingresonoconserentatrabajo'];
+                                $this->aporteseconoedu->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresonoconserentatrabajo);
+            
+                                
                             } else if ($aspecto == "pagosalimen") {
             
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $mesessalariocedulascrear = $_POST['mesessalariocedulascrear'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresonoconserentatrabajo = $_POST['idingresonoconserentatrabajo'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->pagosalimen->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $mesessalariocedulascrear, $idingresonoconserentatrabajo, $tiposubaspectoscedulascrear);
+
                             }
             
                         }  else if ($id == "deducciones"){
             
-            
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentatrabajo = $_POST['idrentatrabajo'];
+                                $aspectoscedulascrear = $_POST['aspectoscedulascrear'];
+                                $iddeducciones = $this->deducciones->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $aspectoscedulascrear);
+                                $this->usuariodeducciones->crear($iddeducciones,$idrentatrabajo, $this->usuario->getid());
+
                         } else if ($id == "rentaexenta") {
             
                             if ($aspecto == "indemnizacion") {
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentaexentarentatrabajo = $_POST['idrentaexentarentatrabajo'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->indemnizacion->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idrentaexentarentatrabajo, $tiposubaspectoscedulascrear);
             
                             } else if ($aspecto == "gastosrepresentacion"){
+
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentaexentarentatrabajo = $_POST['idrentaexentarentatrabajo'];
+                                $this->gastosrepresentacion->crear($valoraspectoscedulascrear, $idrentaexentarentatrabajo);
             
                             } else if ($aspecto == "primacancilleria") {
+
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentaexentarentatrabajo = $_POST['idrentaexentarentatrabajo'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->primacancilleria->crear($valoraspectoscedulascrear, $tiposubaspectoscedulascrear, $idrentaexentarentatrabajo);
             
                             } else if ($aspecto == "fuerzapublica") {
             
                                 if ($tipoaspecto == "seguromuerte") {
                                     
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idfuerzapublica = $_POST['idfuerzapublica'];
+                                $this->seguromuerte->crear($valoraspectoscedulascrear, $idfuerzapublica);
+
                                 } else if ($tipoaspecto == "excesosalariobasico") {
-                                    
+                                    $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                    $idfuerzapublica = $_POST['idfuerzapublica'];
+                                    $this->excesosalariobasico->crear($valoraspectoscedulascrear, $idfuerzapublica);
                                 }
             
                             }
@@ -838,11 +1044,19 @@ class Declaracion extends Controller
             
                             if ($aspecto == "interesesrendimientos") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentacapital = $_POST['idingresobrutorentacapital'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->interesesrendimientoscapital->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $tiposubaspectoscedulascrear, $idingresobrutorentacapital);
             
                             } else if ($aspecto == "otrosingresos"){
-            
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutorentacapital = $_POST['idingresobrutorentacapital'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->otrosingresoscapital->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $tiposubaspectoscedulascrear, $idingresobrutorentacapital);
             
                             }
             
@@ -850,11 +1064,19 @@ class Declaracion extends Controller
             
                             if ($aspecto == "aportesobligatorios") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconsecapital = $_POST['idingresosnoconsecapital'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->aporteobligatoriocapital->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $tiposubaspectoscedulascrear, $idingresosnoconsecapital);
             
                             } else if ($aspecto == "aportesvoluntarios") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconsecapital = $_POST['idingresosnoconsecapital'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->aportevoluntariocapital->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $tiposubaspectoscedulascrear, $idingresosnoconsecapital);
             
                             }
             
@@ -862,21 +1084,37 @@ class Declaracion extends Controller
             
                             if ($aspecto == "interesesprestamos") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idcostogastosprocecapital = $_POST['idcostogastosprocecapital'];
+                                $this->interesesprestamoscapital->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idcostogastosprocecapital);
+    
             
                             } else if ($aspecto == "otroscostogastos") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idcostogastosprocecapital = $_POST['idcostogastosprocecapital'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->otroscostogastoscapital->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idcostogastosprocecapital, $tiposubaspectoscedulascrear);
             
                             }
             
                         } else if ($id == "rentaliqpasece") {
             
-            
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentacapital = $_POST['idrentacapital'];
+                                $rentaliqpasecapital = $this->rentaliqpasececapital->crear($valoraspectoscedulascrear);
+                                $this->usuariorentaliqpasececapital->crear($rentaliqpasecapital, $idrentacapital, $this->usuario->getid());
             
                         } else if ($id == "rentaexentadeduccion") {
             
-            
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idrentacapital = $_POST['idrentacapital'];
+                                $aspectoscedulascrear = $_POST['aspectoscedulascrear'];
+                                $idrentaexededuccioncapital = $this->rentaexededuccioncapital->crear($nombrecrearcedulas,$valoraspectoscedulascrear, $aspectoscedulascrear);
+                                $this->usuariorentaexededuccioncapital->crear($idrentaexededuccioncapital, $idrentacapital, $this->usuario->getid());
             
                         }
                         
@@ -885,60 +1123,177 @@ class Declaracion extends Controller
                         if ($id == "ingresobrutonolaboral") {
             
                             if ($aspecto == "ingresosnoclasifican") {
-                            
+
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->ingresosnoclasificanlaboral->crear($valoraspectoscedulascrear, $idingresobrutolaboral);
+
                             } else if ($aspecto == "indemnizacionnolabo") {
             
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->indemnizacionnolaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
+
                             } else if ($aspecto == "recompensas") {
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->recompensaslaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
+                                
             
                             } else if ($aspecto == "derechosexplotpropie"){
-            
+                                
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->derechosexplotpropielaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
+
                             } else if ($aspecto == "explotfranquicias"){
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->explotfranquiciaslaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
             
                             }  else if ($aspecto == "recibidosgananciales"){
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->recibidosganancialeslaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
             
                             }  else if ($aspecto == "retirodinerosfondovolu") {
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->retirodinerosfondovolulaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
                                 
                             } else if ($aspecto == "apoyoseconoestado") {
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->apoyoseconoestadolaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
             
                             } else if ($aspecto == "campanniaspoliticas"){
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $this->campanniaspoliticaslaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral);
             
                             } else if ($aspecto == "valorbrutoventas"){
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresobrutolaboral = $_POST['idingresobrutolaboral'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->valorbrutoventaslaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresobrutolaboral, $tiposubaspectoscedulascrear);
+                                
                             }
             
                         }  else if ($id == "devdescreb") {
-            
-            
+
+                            $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                            $idrentanolaboral = $_POST['idrentanolaboral'];
+                            $iddevdescreblaboral = $this->devdescreblaboral->crear($nombrecrearcedulas);
+                            $this->usuariodevdescreblaboral->crear($iddevdescreblaboral, $idrentanolaboral, $this->usuario->getid());
+                                
             
                         } else if ($id == "ingresosnoconsenolaboral") {
             
                             if ($aspecto == "aportesobligatorios") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->aportesobligatorioslaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral, $tiposubaspectoscedulascrear);
+        
                             }  else if ($aspecto == "aportesvoluntarios") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->aportesvoluntarioslaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             }  else if ($aspecto == "recompensas") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->recompensaslaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             }  else if ($aspecto == "recibidosgananciales") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->recibidosganancialeslaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             } else if ($aspecto == "honorariosdesaproyec") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->honorariosdesaproyeclaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             } else if ($aspecto == "aporteseconoedu") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->aporteseconoedulaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             } else if ($aspecto == "campanniaspoliticas"){
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->campanniaspoliticaslaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
+                                
                             } else if ($aspecto == "indemnizaaseguradores"){
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->indemnizaaseguradoreslaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             } else if ($aspecto == "agroingresoseguro"){
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idingresosnoconselaboral = $_POST['idingresosnoconselaboral'];
+                                $this->agroingresosegurolaboralnoconse->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idingresosnoconselaboral);
+        
                             }
             
                         } else if ($id == "costogastoproce") {
             
                             if ($aspecto == "interesesprestamos") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idcostogastosprocelaboral = $_POST['idcostogastosprocelaboral'];
+                                $this->interesesprestamoslaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idcostogastosprocelaboral);
+        
                             } else if ($aspecto == "otroscostogastos") {
-            
+
+                                $nombrecrearcedulas = $_POST['nombrecrearcedulas'];
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idcostogastosprocelaboral = $_POST['idcostogastosprocelaboral'];
+                                $tiposubaspectoscedulascrear = $_POST['tiposubaspectoscedulascrear'];
+                                $this->otroscostogastolaboral->crear($nombrecrearcedulas, $valoraspectoscedulascrear, $idcostogastosprocelaboral, $tiposubaspectoscedulascrear);
+    
                             }  else if ($aspecto == "costofiscal") {
+
+                                $valoraspectoscedulascrear = $_POST['valoraspectoscedulascrear'];
+                                $idcostogastosprocelaboral = $_POST['idcostogastosprocelaboral'];
+                                $this->costofiscallaboral->crear($valoraspectoscedulascrear, $idcostogastosprocelaboral);
             
                             }
             

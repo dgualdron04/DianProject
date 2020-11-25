@@ -4,6 +4,7 @@
 class Rentanolaboralmodel extends Models{
 
     private $tablarentanolaboral = "rentanolaboral";
+    private $tablacedulageneral = "cedulageneral";
 
     public function crear($idcedulageneral){
         $connect = $this->db->connect();
@@ -22,6 +23,13 @@ class Rentanolaboralmodel extends Models{
 
         }
 
+    }
+
+    public function traerid($id){
+        $query = $this->db->connect()->prepare('SELECT rl.idrentanolaboral AS "id" FROM '.$this->tablarentanolaboral.' rl JOIN '.$this->tablacedulageneral.' cg ON cg.idcedulageneral = rl.idcedulageneral WHERE cg.iddeclaracion = ?');
+        $query->execute([$id]);
+        $query = $query->fetch(PDO::FETCH_ASSOC);
+        return $query['id'];
     }
 
 
