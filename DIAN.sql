@@ -305,6 +305,7 @@ FOREIGN KEY (idingresobruto) REFERENCES ingresobruto(idingresobruto));
 
 CREATE TABLE honorarios
 (idhonorarios INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de los honorarios',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del honorario',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de los honorarios',
 idingresobruto INT NOT NULL COMMENT 'Codigo del ingreso bruto',
 PRIMARY KEY (idhonorarios),
@@ -418,7 +419,6 @@ PRIMARY KEY (idtipoprimacancilleria));
 
 CREATE TABLE primacancilleria
 (idprimacancilleria INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo de la prima cancilleria',
-nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del tipo de prima',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de la prima cancilleria',
 idtipoprimacancilleria INT NOT NULL COMMENT 'Codigo del tipo de prima cancilleria',
 idrentaexenta INT NOT NULL COMMENT 'Codigo de la rentaexenta',
@@ -581,6 +581,7 @@ FOREIGN KEY (idrentaexenta) REFERENCES rentaexenta(idrentaexenta));
 
 CREATE TABLE aporteseconoedu
 (idaporteseconoedu INT NOT NULL AUTO_INCREMENT COMMENT 'Codigo del aporteseconoedu',
+nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre de aporteeconoedu',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor del aporteseconoedu',
 idingresonoconse INT NOT NULL COMMENT 'Codigo del ingreso no consecutivo',
 PRIMARY KEY (idaporteseconoedu),
@@ -1363,8 +1364,10 @@ CREATE TABLE otroscostogastolaboral
 nombre varchar(50) NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'Nombre del otros costos gastos no laboral',
 valor BIGINT NOT NULL COLLATE utf8mb4_spanish_ci COMMENT 'El valor de otros costos de gastos de la Renta no laboral',
 idtipootroscostogastolaboral INT NOT NULL COMMENT 'Codigo del tipo de otros costos de gastos de la Renta no laboral',
+idcostogastosprocelaboral INT NOT NULL COMMENT 'Codigo de costos gastos procedentes de la renta no laboral',
 PRIMARY KEY (idotroscostogastolaboral),
-FOREIGN KEY (idtipootroscostogastolaboral) REFERENCES tipootroscostogastolaboral(idtipootroscostogastolaboral));
+FOREIGN KEY (idtipootroscostogastolaboral) REFERENCES tipootroscostogastolaboral(idtipootroscostogastolaboral),
+FOREIGN KEY (idcostogastosprocelaboral) REFERENCES costogastosprocelaboral(idcostogastosprocelaboral));
 
 /*---------------------------------------------*/
 
