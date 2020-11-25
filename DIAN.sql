@@ -2081,3 +2081,180 @@ INSERT INTO `modelo` (`tipomodelo`) VALUES ('Nacional'), ('Internacional');
 INSERT INTO `tipomoneda` (`nombre`) VALUES ('Peso Colombiano');
 
 /*-----------------------------------*/
+
+
+/*--- Inserción tipo dirección seccional ---*/
+
+INSERT INTO `tipodireccionseccional` (`nombre`, `descripcion`, `ayuda`) VALUES ('Impuesto y Aduanas de Armenia', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos de Barranquilla', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Aduanas de Bogotá', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuesto y Aduanas de Bucaramanga', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos de Cali', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos de Cartagena', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos de Cúcuta', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos y Aduanas de Girardot', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos y Aduanas de Ibagué', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.'), ('Impuestos y Aduanas de Manizales', 'Sin descripción', 'Registre en esta casilla el código de la Dirección Seccional que corresponde al domicilio o asiento principal de su actividad o negocio, según lo informado en la casilla 12 de la hoja principal del Registro Único Tributario RUT.');
+
+/*-----------------------------------------*/
+
+
+/*--- Inserción actividad economica ---*/
+
+INSERT INTO `tipoactividadeconomica` (`nombre`, `descripcion`, `ayuda`) VALUES ('Asalariados', '0010', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Sin actividad económica', '0081', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Personas naturales subsidiadas por terceros', '0082', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Rentistas de capital', '0090', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Cultivo de cereales (excepto arroz), legumbre y semillas oleaginosas.', '0111', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Cultivo de arroz', '0112', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Cultivo de hortalizas, raices y tubercúlos', '0113', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Cultivo de tabaco', '0114', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Cultivo de plantas textiles', '0115', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.'), ('Otros cultivos transitorios', '0119', 'Digite el código de la actividad económica que le generó el mayor valor de ingresos operacionales en el periodo a declarar.');
+
+/*------------------------------------*/
+
+
+/*--- Inserción tipo bien ---*/
+
+INSERT INTO `tipobien` (`nombre`, `descripcion`, `ayuda`) VALUES ('Terrenos', 'Sin descripción', 'Escrituras'), ('Vehículos', 'Sin descripción', 'Tarjeta de propiedad'), ('Muebles y enseres', 'Sin descripción', 'Sin ayuda'), ('Construcciones', 'Corresponde a casas, apartamentos y oficinas', 'Escrituras'), ('Inversiones', 'Sin descripción', 'Sin ayuda'), ('Acciones', 'Sin descripción', 'Sin ayuda'), ('Cuentas bancarias', 'Sin descripción', 'Saldo total o extractos bancarios en cuentas de ahorro o corriente, se puede ayudar revisando el certificado de costos financiero.'), ('Título valores', 'Sin descripción', 'Sin ayuda');
+
+/*---------------------------*/
+
+
+/*--- Inserción tipo deuda ---*/
+
+INSERT INTO `tipodeuda` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pagarés', 'Sin descripción', 'Ingrese el valor de los saldos finales de su deuda.'), ('Hipotecas', 'Sin descripción', 'Ingrese el valor de los saldos finales de su deuda.'), ('Letras', 'Sin descripción', 'Ingrese el valor de los saldos finales de su deuda.'), ('Deudas', 'Sin descripción', 'Ingrese el valor de los saldos finales de su deuda.'), ('Préstamos', 'Sin descripción', 'Ingrese el valor de los saldos finales de su deuda.'), ('Cuentas por pagar', 'Sin descripción', 'Ingrese el valor de los saldos finales de su deuda.');
+
+/*----------------------------*/
+
+
+/*--- Inserción tipo prestación ---*/
+
+INSERT INTO `tipoprestacion` (`nombre`, `descripcion`, `ayuda`) VALUES ('Prima', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Vacaciones', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*----------------------------------*/
+
+
+/*--- Inserción tipo aporte obligatorio renta trabajo ---*/
+
+INSERT INTO `tipoaporteobligatorio` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pensión y Fondo de solidaridad pensional (FSP)', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Salud', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*-------------------------------------------------------*/
+
+
+/*--- Inserción tipo aporte voluntario renta trabajo ---*/
+
+INSERT INTO `tipoaportevoluntario` (`nombre`, `descripcion`, `ayuda`) VALUES ('Cuentas AFC o AVC', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Regimen de ahorro individual con solidaridad - RAIS', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*------------------------------------------------------*/
+
+
+/*--- Inserción pago de alimentación ---*/
+
+INSERT INTO `tipopagoalimen` (`parentesco`, `descripcion`, `ayuda`) VALUES ('Hijo', 'Sin descripción', 'Sin ayuda'), ('Padre', 'Sin descripción', 'Sin ayuda'), ('Madre', 'Sin descripción', 'Sin ayuda');
+
+/*--------------------------------------*/
+
+
+/*--- Inserción tipo deducción ---*/
+
+INSERT INTO `tipodeduccion` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pago de intereses de vivienda o costo financiero leasing habitacional', 'Límite máximo 1,200 UVT anuales ($39.787.000) ', 'Sin ayuda'), ('Deducción por dependiente', 'Sin descripción', 'Sin ayuda'), ('Pagos por medicina prepagada durante el año 2019', 'Límite máximo a deducir es de 16 UVT mensuales ($548.320), 192 UVT al año ($6.580.000)', 'Sin ayuda'), ('Valor de los aportes voluntarios a fondo de cesantias', 'Límite máximo anual de 2,500 UVT ($85.675.000)', ''), ('Valor del 50% del GMF que se haya pagado durante el 2019', 'GMF = Gravamen a Monto Financiero', 'Sin ayuda');
+
+/*---------------------------------*/
+
+
+/*--- Inserción tipo Indemnización ---*/
+
+INSERT INTO `tipoindemnizacion` (`nombre`, `descripcion`, `ayuda`) VALUES ('Por accidente de trabajo', 'Sin descripción', 'Sin ayuda'), ('Por enfermedad', 'Sin descripción', 'Sin ayuda'), ('Por protección', 'Sin descripción', 'Sin ayuda'), ('Por gastos de entierro', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo prima ---*/
+
+INSERT INTO `tipoprimacancilleria` (`nombre`, `descripcion`, `ayuda`) VALUES ('Prima especial', 'Sin descripción', 'Sin ayuda'), ('Prima costo de vida', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo intereses rendimiento renta capital ---*/
+
+INSERT INTO `tipointeresesrendicapital` (`nombre`, `descripcion`, `ayuda`) VALUES ('Con entidades financieras', 'Sin descripción', 'Sin ayuda'), ('Con otras personas naturales', 'Sin descripción', 'Sin ayuda'), ('Intereses presuntivos por préstamos de dinero', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo otros ingresos renta capital ---*/
+
+INSERT INTO `tipootrosingresoscapital` (`nombre`, `descripcion`, `ayuda`) VALUES ('Ingresos por diferencia en cambio', 'Sin descripción ', 'Sin ayuda'), ('Arrendamientos de bienes muebles e inmuebles', 'Sin descripción', 'Sin ayuda'), ('Regalias por derechos de autor', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo aporte obligatorio renta capital ---*/
+
+INSERT INTO `tipoaporteobligatoriocapital` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pensión y Fondo de solidaridad pensional (FSP)', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Salud', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo aporte voluntario renta capital ---*/
+
+INSERT INTO `tipoaportevoluntariocapital` (`nombre`, `descripcion`, `ayuda`) VALUES ('Cuentas AFC o AVC', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Regimen de ahorro individual con solidaridad - RAIS', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo otros costos gastos renta capital ---*/
+
+INSERT INTO `tipootroscostogastocapital` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pago intereses de préstamos', 'Hace referencia a los pagos de intereses de préstamos con bancos y particulares, sin incluir el crédito de vivienda.', 'Sin ayuda'), ('Gastos', 'Hace referencia a los gastos de personal, mensajería, mantenimientos, seguros, impuestos prediales, impuesto industria y comercio.', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo renta exenta deducción renta capital ---*/
+
+INSERT INTO `tiporentaexededuccioncapital` (`nombre`, `descripcion`, `ayuda`) VALUES ('Intereses pagados por un solo crédito hipotecario', 'Sin descripción', 'Sin ayuda'), ('Aportes voluntarios a fondos de cesantias deducibles', 'Sin descripción', 'Sin ayuda'), ('50% de los GMF', 'Sin descripción', 'Sin ayuda'), ('Por regalias derechos de autor sobre obras editadas e impresoras en Colombia', 'Sin descripción', 'Sin ayuda'), ('Aportes voluntarios a fondos de pensiones y cuentas AFC', 'Sin descripción', 'Sin ayuda'), ('Rentas por ingresos de renta de capital obtenidos en paises de la CAN', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo valor bruto ventas renta no laboral ---*/
+
+INSERT INTO `tipovalorbrutoventaslaboral` (`nombre`, `descripcion`, `ayuda`) VALUES ('En ventas de ganadería o cultivos', 'Sin descripción', 'Sin ayuda'), ('En ventas de activos fijos poseidos por menor de dos años', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo aporte obligatorio renta no laboral ---*/
+
+INSERT INTO `tipoaporteobligatoriolaboralnoconse` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pensión y Fondo de solidaridad pensional (FSP)', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Salud', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo otros costosgastos renta no laboral ---*/
+
+INSERT INTO `tipootroscostogastolaboral` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pago intereses de préstamos', 'Hace referencia a los pagos de intereses de préstamos con bancos y particulares, sin incluir el crédito de vivienda.', 'Sin ayuda'), ('Gastos', 'Hace referencia a los gastos de personal, mensajería, mantenimientos, seguros, impuestos prediales, impuesto industria y comercio.', 'Sin ayuda'), ('Costo fiscal', 'Hace referencia a los activos fijos vendidos y poseidos por menos de 2 años.', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo renta exenta deducción renta no laboral ---*/ 
+
+INSERT INTO `tiporentaexededuccionlaboral` (`nombre`, `descripcion`, `ayuda`) VALUES ('Intereses pagados por un solo crédito hipotecario', 'Sin descripción', 'Sin ayuda'), ('Aportes voluntarios a fondos de cesantias deducibles', 'Sin descripción', 'Sin ayuda'), ('50% de los GMF', 'Sin descripción', 'Sin ayuda'), ('Aportes voluntarios a fondos de pensiones y cuentas AFC', 'Sin descripción', 'Sin ayuda'), ('Rentas por ingresos de renta de capital obtenidos en paises de la CAN', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo ingresos pensiones ---*/
+
+INSERT INTO `tipoingresospensiones` (`nombre`, `descripcion`, `ayuda`) VALUES ('Por pensión', 'Sin descripción', 'Sin ayuda'), ('Por indemnización', 'Sin descripción', 'Sin ayuda'), ('Por pensión de fuente extranjera', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo aporte obligatorio cedula pensiones ---*/
+
+INSERT INTO `tipoaportesobligatoriospensiones` (`nombre`, `descripcion`, `ayuda`) VALUES ('Pensión y Fondo de solidaridad pensional (FSP)', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.'), ('Salud', 'Sin descripción', 'Se encuentra consignada en el Certificado de ingresos y retenciones por rentas de trabajo y de pensiones - Formulario 220.');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo ingresos ganancias ---*/ 
+
+INSERT INTO `tipoingresosganancias` (`nombre`, `descripcion`, `ayuda`) VALUES ('Herencias, legados o donaciones', 'Sin descripción', 'Sin ayuda'), ('Rifas, loterías, apuestas y similares', 'Sin descripción', 'Sin ayuda'), ('Utilidad en la venta de un activo fijo', 'Sin descripción', 'Sin ayuda'), ('Liquidación de sociedades', 'Sin descripción', 'Sin ayuda'), ('Indemnización por seguro de vida', 'Sin descripción', 'Sin ayuda'), ('Premios en títulos de capitalización', 'Sin descripción', 'Sin ayuda'), ('Ventas inmuebles', 'Sin descripción', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
+/*--- Inserción Tipo ganancias no gravadas ---*/
+
+INSERT INTO `tipogananciasnogravadas` (`nombre`, `descripcion`, `ayuda`) VALUES ('Vivienda urbana del causante', 'Las primeras 7,700 UVT del valor de un inmueble de vivienda urbana de propiedad del causante.', 'Sin ayuda'), ('Inmueble rural de causante', 'Las primeras 7,700 UVT de un inmueble rural de propiedad del causante, independientemente de que dicho inmueble haya estado destinado a vivienda o a explotación económica.', 'Sin ayuda'), ('Asignación de porción conyugal, legados y herencias', 'Las primeras 3,490 UVT del valor de las asignaciones que por concepto de porción conyugal o de herencia o legado reciban el cónyuge supérstite y cada uno de los herederos o legatarios.', 'Sin ayuda'), ('Mobiliario del causante', 'Los libros, las ropas y utensilios de uso personal y el mobiliario de la casa del causante.', 'Sin ayuda'), ('Indemnización por seguro de vida', 'Sin descripción ', 'Sin ayuda');
+
+/*-----------------------------------*/
+
+
