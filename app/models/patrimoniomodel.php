@@ -61,6 +61,16 @@ class Patrimoniomodel extends Models{
 
     }
 
+    public function consultarvalor($iddeclaracion){
+
+        $patrimonio = $this->db->connect()->prepare('SELECT deudatotal, patbrutototal FROM '.$this->tablapatrimonio.' WHERE iddeclaracion = ?');
+        $patrimonio->execute([$iddeclaracion]);
+        $patrimonio = $patrimonio->fetch(PDO::FETCH_ASSOC);
+
+        return $patrimonio;
+
+    }
+
 }
 
 

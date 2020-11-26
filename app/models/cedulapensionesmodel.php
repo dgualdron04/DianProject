@@ -46,6 +46,16 @@ class Cedulapensionesmodel extends Models{
         return $query['id'];
     }
 
+    public function consultarvalor($iddeclaracion){
+
+        $cedulapensiones = $this->db->connect()->prepare('SELECT rentaliquida, rentaliquidagravable FROM '.$this->tablacedulapensiones.' WHERE iddeclaracion = ?');
+        $cedulapensiones->execute([$iddeclaracion]);
+        $cedulapensiones = $cedulapensiones->fetch(PDO::FETCH_ASSOC);
+
+        return $cedulapensiones;
+
+    }
+
 }
 
 ?>

@@ -29,9 +29,11 @@ class Usuario extends Controller
             
             if (strtolower($this->usuario->getnomrol()) == "declarante") {
                 $this->declaracion = $this->model('Declaracion');
-                $declaraciones = $this->declaracion->listar($this->usuario->getid(), $this->usuario->getnomrol());
-                $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
+                echo '<script> document.location.href = "./declaracion/listar/'.$this->usuario->getid().'" </script>';
+                /* $declaraciones = $this->declaracion->listar($this->usuario->getid(), $this->usuario->getnomrol());
+                $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones); */
             }else if (strtolower($this->usuario->getnomrol()) == "contador") {
+                echo '<script> document.location.href = "./declaracion/revision/2019" </script>';
                 $this->viewtemplate('declaracion', 'revision', $this->usuario->traerdatosusuario());
             }else if (strtolower($this->usuario->getnomrol()) == "superadmin" || strtolower($this->usuario->getnomrol()) == "coordinador"){
 

@@ -62,7 +62,7 @@ class Rentatrabajomodel extends Models{
         $rentaexenta->execute([$id]);
         $rentaexenta = $rentaexenta->fetch(PDO::FETCH_ASSOC);
 
-        $subtotal = $rentaliquida - $rentaexenta['rentaexenta'];
+        /* $subtotal = $rentaliquida - $rentaexenta['rentaexenta']; */
 
         $rentasexentasdeduccion = $rentaliquida * 40 / 100;
 

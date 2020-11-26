@@ -82,3 +82,6 @@ const nav1 = document.getElementById("nav-1");
         tabinactivo5.classList.remove('active');
 
     }
+
+
+    

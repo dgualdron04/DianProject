@@ -65,7 +65,7 @@
                                         <td>
                                             <span class="<?php
 
-                                                            if ($datos['estadorevision'] == true && $datos['estadodeclaracion'] == true) {
+                                                            if ($datos['estadorevision'] == true && $datos['estadodeclaracion'] == true && $datos['estadoarchivo'] == false) {
                                                                 echo "away";
                                                             } else if ($datos['estadorevision'] == false && $datos['estadodeclaracion'] == true) {
                                                                 echo "available";
@@ -84,10 +84,10 @@
                                             $contanio++;
                                         }
                                         ?></td>
-                                        <td>progreso:10</td>
+                                        <td><?php echo "progreso:".$datos['porcent']  ?></td>
                                         <td>
                                             <?php
-                                            if ($datos['estadorevision'] == false) {
+                                            if ($datos['estadorevision'] == false || $datos['estadoarchivo'] == true) {
                                                 echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:editar;id:edit-'.$datos['iddeclaracion'].';href:'.constant('URL').'declaracion/editar/'.$datos['iddeclaracion'];
                                             } else {
                                                 echo 'icon:far fa-edit;name:editar';
@@ -96,7 +96,7 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($datos['estadorevision'] == false) {
+                                            if ($datos['estadorevision'] == false || $datos['estadoarchivo'] == true) {
                                                 echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:delete-'.$datos['iddeclaracion'].';onclick:eliminardeclaracion';
                                             } else {
                                                 echo 'icon:far fa-trash-alt;name:eliminar';
@@ -105,10 +105,10 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($datos['estadorevision'] == false) {
-                                                echo 'icon:fas fa-eye-slash;name:Revisión del Contador';
-                                            } else {
+                                            if ($datos['porcent'] == 90 && $datos['estadorevision'] == false) {
                                                 echo 'actionlink:user-edit simbollink;icon:fas fa-eye;name:Revisión del Contador;id:revision-'.$datos['iddeclaracion'].';onclick:revisiondeclaracion';
+                                            } else {
+                                                echo 'icon:fas fa-eye-slash;name:Revisión del Contador';
                                             }
                                             ?>
                                         </td>

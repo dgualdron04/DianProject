@@ -58,23 +58,6 @@ class Rentanolaboralmodel extends Models{
         $ingresosnoconselaboral->execute([$id]);
         $ingresosnoconselaboral = $ingresosnoconselaboral->fetch(PDO::FETCH_ASSOC);
 
-        /* $rentaliquida = $ingresobruto['ingresobruto'] - $ingresonoconse['ingresnoconse'];
-
-        $rentaliquidaydeducciones = $rentaliquida - $deducciones['deducciones'];
-
-        $rentaexenta = $this->db->connect()->prepare('SELECT rentaexentatotal AS "rentaexenta" FROM '.$this->tablarentaexenta.' re JOIN '.$this->tablausuariorentaexenta.' ure ON ure.idrentaexenta = ure.idrentaexenta WHERE ure.idrentanolaboral = ?');
-        $rentaexenta->execute([$id]);
-        $rentaexenta = $rentaexenta->fetch(PDO::FETCH_ASSOC);
-
-        $subtotal = $rentaliquida - $rentaexenta['rentaexenta'];
-
-        $rentasexentasdeduccion = $rentaliquida * 40 / 100;
-
-        $rentaliquidatrabajo = $rentaliquida - $rentasexentasdeduccion; */
-
-        /* $rentatrabajo = $this->db->connect()->prepare('UPDATE '.$this->tablarentatrabajo.' SET rentaliquida = ?, rentasexentasdeduccion = ?, rentaliquidatrabajo = ? WHERE idrentatrabajo = ?');
-        $rentatrabajo->execute([$rentaliquida, $rentasexentasdeduccion, $rentaliquidatrabajo, $id]); */
-
     }
 
 

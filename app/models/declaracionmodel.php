@@ -49,6 +49,54 @@ class Declaracionmodel extends Models{
 
     }
 
+    public function cambiarestadorevision($id){
+
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tabladeclaracion.' SET estadorevision = ? WHERE iddeclaracion = ?')) {
+            $stmt->execute([1,$id]);
+            
+            return true;
+        } else {
+            
+            return false;
+        }
+
+    }
+
+    public function denegarrevision($id){
+
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tabladeclaracion.' SET estadorevision = ? WHERE iddeclaracion = ?')) {
+            $stmt->execute([0,$id]);
+            
+            return true;
+        } else {
+            
+            return false;
+        }
+
+    }
+
+    public function cambiarestadoarchivo($id){
+
+        if ( $stmt = $this->db->connect()->prepare('UPDATE '.$this->tabladeclaracion.' SET estadoarchivo = ? WHERE iddeclaracion = ?')) {
+            $stmt->execute([1,$id]);
+            
+            return true;
+        } else {
+            
+            return false;
+        }
+
+    }
+
+    public function listarrevision(){
+        
+        $query = $this->db->connect()->prepare('SELECT p.annoperiodo, d.iddeclaracion, d.pagototal, d.estadoarchivo, d.estadorevision, d.estadodeclaracion, d.observaciones, u.nombre AS "nombre", u.apellido AS "apellido" FROM declaracion d JOIN usuario u ON u.idusuario = d.idusuario JOIN parametrosdeclaracion pd ON pd.iddeclaracion = d.iddeclaracion JOIN parametros p ON p.idparametro = pd.idparametro WHERE d.estadorevision = 1 AND d.estadoarchivo = 0;');
+            $query->execute();
+            $myquery = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $myquery;
+
+    }
+
 }
 
 

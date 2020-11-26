@@ -27,4 +27,15 @@ class Ceduladivipartimodel extends Models
         $query = $query->fetch(PDO::FETCH_ASSOC);
         return $query['id'];
     }
+
+    public function consultarvalor($iddeclaracion){
+
+        $ceduladiviparti = $this->db->connect()->prepare('SELECT rentaliquida, rentaexenta FROM '.$this->tablaceduladiviparti.' WHERE iddeclaracion = ?');
+        $ceduladiviparti->execute([$iddeclaracion]);
+        $ceduladiviparti = $ceduladiviparti->fetch(PDO::FETCH_ASSOC);
+
+        return $ceduladiviparti;
+
+    }
+
 }

@@ -94,6 +94,50 @@ class Cedulageneralmodel extends Models{
 
     }
 
+    public function traerid($id)
+    {
+        $query = $this->db->connect()->prepare('SELECT cd.idcedulageneral AS "id" FROM '.$this->tablacedulageneral . ' cd WHERE cd.iddeclaracion = ?');
+        $query->execute([$id]);
+        $query = $query->fetch(PDO::FETCH_ASSOC);
+        return $query['id'];
+    }
+
+    public function calcularcedulageneral($id){
+        $rentatrabajo = $this->db->connect()->prepare('SELECT rentaliquida, rentasexentasdeduccion, rentaliquidatrabajo FROM rentatrabajo  WHERE idcedulageneral = ?');
+        $rentatrabajo->execute([$id]);
+        $rentatrabajo = $rentatrabajo->fetch(PDO::FETCH_ASSOC);
+
+        $rentacapital = $this->db->connect()->prepare('SELECT rentaliquida, rentasexentasdeduccion, rentaliquidaordinaria, rentaliquidacapital FROM rentacapital  WHERE idcedulageneral = ?');
+        $rentacapital->execute([$id]);
+        $rentacapital = $rentacapital->fetch(PDO::FETCH_ASSOC);
+
+        $rentanolaboral = $this->db->connect()->prepare('SELECT rentaliquida, rentasexentasdeduccion, rentaliquidaordinaria, rentaliquidanolaboral FROM rentanolaboral  WHERE idcedulageneral = ?');
+        $rentanolaboral->execute([$id]);
+        $rentanolaboral = $rentanolaboral->fetch(PDO::FETCH_ASSOC);
+
+        $rentaliquidageneral = $rentatrabajo['rentaliquida'] + $rentacapital['rentaliquida'] + $rentanolaboral['rentaliquida'];
+        
+        $rentasexentasdeduccion = $rentatrabajo['rentasexentasdeduccion'] + $rentacapital['rentasexentasdeduccion'] + $rentanolaboral['rentasexentasdeduccion']; 
+        
+        $rentaliquidaordinaria = $rentaliquidageneral - $rentasexentasdeduccion;
+
+        $rentaliquidagravable = $rentacapital['rentaliquidaordinaria'] + $rentanolaboral['rentaliquidaordinaria'];
+
+        $cedulageneral = $this->db->connect()->prepare('UPDATE '.$this->tablacedulageneral.' SET rentaliquidageneral = ?, rentasexentasdeduccion = ?, rentaliquidaordinaria = ?, rentaliquidagravable = ? WHERE idcedulageneral = ?');
+        $cedulageneral->execute([$rentaliquidageneral, $rentasexentasdeduccion, $rentaliquidaordinaria, $rentaliquidagravable, $id]);
+
+    }
+
+    public function consultarvalor($iddeclaracion){
+
+        $cedulageneral = $this->db->connect()->prepare('SELECT rentaliquidageneral, rentasexentasdeduccion, rentaliquidaordinaria, rentaliquidagravable FROM '.$this->tablacedulageneral.' WHERE iddeclaracion = ?');
+        $cedulageneral->execute([$iddeclaracion]);
+        $cedulageneral = $cedulageneral->fetch(PDO::FETCH_ASSOC);
+
+        return $cedulageneral;
+
+    }
+
 }
 
 

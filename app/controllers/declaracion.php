@@ -349,8 +349,50 @@ class Declaracion extends Controller
 
                 $declaraciones = $this->declaracion->listar($this->usuario->getid(), $this->usuario->getnomrol());
 
+                $i = 0;
+                    $porcentaje = 0;
+
+                    foreach ($declaraciones as $decla) {
+
+                        $patrimonio = $this->patrimonio->consultarvalor($decla['iddeclaracion']);
+                        $cedulageneral = $this->cedulageneral->consultarvalor($decla['iddeclaracion']);
+                        $ceduladiviparti = $this->ceduladiviparti->consultarvalor($decla['iddeclaracion']);
+                        $cedulapensiones = $this->cedulapensiones->consultarvalor($decla['iddeclaracion']);
+
+                        if ($patrimonio["deudatotal"] > 0 || $patrimonio["patbrutototal"] > 0) {
+
+                            $porcentaje += 45; 
+
+                        }
+
+                        if ($cedulageneral["rentaliquidageneral"] > 0 || $cedulageneral["rentasexentasdeduccion"] > 0 || $cedulageneral["rentaliquidaordinaria"] > 0 || $cedulageneral["rentaliquidagravable"] > 0 || $ceduladiviparti["rentaliquida"] > 0 || $ceduladiviparti["rentaexenta"] > 0 || $cedulapensiones["rentaliquida"] > 0 || $cedulapensiones["rentaliquidagravable"] > 0) {
+
+                            $porcentaje += 45; 
+
+                        }
+
+                        if ($decla['estadorevision'] == 1) {
+                            
+                            $porcentaje += 5; 
+
+                        }
+                        if ($decla['estadoarchivo'] == 1) {
+                            
+                            $porcentaje += 5; 
+
+                        }
+                        $declaraciones[$i] += [ "porcent" => $porcentaje];
+                        $i++;
+                    }
+
+
                 $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
-            } else{
+            } else if(strtolower($this->usuario->getnomrol() == "contador")){
+
+                $declaraciones = $this->declaracion->listarrevision();
+                
+                $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
+            } else {
 
                 $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
 
@@ -369,6 +411,45 @@ class Declaracion extends Controller
                 if ($id == $this->usuario->getid()) {
                         
                     $declaraciones = $this->declaracion->listar($id, $this->usuario->getnomrol());
+                    $i = 0;
+                    $porcentaje = 0;
+
+                    foreach ($declaraciones as $decla) {
+
+                        $patrimonio = $this->patrimonio->consultarvalor($decla['iddeclaracion']);
+                        $cedulageneral = $this->cedulageneral->consultarvalor($decla['iddeclaracion']);
+                        $ceduladiviparti = $this->ceduladiviparti->consultarvalor($decla['iddeclaracion']);
+                        $cedulapensiones = $this->cedulapensiones->consultarvalor($decla['iddeclaracion']);
+
+                        if ($patrimonio["deudatotal"] > 0 || $patrimonio["patbrutototal"] > 0) {
+
+                            $porcentaje += 45; 
+
+                        }
+
+                        if ($cedulageneral["rentaliquidageneral"] > 0 || $cedulageneral["rentasexentasdeduccion"] > 0 || $cedulageneral["rentaliquidaordinaria"] > 0 || $cedulageneral["rentaliquidagravable"] > 0 || $ceduladiviparti["rentaliquida"] > 0 || $ceduladiviparti["rentaexenta"] > 0 || $cedulapensiones["rentaliquida"] > 0 || $cedulapensiones["rentaliquidagravable"] > 0) {
+
+                            $porcentaje += 45; 
+
+                        }
+                        
+                        
+                        if ($decla['estadorevision'] == 1) {
+                            
+                            $porcentaje += 5; 
+
+                        }
+                        if ($decla['estadoarchivo'] == 1) {
+                            
+                            $porcentaje += 5; 
+
+                        }
+                        print_r($decla);
+                        $declaraciones[$i] += [ "porcent" => $porcentaje];
+                        $i++;
+                    }
+
+                    /* echo $declaraciones[0]['porcent']; */
 
                     $this->viewtemplate('declaracion', 'listar', $this->usuario->traerdatosusuario(), $declaraciones);
 
@@ -572,6 +653,10 @@ class Declaracion extends Controller
 
                 $this->rentanolaboral->calcularrentanolaboral($idrentanolaboral);
 
+                $idcedulageneral = $this->cedulageneral->traerid($id);
+
+                $this->cedulageneral->calcularcedulageneral($idcedulageneral);
+
                 $idceduladiviparti = $this->ceduladiviparti->traerid($id);
                 $idingresobrutopensiones = $this->ingresosbrutospensiones->traerid($id);
                 $idingresonoconsepensiones = $this->ingresonoconsepensiones->traerid($id);
@@ -580,6 +665,30 @@ class Declaracion extends Controller
                 $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias];
                 $cedula = [];
                 $data = [$ids, $informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales];
+
+                $porcentaje = 0;
+                $patrimonio = $this->patrimonio->consultarvalor($id);
+                $cedulageneral = $this->cedulageneral->consultarvalor($id);
+                $ceduladiviparti = $this->ceduladiviparti->consultarvalor($id);
+                $cedulapensiones = $this->cedulapensiones->consultarvalor($id);
+
+                if ($patrimonio["deudatotal"] > 0 || $patrimonio["patbrutototal"] > 0) {
+
+                            $porcentaje += 45; 
+
+                }
+
+                if ($cedulageneral["rentaliquidageneral"] > 0 || $cedulageneral["rentasexentasdeduccion"] > 0 || $cedulageneral["rentaliquidaordinaria"] > 0 || $cedulageneral["rentaliquidagravable"] > 0 || $ceduladiviparti["rentaliquida"] > 0 || $ceduladiviparti["rentaexenta"] > 0 || $cedulapensiones["rentaliquida"] > 0 || $cedulapensiones["rentaliquidagravable"] > 0) {
+
+                $porcentaje += 45; 
+
+                }
+
+                if ($porcentaje == 90) {
+
+                    /* $this->declaracion->cambiarestadorevision($id); */
+
+                }
 
                 $this->viewtemplate('declaracion', 'editar', $this->usuario->traerdatosusuario(), $data);
 
@@ -598,12 +707,45 @@ class Declaracion extends Controller
 
     }
 
+    public function ver($id){
+
+        if (isset($_SESSION['email'])) {
+            $this->usuario->setusuario($this->traersesion());
+            if ((strtolower($this->usuario->getnomrol()) == "contador") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
+
+                $informacionpersonal = $this->usuario->listarinformacionpersonal($this->usuario->getid());
+                $patrimonio = $this->patrimonio->listar($id);
+                $liquidacionprivada = $this->liquidacionprivada->listar($id);
+                $gananciasocasionales = $this->gananciasocasionales->listar($id);
+                $cedula = [];
+                $data = [$informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales];
+
+
+                $this->viewtemplate('declaracion', 'ver', $this->usuario->traerdatosusuario(), $data);
+
+            } else{
+
+                $this->viewtemplate('usuario', 'index', $this->usuario->traerdatosusuario());
+
+            }
+        } else {
+
+            $this->viewtemplate('usuario', 'index', null, $this->topes);
+        }
+
+        
+
+    }
+
+
     public function revision($annoperiodo){
         if (isset($_SESSION['email'])) {
 
             if ((strtolower($this->usuario->getnomrol()) == "contador") || (strtolower($this->usuario->getnomrol()) == "coordinador")) {
 
-                $this->viewtemplate('declaracion', 'revision', $this->usuario->traerdatosusuario());
+                $declaraciones = $this->declaracion->listarrevision();
+
+                $this->viewtemplate('declaracion', 'revision', $this->usuario->traerdatosusuario(), $declaraciones);
 
             } else{
 
@@ -616,16 +758,21 @@ class Declaracion extends Controller
         }
     }
 
-    public function solicitarrevision($annoperiodo){
+    public function solicitarrevision($iddeclaracion){
+
+        $this->declaracion->cambiarestadorevision($iddeclaracion);
 
     }
 
     public function denegarrevision($iddeclaracion){
 
+        $this->declaracion->denegarrevision($iddeclaracion);
+
     }
 
     public function aceptarrevision($iddeclaracion){
         
+        $this->declaracion->cambiarestadoarchivo($iddeclaracion);
     }
 
     public function porcent(){

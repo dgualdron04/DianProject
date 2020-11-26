@@ -1,15 +1,15 @@
-<div class="modal-container" >
+<div class="modal-container" id="modal-eliminar-declaracion">
 
     <div class="container-modal modal-close" >
 
         <div class="modal-header flex">
-            <h3 id="h2-header">Eliminar la Decalración del Anio 0000.</h3>
+            <h3 id="h2-header">Eliminar la Declaración.</h3>
             <span class="close-modal text-center" >&times;</span>
         </div>
 
         <div class="modal-body" >
 
-        <p> ¿ Estas seguro que deseas eliminar la Declaración del Anio 0000. ? </p>
+        <p> ¿ Estas seguro que deseas eliminar la Declaración  ? </p>
 
         </div>
 

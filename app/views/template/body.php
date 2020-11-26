@@ -59,7 +59,8 @@
             ($controllert == "declaracion" && $methodt == "revision") || 
             ($controllert == "cedulas" && $methodt == "listar") ||
             ($controllert == "informacionpersonal" && $methodt == "listar")||
-            ($controllert == "ganancias" && $methodt == "listar")) {
+            ($controllert == "ganancias" && $methodt == "listar") || 
+            ($controllert == "declaracion" && $methodt == "ver")) {
                 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
