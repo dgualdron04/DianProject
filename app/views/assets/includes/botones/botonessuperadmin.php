@@ -22,7 +22,7 @@
             <i class="fas fa-question-circle"></i><span>Ayuda <i class="fas fa-chevron-down drop-down flecha"></i></span>
         </a>
         <div class="sub-menu">
-            <a href="#" title="Manual de Usuario"><i class="fas fa-address-book"></i><span>Manual de usuario</span></a>
+            <a href="<?php echo constant('URL'); ?>app/views/assets/manuales/manualsuperadmin.pdf" title="Manual de Usuario"><i class="fas fa-address-book"></i><span>Manual de usuario</span></a>
         </div>
     </li>
 </ul>

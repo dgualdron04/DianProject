@@ -16,7 +16,8 @@
 
         if (strtolower($infouser['nomrol']) == "superadmin") {
             
-            if (($controllert == "usuario" && $methodt == "listar") || ($controllert == "usuario" && $methodt == "perfil")) {
+            if (($controllert == "usuario" && $methodt == "listar") || ($controllert == "usuario" && $methodt == "perfil") ||
+            ($controllert == "errores" && $methodt == "error403")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
@@ -34,7 +35,8 @@
             ($controllert == "declaracion" && $methodt == "revision")|| 
             ($controllert == "cedulas" && $methodt == "listar") ||
             ($controllert == "informacionpersonal" && $methodt == "listar")||
-            ($controllert == "ganancias" && $methodt == "listar")) {
+            ($controllert == "ganancias" && $methodt == "listar") ||
+            ($controllert == "errores" && $methodt == "error403")) {
 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
@@ -60,7 +62,8 @@
             ($controllert == "cedulas" && $methodt == "listar") ||
             ($controllert == "informacionpersonal" && $methodt == "listar")||
             ($controllert == "ganancias" && $methodt == "listar") || 
-            ($controllert == "declaracion" && $methodt == "ver")) {
+            ($controllert == "declaracion" && $methodt == "ver") ||
+            ($controllert == "errores" && $methodt == "error403")) {
                 
                 require_once './app/views/'.$controllert.'/'.$methodt.'.php';
 
