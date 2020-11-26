@@ -187,6 +187,7 @@
                             <tr>
                                 <th>Clase</th>
                                 <th>Tipo</th>
+                                <th>Nombre</th>
                                 <th>Valor</th>
                                 <th>icon:far fa-edit</th>
                                 <th>icon:far fa-trash-alt</th>
@@ -199,10 +200,11 @@
                                 foreach ($data[3] as $datos) : ?>
                                     <tr>
                                         <td><?php echo $datos['clase']; ?></td>
-                                        <td><?php echo $datos['tipo']; ?></td>
+                                        <td><?php echo $datos['Tipo']; ?></td>
+                                        <td><?php echo $datos['nombre']; ?> </td>
                                         <td><?php echo $datos['valor']; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'] .'-'.$datos['clase'].'-'.$datos['tipo'].';onclick:editargananciasocasionales'; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminargananciasocasionales'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'] .'-'.$datos['clase'].'-'.$datos['Tipo'].';onclick:editarcedulas'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['Tipo'].'-'.$datos['valor'].';onclick:eliminarcedulas'; ?></td>
                                     </tr>
                             <?php endforeach;
                             } ?>
@@ -363,6 +365,8 @@
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/editar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/eliminar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/cedulas/crear.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/cedulas/editar.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/cedulas/eliminar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/exogenas/crear.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/exogenas/eliminar.php'; ?>
 

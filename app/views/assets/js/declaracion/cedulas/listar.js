@@ -2398,3 +2398,65 @@ formcrearcedulas.addEventListener('submit', (e) => {
 });
 
 //#endregion
+
+
+//#region Editar cedulas
+
+function editarcedulas(e, id){
+
+    e.preventDefault();
+    let modaleditar = document.getElementById("modal-editar-cedulas");
+
+    modaleditar.style.opacity = 1;
+    modaleditar.style.visibility = "visible";
+    modaleditar.children[0].classList.remove("modal-close");
+
+    //#region Cerrar modal editar
+
+    modaleditar.children[0].children[0].children[0].children[0].addEventListener(
+        "click",
+        () => {
+            modaleditar.children[0].classList.add("modal-close");
+
+            setTimeout(() => {
+                modaleditar.style.opacity = 0;
+                modaleditar.style.visibility = "hidden";
+            }, 500);
+        }
+    );
+
+    //#endregion
+
+}
+
+//#endregion
+
+
+//#region Eliminar Cedulas
+
+function eliminarcedulas(e, id) {
+    
+    e.preventDefault();
+
+    let modaldelete = document.getElementById("modal-eliminar-cedulas");
+
+    modaldelete.style.opacity = 1;
+    modaldelete.style.visibility = "visible";
+    modaldelete.children[0].classList.remove("modal-close");
+
+    //#region Cerrar modal eliminar
+    modaldelete.children[0].children[0].children[1].addEventListener("click", () => {
+        modaldelete.children[0].classList.add("modal-close");
+
+        setTimeout(() => {
+            modaldelete.style.opacity = 0;
+            modaldelete.style.visibility = "hidden";
+        }, 500);
+    }
+    );
+    //#endregion
+
+}
+
+
+//#endregion

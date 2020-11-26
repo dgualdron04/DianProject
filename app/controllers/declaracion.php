@@ -446,7 +446,7 @@ class Declaracion extends Controller
                             $porcentaje += 5; 
 
                         }
-                        
+
                         $declaraciones[$i] += [ "porcent" => $porcentaje];
                         $i++;
                     }
@@ -668,7 +668,7 @@ class Declaracion extends Controller
 
                 $cedulas = [$idingresobruto, $idrentaexenta, $idingresonoconse, $idrentatrabajo, $idfuerzapublica, $idingresobrutorentacapital, $idingresosnoconsecapital, $idcostogastosprocecapital, $idrentacapital, $idceduladiviparti, $idingresobrutopensiones, $idingresonoconsepensiones, $idingresobrutolaboral, $idingresosnoconselaboral, $idcostogastosprocelaboral, $idrentanolaboral, $idcedulapensiones];
                 $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias, "iddecla" => $id];
-                $cedula = [];
+                $cedula = $this->declaracion->listarcedulas($id);
                 $data = [$ids, $informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales, $exogenas];
 
                 $porcentaje = 0;
