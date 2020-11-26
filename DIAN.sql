@@ -2261,3 +2261,365 @@ INSERT INTO `tipogananciasnogravadas` (`nombre`, `descripcion`, `ayuda`) VALUES 
 /*-----------------------------------*/
 
 
+/* Declaración */
+
+INSERT INTO `declaracion` (`pagototal`, `estadoarchivo`, `estadorevision`, `estadodeclaracion`, `observaciones`, `idusuario`) VALUES ('0', '0', '0', '1', '', '4');
+
+
+/* Patrimonio */
+
+INSERT INTO `patrimonio` (`patliquitotal`, `deudatotal`, `patbrutototal`, `iddeclaracion`) VALUES ('0', '0', '0', '1');
+
+
+/* Bien */
+
+INSERT INTO `bien` (`valorbien`, `nombre`, `idtipobien`, `idtipomoneda`, `idmodelo`) VALUES ('35000000', 'Camioneta', '2', '1', '1'), ('2500000', 'Banco Davivienda', '7', '1', '1');
+
+
+/* Deuda */
+
+INSERT INTO `deuda` (`nombre`, `valordeuda`, `idtipodeuda`, `idtipomoneda`, `idmodelo`) VALUES ('Préstamo Jefe', '2500000', '5', '1', '1'), ('Banco Davivienda', '600000', '6', '1', '1');
+
+
+/* Cédula general */
+
+INSERT INTO `cedulageneral` (`iddeclaracion`, `rentaliquidageneral`, `rentasexentasdeduccion`, `rentaliquidaordinaria`, `rentaliquidagravable`) VALUES ('1', '0', '0', '0', '0');
+
+
+/* Renta trabajo */
+
+INSERT INTO `rentatrabajo` (`idcedulageneral`, `rentaliquida`, `rentasexentasdeduccion`, `rentaliquidatrabajo`) VALUES ('1', '0', '0', '0');
+
+
+/* Ingreso bruto */
+
+INSERT INTO `ingresobruto` (`ingresobrutototal`) VALUES ('0');
+
+
+/* Salario */
+
+INSERT INTO `salario` (`nombre`, `meseslaborados`, `valor`, `idingresobruto`) VALUES ('Empresa Zenteno', '12', '54000000', '1');
+
+
+/* Renta exenta */
+
+INSERT INTO `rentaexenta` (`rentaexentatotal`) VALUES ('0');
+
+
+/* CesantiaIntereses */
+
+INSERT INTO `cesantiaintereses` (`nombre`, `valor`, `idingresobruto`, `idrentaexenta`) VALUES ('Empresa Zenteno', '5040000', '1', '1');
+
+
+/* Prestaciones sociales */
+
+INSERT INTO `prestasociales` (`nombre`, `valor`, `idtipoprestacion`, `idingresobruto`) VALUES ('Empresa Zenteno', '6750000', '1', '1');
+
+
+/* Otros pagos */
+
+INSERT INTO `otrospagos` (`nombre`, `valor`, `idingresobruto`) VALUES ('Asesoría ', '5000000', '1');
+
+
+/* Ingreso no constitutivos */
+
+INSERT INTO `ingresonoconse` (`ingresosnoconsetotal`) VALUES ('0');
+
+
+/* Aporte obligatorio */
+
+INSERT INTO `aporteobligatorio` (`nombre`, `valor`, `idtipoaporteobligatorio`, `idingresonoconse`) VALUES ('Empresa Zenteno', '2700000', '1', '1'), ('Empresa Zenteno', '2160000', '2', '1');
+
+
+/* Deducciones */
+
+INSERT INTO `deducciones` (`nombre`, `valor`, `idtipodeduccion`) VALUES ('Casa Mesa de los Santos', '5000000', '1'), ('Hijo Luis', '7079000', '2'), ('Medicina', '1500000', '3');
+
+
+
+/* Renta capital */
+
+INSERT INTO `rentacapital` (`idcedulageneral`, `rentaliquida`, `rentasexentasdeduccion`, `rentaliquidaordinaria`, `rentaliquidacapital`) VALUES ('1', '0', '0', '0', '0');
+
+
+/* Ingreso bruto capital */
+
+INSERT INTO `ingresobrutocapital` (`ingresobrutocapitaltotal`) VALUES ('0');
+
+
+/* Otros ingresos */
+
+INSERT INTO `otrosingresoscapital` (`nombre`, `valor`, `idtipootrosingresoscapital`, `idingresobrutocapital`) VALUES ('Casa Lebrija', '65000000', '2', '1');
+
+
+/* Ingreso no constitutivo capital */
+
+INSERT INTO `ingresonoconsecapital` (`ingresosnoconsecapitaltotal`) VALUES ('0');
+
+
+/* Aporte voluntario capital */
+
+INSERT INTO `aportevoluntariocapital` (`nombre`, `valor`, `idtipoaportevoluntariocapital`, `idingresonoconsecapital`) VALUES ('RAIS', '1500000', '2', '1');
+
+
+/* Aporte obligatorio capital */
+
+INSERT INTO `aporteobligatoriocapital` (`nombre`, `valor`, `idtipoaporteobligatoriocapital`, `idingresonoconsecapital`) VALUES ('Pensión', '2200000', '1', '1'), ('Salud', '1800000', '2', '1');
+
+
+/* Costo gastos proce capital */
+
+INSERT INTO `costogastosprocecapital` (`valor`) VALUES ('0');
+
+
+/* Otros costo gastos capital */
+
+INSERT INTO `otroscostogastoscapital` (`nombre`, `valor`, `idtipootroscostogastocapital`, `idcostogastosprocecapital`) VALUES ('Gastos mantenimientos', '6500000', '2', '1');
+
+
+/* Renta exe deducción capital */
+
+INSERT INTO `rentaexededuccioncapital` (`nombre`, `valor`, `idtiporentaexededuccioncapital`) VALUES ('Crédito ', '4850000', '1'), ('GMF', '500000', '3');
+
+
+/* Renta no laboral */
+
+INSERT INTO `rentanolaboral` (`idcedulageneral`, `rentaliquida`, `rentasexentasdeduccion`, `rentaliquidaordinaria`, `rentaliquidanolaboral`) VALUES ('1', '0', '0', '0', '0');
+
+
+/* Ingreso bruto no laboral */
+
+INSERT INTO `ingresobrutolaboral` (`ingresobrutototal`) VALUES ('0');
+
+
+/* Ingresos no clasifican no laboral */
+
+INSERT INTO `ingresosnoclasificanlaboral` (`valor`, `idingresobrutolaboral`) VALUES ('108500000', '1');
+
+
+/* Devoluciones, descuentos y rebajas no laboral */
+
+INSERT INTO `devdescreblaboral` (`nombre`, `valor`) VALUES ('Rebajas', '28000000');
+
+
+/* Ingresos no constitutivos no laboral */
+
+INSERT INTO `ingresosnoconselaboral` (`ingresosnoconsetotal`) VALUES ('0');
+
+
+/* Aporte obligatorio no laboral  */
+
+INSERT INTO `aportesobligatorioslaboralnoconse` (`nombre`, `valor`, `idingresosnoconselaboral`, `idtipoaporteobligatoriolaboralnoconse`) VALUES ('Pensión', '2000000', '1', '1'), ('Salud', '2000000', '1', '2');
+
+
+/* Costo gastos proce no laboral */
+
+INSERT INTO `costogastosprocelaboral` (`ingresocostogastoprocetotal`) VALUES ('0');
+
+
+/* Otros costo gasto no laboral */
+
+INSERT INTO `otroscostogastolaboral` (`nombre`, `valor`, `idtipootroscostogastolaboral`, `idcostogastosprocelaboral`) VALUES ('Gastos mantenimientos', '35000000', '2', '1');
+
+
+/* Intereses préstamos no laboral */
+
+INSERT INTO `interesesprestamoslaboral` (`nombre`, `valor`, `idcostogastosprocelaboral`) VALUES ('Interés banco Davivienda', '3750000', '1');
+
+
+/* Renta exe deducción no laboral  */
+
+INSERT INTO `rentaexededuccionlaboral` (`nombre`, `valor`, `idtiporentaexededuccionlaboral`) VALUES ('Interés', '5000000', '1'), ('GMF', '800000', '3');
+
+
+/* Cédula pensiones */
+
+INSERT INTO `cedulapensiones` (`iddeclaracion`, `rentaliquida`, `rentaliquidagravable`) VALUES ('1', '0', '0');
+
+
+/* Ingresos brutos pensiones */
+
+INSERT INTO `ingresosbrutospensiones` (`ingresobrutototal`) VALUES ('0');
+
+
+/* Ingresos pensiones */
+
+INSERT INTO `ingresospensiones` (`nombre`, `valor`, `idingresosbrutospensiones`, `idtipoingresospensiones`) VALUES ('Pensión de invalidez', '50000000', '1', '2');
+
+
+/* Pensiones exterior */ 
+
+INSERT INTO `pensionesexteriorpensiones` (`nombre`, `valor`, `idingresosbrutospensiones`) VALUES ('Pensión países de la CAN', '25000000', '1'), ('Pensión EEUU', '55000000', '1');
+
+
+/* Ingreso no constitutivo pensiones */
+
+INSERT INTO `ingresonoconsepensiones` (`ingresosnoconsetotal`) VALUES ('0');
+
+
+/* Aportes obligatorios pensiones */
+
+INSERT INTO `aportesobligatoriospensiones` (`nombre`, `valor`, `idingresonoconsepensiones`, `idtipoaportesobligatoriospensiones`) VALUES ('Salud', '2500000', '1', '2');
+
+
+/* Renta exenta pensiones */
+
+INSERT INTO `rentaexentapensiones` (`valor`) VALUES ('72500000');
+
+/*  */
+
+/**/
+INSERT INTO `fuerzapublica` (`fuerzapublicatotal`, `idrentaexenta`) VALUES ('0', '1');
+
+
+/* Ganancias ocasionales */
+
+INSERT INTO `gananciasocasionales` (`iddeclaracion`, `gananciasocasionales`) VALUES ('1', '0');
+
+
+/* Ingresos ganancias */
+
+INSERT INTO `ingresosganacias` (`valor`, `idtipoingresosganancias`) VALUES ('60000000', '3'), ('20000000', '2');
+
+
+/* Ingresos no constitutivos ganancias */
+
+INSERT INTO `ingresonoconseganancias` (`valor`) VALUES ('45000000');
+
+
+/* Cédula dividendos y participaciones */
+
+INSERT INTO `ceduladiviparti` (`iddeclaracion`, `rentaliquida`, `rentaexenta`) VALUES ('1', '0', '0');
+
+
+/* Dividendos y participaciones 2016 */
+
+INSERT INTO `diviparti2016` (`valor`) VALUES ('50000000');
+
+/* Ingresos no constitutivos dividendos */
+
+INSERT INTO `ingresonoconsedividendos` (`valor`) VALUES ('50000000');
+
+
+/* 1a.Subcedula */
+
+INSERT INTO `subcedula1a` (`valor`) VALUES ('40000000');
+
+/* 2a.Subcedula */
+
+INSERT INTO `subcedula2a` (`valor`) VALUES ('30000000');
+
+INSERT INTO `liquidacionprivada` (`iddeclaracion`, `impuestoneto`, `impuestocargototal`, `impuestototal`, `saldopagartotal`, `saldofavortotal`) VALUES ('1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `usuariorentaexenta` (`idusuario`, `idrentaexenta`, `idrentatrabajo`) VALUES ('4', '1', '1');
+
+/* UsuarioBien */
+
+INSERT INTO `usuariobien` (`idbien`, `idusuario`, `idpatrimonio`) VALUES ('1', '4', '1'), ('2', '4', '1');
+
+/* UsuarioDeuda */
+
+INSERT INTO `usuariodeuda` (`iddeuda`, `idusuario`, `idpatrimonio`) VALUES ('1', '4', '1'), ('2', '4', '1');
+
+
+/* Usuario ingreso bruto renta trabajo */
+
+INSERT INTO `usuarioingresobruto` (`idusuario`, `idingresobruto`, `idrentatrabajo`) VALUES ('4', '1', '1');
+
+/* Usuario ingreso no conse renta trabajo */
+
+INSERT INTO `usuarioingresonoconse` (`idusuario`, `idingresonoconse`, `idrentatrabajo`) VALUES ('4', '1', '1');
+
+
+/* Usuario deducciones renta trabajo */
+
+INSERT INTO `usuariodeducciones` (`idusuario`, `iddeducciones`, `idrentatrabajo`) VALUES ('4', '1', '1'), ('4', '2', '1'), ('4', '3', '1');
+
+/* Usuario ingreso bruto capital */
+
+INSERT INTO `usuarioingresobrutocapital` (`idusuario`, `idingresobrutocapital`, `idrentacapital`) VALUES ('4', '1', '1');
+
+
+/* Usuario ingreso no constitutivos capital */
+
+INSERT INTO `usuarioingresonoconsecapital` (`idusuario`, `idingresonoconsecapital`, `idrentacapital`) VALUES ('4', '1', '1');
+
+
+/* Usuario costo gastos proce capital */
+
+INSERT INTO `usuariocostogastosprocecapital` (`idusuario`, `idcostogastosprocecapital`, `idrentacapital`) VALUES ('4', '1', '1');
+
+
+/* Usuario renta exe deducción capital */
+
+INSERT INTO `usuariorentaexededuccioncapital` (`idusuario`, `idrentaexededuccioncapital`, `idrentacapital`) VALUES ('4', '1', '1'), ('4', '2', '1');
+
+
+/* Usuario ingreso bruto no laboral */
+
+INSERT INTO `usuarioingresobrutolaboral` (`idusuario`, `idingresobrutolaboral`, `idrentanolaboral`) VALUES ('4', '1', '1');
+
+
+/* Usuario devoluciones, descuentos y rebajas no laboral */
+
+INSERT INTO `usuariodevdescreblaboral` (`idusuario`, `iddevdescreblaboral`, `idrentanolaboral`) VALUES ('4', '1', '1');
+
+
+/* Usuario ingreso no constitutivo no laboral */
+
+INSERT INTO `usuarioingresonoconselaboral` (`idusuario`, `idingresosnoconselaboral`, `idrentanolaboral`) VALUES ('4', '1', '1');
+
+
+/* Usuario costo gastos proce no laboral */
+
+INSERT INTO `usuariocostogastosprocelaboral` (`idusuario`, `idcostogastosprocelaboral`, `idrentanolaboral`) VALUES ('4', '1', '1');
+
+/* Usuario renta exe deducción no laboral */
+
+INSERT INTO `usuariorentaexededuccionlaboral` (`idusuario`, `idrentaexededuccionlaboral`, `idrentanolaboral`) VALUES ('4', '1', '1'), ('4', '2', '1');
+
+/* Usuario ingreso brutos pensiones */
+
+INSERT INTO `usuarioingresobrutopensiones` (`idusuario`, `idcedulapensiones`, `idingresosbrutospensiones`) VALUES ('4', '1', '1');
+
+
+/* Usuario ingreso no constitutivo pensiones */
+
+INSERT INTO `usuarioingresonoconsepensiones` (`idusuario`, `idcedulapensiones`, `idingresonoconsepensiones`) VALUES ('4', '1', '1');
+
+/* Usuario renta exenta pensiones */
+
+INSERT INTO `usuariorentaexentapensiones` (`idusuario`, `idcedulapensiones`, `idrentaexentapensiones`) VALUES ('4', '1', '1');
+
+
+/* Usuario ingresos ganancias */
+
+INSERT INTO `usuarioingresosganancias` (`idusuario`, `idgananciasocasionales`, `idingresosganacias`) VALUES ('4', '1', '1'), ('4', '1', '2');
+
+/* Usuario ingresos no constitutivos ganancias */
+
+INSERT INTO `usuarioingresonoconsegananciasocasionales` (`idusuario`, `idgananciasocasionales`, `idingresonoconseganancias`) VALUES ('4', '1', '1');
+
+
+/* Usuario dividendos y participaciones 2016 */
+
+INSERT INTO `usuariodiviparti2016` (`idusuario`, `idceduladiviparti`, `iddiviparti2016`) VALUES ('4', '1', '1');
+
+/* Usuario ingresos no constitutivos dividendos */
+
+INSERT INTO `usuarioingresonoconsedividendos` (`idusuario`, `idceduladiviparti`, `idingresonoconsedividendos`) VALUES ('4', '1', '1');
+
+/* Usuario 1a.Subcedula */
+
+INSERT INTO `usuariosubcedula1a` (`idusuario`, `idceduladiviparti`, `idsubcedula1a`) VALUES ('4', '1', '1');
+
+/* Usuario 2a.Subcedula */
+
+INSERT INTO `usuariosubcedula2a` (`idusuario`, `idceduladiviparti`, `idsubcedula2a`) VALUES ('4', '1', '1');
+/* --- */
+
+
+/*---*/
+
+INSERT INTO `parametrosdeclaracion` (`idparametrosdeclaracion`, `idparametro`, `iddeclaracion`) VALUES (NULL, '1', '1');
