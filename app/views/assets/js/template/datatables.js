@@ -213,7 +213,12 @@ class DataTable{
                                     <div class="progresotabla-bar progresotabla-bar-normal" style="width: ${etiqueta}%;"></div>
                                 </div>
                                 </td>`
-                    }else {
+                    }else if(cell.indexOf('download:') !== -1){
+                        let etiqueta = cell.trim().split(';');
+                        let etiqueta2 = etiqueta[0].split('download:');
+                        let etiqueta3 = etiqueta2[1].split('/');
+                        data += `<td class="table-filas"><a download="Exogenas - ${etiqueta3[6]}" href="${etiqueta2[1]}">${etiqueta3[6]}</a></td>`;
+                    }else{
 
                         data += `<td class="table-filas-normal">${cell}</td>`;
                     }

@@ -267,9 +267,15 @@
                         <tbody>
                             <?php
                             if (!empty($data)) {
-                                foreach ($data[4] as $datos) : ?>
+                                foreach ($data[5] as $datos) : ?>
                                     <tr>
-                                        <td><?php echo $datos['clase']; ?></td>
+                                        <td>
+                                            <!--?php 
+                                            $cadena = str_replace("./app/views/assets/files/exogenas/","",$datos['ruta']);
+                                            echo str_replace($infouser['nombre'].$infouser['apellido'].'-', "", $cadena) ?!-->
+                                        <?php echo "download:".$datos['ruta'].";" ?>
+                                        </td>
+                                        
                                     </tr>
                             <?php endforeach;
                             } ?>
@@ -290,3 +296,4 @@
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/declaracion.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/declaracion/ver/listar.js' ?>"></script>
+

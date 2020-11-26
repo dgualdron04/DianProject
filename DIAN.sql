@@ -2623,3 +2623,6 @@ INSERT INTO `usuariosubcedula2a` (`idusuario`, `idceduladiviparti`, `idsubcedula
 /*---*/
 
 INSERT INTO `parametrosdeclaracion` (`idparametrosdeclaracion`, `idparametro`, `iddeclaracion`) VALUES (NULL, '1', '1');
+
+
+INSERT INTO `exogenas` (`iddeclaracion`, `ruta`) VALUES ('1', './app/views/assets/files/exogenas/210_2020.pdf'), ('1', './app/views/assets/files/exogenas/eldeclarante-210_2020.pdf');

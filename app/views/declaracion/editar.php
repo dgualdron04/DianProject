@@ -308,7 +308,7 @@
             <div class="tab-pane show" id="exogenas">
                 <p></p>
             
-                
+                <p class="scond scond-2" id="iddeclaracion"><?php echo $data[0]["iddecla"] ?></p>             
                 <!--div class="only-flex">
                     <p class="scond scond-2" id="idtotalganancias">Total Ganancias Ocasionales:!--> <!--?php echo empty($data[2]) ? "0" : $data[2][0]['patliquitotal']; ?!--><!--/p>
                 </div!-->
@@ -326,11 +326,14 @@
                         <tbody>
                             <?php
                             if (!empty($data)) {
-                                foreach ($data[5] as $datos) : ?>
+                                foreach ($data[6] as $datos) : ?>
                                     <tr>
-                                        <td><?php echo $datos['clase']; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'] .'-'.$datos['clase'].'-'.$datos['tipo'].';onclick:editargananciasocasionales'; ?></td>
-                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].'-'.$datos['clase'].'-'.$datos['tipo'].'-'.$datos['valor'].';onclick:eliminargananciasocasionales'; ?></td>
+                                        <td>
+                                            <?php 
+                                            $cadena = str_replace("./app/views/assets/files/exogenas/","",$datos['ruta']);
+                                            echo str_replace($infouser['nombre'].$infouser['apellido'].'-', "", $cadena) ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-edit;name:Editar;id:editgo-' . $datos['id'].';onclick:editarexogenas'; ?></td>
+                                        <td><?php echo 'actionlink:user-edit simbollink;icon:far fa-trash-alt;name:eliminar;id:deletgo-' . $datos['id'].';onclick:eliminarexogenas'; ?></td>
                                     </tr>
                             <?php endforeach;
                             } ?>
@@ -360,6 +363,8 @@
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/editar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/gananciasocasionales/eliminar.php'; ?>
 <?php require_once './app/views/assets/includes/modals/declaracion/cedulas/crear.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/exogenas/crear.php'; ?>
+<?php require_once './app/views/assets/includes/modals/declaracion/exogenas/eliminar.php'; ?>
 
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/funciones.js' ?>"></script>
 <script src="<?php echo constant('URL') . 'app/views/assets/js/template/datatables.js' ?>"></script>

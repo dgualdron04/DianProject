@@ -165,6 +165,7 @@ class Declaracion extends Controller
     private $usuarioingresonoconsedividendos;
     private $rentaliqpasecedividendos;
     private $usuariorentaliqpasecedividendos;
+    private $exogenas;
 
     public function __construct()
     {
@@ -329,6 +330,7 @@ class Declaracion extends Controller
         $this->usuarioingresonoconsedividendos = $this->model('Usuarioingresonoconsedividendos');
         $this->rentaliqpasecedividendos = $this->model('Rentaliqpasecedividendos');
         $this->usuariorentaliqpasecedividendos = $this->model('Usuariorentaliqpasecedividendos');
+        $this->exogenas = $this->model('Exogenas');
 
         parent::__construct();
         if (isset($_SESSION['email'])) {
@@ -444,7 +446,7 @@ class Declaracion extends Controller
                             $porcentaje += 5; 
 
                         }
-                        print_r($decla);
+                        
                         $declaraciones[$i] += [ "porcent" => $porcentaje];
                         $i++;
                     }
@@ -661,10 +663,13 @@ class Declaracion extends Controller
                 $idingresobrutopensiones = $this->ingresosbrutospensiones->traerid($id);
                 $idingresonoconsepensiones = $this->ingresonoconsepensiones->traerid($id);
                 $idcedulapensiones = $this->cedulapensiones->traerid($id);
+                
+                $exogenas = $this->exogenas->listar($id);
+
                 $cedulas = [$idingresobruto, $idrentaexenta, $idingresonoconse, $idrentatrabajo, $idfuerzapublica, $idingresobrutorentacapital, $idingresosnoconsecapital, $idcostogastosprocecapital, $idrentacapital, $idceduladiviparti, $idingresobrutopensiones, $idingresonoconsepensiones, $idingresobrutolaboral, $idingresosnoconselaboral, $idcostogastosprocelaboral, $idrentanolaboral, $idcedulapensiones];
-                $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias];
+                $ids = [$idpatrimonio, $cedulas, $idliquidacion, $idganancias, "iddecla" => $id];
                 $cedula = [];
-                $data = [$ids, $informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales];
+                $data = [$ids, $informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales, $exogenas];
 
                 $porcentaje = 0;
                 $patrimonio = $this->patrimonio->consultarvalor($id);
@@ -718,7 +723,8 @@ class Declaracion extends Controller
                 $liquidacionprivada = $this->liquidacionprivada->listar($id);
                 $gananciasocasionales = $this->gananciasocasionales->listar($id);
                 $cedula = [];
-                $data = [$informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales];
+                $exogenas = $this->exogenas->listar($id);
+                $data = [$informacionpersonal, $patrimonio, $cedula, $liquidacionprivada, $gananciasocasionales, $exogenas];
 
 
                 $this->viewtemplate('declaracion', 'ver', $this->usuario->traerdatosusuario(), $data);
@@ -1654,6 +1660,14 @@ class Declaracion extends Controller
                         
                     }
                     
+                } else if ($clase == "exogenas") {
+
+                    $nombre_temporal = $_FILES['archivo']['tmp_name'];
+                    $nombre = $_FILES['archivo']['name'];
+                    $ruta = './app/views/assets/files/exogenas/'.$this->usuario->getnombre().$this->usuario->getapellido()."-".$nombre;
+                    move_uploaded_file($nombre_temporal, $ruta);
+                    $this->exogenas->crear($ruta, $tipo);
+
                 }
 
             } else{
