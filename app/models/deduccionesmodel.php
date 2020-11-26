@@ -21,6 +21,20 @@ class Deduccionesmodel extends Models{
 
         }
 
+        
+
+        
+
+    }
+
+    public function consultarvalor($iddeclaracion){
+
+        $deducciones = $this->db->connect()->prepare('SELECT IF(SUM(d.valor) != 0,SUM(d.valor),0) AS "deducciones" FROM deducciones d JOIN usuariodeducciones ud ON ud.iddeducciones = d.iddeducciones JOIN rentatrabajo rt ON rt.idrentatrabajo = ud.idrentatrabajo JOIN cedulageneral cg on cg.idcedulageneral = rt.idcedulageneral WHERE iddeclaracion = ?');
+        $deducciones->execute([$iddeclaracion]);
+        $deducciones = $deducciones->fetch(PDO::FETCH_ASSOC);
+
+        return $deducciones;
+
     }
 
 

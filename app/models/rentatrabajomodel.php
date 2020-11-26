@@ -74,6 +74,18 @@ class Rentatrabajomodel extends Models{
     }
 
 
+    public function consultarvalor($iddeclaracion){
+
+        $rentatrabajo = $this->db->connect()->prepare('SELECT rt.rentaliquida, rt.rentasexentasdeduccion, rt.rentaliquidatrabajo FROM rentatrabajo rt JOIN cedulageneral cg on cg.idcedulageneral = rt.idcedulageneral WHERE cg.iddeclaracion = ?');
+        $rentatrabajo->execute([$iddeclaracion]);
+        $rentatrabajo = $rentatrabajo->fetch(PDO::FETCH_ASSOC);
+
+        return $rentatrabajo;
+
+    }
+
+
+
 }
 
 

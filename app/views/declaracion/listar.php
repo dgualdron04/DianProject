@@ -115,7 +115,7 @@
                                         <td>
                                             <?php
                                             if ($datos['estadorevision'] == true && $datos['estadoarchivo'] == true) {
-                                                echo 'actionlink:user-edit simbollink;icon:far fa-file-pdf;name:Descargar Declaración;id:pdf-'.$datos['iddeclaracion'].';onclick:generardeclaracion';
+                                                echo 'actionlink:user-edit simbollink;icon:far fa-file-pdf;name:Descargar Declaración;id:pdf-'.$datos['iddeclaracion'].';href:'.constant('URL').'declaracion/crearpdf/'.$datos['iddeclaracion'];
                                             } else {
                                                 echo 'icon:far fa-file-pdf;name:Descargar Declaración';
                                             }

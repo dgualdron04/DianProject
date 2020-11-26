@@ -72,5 +72,15 @@ class Ingresobrutomodel extends Models{
 
     }
 
+    public function consultarvalor($iddeclaracion){
+
+        $ingresobruto = $this->db->connect()->prepare('SELECT ib.ingresobrutototal FROM ingresobruto ib JOIN usuarioingresobruto uib ON uib.idingresobruto = ib.idingresobruto JOIN rentatrabajo rt ON rt.idrentatrabajo = uib.idrentatrabajo JOIN cedulageneral cg on cg.idcedulageneral = rt.idcedulageneral WHERE iddeclaracion = ?');
+        $ingresobruto->execute([$iddeclaracion]);
+        $ingresobruto = $ingresobruto->fetch(PDO::FETCH_ASSOC);
+
+        return $ingresobruto;
+
+    }
+
 }
 ?>

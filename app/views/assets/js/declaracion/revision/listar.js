@@ -1,19 +1,6 @@
 //#region Creación de la tabla declarante
 const dt = new DataTable('#datatable-revision', 'declaraciones', [
-    {
-      id: 'bAddrevision',
-      text: 'Crear Revisión',
-      icon: 'fas fa-paste',
-      type: 'button',
-      action: function () {
-        if (document.querySelector('.alertbasic')) {
-          alerta("Solo puedes crear una declaración por Anno de declaración.", '.alertbasic');
-        }else{
-        history.pushState(null, "", url1);
-        location.href='./declaracion/crear';
-        }
-      }
-    }
+
   ]);
   
   dt.parse();
@@ -59,3 +46,5 @@ ajax({
 
 }
   
+
+

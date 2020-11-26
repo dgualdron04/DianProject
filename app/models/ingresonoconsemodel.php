@@ -62,5 +62,15 @@ class Ingresonoconsemodel extends Models{
 
     }
 
+    public function consultarvalor($iddeclaracion){
+
+        $cedulageneral = $this->db->connect()->prepare('SELECT inct.ingresosnoconsetotal FROM ingresonoconse inct JOIN usuarioingresonoconse uinct ON uinct.idingresonoconse = uinct.idingresonoconse = inct.idingresonoconse JOIN rentatrabajo rt ON rt.idrentatrabajo = uinct.idrentatrabajo JOIN cedulageneral cg on cg.idcedulageneral = rt.idcedulageneral WHERE iddeclaracion = ?');
+        $cedulageneral->execute([$iddeclaracion]);
+        $cedulageneral = $cedulageneral->fetch(PDO::FETCH_ASSOC);
+
+        return $cedulageneral;
+
+    }
+
 }
 ?>

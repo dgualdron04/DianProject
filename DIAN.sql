@@ -2298,7 +2298,7 @@ INSERT INTO `ingresobruto` (`ingresobrutototal`) VALUES ('0');
 
 /* Salario */
 
-INSERT INTO `salario` (`nombre`, `meseslaborados`, `valor`, `idingresobruto`) VALUES ('Empresa Zenteno', '12', '54000000', '1');
+INSERT INTO `salario` (`nombre`, `meseslaborados`, `valor`, `idingresobruto`) VALUES ('Empresa Zenteno', '12', '4500000', '1');
 
 
 /* Renta exenta */

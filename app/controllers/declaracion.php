@@ -775,8 +775,21 @@ class Declaracion extends Controller
         $this->declaracion->cambiarestadoarchivo($iddeclaracion);
     }
 
-    public function porcent(){
+    public function crearpdf($iddeclaracion){
         
+        $patrimonio = $this->patrimonio->consultarvalor($iddeclaracion);
+        $cedulageneral = $this->cedulageneral->consultarvalor($iddeclaracion);
+        $rentatrabajo = $this->rentatrabajo->consultarvalor($iddeclaracion);
+        $ingresobruto = $this->ingresobruto->consultarvalor($iddeclaracion);
+        $ingresonoconse = $this->ingresonoconse->consultarvalor($iddeclaracion);
+        $deducciones = $this->deducciones->consultarvalor($iddeclaracion);
+        $rentaexenta = $this->rentaexenta->consultarvalor($iddeclaracion);
+        $nombre = $this->usuario->getnombre();
+        $apellido = $this->usuario->getapellido();
+
+        $data = [$patrimonio, $cedulageneral, $rentatrabajo, $ingresobruto, $ingresonoconse, $deducciones, $rentaexenta, $nombre." ".$apellido];
+
+        $this->view('declaracion/pdf', $data);
     }
 
     public function traertipo($clase, $tipo, $aspecto = null, $tipoaspecto = null, $tipodeltipoaspecto = null){

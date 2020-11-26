@@ -75,5 +75,16 @@ class Rentaexentamodel extends Models{
         $ingresobruto->execute([$rentaexentatotal, $id]);
 
     }
+
+    public function consultarvalor($iddeclaracion){
+
+        $rentaexenta = $this->db->connect()->prepare('SELECT re.rentaexentatotal FROM rentaexenta re JOIN usuariorentaexenta ure ON ure.idrentaexenta = re.idrentaexenta JOIN rentatrabajo rt ON rt.idrentatrabajo = ure.idrentatrabajo JOIN cedulageneral cg on cg.idcedulageneral = rt.idcedulageneral WHERE iddeclaracion = ?');
+        $rentaexenta->execute([$iddeclaracion]);
+        $rentaexenta = $rentaexenta->fetch(PDO::FETCH_ASSOC);
+
+        return $rentaexenta;
+
+    }
+
 }
 ?>
